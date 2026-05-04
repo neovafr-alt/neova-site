@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neova — Agence IA & Automatisation</title>
+  <meta name="description" content="Neova automatise votre croissance : SEO, automatisation IA, outils sur mesure pour les entreprises ambitieuses." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0A1628;
+      --navy2: #0D2147;
+      --cyan: #00D4FF;
+      --cyan2: #00A8CC;
+      --white: #FFFFFF;
+      --gray: #F4F6FA;
+      --text: #1a2744;
+      --muted: #6B7A99;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 6%; height: 72px;
+      background: rgba(10, 22, 40, 0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,212,255,0.15);
+    }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 36px; height: 36px;
+    }
+
+    .logo-text {
+      font-size: 22px; font-weight: 800; letter-spacing: 2px;
+      background: linear-gradient(90deg, #FFFFFF 0%, #00D4FF 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 32px; list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.75); text-decoration: none;
+      font-size: 14px; font-weight: 500; transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--cyan); }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--cyan), var(--cyan2));
+      color: var(--navy) !important;
+      padding: 10px 22px; border-radius: 8px;
+      font-weight: 700 !important; font-size: 13px !important;
+      transition: opacity .2s !important;
+    }
+    .nav-cta:hover { opacity: .85; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, var(--navy) 0%, #0D2147 60%, #0a2040 100%);
+      display: flex; align-items: center;
+      padding: 100px 6% 60px;
+      position: relative; overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute; top: -200px; right: -200px;
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,212,255,0.08) 0%, transparent 70%);
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -100px; left: -100px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,212,255,0.05) 0%, transparent 70%);
+    }
+
+    .hero-content { max-width: 680px; position: relative; z-index: 1; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3);
+      color: var(--cyan); padding: 6px 16px; border-radius: 20px;
+      font-size: 13px; font-weight: 600; margin-bottom: 28px;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-badge::before { content: '●'; font-size: 8px; }
+
+    h1 {
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 800; line-height: 1.1;
+      color: var(--white); margin-bottom: 24px;
+    }
+
+    h1 span {
+      background: linear-gradient(90deg, var(--cyan), #7B9EFF);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 18px; color: rgba(255,255,255,0.65);
+      line-height: 1.7; margin-bottom: 40px; max-width: 520px;
+    }
+
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--cyan), var(--cyan2));
+      color: var(--navy); padding: 16px 32px; border-radius: 10px;
+      font-weight: 700; font-size: 15px; text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 24px rgba(0,212,255,0.35);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,212,255,0.5); }
+
+    .btn-secondary {
+      color: var(--white); padding: 16px 32px; border-radius: 10px;
+      font-weight: 600; font-size: 15px; text-decoration: none;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      transition: border-color .2s, background .2s;
+    }
+    .btn-secondary:hover { border-color: var(--cyan); background: rgba(0,212,255,0.05); }
+
+    .hero-stats {
+      display: flex; gap: 40px; margin-top: 56px; flex-wrap: wrap;
+    }
+
+    .stat { }
+    .stat-num {
+      font-size: 32px; font-weight: 800; color: var(--white);
+      background: linear-gradient(90deg, var(--white), var(--cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .stat-label { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+    /* ── SECTIONS COMMUNES ── */
+    section { padding: 96px 6%; }
+
+    .section-tag {
+      display: inline-block;
+      color: var(--cyan); font-size: 12px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 3.5vw, 42px);
+      font-weight: 800; line-height: 1.2; margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 17px; color: var(--muted);
+      line-height: 1.7; max-width: 540px;
+    }
+
+    .section-header { margin-bottom: 60px; }
+
+    /* ── SERVICES ── */
+    .services { background: var(--gray); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-radius: 16px; padding: 36px 32px;
+      border: 1.5px solid #E8EDF5;
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+      position: relative; overflow: hidden;
+    }
+
+    .service-card::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--cyan), var(--navy2));
+      opacity: 0; transition: opacity .25s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(10,22,40,0.1);
+      border-color: rgba(0,212,255,0.3);
+    }
+    .service-card:hover::before { opacity: 1; }
+
+    .service-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(0,212,255,0.12), rgba(0,212,255,0.04));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; margin-bottom: 20px;
+      border: 1px solid rgba(0,212,255,0.2);
+    }
+
+    .service-title {
+      font-size: 19px; font-weight: 700; margin-bottom: 10px; color: var(--text);
+    }
+
+    .service-desc {
+      font-size: 14px; color: var(--muted); line-height: 1.7;
+    }
+
+    /* ── PROCESSUS ── */
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 32px; position: relative;
+    }
+
+    .process-step {
+      text-align: center; padding: 20px;
+    }
+
+    .step-num {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy), var(--navy2));
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 18px; font-weight: 800; color: var(--cyan);
+      border: 2px solid rgba(0,212,255,0.3);
+    }
+
+    .step-title { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+    .step-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+    /* ── POURQUOI NEOVA ── */
+    .why { background: var(--gray); }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .why-item {
+      background: var(--white);
+      border-radius: 12px; padding: 28px 24px;
+      display: flex; gap: 16px; align-items: flex-start;
+      border: 1.5px solid #E8EDF5;
+    }
+
+    .why-check {
+      width: 32px; height: 32px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--cyan), var(--cyan2));
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--navy); font-weight: 800; font-size: 14px;
+    }
+
+    .why-text h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .why-text p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+    /* ── CONTACT ── */
+    .contact {
+      background: linear-gradient(160deg, var(--navy) 0%, #0D2147 100%);
+      text-align: center;
+    }
+
+    .contact .section-title { color: var(--white); }
+    .contact .section-sub { color: rgba(255,255,255,0.6); margin: 0 auto 48px; }
+
+    .contact-cards {
+      display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;
+    }
+
+    .contact-card {
+      background: rgba(255,255,255,0.06);
+      border: 1.5px solid rgba(0,212,255,0.2);
+      border-radius: 16px; padding: 32px 40px;
+      text-decoration: none; color: var(--white);
+      transition: background .2s, transform .2s;
+      min-width: 220px;
+    }
+    .contact-card:hover {
+      background: rgba(0,212,255,0.1);
+      transform: translateY(-4px);
+    }
+
+    .contact-card-icon { font-size: 28px; margin-bottom: 12px; }
+    .contact-card-label { font-size: 12px; color: var(--cyan); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+    .contact-card-value { font-size: 16px; font-weight: 700; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      padding: 24px 6%;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-logo {
+      font-size: 16px; font-weight: 800; letter-spacing: 2px;
+      background: linear-gradient(90deg, #FFFFFF, var(--cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero { padding-top: 120px; }
+      .hero-stats { gap: 24px; }
+      section { padding: 64px 5%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <svg class="logo-icon" viewBox="0 0 36 36" fill="none">
+      <path d="M6 28L14 12L20 20L26 10L30 14" stroke="#00D4FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M26 10L30 10L30 14" stroke="#0A1628" stroke-width="3" stroke-linecap="round"/>
+      <rect x="8" y="20" width="8" height="8" rx="2" fill="rgba(0,212,255,0.15)" stroke="#00D4FF" stroke-width="1.5"/>
+    </svg>
+    <span class="logo-text">NEOVA</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#processus">Comment ça marche</a></li>
+    <li><a href="#contact" class="nav-cta">Nous contacter</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Agence IA & Automatisation</div>
+    <h1>Automatisez votre<br/><span>croissance digitale</span></h1>
+    <p class="hero-sub">
+      Neova conçoit des systèmes intelligents qui travaillent pour vous : automatisation de processus, SEO, outils IA sur mesure. Vous gagnez du temps, on fait croître votre business.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Consultation gratuite →</a>
+      <a href="#services" class="btn-secondary">Voir nos services</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Sur mesure</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">IA</div>
+        <div class="stat-label">Powered</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">48h</div>
+        <div class="stat-label">Réponse garantie</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header">
+    <span class="section-tag">Ce qu'on fait</span>
+    <h2 class="section-title">Nos services</h2>
+    <p class="section-sub">Des solutions concrètes pour automatiser, optimiser et faire croître votre activité.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🤖</div>
+      <h3 class="service-title">Automatisation IA</h3>
+      <p class="service-desc">Automatisez vos tâches répétitives grâce à des workflows intelligents. Prospection, emails, traitement de données — on construit les systèmes qui tournent 24h/24 sans vous.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📈</div>
+      <h3 class="service-title">SEO & Visibilité</h3>
+      <p class="service-desc">Audit technique complet, optimisation on-page, stratégie de contenu. On identifie ce qui freine votre référencement et on corrige — résultats mesurables en 30 jours.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">⚙️</div>
+      <h3 class="service-title">Outils sur mesure</h3>
+      <p class="service-desc">Scripts, pipelines de données, intégrations API. On développe les outils qui s'adaptent exactement à votre business — pas du prêt-à-porter, du sur mesure.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎯</div>
+      <h3 class="service-title">Prospection automatisée</h3>
+      <p class="service-desc">Identifiez et contactez automatiquement vos clients potentiels. Système de prospection intelligent qui qualifie, contacte et relance — sans effort de votre côté.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESSUS -->
+<section id="processus">
+  <div class="section-header">
+    <span class="section-tag">Notre méthode</span>
+    <h2 class="section-title">Comment ça marche</h2>
+    <p class="section-sub">Un processus simple et transparent pour aller vite et bien.</p>
+  </div>
+  <div class="process-grid">
+    <div class="process-step">
+      <div class="step-num">1</div>
+      <h4 class="step-title">Audit gratuit</h4>
+      <p class="step-desc">On analyse votre situation actuelle et identifions les opportunités d'automatisation et de croissance.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">2</div>
+      <h4 class="step-title">Proposition sur mesure</h4>
+      <p class="step-desc">On vous présente un plan d'action clair avec les actions prioritaires, les délais et les tarifs.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">3</div>
+      <h4 class="step-title">Exécution & Livraison</h4>
+      <p class="step-desc">On implémente les solutions, on vous forme et on assure le suivi pour que tout fonctionne.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">4</div>
+      <h4 class="step-title">Résultats mesurables</h4>
+      <p class="step-desc">Reporting régulier, KPIs clairs. Vous voyez exactement ce que nos actions vous rapportent.</p>
+    </div>
+  </div>
+</section>
+
+<!-- POURQUOI NEOVA -->
+<section class="why">
+  <div class="section-header">
+    <span class="section-tag">Pourquoi nous</span>
+    <h2 class="section-title">Pourquoi choisir Neova</h2>
+    <p class="section-sub">Pas une agence traditionnelle — une équipe qui utilise l'IA pour faire plus, plus vite, mieux.</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-item">
+      <div class="why-check">✓</div>
+      <div class="why-text">
+        <h4>100% sur mesure</h4>
+        <p>Aucune solution générique. Chaque système est conçu pour votre activité spécifique.</p>
+      </div>
+    </div>
+    <div class="why-item">
+      <div class="why-check">✓</div>
+      <div class="why-text">
+        <h4>Résultats rapides</h4>
+        <p>Premières améliorations visibles sous 2 semaines. Pas de promesses vagues.</p>
+      </div>
+    </div>
+    <div class="why-item">
+      <div class="why-check">✓</div>
+      <div class="why-text">
+        <h4>Transparent & direct</h4>
+        <p>On vous dit ce qui marche, ce qui ne marche pas, et pourquoi. Pas de jargon inutile.</p>
+      </div>
+    </div>
+    <div class="why-item">
+      <div class="why-check">✓</div>
+      <div class="why-text">
+        <h4>Interlocuteur unique</h4>
+        <p>Un seul contact du début à la fin. Pas de ping-pong entre équipes.</p>
+      </div>
+    </div>
+    <div class="why-item">
+      <div class="why-check">✓</div>
+      <div class="why-text">
+        <h4>IA-first</h4>
+        <p>On exploite les derniers outils IA pour livrer plus vite et mieux que les agences classiques.</p>
+      </div>
+    </div>
+    <div class="why-item">
+      <div class="why-check">✓</div>
+      <div class="why-text">
+        <h4>Consultation gratuite</h4>
+        <p>Premier échange sans engagement. On vous apporte de la valeur dès le premier appel.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <span class="section-tag">Contact</span>
+  <h2 class="section-title">Parlons de votre projet</h2>
+  <p class="section-sub">Un échange de 20 minutes suffit pour voir si on peut vous aider. C'est gratuit, sans engagement.</p>
+  <div class="contact-cards">
+    <a href="tel:0783802565" class="contact-card">
+      <div class="contact-card-icon">📞</div>
+      <div class="contact-card-label">Téléphone</div>
+      <div class="contact-card-value">07 83 80 25 65</div>
+    </a>
+    <a href="mailto:contact@neova-agency.fr" class="contact-card">
+      <div class="contact-card-icon">✉️</div>
+      <div class="contact-card-label">Email</div>
+      <div class="contact-card-value">contact@neova-agency.fr</div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">NEOVA</div>
+  <div class="footer-copy">© 2026 Neova — Agence IA & Automatisation</div>
+</footer>
+
+</body>
+</html>
