@@ -12,13 +12,13 @@
     :root{
       --sky:#0EA5E9;
       --sky-dark:#0284C7;
-      --sky-light:#38BDF8;
-      --black:#0B0D0F;
+      --sky-glow:rgba(14,165,233,0.15);
+      --black:#111318;
       --white:#FFFFFF;
-      --offwhite:#F8FAFC;
-      --border:#E2E8F0;
-      --muted:#64748B;
-      --text:#0B0D0F;
+      --offwhite:#F6F8FB;
+      --border:#E4E8F0;
+      --muted:#6B7689;
+      --text:#111318;
     }
     html{scroll-behavior:smooth}
     body{font-family:'Inter',sans-serif;color:var(--text);background:var(--white);overflow-x:hidden}
@@ -27,237 +27,306 @@
     nav{
       position:fixed;top:0;left:0;right:0;z-index:200;
       display:flex;align-items:center;justify-content:space-between;
-      padding:0 6%;height:70px;
-      background:rgba(255,255,255,0.97);
-      backdrop-filter:blur(16px);
+      padding:0 6%;height:66px;
+      background:rgba(255,255,255,0.95);
+      backdrop-filter:blur(20px);
       border-bottom:1px solid var(--border);
     }
-    .nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none}
-
+    .nav-brand{display:flex;align-items:center;gap:11px;text-decoration:none}
     .logo-circle{
-      width:42px;height:42px;border-radius:50%;
+      width:38px;height:38px;border-radius:50%;
       background:var(--sky);
       display:flex;align-items:center;justify-content:center;
       flex-shrink:0;
     }
-    .logo-circle svg{width:24px;height:24px}
-
+    .logo-circle svg{width:22px;height:22px}
     .brand-name{
       font-family:'Space Grotesk',sans-serif;
-      font-size:19px;font-weight:700;letter-spacing:2px;
+      font-size:17px;font-weight:700;letter-spacing:1.5px;
       color:var(--black);
     }
     .brand-name span{color:var(--sky)}
-
-    .nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+    .nav-links{display:flex;align-items:center;gap:28px;list-style:none}
     .nav-links a{
-      font-family:'Inter',sans-serif;font-size:14px;font-weight:500;
-      color:var(--black);text-decoration:none;transition:color .2s;
+      font-size:14px;font-weight:500;
+      color:var(--muted);text-decoration:none;transition:color .2s;
     }
-    .nav-links a:hover{color:var(--sky)}
+    .nav-links a:hover{color:var(--black)}
     .nav-cta{
       background:var(--black) !important;color:var(--white) !important;
-      padding:10px 24px;border-radius:8px;
+      padding:9px 22px;border-radius:8px;
       font-weight:600 !important;font-size:13px !important;
-      letter-spacing:.2px;transition:background .2s !important;
+      transition:background .2s,transform .15s !important;
+      color:var(--muted) !important;
     }
-    .nav-cta:hover{background:var(--sky) !important;color:var(--black) !important}
+    .nav-cta{color:var(--white) !important}
+    .nav-cta:hover{background:var(--sky) !important;transform:translateY(-1px) !important}
 
     /* ── HERO ── */
     .hero{
       min-height:100vh;
-      background:var(--black);
+      background:var(--white);
       display:flex;align-items:center;
-      padding:110px 6% 80px;
+      padding:100px 6% 72px;
       position:relative;overflow:hidden;
     }
+    /* Gradient subtil en haut à droite */
     .hero::before{
-      content:'';position:absolute;inset:0;
-      background-image:
-        linear-gradient(rgba(14,165,233,.04) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(14,165,233,.04) 1px,transparent 1px);
-      background-size:60px 60px;
-      pointer-events:none;
-    }
-    .hero::after{
       content:'';position:absolute;
-      top:-10%;right:-5%;
-      width:60vw;height:60vw;border-radius:50%;
-      background:radial-gradient(circle,rgba(14,165,233,.08) 0%,transparent 60%);
+      top:-100px;right:-80px;
+      width:700px;height:700px;border-radius:50%;
+      background:radial-gradient(circle,rgba(14,165,233,0.08) 0%,transparent 65%);
       pointer-events:none;
     }
     .hero-inner{
       position:relative;z-index:1;
-      max-width:740px;
+      display:grid;grid-template-columns:1fr 1fr;
+      align-items:center;gap:72px;width:100%;max-width:1200px;margin:0 auto;
     }
 
+    /* Badge eyebrow */
     .hero-eyebrow{
-      display:inline-flex;align-items:center;gap:8px;
-      background:rgba(14,165,233,.1);
-      border:1px solid rgba(14,165,233,.3);
-      color:var(--sky);padding:6px 16px;border-radius:40px;
-      font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
-      margin-bottom:32px;
+      display:inline-flex;align-items:center;gap:7px;
+      background:rgba(14,165,233,0.08);
+      border:1px solid rgba(14,165,233,0.2);
+      color:var(--sky-dark);padding:5px 14px;border-radius:40px;
+      font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+      margin-bottom:28px;
     }
     .hero-eyebrow span{
-      width:6px;height:6px;border-radius:50%;background:var(--sky);
+      width:5px;height:5px;border-radius:50%;background:var(--sky);
       animation:blink 2s infinite;
     }
-    @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
     h1{
       font-family:'Space Grotesk',sans-serif;
-      font-size:clamp(30px,3.6vw,50px);
-      font-weight:600;line-height:1.15;
-      color:var(--white);margin-bottom:24px;
-      letter-spacing:-0.3px;
+      font-size:clamp(28px,3.2vw,46px);
+      font-weight:700;line-height:1.18;
+      color:var(--black);margin-bottom:20px;
+      letter-spacing:-0.5px;
     }
     h1 em{
       font-style:normal;
       color:var(--sky);
     }
     .hero-desc{
-      font-size:17px;color:rgba(255,255,255,.55);
-      line-height:1.8;margin-bottom:40px;max-width:520px;
-      font-weight:300;
+      font-size:16px;color:var(--muted);
+      line-height:1.8;margin-bottom:36px;
+      font-weight:400;
     }
-    .hero-btns{display:flex;gap:14px;flex-wrap:wrap}
-    .btn-cta{
-      background:var(--sky);color:var(--black);
-      padding:15px 30px;border-radius:8px;
-      font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;
-      text-decoration:none;letter-spacing:.2px;
-      transition:background .2s,transform .2s;
-    }
-    .btn-cta:hover{background:var(--sky-light);transform:translateY(-2px)}
-    .btn-ghost{
-      color:rgba(255,255,255,.75);
-      padding:15px 30px;border-radius:8px;
-      font-family:'Inter',sans-serif;font-weight:500;font-size:15px;
+    .hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:44px}
+    .btn-primary{
+      background:var(--sky);color:var(--white);
+      padding:13px 28px;border-radius:8px;
+      font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;
       text-decoration:none;
-      border:1.5px solid rgba(255,255,255,.15);
-      transition:border-color .2s,color .2s;
+      transition:background .2s,transform .15s;
+      display:inline-flex;align-items:center;gap:8px;
     }
-    .btn-ghost:hover{border-color:var(--sky);color:var(--white)}
+    .btn-primary:hover{background:var(--sky-dark);transform:translateY(-2px)}
+    .btn-secondary{
+      background:var(--offwhite);color:var(--black);
+      padding:13px 28px;border-radius:8px;
+      font-family:'Inter',sans-serif;font-weight:500;font-size:14px;
+      text-decoration:none;
+      border:1.5px solid var(--border);
+      transition:border-color .2s,background .2s;
+    }
+    .btn-secondary:hover{border-color:var(--sky);background:var(--white)}
 
-    .hero-metrics{
-      display:flex;gap:40px;margin-top:52px;
-      padding-top:36px;border-top:1px solid rgba(255,255,255,.06);
-      flex-wrap:wrap;
+    /* Badges de confiance */
+    .trust-row{
+      display:flex;align-items:center;gap:20px;flex-wrap:wrap;
     }
-    .metric-val{
+    .trust-item{
+      display:flex;align-items:center;gap:6px;
+      font-size:12px;color:var(--muted);font-weight:500;
+    }
+    .trust-item::before{
+      content:'✓';
+      width:18px;height:18px;border-radius:50%;
+      background:rgba(14,165,233,0.12);
+      color:var(--sky);
+      font-size:10px;font-weight:700;
+      display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    }
+
+    /* Visuel hero droite */
+    .hero-visual{
+      position:relative;
+    }
+    .hero-card-main{
+      background:var(--black);
+      border-radius:20px;
+      padding:28px;
+      box-shadow:0 20px 60px rgba(17,19,24,0.12), 0 4px 16px rgba(14,165,233,0.08);
+      position:relative;overflow:hidden;
+    }
+    .hero-card-main::before{
+      content:'';position:absolute;
+      top:0;left:0;right:0;height:2px;
+      background:linear-gradient(90deg,var(--sky),#38BDF8,transparent);
+    }
+    .hcard-label{
+      font-size:10px;font-weight:700;letter-spacing:2px;
+      text-transform:uppercase;color:var(--sky);
+      margin-bottom:16px;
+    }
+    .hcard-title{
       font-family:'Space Grotesk',sans-serif;
-      font-size:30px;font-weight:700;color:var(--white);
+      font-size:15px;font-weight:600;color:#fff;
+      margin-bottom:20px;
     }
-    .metric-val sup{color:var(--sky);font-size:18px}
-    .metric-lab{
-      font-size:11px;color:rgba(255,255,255,.35);
-      text-transform:uppercase;letter-spacing:1.5px;margin-top:3px;
+    .hcard-stats{
+      display:grid;grid-template-columns:1fr 1fr;gap:12px;
+      margin-bottom:20px;
     }
+    .hstat{
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.07);
+      border-radius:10px;padding:14px;
+    }
+    .hstat-val{
+      font-family:'Space Grotesk',sans-serif;
+      font-size:22px;font-weight:700;color:#fff;
+      margin-bottom:3px;
+    }
+    .hstat-val span{color:var(--sky)}
+    .hstat-lab{font-size:11px;color:rgba(255,255,255,0.4)}
+    .hcard-bar-wrap{background:rgba(255,255,255,0.06);border-radius:6px;overflow:hidden;height:6px;margin-bottom:8px}
+    .hcard-bar{height:100%;background:linear-gradient(90deg,var(--sky),#38BDF8);border-radius:6px}
+    .hcard-bar-label{font-size:11px;color:rgba(255,255,255,.35);display:flex;justify-content:space-between}
+
+    /* Mini floating cards */
+    .hero-float-1{
+      position:absolute;bottom:-18px;left:-24px;
+      background:var(--white);border-radius:12px;
+      padding:12px 16px;
+      box-shadow:0 8px 32px rgba(17,19,24,0.1);
+      border:1px solid var(--border);
+      display:flex;align-items:center;gap:10px;
+      min-width:160px;
+    }
+    .hero-float-2{
+      position:absolute;top:-16px;right:-20px;
+      background:var(--white);border-radius:12px;
+      padding:12px 16px;
+      box-shadow:0 8px 32px rgba(17,19,24,0.1);
+      border:1px solid var(--border);
+      text-align:center;
+      min-width:120px;
+    }
+    .float-dot{width:8px;height:8px;border-radius:50%;background:#22C55E;flex-shrink:0}
+    .float-text{font-size:12px;font-weight:600;color:var(--black)}
+    .float-sub{font-size:10px;color:var(--muted);margin-top:1px}
+    .float2-val{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;color:var(--sky)}
+    .float2-lab{font-size:10px;color:var(--muted);font-weight:500;margin-top:2px}
 
     /* ── SECTIONS ── */
-    section{padding:96px 6%}
+    section{padding:88px 6%}
+    .container{max-width:1200px;margin:0 auto}
     .section-label{
       display:inline-block;
-      font-family:'Space Grotesk',sans-serif;
-      font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
-      color:var(--sky);margin-bottom:12px;
+      font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+      color:var(--sky);margin-bottom:10px;
     }
     .section-title{
       font-family:'Space Grotesk',sans-serif;
-      font-size:clamp(28px,3.5vw,44px);font-weight:700;line-height:1.15;
-      letter-spacing:-0.5px;margin-bottom:14px;
+      font-size:clamp(24px,3vw,38px);font-weight:700;line-height:1.2;
+      letter-spacing:-0.4px;margin-bottom:12px;
     }
     .section-sub{
-      font-size:16px;color:var(--muted);line-height:1.8;max-width:480px;
+      font-size:15px;color:var(--muted);line-height:1.75;max-width:480px;
     }
-    .section-head{margin-bottom:56px}
+    .section-head{margin-bottom:52px}
 
     /* ── SERVICES ── */
     .services{background:var(--offwhite)}
     .services-grid{
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:20px;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:18px;
     }
     .scard{
       background:var(--white);border-radius:16px;
-      padding:36px 30px;
+      padding:32px 28px;
       border:1.5px solid var(--border);
       transition:transform .3s,box-shadow .3s,border-color .3s;
       position:relative;overflow:hidden;
     }
-    .scard::after{
-      content:'';position:absolute;
-      top:0;left:0;right:0;height:3px;
-      background:linear-gradient(90deg,var(--sky),var(--sky-light));
-      transform:scaleX(0);transform-origin:left;
-      transition:transform .3s;
-    }
     .scard:hover{
       transform:translateY(-5px);
-      box-shadow:0 12px 40px rgba(14,165,233,.12);
-      border-color:rgba(14,165,233,.3);
+      box-shadow:0 12px 40px rgba(14,165,233,0.1);
+      border-color:rgba(14,165,233,0.35);
     }
-    .scard:hover::after{transform:scaleX(1)}
     .scard-icon{
-      width:48px;height:48px;border-radius:12px;
-      background:rgba(14,165,233,.1);
-      border:1px solid rgba(14,165,233,.2);
+      width:44px;height:44px;border-radius:10px;
+      background:rgba(14,165,233,0.1);
       display:flex;align-items:center;justify-content:center;
-      font-size:22px;margin-bottom:18px;
+      font-size:20px;margin-bottom:16px;
     }
     .scard-title{
       font-family:'Space Grotesk',sans-serif;
-      font-size:17px;font-weight:700;margin-bottom:10px;
+      font-size:16px;font-weight:700;margin-bottom:8px;
     }
-    .scard-desc{font-size:14px;color:var(--muted);line-height:1.75}
+    .scard-desc{font-size:13.5px;color:var(--muted);line-height:1.7}
 
     /* ── PROCESSUS ── */
+    .process{background:var(--white)}
     .process-grid{
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
-      gap:36px;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:32px;
     }
-    .pstep{text-align:center;padding:8px}
+    .pstep{
+      text-align:center;padding:8px 12px;
+      position:relative;
+    }
+    .pstep:not(:last-child)::after{
+      content:'';
+      position:absolute;top:27px;right:-16px;
+      width:32px;height:2px;
+      background:linear-gradient(90deg,var(--border),transparent);
+    }
     .pstep-num{
-      width:54px;height:54px;border-radius:50%;
-      background:var(--black);margin:0 auto 20px;
+      width:52px;height:52px;border-radius:50%;
+      background:var(--black);margin:0 auto 18px;
       display:flex;align-items:center;justify-content:center;
       font-family:'Space Grotesk',sans-serif;
-      font-size:19px;font-weight:700;color:var(--sky);
-      border:2px solid rgba(14,165,233,.3);
+      font-size:17px;font-weight:700;color:var(--sky);
+      border:2px solid rgba(14,165,233,0.25);
     }
     .pstep-title{
       font-family:'Space Grotesk',sans-serif;
-      font-size:16px;font-weight:700;margin-bottom:8px;
+      font-size:15px;font-weight:700;margin-bottom:7px;
     }
-    .pstep-desc{font-size:14px;color:var(--muted);line-height:1.7}
+    .pstep-desc{font-size:13.5px;color:var(--muted);line-height:1.65}
 
     /* ── POURQUOI ── */
     .why{background:var(--offwhite)}
     .why-grid{
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-      gap:16px;
+      grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+      gap:14px;
     }
     .witem{
       background:var(--white);border-radius:12px;
-      padding:26px 22px;
+      padding:22px 20px;
       display:flex;gap:14px;align-items:flex-start;
       border:1.5px solid var(--border);
       transition:border-color .25s,transform .25s;
     }
-    .witem:hover{border-color:var(--sky);transform:translateY(-3px)}
+    .witem:hover{border-color:var(--sky);transform:translateY(-2px)}
     .wcheck{
-      width:30px;height:30px;flex-shrink:0;
-      background:var(--sky);border-radius:8px;
+      width:28px;height:28px;flex-shrink:0;
+      background:var(--sky);border-radius:7px;
       display:flex;align-items:center;justify-content:center;
-      color:var(--black);font-weight:700;font-size:13px;
+      color:var(--white);font-weight:700;font-size:12px;
     }
     .witem h4{
       font-family:'Space Grotesk',sans-serif;
-      font-size:15px;font-weight:700;margin-bottom:5px;
+      font-size:14px;font-weight:700;margin-bottom:4px;
     }
     .witem p{font-size:13px;color:var(--muted);line-height:1.6}
 
@@ -268,68 +337,72 @@
     }
     .contact::before{
       content:'';position:absolute;
-      top:-30%;left:50%;transform:translateX(-50%);
-      width:800px;height:600px;border-radius:50%;
-      background:radial-gradient(circle,rgba(14,165,233,.07) 0%,transparent 60%);
+      top:0;left:50%;transform:translateX(-50%);
+      width:700px;height:500px;
+      background:radial-gradient(ellipse,rgba(14,165,233,0.08) 0%,transparent 60%);
       pointer-events:none;
     }
     .contact .section-label,.contact .section-title,.contact .section-sub{position:relative}
     .contact .section-title{color:var(--white)}
-    .contact .section-sub{color:rgba(255,255,255,.45);margin:0 auto 48px}
+    .contact .section-sub{color:rgba(255,255,255,.45);margin:0 auto 44px}
     .contact-row{
-      display:flex;justify-content:center;gap:18px;
+      display:flex;justify-content:center;gap:16px;
       flex-wrap:wrap;position:relative;
     }
     .ccard{
       background:rgba(255,255,255,.04);
-      border:1.5px solid rgba(14,165,233,.2);
-      border-radius:16px;padding:32px 44px;
+      border:1.5px solid rgba(255,255,255,.08);
+      border-radius:16px;padding:28px 40px;
       text-decoration:none;color:var(--white);
       transition:background .25s,transform .25s,border-color .25s;
-      min-width:210px;
+      min-width:200px;
     }
     .ccard:hover{
-      background:rgba(14,165,233,.1);
+      background:rgba(14,165,233,0.1);
       border-color:var(--sky);transform:translateY(-4px);
     }
-    .ccard-icon{font-size:26px;margin-bottom:10px}
+    .ccard-icon{font-size:24px;margin-bottom:10px}
     .ccard-label{
       font-size:10px;color:var(--sky);font-weight:700;
       letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;
     }
     .ccard-val{
       font-family:'Space Grotesk',sans-serif;
-      font-size:16px;font-weight:700;
+      font-size:15px;font-weight:700;
     }
 
     /* ── FOOTER ── */
     footer{
-      background:#070A0D;
-      padding:22px 6%;
+      background:#0A0C0F;
+      padding:20px 6%;
       display:flex;align-items:center;justify-content:space-between;
       flex-wrap:wrap;gap:12px;
-      border-top:1px solid rgba(14,165,233,.08);
+      border-top:1px solid rgba(255,255,255,.05);
     }
-    .footer-brand{display:flex;align-items:center;gap:10px}
+    .footer-brand{display:flex;align-items:center;gap:9px}
     .footer-circle{
-      width:30px;height:30px;border-radius:50%;
+      width:28px;height:28px;border-radius:50%;
       background:var(--sky);
       display:flex;align-items:center;justify-content:center;
     }
-    .footer-circle svg{width:16px;height:16px}
+    .footer-circle svg{width:15px;height:15px}
     .footer-name{
       font-family:'Space Grotesk',sans-serif;
-      font-size:14px;font-weight:700;letter-spacing:2px;
-      color:var(--white);
+      font-size:13px;font-weight:700;letter-spacing:1.5px;color:var(--white);
     }
     .footer-name span{color:var(--sky)}
     .footer-copy{font-size:12px;color:rgba(255,255,255,.2)}
 
     /* ── RESPONSIVE ── */
+    @media(max-width:900px){
+      .hero-inner{grid-template-columns:1fr}
+      .hero-visual{display:none}
+    }
     @media(max-width:768px){
       .nav-links{display:none}
-      .hero{padding-top:110px}
-      section{padding:68px 5%}
+      .hero{padding-top:100px}
+      section{padding:64px 5%}
+      .pstep::after{display:none}
     }
   </style>
 </head>
@@ -341,7 +414,7 @@
     <div class="logo-circle">
       <svg viewBox="0 0 52 50" fill="none" xmlns="http://www.w3.org/2000/svg">
         <polygon points="1,45 19,24 26,31 8,52" fill="#0B0D0F"/>
-        <rect x="19" y="20" width="16" height="16" fill="#ffffff" opacity="0.85"/>
+        <rect x="19" y="20" width="16" height="16" fill="#ffffff" opacity="0.9"/>
         <polygon points="14,24 32,4 39,11 21,31" fill="#0B0D0F"/>
         <path d="M32,4 L46,0 L50,4 L40,13 L50,18 L46,24 L34,14 Z" fill="#0B0D0F"/>
       </svg>
@@ -358,100 +431,150 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-eyebrow"><span></span>Agence IA &amp; Automatisation</div>
-    <h1>Automatisez votre<br/><em>croissance digitale</em></h1>
-    <p class="hero-desc">Neova conçoit des systèmes intelligents qui travaillent pour vous — automatisation, SEO, outils IA sur mesure. Vous gagnez du temps, on fait croître votre business.</p>
-    <div class="hero-btns">
-      <a href="#contact" class="btn-cta">Consultation gratuite →</a>
-      <a href="#services" class="btn-ghost">Découvrir nos services</a>
+    <!-- Gauche : contenu -->
+    <div class="hero-content">
+      <div class="hero-eyebrow"><span></span>Agence IA &amp; Automatisation</div>
+      <h1>Automatisez votre<br/><em>croissance digitale</em></h1>
+      <p class="hero-desc">Neova conçoit des systèmes intelligents qui travaillent pour vous — automatisation, SEO, outils IA sur mesure. Vous gagnez du temps, on fait croître votre business.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary">Consultation gratuite →</a>
+        <a href="#services" class="btn-secondary">Découvrir nos services</a>
+      </div>
+      <div class="trust-row">
+        <div class="trust-item">100% sur mesure</div>
+        <div class="trust-item">IA-first</div>
+        <div class="trust-item">Réponse 48h</div>
+      </div>
     </div>
-    <div class="hero-metrics">
-      <div><div class="metric-val">100<sup>%</sup></div><div class="metric-lab">Sur mesure</div></div>
-      <div><div class="metric-val">IA<sup>✦</sup></div><div class="metric-lab">Powered</div></div>
-      <div><div class="metric-val">48<sup>h</sup></div><div class="metric-lab">Réponse garantie</div></div>
+
+    <!-- Droite : visuel dashboard IA -->
+    <div class="hero-visual">
+      <div class="hero-card-main">
+        <div class="hcard-label">Pipeline IA — En direct</div>
+        <div class="hcard-title">Automatisation active</div>
+        <div class="hcard-stats">
+          <div class="hstat">
+            <div class="hstat-val">+<span>247</span></div>
+            <div class="hstat-lab">Prospects contactés</div>
+          </div>
+          <div class="hstat">
+            <div class="hstat-val"><span>31</span>%</div>
+            <div class="hstat-lab">Taux de réponse</div>
+          </div>
+          <div class="hstat">
+            <div class="hstat-val"><span>18</span>h</div>
+            <div class="hstat-lab">Temps économisé / sem.</div>
+          </div>
+          <div class="hstat">
+            <div class="hstat-val"><span>98</span>%</div>
+            <div class="hstat-lab">Uptime système</div>
+          </div>
+        </div>
+        <div class="hcard-bar-wrap"><div class="hcard-bar" style="width:78%"></div></div>
+        <div class="hcard-bar-label"><span>SEO — Score technique</span><span>78/100</span></div>
+      </div>
+      <div class="hero-float-1">
+        <div class="float-dot"></div>
+        <div>
+          <div class="float-text">Workflow actif</div>
+          <div class="float-sub">24h/24 — 7j/7</div>
+        </div>
+      </div>
+      <div class="hero-float-2">
+        <div class="float2-val">×3.2</div>
+        <div class="float2-lab">Croissance leads</div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- SERVICES -->
 <section class="services" id="services">
-  <div class="section-head">
-    <span class="section-label">Ce qu'on fait</span>
-    <h2 class="section-title">Nos services</h2>
-    <p class="section-sub">Des solutions concrètes pour automatiser, optimiser et faire croître votre activité.</p>
-  </div>
-  <div class="services-grid">
-    <div class="scard">
-      <div class="scard-icon">🤖</div>
-      <h3 class="scard-title">Automatisation IA</h3>
-      <p class="scard-desc">Workflows intelligents, traitement de données, prospection automatique — des systèmes qui tournent 24h/24 sans vous.</p>
+  <div class="container">
+    <div class="section-head">
+      <span class="section-label">Ce qu'on fait</span>
+      <h2 class="section-title">Nos services</h2>
+      <p class="section-sub">Des solutions concrètes pour automatiser, optimiser et faire croître votre activité.</p>
     </div>
-    <div class="scard">
-      <div class="scard-icon">📈</div>
-      <h3 class="scard-title">SEO & Visibilité</h3>
-      <p class="scard-desc">Audit technique, optimisation on-page, stratégie de contenu. Résultats mesurables en 30 jours.</p>
-    </div>
-    <div class="scard">
-      <div class="scard-icon">⚙️</div>
-      <h3 class="scard-title">Outils sur mesure</h3>
-      <p class="scard-desc">Scripts, pipelines, intégrations API. Développés exactement pour votre business — rien de générique.</p>
-    </div>
-    <div class="scard">
-      <div class="scard-icon">🎯</div>
-      <h3 class="scard-title">Prospection automatisée</h3>
-      <p class="scard-desc">Système intelligent qui identifie, contacte et relance vos prospects — sans effort de votre côté.</p>
+    <div class="services-grid">
+      <div class="scard">
+        <div class="scard-icon">🤖</div>
+        <h3 class="scard-title">Automatisation IA</h3>
+        <p class="scard-desc">Workflows intelligents, traitement de données, prospection automatique — des systèmes qui tournent 24h/24 sans vous.</p>
+      </div>
+      <div class="scard">
+        <div class="scard-icon">📈</div>
+        <h3 class="scard-title">SEO & Visibilité</h3>
+        <p class="scard-desc">Audit technique, optimisation on-page, stratégie de contenu. Résultats mesurables en 30 jours.</p>
+      </div>
+      <div class="scard">
+        <div class="scard-icon">⚙️</div>
+        <h3 class="scard-title">Outils sur mesure</h3>
+        <p class="scard-desc">Scripts, pipelines, intégrations API. Développés exactement pour votre business — rien de générique.</p>
+      </div>
+      <div class="scard">
+        <div class="scard-icon">🎯</div>
+        <h3 class="scard-title">Prospection automatisée</h3>
+        <p class="scard-desc">Système intelligent qui identifie, contacte et relance vos prospects — sans effort de votre côté.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- PROCESSUS -->
-<section id="processus">
-  <div class="section-head">
-    <span class="section-label">Notre méthode</span>
-    <h2 class="section-title">Comment ça marche</h2>
-    <p class="section-sub">Simple, transparent, efficace.</p>
-  </div>
-  <div class="process-grid">
-    <div class="pstep"><div class="pstep-num">1</div><h4 class="pstep-title">Audit gratuit</h4><p class="pstep-desc">On analyse votre situation et identifions les leviers de croissance.</p></div>
-    <div class="pstep"><div class="pstep-num">2</div><h4 class="pstep-title">Proposition sur mesure</h4><p class="pstep-desc">Plan clair avec priorités, délais et tarifs. Aucune surprise.</p></div>
-    <div class="pstep"><div class="pstep-num">3</div><h4 class="pstep-title">Exécution</h4><p class="pstep-desc">On implémente, vous êtes formé, tout fonctionne.</p></div>
-    <div class="pstep"><div class="pstep-num">4</div><h4 class="pstep-title">Résultats mesurables</h4><p class="pstep-desc">KPIs clairs. Vous voyez ce que nos actions vous rapportent.</p></div>
+<section class="process" id="processus">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-label">Notre méthode</span>
+      <h2 class="section-title">Comment ça marche</h2>
+      <p class="section-sub">Simple, transparent, efficace.</p>
+    </div>
+    <div class="process-grid">
+      <div class="pstep"><div class="pstep-num">1</div><h4 class="pstep-title">Audit gratuit</h4><p class="pstep-desc">On analyse votre situation et identifions les leviers de croissance.</p></div>
+      <div class="pstep"><div class="pstep-num">2</div><h4 class="pstep-title">Proposition sur mesure</h4><p class="pstep-desc">Plan clair avec priorités, délais et tarifs. Aucune surprise.</p></div>
+      <div class="pstep"><div class="pstep-num">3</div><h4 class="pstep-title">Exécution</h4><p class="pstep-desc">On implémente, vous êtes formé, tout fonctionne.</p></div>
+      <div class="pstep"><div class="pstep-num">4</div><h4 class="pstep-title">Résultats mesurables</h4><p class="pstep-desc">KPIs clairs. Vous voyez ce que nos actions vous rapportent.</p></div>
+    </div>
   </div>
 </section>
 
 <!-- POURQUOI NEOVA -->
 <section class="why">
-  <div class="section-head">
-    <span class="section-label">Pourquoi nous</span>
-    <h2 class="section-title">Pourquoi choisir Neova</h2>
-    <p class="section-sub">Pas une agence classique — une équipe IA-first qui livre plus vite et mieux.</p>
-  </div>
-  <div class="why-grid">
-    <div class="witem"><div class="wcheck">✓</div><div><h4>100% sur mesure</h4><p>Chaque système est conçu pour votre activité spécifique.</p></div></div>
-    <div class="witem"><div class="wcheck">✓</div><div><h4>Résultats rapides</h4><p>Premières améliorations visibles sous 2 semaines.</p></div></div>
-    <div class="witem"><div class="wcheck">✓</div><div><h4>Transparent & direct</h4><p>On dit ce qui marche et ce qui ne marche pas. Pas de jargon.</p></div></div>
-    <div class="witem"><div class="wcheck">✓</div><div><h4>Interlocuteur unique</h4><p>Un seul contact du début à la fin.</p></div></div>
-    <div class="witem"><div class="wcheck">✓</div><div><h4>IA-first</h4><p>On exploite les meilleurs outils IA pour livrer plus vite.</p></div></div>
-    <div class="witem"><div class="wcheck">✓</div><div><h4>Consultation gratuite</h4><p>Premier échange sans engagement, avec de la valeur dès le départ.</p></div></div>
+  <div class="container">
+    <div class="section-head">
+      <span class="section-label">Pourquoi nous</span>
+      <h2 class="section-title">Pourquoi choisir Neova</h2>
+      <p class="section-sub">Pas une agence classique — une équipe IA-first qui livre plus vite et mieux.</p>
+    </div>
+    <div class="why-grid">
+      <div class="witem"><div class="wcheck">✓</div><div><h4>100% sur mesure</h4><p>Chaque système est conçu pour votre activité spécifique.</p></div></div>
+      <div class="witem"><div class="wcheck">✓</div><div><h4>Résultats rapides</h4><p>Premières améliorations visibles sous 2 semaines.</p></div></div>
+      <div class="witem"><div class="wcheck">✓</div><div><h4>Transparent & direct</h4><p>On dit ce qui marche et ce qui ne marche pas. Pas de jargon.</p></div></div>
+      <div class="witem"><div class="wcheck">✓</div><div><h4>Interlocuteur unique</h4><p>Un seul contact du début à la fin.</p></div></div>
+      <div class="witem"><div class="wcheck">✓</div><div><h4>IA-first</h4><p>On exploite les meilleurs outils IA pour livrer plus vite.</p></div></div>
+      <div class="witem"><div class="wcheck">✓</div><div><h4>Consultation gratuite</h4><p>Premier échange sans engagement, avec de la valeur dès le départ.</p></div></div>
+    </div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section class="contact" id="contact">
-  <span class="section-label">Contact</span>
-  <h2 class="section-title">Parlons de votre projet</h2>
-  <p class="section-sub">20 minutes suffisent pour voir si on peut vous aider. Gratuit, sans engagement.</p>
-  <div class="contact-row">
-    <a href="tel:0783802565" class="ccard">
-      <div class="ccard-icon">📞</div>
-      <div class="ccard-label">Téléphone</div>
-      <div class="ccard-val">07 83 80 25 65</div>
-    </a>
-    <a href="mailto:contact@neova-agency.fr" class="ccard">
-      <div class="ccard-icon">✉️</div>
-      <div class="ccard-label">Email</div>
-      <div class="ccard-val">contact@neova-agency.fr</div>
-    </a>
+  <div class="container">
+    <span class="section-label">Contact</span>
+    <h2 class="section-title">Parlons de votre projet</h2>
+    <p class="section-sub">20 minutes suffisent pour voir si on peut vous aider. Gratuit, sans engagement.</p>
+    <div class="contact-row">
+      <a href="tel:0783802565" class="ccard">
+        <div class="ccard-icon">📞</div>
+        <div class="ccard-label">Téléphone</div>
+        <div class="ccard-val">07 83 80 25 65</div>
+      </a>
+      <a href="mailto:contact@neova-agency.fr" class="ccard">
+        <div class="ccard-icon">✉️</div>
+        <div class="ccard-label">Email</div>
+        <div class="ccard-val">contact@neova-agency.fr</div>
+      </a>
+    </div>
   </div>
 </section>
 
