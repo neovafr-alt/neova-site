@@ -6,19 +6,19 @@
   <title>Neova — Agence IA & Automatisation</title>
   <meta name="description" content="Neova automatise votre croissance : SEO, automatisation IA, outils sur mesure."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
-      --navy:#0D1B3E;
-      --navy-dark:#080f22;
-      --cyan:#00CFEE;
-      --cyan-light:#4de8ff;
+      --sky:#0EA5E9;
+      --sky-dark:#0284C7;
+      --sky-light:#38BDF8;
+      --black:#0B0D0F;
       --white:#FFFFFF;
-      --offwhite:#F6F8FC;
-      --border:#E3E8F4;
-      --muted:#6b7899;
-      --text:#0D1B3E;
+      --offwhite:#F8FAFC;
+      --border:#E2E8F0;
+      --muted:#64748B;
+      --text:#0B0D0F;
     }
     html{scroll-behavior:smooth}
     body{font-family:'Inter',sans-serif;color:var(--text);background:var(--white);overflow-x:hidden}
@@ -27,226 +27,210 @@
     nav{
       position:fixed;top:0;left:0;right:0;z-index:200;
       display:flex;align-items:center;justify-content:space-between;
-      padding:0 6%;height:72px;
-      background:rgba(255,255,255,0.96);
+      padding:0 6%;height:70px;
+      background:rgba(255,255,255,0.97);
       backdrop-filter:blur(16px);
       border-bottom:1px solid var(--border);
     }
     .nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none}
 
-    /* Logo rond */
     .logo-circle{
-      width:44px;height:44px;border-radius:50%;
-      background:var(--navy);
+      width:42px;height:42px;border-radius:50%;
+      background:var(--black);
       display:flex;align-items:center;justify-content:center;
       flex-shrink:0;
-      box-shadow:0 2px 12px rgba(13,27,62,0.25);
     }
-    .logo-circle svg{width:26px;height:26px}
+    .logo-circle svg{width:24px;height:24px}
 
     .brand-name{
-      font-family:'Syne',sans-serif;
-      font-size:20px;font-weight:800;letter-spacing:3px;
-      background:linear-gradient(90deg, var(--navy) 40%, var(--cyan) 100%);
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      font-family:'Space Grotesk',sans-serif;
+      font-size:19px;font-weight:700;letter-spacing:2px;
+      color:var(--black);
     }
-    .nav-links{display:flex;align-items:center;gap:36px;list-style:none}
+    .brand-name span{color:var(--sky)}
+
+    .nav-links{display:flex;align-items:center;gap:32px;list-style:none}
     .nav-links a{
       font-family:'Inter',sans-serif;font-size:14px;font-weight:500;
-      color:var(--navy);text-decoration:none;transition:color .2s;
+      color:var(--black);text-decoration:none;transition:color .2s;
     }
-    .nav-links a:hover{color:var(--cyan)}
+    .nav-links a:hover{color:var(--sky)}
     .nav-cta{
-      background:var(--navy) !important;color:var(--white) !important;
-      padding:11px 26px;border-radius:8px;
+      background:var(--black) !important;color:var(--white) !important;
+      padding:10px 24px;border-radius:8px;
       font-weight:600 !important;font-size:13px !important;
-      letter-spacing:.3px;transition:background .2s !important;
+      letter-spacing:.2px;transition:background .2s !important;
     }
-    .nav-cta:hover{background:#1a2d5a !important}
+    .nav-cta:hover{background:var(--sky) !important;color:var(--black) !important}
 
     /* ── HERO ── */
     .hero{
       min-height:100vh;
-      background:var(--navy-dark);
+      background:var(--black);
       display:flex;align-items:center;
       padding:110px 6% 80px;
       position:relative;overflow:hidden;
     }
-    /* Grille de fond subtile */
     .hero::before{
       content:'';position:absolute;inset:0;
       background-image:
-        linear-gradient(rgba(0,207,238,.04) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(0,207,238,.04) 1px,transparent 1px);
-      background-size:72px 72px;
+        linear-gradient(rgba(14,165,233,.04) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(14,165,233,.04) 1px,transparent 1px);
+      background-size:60px 60px;
       pointer-events:none;
     }
-    /* Halo lumière cyan */
     .hero::after{
       content:'';position:absolute;
-      top:-20%;right:-10%;
-      width:65vw;height:65vw;border-radius:50%;
-      background:radial-gradient(circle,rgba(0,207,238,.09) 0%,transparent 65%);
+      top:-10%;right:-5%;
+      width:60vw;height:60vw;border-radius:50%;
+      background:radial-gradient(circle,rgba(14,165,233,.08) 0%,transparent 60%);
       pointer-events:none;
     }
     .hero-inner{
       position:relative;z-index:1;
-      display:grid;grid-template-columns:1fr auto;
-      align-items:center;gap:60px;width:100%;
+      max-width:740px;
     }
-    .hero-content{max-width:660px}
 
     .hero-eyebrow{
       display:inline-flex;align-items:center;gap:8px;
-      background:rgba(0,207,238,.1);
-      border:1px solid rgba(0,207,238,.3);
-      color:var(--cyan);padding:6px 18px;border-radius:40px;
+      background:rgba(14,165,233,.1);
+      border:1px solid rgba(14,165,233,.3);
+      color:var(--sky);padding:6px 16px;border-radius:40px;
       font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
-      margin-bottom:28px;
+      margin-bottom:32px;
     }
     .hero-eyebrow span{
-      width:6px;height:6px;border-radius:50%;background:var(--cyan);
+      width:6px;height:6px;border-radius:50%;background:var(--sky);
       animation:blink 2s infinite;
     }
     @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 
     h1{
-      font-family:'Syne',sans-serif;
-      font-size:clamp(40px,5.5vw,68px);
-      font-weight:800;line-height:1.06;
-      color:var(--white);margin-bottom:26px;
-      letter-spacing:-1.5px;
+      font-family:'Space Grotesk',sans-serif;
+      font-size:clamp(38px,5vw,62px);
+      font-weight:700;line-height:1.1;
+      color:var(--white);margin-bottom:24px;
+      letter-spacing:-0.5px;
     }
     h1 em{
       font-style:normal;
-      background:linear-gradient(90deg,var(--cyan),#7bc8ff);
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      color:var(--sky);
     }
     .hero-desc{
-      font-size:17px;color:rgba(255,255,255,.58);
-      line-height:1.8;margin-bottom:42px;max-width:500px;
+      font-size:17px;color:rgba(255,255,255,.55);
+      line-height:1.8;margin-bottom:40px;max-width:520px;
       font-weight:300;
     }
     .hero-btns{display:flex;gap:14px;flex-wrap:wrap}
     .btn-cta{
-      background:var(--cyan);color:var(--navy-dark);
-      padding:16px 32px;border-radius:10px;
-      font-family:'Syne',sans-serif;font-weight:700;font-size:15px;
-      text-decoration:none;letter-spacing:.3px;
-      box-shadow:0 6px 28px rgba(0,207,238,.4);
-      transition:transform .2s,box-shadow .2s;
+      background:var(--sky);color:var(--black);
+      padding:15px 30px;border-radius:8px;
+      font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;
+      text-decoration:none;letter-spacing:.2px;
+      transition:background .2s,transform .2s;
     }
-    .btn-cta:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,207,238,.55)}
+    .btn-cta:hover{background:var(--sky-light);transform:translateY(-2px)}
     .btn-ghost{
-      color:rgba(255,255,255,.8);
-      padding:16px 32px;border-radius:10px;
+      color:rgba(255,255,255,.75);
+      padding:15px 30px;border-radius:8px;
       font-family:'Inter',sans-serif;font-weight:500;font-size:15px;
       text-decoration:none;
       border:1.5px solid rgba(255,255,255,.15);
       transition:border-color .2s,color .2s;
     }
-    .btn-ghost:hover{border-color:var(--cyan);color:var(--white)}
+    .btn-ghost:hover{border-color:var(--sky);color:var(--white)}
 
-    /* Métriques hero */
     .hero-metrics{
-      display:flex;gap:40px;margin-top:56px;
-      padding-top:40px;border-top:1px solid rgba(255,255,255,.07);
+      display:flex;gap:40px;margin-top:52px;
+      padding-top:36px;border-top:1px solid rgba(255,255,255,.06);
       flex-wrap:wrap;
     }
     .metric-val{
-      font-family:'Syne',sans-serif;
-      font-size:34px;font-weight:800;color:var(--white);
+      font-family:'Space Grotesk',sans-serif;
+      font-size:30px;font-weight:700;color:var(--white);
     }
-    .metric-val sup{color:var(--cyan);font-size:20px}
+    .metric-val sup{color:var(--sky);font-size:18px}
     .metric-lab{
-      font-size:11px;color:rgba(255,255,255,.4);
+      font-size:11px;color:rgba(255,255,255,.35);
       text-transform:uppercase;letter-spacing:1.5px;margin-top:3px;
     }
 
-    /* Gros logo décoratif côté droit du hero */
-    .hero-deco{
-      flex-shrink:0;opacity:.06;
-      display:flex;align-items:center;justify-content:center;
-    }
-    .hero-deco svg{width:280px;height:260px}
-
     /* ── SECTIONS ── */
-    section{padding:100px 6%}
+    section{padding:96px 6%}
     .section-label{
       display:inline-block;
-      font-family:'Syne',sans-serif;
+      font-family:'Space Grotesk',sans-serif;
       font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
-      color:var(--cyan);margin-bottom:14px;
+      color:var(--sky);margin-bottom:12px;
     }
     .section-title{
-      font-family:'Syne',sans-serif;
-      font-size:clamp(30px,4vw,48px);font-weight:800;line-height:1.12;
-      letter-spacing:-1px;margin-bottom:16px;
+      font-family:'Space Grotesk',sans-serif;
+      font-size:clamp(28px,3.5vw,44px);font-weight:700;line-height:1.15;
+      letter-spacing:-0.5px;margin-bottom:14px;
     }
     .section-sub{
-      font-size:16px;color:var(--muted);line-height:1.8;max-width:500px;
+      font-size:16px;color:var(--muted);line-height:1.8;max-width:480px;
     }
-    .section-head{margin-bottom:60px}
+    .section-head{margin-bottom:56px}
 
     /* ── SERVICES ── */
     .services{background:var(--offwhite)}
     .services-grid{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:22px;
+      gap:20px;
     }
     .scard{
-      background:var(--white);border-radius:18px;
-      padding:38px 32px;
+      background:var(--white);border-radius:16px;
+      padding:36px 30px;
       border:1.5px solid var(--border);
       transition:transform .3s,box-shadow .3s,border-color .3s;
       position:relative;overflow:hidden;
     }
-    .scard::before{
+    .scard::after{
       content:'';position:absolute;
       top:0;left:0;right:0;height:3px;
-      background:linear-gradient(90deg,var(--navy),var(--cyan));
+      background:linear-gradient(90deg,var(--sky),var(--sky-light));
       transform:scaleX(0);transform-origin:left;
-      transition:transform .35s;
+      transition:transform .3s;
     }
     .scard:hover{
-      transform:translateY(-6px);
-      box-shadow:0 16px 48px rgba(13,27,62,.1);
-      border-color:rgba(0,207,238,.3);
+      transform:translateY(-5px);
+      box-shadow:0 12px 40px rgba(14,165,233,.12);
+      border-color:rgba(14,165,233,.3);
     }
-    .scard:hover::before{transform:scaleX(1)}
+    .scard:hover::after{transform:scaleX(1)}
     .scard-icon{
-      width:52px;height:52px;border-radius:14px;
-      background:linear-gradient(135deg,rgba(0,207,238,.12),rgba(0,207,238,.03));
-      border:1px solid rgba(0,207,238,.2);
+      width:48px;height:48px;border-radius:12px;
+      background:rgba(14,165,233,.1);
+      border:1px solid rgba(14,165,233,.2);
       display:flex;align-items:center;justify-content:center;
-      font-size:22px;margin-bottom:20px;
+      font-size:22px;margin-bottom:18px;
     }
     .scard-title{
-      font-family:'Syne',sans-serif;
-      font-size:18px;font-weight:700;margin-bottom:10px;
+      font-family:'Space Grotesk',sans-serif;
+      font-size:17px;font-weight:700;margin-bottom:10px;
     }
     .scard-desc{font-size:14px;color:var(--muted);line-height:1.75}
 
     /* ── PROCESSUS ── */
     .process-grid{
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-      gap:40px;
+      grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+      gap:36px;
     }
-    .pstep{text-align:center;padding:10px}
+    .pstep{text-align:center;padding:8px}
     .pstep-num{
-      width:58px;height:58px;border-radius:50%;
-      background:var(--navy);margin:0 auto 22px;
+      width:54px;height:54px;border-radius:50%;
+      background:var(--black);margin:0 auto 20px;
       display:flex;align-items:center;justify-content:center;
-      font-family:'Syne',sans-serif;
-      font-size:20px;font-weight:800;color:var(--cyan);
-      border:2px solid rgba(0,207,238,.35);
-      box-shadow:0 4px 20px rgba(13,27,62,.2);
+      font-family:'Space Grotesk',sans-serif;
+      font-size:19px;font-weight:700;color:var(--sky);
+      border:2px solid rgba(14,165,233,.3);
     }
     .pstep-title{
-      font-family:'Syne',sans-serif;
-      font-size:17px;font-weight:700;margin-bottom:8px;
+      font-family:'Space Grotesk',sans-serif;
+      font-size:16px;font-weight:700;margin-bottom:8px;
     }
     .pstep-desc{font-size:14px;color:var(--muted);line-height:1.7}
 
@@ -254,102 +238,99 @@
     .why{background:var(--offwhite)}
     .why-grid{
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:18px;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:16px;
     }
     .witem{
-      background:var(--white);border-radius:14px;
-      padding:28px 24px;
-      display:flex;gap:16px;align-items:flex-start;
+      background:var(--white);border-radius:12px;
+      padding:26px 22px;
+      display:flex;gap:14px;align-items:flex-start;
       border:1.5px solid var(--border);
       transition:border-color .25s,transform .25s;
     }
-    .witem:hover{border-color:var(--cyan);transform:translateY(-3px)}
+    .witem:hover{border-color:var(--sky);transform:translateY(-3px)}
     .wcheck{
-      width:32px;height:32px;flex-shrink:0;
-      background:var(--navy);border-radius:9px;
+      width:30px;height:30px;flex-shrink:0;
+      background:var(--sky);border-radius:8px;
       display:flex;align-items:center;justify-content:center;
-      color:var(--cyan);font-weight:700;font-size:14px;
+      color:var(--black);font-weight:700;font-size:13px;
     }
     .witem h4{
-      font-family:'Syne',sans-serif;
+      font-family:'Space Grotesk',sans-serif;
       font-size:15px;font-weight:700;margin-bottom:5px;
     }
     .witem p{font-size:13px;color:var(--muted);line-height:1.6}
 
     /* ── CONTACT ── */
     .contact{
-      background:var(--navy-dark);text-align:center;
+      background:var(--black);text-align:center;
       position:relative;overflow:hidden;
     }
     .contact::before{
       content:'';position:absolute;
       top:-30%;left:50%;transform:translateX(-50%);
-      width:900px;height:700px;border-radius:50%;
-      background:radial-gradient(circle,rgba(0,207,238,.07) 0%,transparent 60%);
+      width:800px;height:600px;border-radius:50%;
+      background:radial-gradient(circle,rgba(14,165,233,.07) 0%,transparent 60%);
       pointer-events:none;
     }
-    .contact .section-label,.contact .section-title,.contact .section-sub{
-      position:relative;
-    }
+    .contact .section-label,.contact .section-title,.contact .section-sub{position:relative}
     .contact .section-title{color:var(--white)}
-    .contact .section-sub{color:rgba(255,255,255,.5);margin:0 auto 52px}
+    .contact .section-sub{color:rgba(255,255,255,.45);margin:0 auto 48px}
     .contact-row{
-      display:flex;justify-content:center;gap:20px;
+      display:flex;justify-content:center;gap:18px;
       flex-wrap:wrap;position:relative;
     }
     .ccard{
-      background:rgba(255,255,255,.05);
-      border:1.5px solid rgba(0,207,238,.2);
-      border-radius:18px;padding:34px 48px;
+      background:rgba(255,255,255,.04);
+      border:1.5px solid rgba(14,165,233,.2);
+      border-radius:16px;padding:32px 44px;
       text-decoration:none;color:var(--white);
       transition:background .25s,transform .25s,border-color .25s;
-      min-width:220px;
+      min-width:210px;
     }
     .ccard:hover{
-      background:rgba(0,207,238,.1);
-      border-color:var(--cyan);transform:translateY(-5px);
+      background:rgba(14,165,233,.1);
+      border-color:var(--sky);transform:translateY(-4px);
     }
-    .ccard-icon{font-size:28px;margin-bottom:12px}
+    .ccard-icon{font-size:26px;margin-bottom:10px}
     .ccard-label{
-      font-size:10px;color:var(--cyan);font-weight:700;
-      letter-spacing:2px;text-transform:uppercase;margin-bottom:7px;
+      font-size:10px;color:var(--sky);font-weight:700;
+      letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;
     }
     .ccard-val{
-      font-family:'Syne',sans-serif;
-      font-size:17px;font-weight:700;
+      font-family:'Space Grotesk',sans-serif;
+      font-size:16px;font-weight:700;
     }
 
     /* ── FOOTER ── */
     footer{
-      background:#060d1c;
-      padding:24px 6%;
+      background:#070A0D;
+      padding:22px 6%;
       display:flex;align-items:center;justify-content:space-between;
       flex-wrap:wrap;gap:12px;
-      border-top:1px solid rgba(0,207,238,.08);
+      border-top:1px solid rgba(14,165,233,.08);
     }
     .footer-brand{display:flex;align-items:center;gap:10px}
     .footer-circle{
-      width:32px;height:32px;border-radius:50%;
-      background:var(--navy);
+      width:30px;height:30px;border-radius:50%;
+      background:var(--black);
       display:flex;align-items:center;justify-content:center;
-      border:1px solid rgba(0,207,238,.3);
+      border:1px solid rgba(14,165,233,.3);
     }
-    .footer-circle svg{width:18px;height:18px}
+    .footer-circle svg{width:16px;height:16px}
     .footer-name{
-      font-family:'Syne',sans-serif;
-      font-size:14px;font-weight:800;letter-spacing:3px;
-      background:linear-gradient(90deg,#fff,var(--cyan));
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      font-family:'Space Grotesk',sans-serif;
+      font-size:14px;font-weight:700;letter-spacing:2px;
+      color:var(--white);
     }
+    .footer-name span{color:var(--sky)}
     .footer-copy{font-size:12px;color:rgba(255,255,255,.2)}
 
     /* ── RESPONSIVE ── */
-    @media(max-width:960px){.hero-deco{display:none}}
     @media(max-width:768px){
       .nav-links{display:none}
-      .hero{padding-top:115px}
-      section{padding:72px 5%}
+      .hero{padding-top:110px}
+      section{padding:68px 5%}
     }
   </style>
 </head>
@@ -359,19 +340,14 @@
 <nav>
   <a href="#" class="nav-brand">
     <div class="logo-circle">
-      <!-- Icône du logo Neova : double chevron + carré cyan -->
       <svg viewBox="0 0 52 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Barre basse navy -->
-        <polygon points="1,45 19,24 26,31 8,52" fill="white"/>
-        <!-- Carré cyan -->
-        <rect x="19" y="20" width="16" height="16" fill="#00CFEE"/>
-        <!-- Barre haute navy -->
-        <polygon points="14,24 32,4 39,11 21,31" fill="white"/>
-        <!-- Pointe flèche navy -->
-        <path d="M32,4 L46,0 L50,4 L40,13 L50,18 L46,24 L34,14 Z" fill="white"/>
+        <polygon points="1,45 19,24 26,31 8,52" fill="#0EA5E9"/>
+        <rect x="19" y="20" width="16" height="16" fill="#ffffff" opacity="0.9"/>
+        <polygon points="14,24 32,4 39,11 21,31" fill="#0EA5E9"/>
+        <path d="M32,4 L46,0 L50,4 L40,13 L50,18 L46,24 L34,14 Z" fill="#0EA5E9"/>
       </svg>
     </div>
-    <span class="brand-name">NEOVA</span>
+    <span class="brand-name">NEO<span>VA</span></span>
   </a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
@@ -383,28 +359,17 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-content">
-      <div class="hero-eyebrow"><span></span>Agence IA &amp; Automatisation</div>
-      <h1>Automatisez votre<br/><em>croissance digitale</em></h1>
-      <p class="hero-desc">Neova conçoit des systèmes intelligents qui travaillent pour vous — automatisation, SEO, outils IA sur mesure. Vous gagnez du temps, on fait croître votre business.</p>
-      <div class="hero-btns">
-        <a href="#contact" class="btn-cta">Consultation gratuite →</a>
-        <a href="#services" class="btn-ghost">Découvrir nos services</a>
-      </div>
-      <div class="hero-metrics">
-        <div><div class="metric-val">100<sup>%</sup></div><div class="metric-lab">Sur mesure</div></div>
-        <div><div class="metric-val">IA<sup>✦</sup></div><div class="metric-lab">Powered</div></div>
-        <div><div class="metric-val">48<sup>h</sup></div><div class="metric-lab">Réponse garantie</div></div>
-      </div>
+    <div class="hero-eyebrow"><span></span>Agence IA &amp; Automatisation</div>
+    <h1>Automatisez votre<br/><em>croissance digitale</em></h1>
+    <p class="hero-desc">Neova conçoit des systèmes intelligents qui travaillent pour vous — automatisation, SEO, outils IA sur mesure. Vous gagnez du temps, on fait croître votre business.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-cta">Consultation gratuite →</a>
+      <a href="#services" class="btn-ghost">Découvrir nos services</a>
     </div>
-    <!-- Watermark décoratif -->
-    <div class="hero-deco">
-      <svg viewBox="0 0 52 50" fill="none">
-        <polygon points="1,45 19,24 26,31 8,52" fill="white"/>
-        <rect x="19" y="20" width="16" height="16" fill="#00CFEE"/>
-        <polygon points="14,24 32,4 39,11 21,31" fill="white"/>
-        <path d="M32,4 L46,0 L50,4 L40,13 L50,18 L46,24 L34,14 Z" fill="white"/>
-      </svg>
+    <div class="hero-metrics">
+      <div><div class="metric-val">100<sup>%</sup></div><div class="metric-lab">Sur mesure</div></div>
+      <div><div class="metric-val">IA<sup>✦</sup></div><div class="metric-lab">Powered</div></div>
+      <div><div class="metric-val">48<sup>h</sup></div><div class="metric-lab">Réponse garantie</div></div>
     </div>
   </div>
 </section>
@@ -496,13 +461,13 @@
   <div class="footer-brand">
     <div class="footer-circle">
       <svg viewBox="0 0 52 50" fill="none">
-        <polygon points="1,45 19,24 26,31 8,52" fill="white"/>
-        <rect x="19" y="20" width="16" height="16" fill="#00CFEE"/>
-        <polygon points="14,24 32,4 39,11 21,31" fill="white"/>
-        <path d="M32,4 L46,0 L50,4 L40,13 L50,18 L46,24 L34,14 Z" fill="white"/>
+        <polygon points="1,45 19,24 26,31 8,52" fill="#0EA5E9"/>
+        <rect x="19" y="20" width="16" height="16" fill="#ffffff" opacity="0.9"/>
+        <polygon points="14,24 32,4 39,11 21,31" fill="#0EA5E9"/>
+        <path d="M32,4 L46,0 L50,4 L40,13 L50,18 L46,24 L34,14 Z" fill="#0EA5E9"/>
       </svg>
     </div>
-    <span class="footer-name">NEOVA</span>
+    <span class="footer-name">NEO<span>VA</span></span>
   </div>
   <span class="footer-copy">© 2026 Neova — Agence IA &amp; Automatisation</span>
 </footer>
