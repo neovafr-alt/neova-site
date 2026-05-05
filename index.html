@@ -227,15 +227,75 @@
       border-top:1px solid rgba(255,255,255,0.06);
       border-bottom:1px solid rgba(255,255,255,0.06);
       padding:22px 24px;
-      display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap;
+      display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap;
       overflow:hidden;position:relative;
     }
     .tools-strip span{
       font-size:12px;font-weight:500;
-      color:rgba(255,255,255,0.35);letter-spacing:0.3px;
+      color:rgba(255,255,255,0.4);letter-spacing:0.3px;
       transition:color .25s;cursor:default;
     }
     .tools-strip span:hover{color:var(--sky)}
+    .tools-strip span.tag-strong{
+      color:rgba(14,165,233,0.85);font-weight:600;
+      padding:4px 10px;border-radius:50px;
+      background:rgba(14,165,233,0.08);
+      border:1px solid rgba(14,165,233,0.2);
+    }
+
+    /* ── STATS — chiffres clés ── */
+    .stats-section{
+      background:var(--apple-gray);
+      padding:80px 6%;
+      border-top:1px solid rgba(0,0,0,0.04);
+    }
+    .stats-grid{
+      display:grid;grid-template-columns:repeat(4,1fr);
+      gap:24px;max-width:1100px;margin:0 auto;
+      text-align:center;
+    }
+    .stat{
+      padding:20px 16px;
+      position:relative;
+      transition:transform .3s;
+    }
+    .stat:hover{transform:translateY(-4px)}
+    .stat:not(:last-child)::after{
+      content:'';position:absolute;
+      right:-12px;top:25%;bottom:25%;width:1px;
+      background:linear-gradient(180deg,transparent,rgba(0,0,0,0.1),transparent);
+    }
+    .stat-num{
+      font-size:clamp(36px,4.5vw,52px);
+      font-weight:700;letter-spacing:-1.5px;line-height:1;
+      background:linear-gradient(135deg,#0EA5E9,#8B5CF6);
+      -webkit-background-clip:text;background-clip:text;
+      -webkit-text-fill-color:transparent;
+      margin-bottom:8px;
+    }
+    .stat-label{
+      font-size:14px;font-weight:500;
+      color:var(--near-black);letter-spacing:-0.2px;
+    }
+    .stat-sub{
+      font-size:12px;color:var(--muted);
+      margin-top:4px;
+    }
+
+    /* ── SECTIONS LIGHT (alternance) ── */
+    .light-section{
+      background:var(--apple-gray);
+      padding:140px 6% 120px;text-align:center;
+      position:relative;overflow:hidden;
+    }
+    .light-section .section-eyebrow{
+      color:var(--sky-dark);
+      background:rgba(14,165,233,0.06);
+      border-color:rgba(14,165,233,0.18);
+    }
+    .light-section .section-title{color:var(--near-black)}
+    .light-section .section-title em{color:var(--sky-dark)}
+    .light-section .section-sub{color:var(--muted)}
 
     /* ── SECTIONS DARK UNIFIÉES ── */
     .dark-section{
@@ -342,7 +402,7 @@
     .scard:hover .scard-link{gap:12px}
     .scard:hover .scard-link svg{transform:translateX(4px)}
 
-    /* ── PROCESS — timeline lumineuse ── */
+    /* ── PROCESS — timeline lumineuse (sur fond clair) ── */
     .process-wrap{
       max-width:900px;margin:0 auto;
       position:relative;
@@ -352,14 +412,14 @@
       width:2px;transform:translateX(-50%);
       background:linear-gradient(180deg,
         transparent 0%,
-        rgba(14,165,233,0.3) 10%,
-        rgba(139,92,246,0.3) 90%,
+        rgba(14,165,233,0.5) 10%,
+        rgba(139,92,246,0.5) 90%,
         transparent 100%);
     }
     .process-line::before{
       content:'';position:absolute;inset:0;
       background:linear-gradient(180deg,transparent,#0EA5E9,#8B5CF6,transparent);
-      filter:blur(8px);
+      filter:blur(10px);opacity:0.6;
     }
     .process-row{
       display:grid;grid-template-columns:1fr 80px 1fr;
@@ -378,21 +438,26 @@
       display:flex;align-items:center;justify-content:center;
       font-size:22px;font-weight:700;color:#fff;
       margin:0 auto;position:relative;z-index:2;
-      box-shadow:0 0 0 6px rgba(14,165,233,0.12),0 0 30px rgba(14,165,233,0.4);
+      box-shadow:0 0 0 6px rgba(14,165,233,0.15),0 0 30px rgba(14,165,233,0.4);
       transition:transform .35s,box-shadow .35s;
     }
     .process-row:hover .process-num{
       transform:scale(1.15);
-      box-shadow:0 0 0 10px rgba(14,165,233,0.18),0 0 50px rgba(14,165,233,0.6);
+      box-shadow:0 0 0 10px rgba(14,165,233,0.22),0 0 50px rgba(14,165,233,0.6);
     }
     .process-content h4{
-      font-size:22px;font-weight:700;color:var(--white);
+      font-size:22px;font-weight:700;
       letter-spacing:-0.4px;margin-bottom:8px;
     }
     .process-content p{
-      font-size:15px;color:rgba(255,255,255,0.55);
-      line-height:1.65;
+      font-size:15px;line-height:1.65;
     }
+    /* Process sur fond noir (dark) */
+    .dark-section .process-content h4{color:var(--white)}
+    .dark-section .process-content p{color:rgba(255,255,255,0.55)}
+    /* Process sur fond clair (light) */
+    .light-section .process-content h4{color:var(--near-black)}
+    .light-section .process-content p{color:var(--muted)}
 
     /* ── WHY — cards interactives ── */
     .why-grid{
@@ -432,26 +497,25 @@
     }
     .witem p{font-size:14px;color:rgba(255,255,255,0.5);line-height:1.65}
 
-    /* ── CONTACT — CTA spectaculaire ── */
+    /* ── CONTACT — CTA spectaculaire (fond clair) ── */
     .contact-section{
-      background:#000;padding:140px 6%;text-align:center;
+      background:var(--apple-gray);padding:140px 6%;text-align:center;
       position:relative;overflow:hidden;
     }
     .contact-section::before{
       content:'';position:absolute;inset:0;
       background:
-        radial-gradient(ellipse at 50% 50%,rgba(14,165,233,0.15) 0%,transparent 50%),
-        radial-gradient(ellipse at 30% 80%,rgba(139,92,246,0.12) 0%,transparent 50%);
+        radial-gradient(ellipse at 50% 50%,rgba(14,165,233,0.08) 0%,transparent 50%),
+        radial-gradient(ellipse at 30% 80%,rgba(139,92,246,0.06) 0%,transparent 50%);
       pointer-events:none;
     }
     .contact-section > *{position:relative;z-index:1}
     .contact-card{
       max-width:780px;margin:0 auto;
       padding:60px 48px;
-      background:linear-gradient(180deg,rgba(20,20,24,0.8) 0%,rgba(8,8,10,0.8) 100%);
-      backdrop-filter:blur(20px);
-      -webkit-backdrop-filter:blur(20px);
-      border:1px solid rgba(255,255,255,0.08);
+      background:linear-gradient(180deg,#ffffff 0%,#fafafa 100%);
+      box-shadow:0 20px 60px rgba(14,165,233,0.08),0 4px 20px rgba(0,0,0,0.04);
+      border:1px solid rgba(0,0,0,0.04);
       border-radius:28px;
       position:relative;overflow:hidden;
     }
@@ -469,20 +533,20 @@
     .contact-eyebrow{
       display:inline-block;
       font-size:11px;font-weight:600;letter-spacing:2px;
-      text-transform:uppercase;color:var(--sky);
+      text-transform:uppercase;color:var(--sky-dark);
       padding:6px 14px;border-radius:50px;
       background:rgba(14,165,233,0.08);
-      border:1px solid rgba(14,165,233,0.25);
+      border:1px solid rgba(14,165,233,0.2);
       margin-bottom:20px;
     }
     .contact-title{
       font-size:clamp(34px,4.5vw,56px);
       font-weight:700;letter-spacing:-1.8px;line-height:1.05;
-      color:var(--white);margin-bottom:16px;
+      color:var(--near-black);margin-bottom:16px;
     }
-    .contact-title em{font-style:normal;color:var(--sky)}
+    .contact-title em{font-style:normal;color:var(--sky-dark)}
     .contact-sub{
-      font-size:17px;color:rgba(255,255,255,0.6);
+      font-size:17px;color:var(--muted);
       margin-bottom:40px;line-height:1.6;
     }
     .contact-buttons{
@@ -513,33 +577,34 @@
     .cta-secondary{
       display:inline-flex;align-items:center;gap:8px;
       padding:13px 26px;border-radius:50px;
-      background:rgba(255,255,255,0.04);
-      border:1px solid rgba(255,255,255,0.15);
-      color:#fff;text-decoration:none;
+      background:rgba(0,0,0,0.02);
+      border:1px solid rgba(0,0,0,0.1);
+      color:var(--near-black);text-decoration:none;
       font-size:15px;font-weight:500;
       transition:background .25s,border-color .25s;
     }
     .cta-secondary:hover{
-      background:rgba(255,255,255,0.08);
-      border-color:rgba(14,165,233,0.5);
+      background:rgba(14,165,233,0.06);
+      border-color:rgba(14,165,233,0.4);
+      color:var(--sky-dark);
     }
     .contact-info{
       display:flex;justify-content:center;gap:36px;flex-wrap:wrap;
-      padding-top:32px;border-top:1px solid rgba(255,255,255,0.06);
+      padding-top:32px;border-top:1px solid rgba(0,0,0,0.06);
     }
     .contact-item{
       display:flex;align-items:center;gap:10px;
-      color:rgba(255,255,255,0.7);
+      color:var(--muted);
       font-size:14px;text-decoration:none;
       transition:color .2s;
     }
-    .contact-item:hover{color:var(--sky)}
+    .contact-item:hover{color:var(--sky-dark)}
     .contact-item-label{
       font-size:10px;font-weight:600;letter-spacing:1.5px;
-      text-transform:uppercase;color:rgba(255,255,255,0.4);
+      text-transform:uppercase;color:var(--muted);
       display:block;margin-bottom:2px;
     }
-    .contact-item-val{font-size:15px;font-weight:600;color:#fff}
+    .contact-item-val{font-size:15px;font-weight:600;color:var(--near-black)}
 
     /* ── FOOTER ── */
     footer{
@@ -561,6 +626,8 @@
     @media(max-width:860px){
       .services-wrap{grid-template-columns:1fr}
       .why-grid{grid-template-columns:repeat(2,1fr)}
+      .stats-grid{grid-template-columns:repeat(2,1fr);gap:32px}
+      .stat:not(:last-child)::after{display:none}
       .process-row{grid-template-columns:60px 1fr}
       .process-row.right .process-content,.process-row.left .process-content{
         grid-column:2;text-align:left;padding:0 0 0 16px;
@@ -614,15 +681,40 @@
   </div>
 </section>
 
-<!-- BANDE OUTILS -->
+<!-- BANDE OUTILS / STACK -->
 <div class="tools-strip">
-  <span>n8n / Make</span>
-  <span>OpenAI · Claude</span>
-  <span>Shopify</span>
-  <span>Google SEO</span>
-  <span>API & Webhooks</span>
-  <span>Python · Zapier</span>
+  <span>Claude</span>
+  <span>API custom</span>
+  <span>Python</span>
+  <span>Scripts sur mesure</span>
+  <span class="tag-strong">Sans no-code générique</span>
 </div>
+
+<!-- STATS — chiffres clés -->
+<section class="stats-section">
+  <div class="stats-grid">
+    <div class="stat">
+      <div class="stat-num">+10h</div>
+      <div class="stat-label">gagnées par semaine</div>
+      <div class="stat-sub">en moyenne par client</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">7-14j</div>
+      <div class="stat-label">de mise en place</div>
+      <div class="stat-sub">du brief à la prod</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">sur mesure</div>
+      <div class="stat-sub">code propriétaire</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">1</div>
+      <div class="stat-label">interlocuteur unique</div>
+      <div class="stat-sub">du début à la fin</div>
+    </div>
+  </div>
+</section>
 
 <!-- SERVICES — cards premium interactives -->
 <section class="dark-section" id="services">
@@ -679,7 +771,7 @@
 </section>
 
 <!-- PROCESSUS -->
-<section class="dark-section" id="processus">
+<section class="light-section" id="processus">
   <span class="section-eyebrow">Notre méthode</span>
   <h2 class="section-title">Comment <em>ça marche</em></h2>
   <p class="section-sub">Un processus carré en 4 étapes, transparent du premier au dernier jour.</p>
