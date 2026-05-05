@@ -56,21 +56,103 @@
     /* ── HERO ── */
     .hero{
       min-height:100vh;
-      background:var(--black);
+      background:#000;
       display:flex;flex-direction:column;
       align-items:center;justify-content:center;
       text-align:center;
       padding:44px 24px 80px;
       position:relative;overflow:hidden;
+      isolation:isolate;
     }
-    /* Halo glow subtil */
+    /* Grille subtile en fond */
     .hero::before{
-      content:'';position:absolute;
-      top:20%;left:50%;transform:translateX(-50%);
-      width:800px;height:500px;border-radius:50%;
-      background:radial-gradient(ellipse,rgba(14,165,233,0.12) 0%,transparent 60%);
-      pointer-events:none;
+      content:'';position:absolute;inset:0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);
+      background-size:60px 60px;
+      mask-image:radial-gradient(ellipse at center,black 30%,transparent 75%);
+      -webkit-mask-image:radial-gradient(ellipse at center,black 30%,transparent 75%);
+      pointer-events:none;z-index:0;
     }
+    /* Conteneur des orbes animés */
+    .hero-bg{
+      position:absolute;inset:0;overflow:hidden;
+      pointer-events:none;z-index:0;
+    }
+    .orb{
+      position:absolute;border-radius:50%;
+      filter:blur(80px);opacity:0.55;
+      will-change:transform;
+    }
+    .orb-1{
+      width:520px;height:520px;
+      background:radial-gradient(circle,#0EA5E9 0%,transparent 70%);
+      top:-10%;left:-8%;
+      animation:orbFloat1 18s ease-in-out infinite;
+    }
+    .orb-2{
+      width:460px;height:460px;
+      background:radial-gradient(circle,#8B5CF6 0%,transparent 70%);
+      top:30%;right:-10%;
+      animation:orbFloat2 22s ease-in-out infinite;
+    }
+    .orb-3{
+      width:380px;height:380px;
+      background:radial-gradient(circle,#06B6D4 0%,transparent 70%);
+      bottom:-8%;left:18%;
+      animation:orbFloat3 20s ease-in-out infinite;
+    }
+    .orb-4{
+      width:300px;height:300px;
+      background:radial-gradient(circle,#3B82F6 0%,transparent 70%);
+      top:55%;left:45%;
+      animation:orbFloat4 26s ease-in-out infinite;
+    }
+    @keyframes orbFloat1{
+      0%,100%{transform:translate(0,0) scale(1)}
+      33%{transform:translate(80px,60px) scale(1.1)}
+      66%{transform:translate(-40px,90px) scale(0.95)}
+    }
+    @keyframes orbFloat2{
+      0%,100%{transform:translate(0,0) scale(1)}
+      33%{transform:translate(-90px,40px) scale(1.05)}
+      66%{transform:translate(-50px,-80px) scale(1.15)}
+    }
+    @keyframes orbFloat3{
+      0%,100%{transform:translate(0,0) scale(1)}
+      33%{transform:translate(60px,-70px) scale(1.1)}
+      66%{transform:translate(120px,-30px) scale(0.9)}
+    }
+    @keyframes orbFloat4{
+      0%,100%{transform:translate(0,0) scale(1)}
+      50%{transform:translate(-100px,-60px) scale(1.2)}
+    }
+    /* Étoiles fines en pluie subtile */
+    .stars{
+      position:absolute;inset:0;pointer-events:none;z-index:0;
+      background-image:
+        radial-gradient(1px 1px at 20% 30%,rgba(255,255,255,0.6),transparent),
+        radial-gradient(1px 1px at 60% 70%,rgba(255,255,255,0.5),transparent),
+        radial-gradient(1px 1px at 80% 20%,rgba(255,255,255,0.7),transparent),
+        radial-gradient(1px 1px at 40% 80%,rgba(255,255,255,0.5),transparent),
+        radial-gradient(1px 1px at 90% 50%,rgba(255,255,255,0.6),transparent),
+        radial-gradient(1px 1px at 10% 60%,rgba(255,255,255,0.5),transparent),
+        radial-gradient(1px 1px at 70% 10%,rgba(255,255,255,0.4),transparent),
+        radial-gradient(1px 1px at 30% 50%,rgba(255,255,255,0.5),transparent);
+      animation:starsFade 8s ease-in-out infinite;
+    }
+    @keyframes starsFade{
+      0%,100%{opacity:0.5}
+      50%{opacity:1}
+    }
+    /* Voile sombre pour garantir la lisibilité du texte */
+    .hero-veil{
+      position:absolute;inset:0;
+      background:radial-gradient(ellipse at center,rgba(0,0,0,0.35) 0%,rgba(0,0,0,0.55) 100%);
+      pointer-events:none;z-index:0;
+    }
+    .hero > *:not(.hero-bg):not(.hero-veil):not(.stars){position:relative;z-index:1}
     .hero-eyebrow{
       font-size:13px;font-weight:400;
       color:var(--sky);letter-spacing:0.5px;
@@ -332,6 +414,14 @@
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+  </div>
+  <div class="stars" aria-hidden="true"></div>
+  <div class="hero-veil" aria-hidden="true"></div>
   <div class="hero-eyebrow">Agence IA &amp; Automatisation</div>
   <h1>Automatisez votre<br/><em>croissance digitale.</em></h1>
   <p class="hero-sub">Neova conçoit des systèmes intelligents qui travaillent pour vous — automatisation, SEO, outils IA sur mesure. Vous gagnez du temps, on fait croître votre business.</p>
