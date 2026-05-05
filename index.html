@@ -871,9 +871,9 @@
     footer{
       background:#000;
       border-top:1px solid rgba(255,255,255,0.08);
-      padding:20px 22px;
+      padding:24px 22px;
       display:flex;align-items:center;justify-content:space-between;
-      flex-wrap:wrap;gap:12px;
+      flex-wrap:wrap;gap:16px;
     }
     .footer-brand{display:flex;align-items:center;gap:8px}
     .footer-name{
@@ -881,7 +881,15 @@
       letter-spacing:4px;text-transform:uppercase;
     }
     .footer-name em{font-style:normal;color:var(--sky)}
-    .footer-copy{font-size:12px;color:rgba(255,255,255,0.2)}
+    .footer-copy{font-size:12px;color:rgba(255,255,255,0.25)}
+    .footer-links{
+      display:flex;gap:18px;flex-wrap:wrap;
+    }
+    .footer-links a{
+      font-size:12px;color:rgba(255,255,255,0.5);
+      text-decoration:none;transition:color .2s;
+    }
+    .footer-links a:hover{color:var(--sky)}
 
     /* ── RESPONSIVE ── */
     @media(max-width:860px){
@@ -1252,6 +1260,10 @@
 <footer>
   <div class="footer-brand">
     <span class="footer-name">NEO<em>VA</em></span>
+  </div>
+  <div class="footer-links">
+    <a href="/mentions-legales.html">Mentions légales</a>
+    <a href="/confidentialite.html">Confidentialité</a>
   </div>
   <span class="footer-copy">© 2026 Neova — Agence IA &amp; Automatisation</span>
 </footer>
