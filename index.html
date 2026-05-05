@@ -82,11 +82,11 @@
     }
     .orb{
       position:absolute;border-radius:50%;
-      filter:blur(80px);opacity:0.55;
-      will-change:transform;
+      filter:blur(70px);opacity:0.75;
+      will-change:transform;mix-blend-mode:screen;
     }
     .orb-1{
-      width:520px;height:520px;
+      width:560px;height:560px;
       background:radial-gradient(circle,#0EA5E9 0%,transparent 70%);
       top:-10%;left:-8%;
       animation:orbFloat1 18s ease-in-out infinite;
@@ -149,7 +149,7 @@
     /* Voile sombre pour garantir la lisibilité du texte */
     .hero-veil{
       position:absolute;inset:0;
-      background:radial-gradient(ellipse at center,rgba(0,0,0,0.35) 0%,rgba(0,0,0,0.55) 100%);
+      background:radial-gradient(ellipse at center,rgba(0,0,0,0.15) 0%,rgba(0,0,0,0.45) 100%);
       pointer-events:none;z-index:0;
     }
     .hero > *:not(.hero-bg):not(.hero-veil):not(.stars){position:relative;z-index:1}
