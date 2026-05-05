@@ -33,19 +33,14 @@
       backdrop-filter:saturate(180%) blur(20px);
       -webkit-backdrop-filter:saturate(180%) blur(20px);
     }
-    .nav-brand{display:flex;align-items:center;gap:9px;text-decoration:none}
-    .logo-circle{
-      width:28px;height:28px;border-radius:50%;
-      background:var(--sky);
-      display:flex;align-items:center;justify-content:center;
-      flex-shrink:0;
-    }
-    .logo-circle svg{width:16px;height:16px}
+    .nav-brand{display:flex;align-items:center;gap:0px;text-decoration:none}
     .brand-name{
-      font-size:17px;font-weight:600;letter-spacing:-0.3px;
-      color:var(--white);
+      font-size:18px;font-weight:700;letter-spacing:4px;
+      color:var(--white);text-transform:uppercase;
     }
-    .brand-name span{color:var(--sky)}
+    .brand-name em{
+      font-style:normal;color:var(--sky);
+    }
     .nav-links{display:flex;align-items:center;gap:28px;list-style:none}
     .nav-links a{
       font-size:12px;font-weight:400;letter-spacing:0.2px;
@@ -195,8 +190,8 @@
       color:var(--near-black);margin-bottom:64px;
     }
     .process-steps{
-      display:grid;grid-template-columns:repeat(4,1fr);
-      gap:40px;max-width:1000px;margin:0 auto;
+      display:grid;grid-template-columns:repeat(2,1fr);
+      gap:48px;max-width:760px;margin:0 auto;
     }
     .pstep{position:relative}
     .pstep-num{
@@ -300,29 +295,23 @@
       flex-wrap:wrap;gap:12px;
     }
     .footer-brand{display:flex;align-items:center;gap:8px}
-    .footer-circle{
-      width:24px;height:24px;border-radius:50%;
-      background:var(--sky);
-      display:flex;align-items:center;justify-content:center;
-    }
-    .footer-circle svg{width:14px;height:14px}
     .footer-name{
-      font-size:13px;font-weight:600;color:var(--white);
-      letter-spacing:-0.2px;
+      font-size:14px;font-weight:700;color:var(--white);
+      letter-spacing:4px;text-transform:uppercase;
     }
-    .footer-name span{color:var(--sky)}
+    .footer-name em{font-style:normal;color:var(--sky)}
     .footer-copy{font-size:12px;color:rgba(255,255,255,0.2)}
 
     /* ── RESPONSIVE ── */
     @media(max-width:860px){
       .services-grid{grid-template-columns:1fr}
-      .process-steps{grid-template-columns:repeat(2,1fr)}
       .why-grid{grid-template-columns:repeat(2,1fr)}
     }
     @media(max-width:640px){
       .nav-links li:not(.nav-cta-li){display:none}
       h1{letter-spacing:-1px}
-      .process-steps,.why-grid{grid-template-columns:1fr}
+      .process-steps{grid-template-columns:1fr}
+      .why-grid{grid-template-columns:1fr}
       .stile{padding:48px 28px}
     }
   </style>
@@ -332,15 +321,7 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-brand">
-    <div class="logo-circle">
-      <svg viewBox="0 0 52 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="1,45 19,24 26,31 8,52" fill="#0B0D0F"/>
-        <rect x="19" y="20" width="16" height="16" fill="#ffffff" opacity="0.9"/>
-        <polygon points="14,24 32,4 39,11 21,31" fill="#0B0D0F"/>
-        <path d="M32,4 L46,0 L50,4 L40,13 L50,18 L46,24 L34,14 Z" fill="#0B0D0F"/>
-      </svg>
-    </div>
-    <span class="brand-name">NEO<span>VA</span></span>
+    <span class="brand-name">NEO<em>VA</em></span>
   </a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
@@ -377,7 +358,7 @@
     <div class="stile light">
       <div class="stile-icon">🤖</div>
       <div class="stile-eyebrow">Automatisation IA</div>
-      <h2 class="stile-title">Vos tâches.<br/>En pilote automatique.</h2>
+      <h2 class="stile-title">Automatisation IA</h2>
       <p class="stile-desc">Workflows intelligents, traitement de données, prospection automatique — des systèmes qui tournent 24h/24 sans vous.</p>
       <a href="#contact" class="stile-link">Commencer →</a>
     </div>
@@ -385,7 +366,7 @@
     <div class="stile black">
       <div class="stile-icon">📈</div>
       <div class="stile-eyebrow">SEO & Visibilité</div>
-      <h2 class="stile-title">Soyez trouvé.<br/>Avant vos concurrents.</h2>
+      <h2 class="stile-title">SEO & Visibilité</h2>
       <p class="stile-desc">Audit technique, optimisation on-page, stratégie de contenu. Résultats mesurables en 30 jours.</p>
       <a href="#contact" class="stile-link">Commencer →</a>
     </div>
@@ -393,7 +374,7 @@
     <div class="stile dark">
       <div class="stile-icon">⚙️</div>
       <div class="stile-eyebrow">Outils sur mesure</div>
-      <h2 class="stile-title">Développé pour<br/>votre business.</h2>
+      <h2 class="stile-title">Outils sur mesure</h2>
       <p class="stile-desc">Scripts, pipelines, intégrations API. Développés exactement pour votre business — rien de générique.</p>
       <a href="#contact" class="stile-link">Commencer →</a>
     </div>
@@ -401,7 +382,7 @@
     <div class="stile blue">
       <div class="stile-icon">🎯</div>
       <div class="stile-eyebrow">Prospection automatisée</div>
-      <h2 class="stile-title">Vos prospects.<br/>Sans effort.</h2>
+      <h2 class="stile-title">Prospection automatisée</h2>
       <p class="stile-desc">Système intelligent qui identifie, contacte et relance vos prospects — sans effort de votre côté.</p>
       <a href="#contact" class="stile-link">Commencer →</a>
     </div>
@@ -473,15 +454,7 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-brand">
-    <div class="footer-circle">
-      <svg viewBox="0 0 52 50" fill="none">
-        <polygon points="1,45 19,24 26,31 8,52" fill="#0B0D0F"/>
-        <rect x="19" y="20" width="16" height="16" fill="#ffffff" opacity="0.85"/>
-        <polygon points="14,24 32,4 39,11 21,31" fill="#0B0D0F"/>
-        <path d="M32,4 L46,0 L50,4 L40,13 L50,18 L46,24 L34,14 Z" fill="#0B0D0F"/>
-      </svg>
-    </div>
-    <span class="footer-name">NEO<span>VA</span></span>
+    <span class="footer-name">NEO<em>VA</em></span>
   </div>
   <span class="footer-copy">© 2026 Neova — Agence IA &amp; Automatisation</span>
 </footer>
