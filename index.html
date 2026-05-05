@@ -89,44 +89,71 @@
       width:560px;height:560px;
       background:radial-gradient(circle,#0EA5E9 0%,transparent 70%);
       top:-10%;left:-8%;
-      animation:orbFloat1 18s ease-in-out infinite;
+      animation:orbFloat1 11s ease-in-out infinite;
     }
     .orb-2{
       width:460px;height:460px;
       background:radial-gradient(circle,#8B5CF6 0%,transparent 70%);
       top:30%;right:-10%;
-      animation:orbFloat2 22s ease-in-out infinite;
+      animation:orbFloat2 13s ease-in-out infinite;
     }
     .orb-3{
       width:380px;height:380px;
       background:radial-gradient(circle,#06B6D4 0%,transparent 70%);
       bottom:-8%;left:18%;
-      animation:orbFloat3 20s ease-in-out infinite;
+      animation:orbFloat3 12s ease-in-out infinite;
     }
     .orb-4{
       width:300px;height:300px;
       background:radial-gradient(circle,#3B82F6 0%,transparent 70%);
       top:55%;left:45%;
-      animation:orbFloat4 26s ease-in-out infinite;
+      animation:orbFloat4 14s ease-in-out infinite;
+    }
+    /* Canvas réseau IA */
+    .hero-network{
+      position:absolute;inset:0;
+      width:100%;height:100%;
+      pointer-events:none;z-index:0;
+      opacity:0.85;
+    }
+    /* Sweep lumineux qui balaye l'écran */
+    .hero-sweep{
+      position:absolute;inset:0;pointer-events:none;z-index:0;
+      background:linear-gradient(115deg,
+        transparent 0%,transparent 40%,
+        rgba(14,165,233,0.08) 50%,
+        rgba(139,92,246,0.06) 55%,
+        transparent 65%,transparent 100%);
+      background-size:300% 300%;
+      animation:sweepMove 7s linear infinite;
+    }
+    @keyframes sweepMove{
+      0%{background-position:200% 200%}
+      100%{background-position:-100% -100%}
     }
     @keyframes orbFloat1{
       0%,100%{transform:translate(0,0) scale(1)}
-      33%{transform:translate(80px,60px) scale(1.1)}
-      66%{transform:translate(-40px,90px) scale(0.95)}
+      25%{transform:translate(220px,140px) scale(1.25)}
+      50%{transform:translate(80px,260px) scale(0.85)}
+      75%{transform:translate(-120px,180px) scale(1.15)}
     }
     @keyframes orbFloat2{
       0%,100%{transform:translate(0,0) scale(1)}
-      33%{transform:translate(-90px,40px) scale(1.05)}
-      66%{transform:translate(-50px,-80px) scale(1.15)}
+      25%{transform:translate(-180px,120px) scale(1.2)}
+      50%{transform:translate(-260px,-80px) scale(0.9)}
+      75%{transform:translate(-100px,-220px) scale(1.3)}
     }
     @keyframes orbFloat3{
       0%,100%{transform:translate(0,0) scale(1)}
-      33%{transform:translate(60px,-70px) scale(1.1)}
-      66%{transform:translate(120px,-30px) scale(0.9)}
+      25%{transform:translate(180px,-160px) scale(1.2)}
+      50%{transform:translate(280px,-60px) scale(0.85)}
+      75%{transform:translate(220px,120px) scale(1.1)}
     }
     @keyframes orbFloat4{
       0%,100%{transform:translate(0,0) scale(1)}
-      50%{transform:translate(-100px,-60px) scale(1.2)}
+      25%{transform:translate(-200px,-140px) scale(1.3)}
+      50%{transform:translate(180px,-200px) scale(0.8)}
+      75%{transform:translate(220px,80px) scale(1.2)}
     }
     /* Étoiles fines en pluie subtile */
     .stars{
@@ -420,6 +447,8 @@
     <div class="orb orb-3"></div>
     <div class="orb orb-4"></div>
   </div>
+  <canvas class="hero-network" id="heroNet" aria-hidden="true"></canvas>
+  <div class="hero-sweep" aria-hidden="true"></div>
   <div class="stars" aria-hidden="true"></div>
   <div class="hero-veil" aria-hidden="true"></div>
   <div class="hero-eyebrow">Agence IA &amp; Automatisation</div>
@@ -549,5 +578,105 @@
   <span class="footer-copy">© 2026 Neova — Agence IA &amp; Automatisation</span>
 </footer>
 
+<script>
+(function(){
+  const canvas=document.getElementById('heroNet');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  let W,H,particles=[],mouse={x:null,y:null};
+  const COUNT=window.innerWidth<768?40:90;
+  const LINK_DIST=140;
+  const COLORS=['#0EA5E9','#06B6D4','#8B5CF6','#3B82F6'];
+
+  function resize(){
+    const r=canvas.getBoundingClientRect();
+    W=canvas.width=r.width*devicePixelRatio;
+    H=canvas.height=r.height*devicePixelRatio;
+    canvas.style.width=r.width+'px';
+    canvas.style.height=r.height+'px';
+    ctx.scale(devicePixelRatio,devicePixelRatio);
+  }
+
+  function init(){
+    particles=[];
+    const r=canvas.getBoundingClientRect();
+    for(let i=0;i<COUNT;i++){
+      particles.push({
+        x:Math.random()*r.width,
+        y:Math.random()*r.height,
+        vx:(Math.random()-0.5)*0.6,
+        vy:(Math.random()-0.5)*0.6,
+        radius:Math.random()*1.8+0.8,
+        color:COLORS[Math.floor(Math.random()*COLORS.length)]
+      });
+    }
+  }
+
+  function draw(){
+    const r=canvas.getBoundingClientRect();
+    ctx.clearRect(0,0,W,H);
+
+    // Update + draw points
+    for(let p of particles){
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>r.width)p.vx*=-1;
+      if(p.y<0||p.y>r.height)p.vy*=-1;
+
+      // Légère attraction vers la souris
+      if(mouse.x!==null){
+        const dx=mouse.x-p.x,dy=mouse.y-p.y;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<180){
+          p.x+=dx/d*0.4;
+          p.y+=dy/d*0.4;
+        }
+      }
+
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);
+      ctx.fillStyle=p.color;
+      ctx.shadowBlur=10;
+      ctx.shadowColor=p.color;
+      ctx.fill();
+      ctx.shadowBlur=0;
+    }
+
+    // Lignes entre particules proches
+    for(let i=0;i<particles.length;i++){
+      for(let j=i+1;j<particles.length;j++){
+        const a=particles[i],b=particles[j];
+        const dx=a.x-b.x,dy=a.y-b.y;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<LINK_DIST){
+          const op=(1-d/LINK_DIST)*0.4;
+          const grad=ctx.createLinearGradient(a.x,a.y,b.x,b.y);
+          grad.addColorStop(0,a.color);
+          grad.addColorStop(1,b.color);
+          ctx.strokeStyle=grad;
+          ctx.globalAlpha=op;
+          ctx.lineWidth=0.6;
+          ctx.beginPath();
+          ctx.moveTo(a.x,a.y);
+          ctx.lineTo(b.x,b.y);
+          ctx.stroke();
+          ctx.globalAlpha=1;
+        }
+      }
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize',()=>{resize();init();});
+  canvas.parentElement.addEventListener('mousemove',(e)=>{
+    const r=canvas.getBoundingClientRect();
+    mouse.x=e.clientX-r.left;
+    mouse.y=e.clientY-r.top;
+  });
+  canvas.parentElement.addEventListener('mouseleave',()=>{mouse.x=null;mouse.y=null;});
+
+  resize();init();draw();
+})();
+</script>
 </body>
 </html>
