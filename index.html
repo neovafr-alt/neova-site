@@ -111,10 +111,11 @@
     }
     /* Canvas réseau IA */
     .hero-network{
-      position:absolute;inset:0;
-      width:100%;height:100%;
+      position:absolute !important;
+      top:0 !important;left:0 !important;
+      width:100% !important;height:100% !important;
       pointer-events:none;z-index:0;
-      opacity:0.85;
+      opacity:0.85;display:block;
     }
     /* Sweep lumineux qui balaye l'écran */
     .hero-sweep{
@@ -589,21 +590,22 @@
   const COLORS=['#0EA5E9','#06B6D4','#8B5CF6','#3B82F6'];
 
   function resize(){
-    const r=canvas.getBoundingClientRect();
-    W=canvas.width=r.width*devicePixelRatio;
-    H=canvas.height=r.height*devicePixelRatio;
-    canvas.style.width=r.width+'px';
-    canvas.style.height=r.height+'px';
+    const hero=canvas.parentElement;
+    const w=hero.clientWidth,h=hero.clientHeight;
+    canvas.width=w*devicePixelRatio;
+    canvas.height=h*devicePixelRatio;
+    ctx.setTransform(1,0,0,1,0,0);
     ctx.scale(devicePixelRatio,devicePixelRatio);
   }
 
   function init(){
     particles=[];
-    const r=canvas.getBoundingClientRect();
+    const hero=canvas.parentElement;
+    const w=hero.clientWidth,h=hero.clientHeight;
     for(let i=0;i<COUNT;i++){
       particles.push({
-        x:Math.random()*r.width,
-        y:Math.random()*r.height,
+        x:Math.random()*w,
+        y:Math.random()*h,
         vx:(Math.random()-0.5)*0.6,
         vy:(Math.random()-0.5)*0.6,
         radius:Math.random()*1.8+0.8,
@@ -613,14 +615,15 @@
   }
 
   function draw(){
-    const r=canvas.getBoundingClientRect();
-    ctx.clearRect(0,0,W,H);
+    const hero=canvas.parentElement;
+    const w=hero.clientWidth,h=hero.clientHeight;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
 
     // Update + draw points
     for(let p of particles){
       p.x+=p.vx;p.y+=p.vy;
-      if(p.x<0||p.x>r.width)p.vx*=-1;
-      if(p.y<0||p.y>r.height)p.vy*=-1;
+      if(p.x<0||p.x>w)p.vx*=-1;
+      if(p.y<0||p.y>h)p.vy*=-1;
 
       // Légère attraction vers la souris
       if(mouse.x!==null){
