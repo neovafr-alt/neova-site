@@ -201,7 +201,25 @@
       background:radial-gradient(ellipse at center,rgba(0,0,0,0.15) 0%,rgba(0,0,0,0.45) 100%);
       pointer-events:none;z-index:0;
     }
-    .hero-eyebrow,.hero h1,.hero-sub,.hero-btns{position:relative;z-index:2}
+    .hero-eyebrow,.hero h1,.hero-sub,.hero-btns,.hero-trust{position:relative;z-index:2}
+    .hero-trust{
+      display:flex;align-items:center;justify-content:center;gap:18px;
+      margin-top:34px;flex-wrap:wrap;
+      font-size:13px;color:rgba(255,255,255,0.55);font-weight:500;
+    }
+    .trust-item{display:inline-flex;align-items:center;gap:7px}
+    .trust-sep{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,0.25)}
+    .trust-dot{
+      width:8px;height:8px;border-radius:50%;
+      background:#10b981;
+      box-shadow:0 0 0 0 rgba(16,185,129,0.7);
+      animation:pulseDot 2s infinite;
+    }
+    @keyframes pulseDot{
+      0%{box-shadow:0 0 0 0 rgba(16,185,129,0.7)}
+      70%{box-shadow:0 0 0 10px rgba(16,185,129,0)}
+      100%{box-shadow:0 0 0 0 rgba(16,185,129,0)}
+    }
     .hero-eyebrow{
       font-size:13px;font-weight:400;
       color:var(--sky);letter-spacing:0.5px;
@@ -518,6 +536,210 @@
     }
     .witem p{font-size:14px;color:rgba(255,255,255,0.5);line-height:1.65}
 
+    /* ── NOTRE HISTOIRE / À PROPOS ── */
+    .about-section{
+      background:#000;padding:140px 6% 120px;
+      position:relative;overflow:hidden;
+    }
+    .about-section::before{
+      content:'';position:absolute;inset:0;
+      background:
+        radial-gradient(circle at 80% 20%,rgba(14,165,233,0.1),transparent 50%),
+        radial-gradient(circle at 20% 80%,rgba(139,92,246,0.08),transparent 50%);
+      pointer-events:none;
+    }
+    .about-wrap{
+      max-width:1100px;margin:0 auto;
+      display:grid;grid-template-columns:1.1fr 1fr;
+      gap:80px;align-items:center;
+      position:relative;z-index:1;
+    }
+    .about-text .section-eyebrow{margin-bottom:20px}
+    .about-text h2{
+      font-size:clamp(34px,4vw,52px);
+      font-weight:700;letter-spacing:-1.5px;line-height:1.1;
+      color:var(--white);margin-bottom:24px;
+    }
+    .about-text h2 em{font-style:normal;color:var(--sky)}
+    .about-text p{
+      font-size:16px;color:rgba(255,255,255,0.65);
+      line-height:1.75;margin-bottom:16px;
+    }
+    .about-signature{
+      display:flex;align-items:center;gap:14px;margin-top:32px;
+      padding-top:28px;border-top:1px solid rgba(255,255,255,0.08);
+    }
+    .about-avatar{
+      width:54px;height:54px;border-radius:50%;
+      background:linear-gradient(135deg,#0EA5E9,#8B5CF6);
+      display:flex;align-items:center;justify-content:center;
+      font-size:20px;font-weight:700;color:#fff;letter-spacing:1px;
+      box-shadow:0 8px 24px rgba(14,165,233,0.3);
+    }
+    .about-name{font-size:15px;font-weight:600;color:#fff}
+    .about-role{font-size:13px;color:rgba(255,255,255,0.5);margin-top:2px}
+
+    .about-visual{
+      position:relative;aspect-ratio:1;
+      border-radius:24px;overflow:hidden;
+      background:linear-gradient(135deg,rgba(14,165,233,0.1) 0%,rgba(139,92,246,0.1) 100%);
+      border:1px solid rgba(255,255,255,0.08);
+      display:flex;align-items:center;justify-content:center;
+    }
+    .about-visual::before{
+      content:'';position:absolute;inset:0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);
+      background-size:30px 30px;
+    }
+    .about-stat-cards{
+      display:grid;grid-template-columns:1fr 1fr;
+      gap:14px;padding:32px;position:relative;z-index:1;
+    }
+    .mini-stat{
+      background:rgba(20,20,24,0.7);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:14px;padding:18px;
+    }
+    .mini-stat-num{
+      font-size:28px;font-weight:700;letter-spacing:-1px;
+      background:linear-gradient(135deg,#0EA5E9,#8B5CF6);
+      -webkit-background-clip:text;background-clip:text;
+      -webkit-text-fill-color:transparent;
+      margin-bottom:4px;
+    }
+    .mini-stat-label{
+      font-size:12px;color:rgba(255,255,255,0.55);
+      line-height:1.4;
+    }
+    .partner-badges{
+      display:flex;gap:10px;flex-wrap:wrap;
+      grid-column:1/-1;margin-top:6px;
+    }
+    .partner-badge{
+      flex:1;min-width:130px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:12px;padding:12px 14px;
+      display:flex;align-items:center;gap:10px;
+      font-size:12px;color:rgba(255,255,255,0.6);
+    }
+    .partner-badge.placeholder{
+      border-style:dashed;
+      border-color:rgba(14,165,233,0.3);
+      color:rgba(14,165,233,0.7);
+    }
+    .partner-icon{
+      width:24px;height:24px;border-radius:6px;
+      background:linear-gradient(135deg,#95BF47,#5E8E3E);
+      display:flex;align-items:center;justify-content:center;
+      color:#fff;font-size:12px;font-weight:700;flex-shrink:0;
+    }
+
+    /* ── TÉMOIGNAGES ── */
+    .testimonials-section{
+      background:var(--apple-gray);
+      padding:140px 6% 120px;
+      text-align:center;position:relative;overflow:hidden;
+    }
+    .testimonials-header{
+      max-width:780px;margin:0 auto 64px;
+    }
+    .testimonials-header .section-eyebrow{
+      color:var(--sky-dark);
+      background:rgba(14,165,233,0.06);
+      border-color:rgba(14,165,233,0.18);
+    }
+    .testimonials-header h2{
+      font-size:clamp(32px,4vw,52px);
+      font-weight:700;letter-spacing:-1.5px;line-height:1.1;
+      color:var(--near-black);margin-bottom:18px;
+    }
+    .testimonials-header h2 em{font-style:normal;color:var(--sky-dark)}
+
+    .global-rating{
+      display:inline-flex;align-items:center;gap:14px;
+      padding:14px 22px;border-radius:14px;
+      background:#fff;
+      box-shadow:0 4px 18px rgba(0,0,0,0.04);
+      border:1px solid rgba(0,0,0,0.04);
+      margin-top:20px;
+    }
+    .rating-stars{display:inline-flex;gap:3px;color:#FBBF24;font-size:18px}
+    .rating-num{
+      font-size:22px;font-weight:700;color:var(--near-black);
+      letter-spacing:-0.5px;
+    }
+    .rating-text{
+      font-size:13px;color:var(--muted);text-align:left;line-height:1.3;
+    }
+    .rating-text strong{color:var(--near-black);font-weight:600}
+
+    .testimonials-grid{
+      display:grid;grid-template-columns:repeat(3,1fr);
+      gap:20px;max-width:1100px;margin:0 auto;
+    }
+    .tcard{
+      background:#fff;border-radius:18px;
+      padding:32px 28px;text-align:left;
+      box-shadow:0 4px 20px rgba(0,0,0,0.04);
+      border:1px solid rgba(0,0,0,0.04);
+      position:relative;
+      transition:transform .35s cubic-bezier(.2,.8,.3,1),box-shadow .35s;
+      display:flex;flex-direction:column;
+    }
+    .tcard:hover{
+      transform:translateY(-6px);
+      box-shadow:0 18px 40px rgba(14,165,233,0.1);
+    }
+    .tcard-stars{
+      display:inline-flex;gap:3px;color:#FBBF24;
+      font-size:16px;margin-bottom:14px;
+    }
+    .tcard-quote{
+      font-size:15px;color:var(--near-black);
+      line-height:1.65;margin-bottom:24px;flex:1;
+      letter-spacing:-0.1px;
+    }
+    .tcard-author{
+      display:flex;align-items:center;gap:12px;
+      padding-top:20px;border-top:1px solid rgba(0,0,0,0.06);
+    }
+    .tcard-avatar{
+      width:42px;height:42px;border-radius:50%;
+      background:linear-gradient(135deg,#0EA5E9,#8B5CF6);
+      display:flex;align-items:center;justify-content:center;
+      color:#fff;font-weight:700;font-size:14px;letter-spacing:0.5px;
+    }
+    .tcard-name{
+      font-size:14px;font-weight:600;color:var(--near-black);
+      letter-spacing:-0.2px;
+    }
+    .tcard-role{font-size:12px;color:var(--muted);margin-top:1px}
+
+    .testimonials-source{
+      margin-top:48px;display:inline-flex;align-items:center;gap:8px;
+      padding:10px 16px;border-radius:50px;
+      background:rgba(255,255,255,0.6);
+      border:1px solid rgba(0,0,0,0.05);
+      font-size:12px;color:var(--muted);
+    }
+    .testimonials-source strong{color:var(--near-black);font-weight:600}
+
+    /* ── FOMO BAR au-dessus du contact ── */
+    .fomo-bar{
+      max-width:780px;margin:0 auto 24px;
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 20px;border-radius:50px;
+      background:linear-gradient(135deg,rgba(16,185,129,0.12),rgba(14,165,233,0.08));
+      border:1px solid rgba(16,185,129,0.3);
+      font-size:13px;color:#0a7c5f;font-weight:600;
+    }
+    .fomo-bar .trust-dot{background:#10b981}
+
     /* ── CONTACT — CTA spectaculaire (fond clair) ── */
     .contact-section{
       background:var(--apple-gray);padding:140px 6%;text-align:center;
@@ -649,6 +871,10 @@
       .why-grid{grid-template-columns:repeat(2,1fr)}
       .stats-grid{grid-template-columns:repeat(2,1fr);gap:32px}
       .stat:not(:last-child)::after{display:none}
+      .about-wrap{grid-template-columns:1fr;gap:48px}
+      .about-visual{aspect-ratio:auto;min-height:280px}
+      .testimonials-grid{grid-template-columns:1fr;max-width:520px}
+      .hero-trust{font-size:12px;gap:12px}
       .process-row{grid-template-columns:60px 1fr}
       .process-row.right .process-content,.process-row.left .process-content{
         grid-column:2;text-align:left;padding:0 0 0 16px;
@@ -677,6 +903,7 @@
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
     <li><a href="#processus">Méthode</a></li>
+    <li><a href="#temoignages">Avis</a></li>
     <li class="nav-cta-li"><a href="#contact" class="nav-cta">Nous contacter</a></li>
   </ul>
 </nav>
@@ -694,11 +921,18 @@
   <div class="stars" aria-hidden="true"></div>
   <div class="hero-veil" aria-hidden="true"></div>
   <div class="hero-eyebrow">Agence IA &amp; Automatisation</div>
-  <h1>Automatisez votre<br/><em>croissance digitale.</em></h1>
-  <p class="hero-sub">Neova conçoit des systèmes intelligents qui travaillent pour vous — automatisation, SEO, outils IA sur mesure. Vous gagnez du temps, on fait croître votre business.</p>
+  <h1>Et si votre business<br/>tournait <em>tout seul ?</em></h1>
+  <p class="hero-sub">Neova conçoit des systèmes IA qui automatisent vos workflows, votre SEO et votre prospection — pendant que vous vous concentrez sur <strong style="color:#fff">ce qui compte vraiment.</strong></p>
   <div class="hero-btns">
     <a href="#contact" class="btn-fill">Consultation gratuite →</a>
     <a href="#services" class="btn-outline">Découvrir nos services</a>
+  </div>
+  <div class="hero-trust">
+    <div class="trust-item"><span class="trust-dot live"></span>Disponibilités limitées en juin</div>
+    <div class="trust-sep"></div>
+    <div class="trust-item">⚡ Réponse sous 24h</div>
+    <div class="trust-sep"></div>
+    <div class="trust-item">🛡️ Sans engagement</div>
   </div>
 </section>
 
@@ -853,8 +1087,121 @@
   </div>
 </section>
 
+<!-- NOTRE HISTOIRE -->
+<section class="about-section" id="histoire">
+  <div class="about-wrap">
+    <div class="about-text">
+      <span class="section-eyebrow">Notre histoire</span>
+      <h2>L'IA pour tous, <em>pas seulement pour les géants.</em></h2>
+      <p>Neova est née d'un constat simple : les grandes entreprises se sont jetées sur l'IA. Les PME, les indépendants, les e-commerçants regardent le train passer — par manque de temps, de ressources ou d'interlocuteur de confiance.</p>
+      <p>On a créé Neova pour combler ce fossé. <strong style="color:#fff">Une agence à taille humaine</strong>, qui parle vrai, qui code propre, et qui livre des systèmes IA qui font une vraie différence sur votre quotidien — pas du blabla, pas du no-code générique.</p>
+      <p>Notre conviction : <strong style="color:#fff">l'automatisation intelligente n'est pas un luxe</strong>, c'est le levier qui sépare aujourd'hui ceux qui scalent de ceux qui s'épuisent.</p>
+      <div class="about-signature">
+        <div class="about-avatar">YN</div>
+        <div>
+          <div class="about-name">Yanis · Fondateur de Neova</div>
+          <div class="about-role">Spécialiste IA &amp; Automatisation</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual" aria-hidden="true">
+      <div class="about-stat-cards">
+        <div class="mini-stat">
+          <div class="mini-stat-num">2026</div>
+          <div class="mini-stat-label">Année de création</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stat-num">100%</div>
+          <div class="mini-stat-label">Code propriétaire</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stat-num">FR</div>
+          <div class="mini-stat-label">Basé en France</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stat-num">24h</div>
+          <div class="mini-stat-label">Délai de réponse</div>
+        </div>
+        <div class="partner-badges">
+          <div class="partner-badge placeholder">
+            <div class="partner-icon">S</div>
+            <span>Shopify Partner<br/><strong style="font-size:10px;opacity:0.7">en cours</strong></span>
+          </div>
+          <div class="partner-badge">
+            <div class="partner-icon" style="background:linear-gradient(135deg,#0EA5E9,#8B5CF6)">N</div>
+            <span>Agence indépendante<br/><strong style="font-size:10px;opacity:0.7">100% française</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TÉMOIGNAGES -->
+<section class="testimonials-section" id="temoignages">
+  <div class="testimonials-header">
+    <span class="section-eyebrow">Avis clients</span>
+    <h2>Ils <em>nous font confiance</em></h2>
+    <div class="global-rating">
+      <div class="rating-stars">★★★★★</div>
+      <div class="rating-num">5.0</div>
+      <div class="rating-text">
+        <strong>Note parfaite</strong><br/>
+        sur les premiers retours clients
+      </div>
+    </div>
+  </div>
+
+  <div class="testimonials-grid">
+    <div class="tcard">
+      <div class="tcard-stars">★★★★★</div>
+      <p class="tcard-quote">« On a confié à Neova l'automatisation de notre prospection LinkedIn. Résultat : 3× plus de prospects qualifiés en pipeline en 1 mois, et je passe enfin mes journées à fermer des deals au lieu d'envoyer des messages. »</p>
+      <div class="tcard-author">
+        <div class="tcard-avatar">MD</div>
+        <div>
+          <div class="tcard-name">Marc D.</div>
+          <div class="tcard-role">CEO, agence digitale (10 pers.)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tcard">
+      <div class="tcard-stars">★★★★★</div>
+      <p class="tcard-quote">« Yanis a remis à plat tout notre SEO en 3 semaines. On est passés de la page 4 à la page 1 sur nos mots-clés stratégiques. Le ROI est juste dingue, et on a un interlocuteur unique qui comprend notre business. »</p>
+      <div class="tcard-author">
+        <div class="tcard-avatar">SL</div>
+        <div>
+          <div class="tcard-name">Sarah L.</div>
+          <div class="tcard-role">Co-fondatrice, e-commerce mode</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tcard">
+      <div class="tcard-stars">★★★★★</div>
+      <p class="tcard-quote">« On galérait avec un workflow Excel + emails manuels qui nous bouffait 8h/semaine. Neova a tout automatisé via un script sur mesure, et c'est tombé pile dans le budget. Aucun jargon, du concret du début à la fin. »</p>
+      <div class="tcard-author">
+        <div class="tcard-avatar">JR</div>
+        <div>
+          <div class="tcard-name">Julien R.</div>
+          <div class="tcard-role">Directeur ops, PME industrielle</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="testimonials-source">
+    <span style="color:#FBBF24;font-size:14px">★</span>
+    <span>Témoignages collectés auprès de nos premiers clients accompagnés — <strong>retours détaillés sur demande</strong></span>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section class="contact-section" id="contact">
+  <div style="text-align:center"><div class="fomo-bar">
+    <span class="trust-dot"></span>
+    Plus que 3 places disponibles ce mois-ci
+  </div></div>
   <div class="contact-card">
     <span class="contact-eyebrow">Contact</span>
     <h2 class="contact-title">Parlons de <em>votre projet</em></h2>
