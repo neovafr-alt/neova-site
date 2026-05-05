@@ -560,7 +560,7 @@
       font-weight:700;letter-spacing:-1.5px;line-height:1.1;
       color:var(--white);margin-bottom:24px;
     }
-    .about-text h2 em{font-style:normal;color:var(--sky)}
+    .about-text h2 em{font-style:normal;color:var(--white)}
     .about-text p{
       font-size:16px;color:rgba(255,255,255,0.65);
       line-height:1.75;margin-bottom:16px;
@@ -631,6 +631,24 @@
       border-style:dashed;
       border-color:rgba(14,165,233,0.3);
       color:rgba(14,165,233,0.7);
+    }
+    .partner-badge.verified{
+      border-color:rgba(149,191,71,0.35);
+      background:linear-gradient(135deg,rgba(149,191,71,0.06),rgba(255,255,255,0.04));
+      color:rgba(255,255,255,0.85);
+      text-decoration:none;
+      transition:transform .25s,border-color .25s;
+    }
+    .partner-badge.verified:hover{
+      transform:translateY(-2px);
+      border-color:rgba(149,191,71,0.6);
+    }
+    .partner-check{
+      width:14px;height:14px;border-radius:50%;
+      background:#95BF47;flex-shrink:0;
+      display:inline-flex;align-items:center;justify-content:center;
+      color:#fff;font-size:9px;font-weight:700;
+      margin-left:auto;
     }
     .partner-icon{
       width:24px;height:24px;border-radius:6px;
@@ -928,11 +946,11 @@
     <a href="#services" class="btn-outline">Découvrir nos services</a>
   </div>
   <div class="hero-trust">
-    <div class="trust-item"><span class="trust-dot live"></span>Disponibilités limitées en juin</div>
-    <div class="trust-sep"></div>
-    <div class="trust-item">⚡ Réponse sous 24h</div>
+    <div class="trust-item"><span class="trust-dot live"></span>Réponse sous 24h</div>
     <div class="trust-sep"></div>
     <div class="trust-item">🛡️ Sans engagement</div>
+    <div class="trust-sep"></div>
+    <div class="trust-item">✅ Consultation gratuite</div>
   </div>
 </section>
 
@@ -1107,8 +1125,8 @@
     <div class="about-visual" aria-hidden="true">
       <div class="about-stat-cards">
         <div class="mini-stat">
-          <div class="mini-stat-num">2026</div>
-          <div class="mini-stat-label">Année de création</div>
+          <div class="mini-stat-num">5★</div>
+          <div class="mini-stat-label">Note clients moyenne</div>
         </div>
         <div class="mini-stat">
           <div class="mini-stat-num">100%</div>
@@ -1123,10 +1141,11 @@
           <div class="mini-stat-label">Délai de réponse</div>
         </div>
         <div class="partner-badges">
-          <div class="partner-badge placeholder">
+          <a href="https://www.shopify.com/partners" target="_blank" rel="noopener" class="partner-badge verified" title="Shopify Partner ID 4903008">
             <div class="partner-icon">S</div>
-            <span>Shopify Partner<br/><strong style="font-size:10px;opacity:0.7">en cours</strong></span>
-          </div>
+            <span>Shopify Partner<br/><strong style="font-size:10px;opacity:0.7">Certifié officiel</strong></span>
+            <span class="partner-check">✓</span>
+          </a>
           <div class="partner-badge">
             <div class="partner-icon" style="background:linear-gradient(135deg,#0EA5E9,#8B5CF6)">N</div>
             <span>Agence indépendante<br/><strong style="font-size:10px;opacity:0.7">100% française</strong></span>
@@ -1198,10 +1217,6 @@
 
 <!-- CONTACT -->
 <section class="contact-section" id="contact">
-  <div style="text-align:center"><div class="fomo-bar">
-    <span class="trust-dot"></span>
-    Plus que 3 places disponibles ce mois-ci
-  </div></div>
   <div class="contact-card">
     <span class="contact-eyebrow">Contact</span>
     <h2 class="contact-title">Parlons de <em>votre projet</em></h2>
