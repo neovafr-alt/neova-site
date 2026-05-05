@@ -260,71 +260,140 @@
     }
     .btn-outline:hover{border-color:var(--sky);color:var(--sky)}
 
-    /* ── MANIFESTO ÉMOTIONNEL ── */
-    .manifesto{
+    /* ── MARQUEE LOGOS ── */
+    .marquee-section{
       background:#000;
-      padding:120px 6%;
-      text-align:center;
-      position:relative;overflow:hidden;
+      padding:48px 0;
       border-top:1px solid rgba(255,255,255,0.04);
       border-bottom:1px solid rgba(255,255,255,0.04);
+      overflow:hidden;position:relative;
     }
-    .manifesto::before{
-      content:'';position:absolute;inset:0;
-      background:
-        radial-gradient(circle at 30% 50%,rgba(14,165,233,0.06),transparent 50%),
-        radial-gradient(circle at 70% 50%,rgba(139,92,246,0.05),transparent 50%);
+    .marquee-section::before,.marquee-section::after{
+      content:'';position:absolute;top:0;bottom:0;width:140px;z-index:2;
       pointer-events:none;
     }
-    .manifesto-wrap{
-      max-width:880px;margin:0 auto;
-      position:relative;z-index:1;
+    .marquee-section::before{
+      left:0;background:linear-gradient(90deg,#000 20%,transparent);
     }
-    .manifesto-eyebrow{
-      display:inline-block;
+    .marquee-section::after{
+      right:0;background:linear-gradient(-90deg,#000 20%,transparent);
+    }
+    .marquee-label{
+      text-align:center;
       font-size:11px;font-weight:600;letter-spacing:3px;
-      text-transform:uppercase;color:rgba(14,165,233,0.7);
-      margin-bottom:32px;
+      text-transform:uppercase;color:rgba(255,255,255,0.4);
+      margin-bottom:28px;
     }
-    .manifesto-line{
-      font-size:clamp(24px,3vw,38px);
-      font-weight:600;letter-spacing:-1px;line-height:1.3;
-      color:rgba(255,255,255,0.55);
-      margin-bottom:18px;
+    .marquee-track{
+      display:flex;gap:80px;
+      animation:marqueeScroll 30s linear infinite;
+      width:max-content;
     }
-    .manifesto-line strong{
-      color:#fff;font-weight:700;
+    .marquee-section:hover .marquee-track{animation-play-state:paused}
+    @keyframes marqueeScroll{
+      from{transform:translateX(0)}
+      to{transform:translateX(-50%)}
     }
-    .manifesto-line em{
-      font-style:normal;
+    .marquee-item{
+      display:flex;align-items:center;gap:14px;
+      flex-shrink:0;
+      color:rgba(255,255,255,0.45);
+      font-size:18px;font-weight:600;letter-spacing:0.5px;
+      transition:color .25s;
+    }
+    .marquee-item:hover{color:rgba(255,255,255,0.8)}
+    .marquee-item svg{flex-shrink:0}
+    .marquee-dot{
+      width:6px;height:6px;border-radius:50%;
+      background:rgba(255,255,255,0.15);
+      flex-shrink:0;
+    }
+
+    /* ── TUNNEL STATS (transitions entre sections) ── */
+    .tunnel-stat{
+      background:#000;
+      padding:90px 6%;
+      text-align:center;
+      position:relative;overflow:hidden;
+    }
+    .tunnel-stat.light-bg{background:var(--apple-gray)}
+    .tunnel-stat::before{
+      content:'';position:absolute;inset:0;
+      background:radial-gradient(ellipse at 50% 50%,rgba(14,165,233,0.06),transparent 60%);
+      pointer-events:none;
+    }
+    .tunnel-stat.light-bg::before{
+      background:radial-gradient(ellipse at 50% 50%,rgba(14,165,233,0.05),transparent 60%);
+    }
+    .tunnel-stat > *{position:relative;z-index:1}
+    .tunnel-line{
+      max-width:880px;margin:0 auto 28px;
+      font-size:clamp(22px,2.6vw,32px);
+      font-weight:600;letter-spacing:-0.8px;line-height:1.4;
+      color:rgba(255,255,255,0.7);
+    }
+    .tunnel-stat.light-bg .tunnel-line{color:var(--near-black)}
+    .tunnel-stat.light-bg .tunnel-line strong{color:var(--near-black)}
+    .tunnel-line strong{color:#fff;font-weight:700}
+    .tunnel-line em{
+      font-style:normal;font-weight:800;
       background:linear-gradient(135deg,#0EA5E9,#06B6D4);
       -webkit-background-clip:text;background-clip:text;
       -webkit-text-fill-color:transparent;
-      font-weight:700;
     }
-    .manifesto-divider{
-      width:60px;height:1px;
-      background:linear-gradient(90deg,transparent,rgba(14,165,233,0.5),transparent);
-      margin:48px auto;
-    }
-    .manifesto-final{
-      font-size:clamp(28px,3.5vw,46px);
-      font-weight:700;letter-spacing:-1.2px;line-height:1.2;
-      color:#fff;
-    }
-    .manifesto-final em{
-      font-style:normal;
+    .tunnel-cta{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:12px 24px;border-radius:50px;
       background:linear-gradient(135deg,#0EA5E9,#8B5CF6);
-      -webkit-background-clip:text;background-clip:text;
-      -webkit-text-fill-color:transparent;
+      color:#fff;text-decoration:none;
+      font-size:14px;font-weight:600;letter-spacing:0.2px;
+      box-shadow:0 6px 24px rgba(14,165,233,0.3);
+      transition:transform .25s,box-shadow .25s;
     }
-    .manifesto-sign{
-      margin-top:32px;
-      font-size:14px;color:rgba(255,255,255,0.4);
-      letter-spacing:0.5px;
+    .tunnel-cta:hover{
+      transform:translateY(-2px);
+      box-shadow:0 10px 32px rgba(139,92,246,0.45);
     }
-    .manifesto-sign strong{
-      color:rgba(14,165,233,0.9);font-weight:600;letter-spacing:2px;
+    .tunnel-cta svg{transition:transform .25s}
+    .tunnel-cta:hover svg{transform:translateX(3px)}
+
+    /* Logo Shopify dans Notre Histoire */
+    .shopify-feature{
+      grid-column:1/-1;
+      display:flex;align-items:center;gap:20px;
+      padding:24px;margin-top:6px;
+      background:linear-gradient(135deg,rgba(149,191,71,0.08),rgba(94,142,62,0.04));
+      border:1px solid rgba(149,191,71,0.25);
+      border-radius:14px;
+      text-decoration:none;
+      transition:transform .25s,border-color .25s;
+    }
+    .shopify-feature:hover{
+      transform:translateY(-2px);
+      border-color:rgba(149,191,71,0.5);
+    }
+    .shopify-feature-logo{
+      width:56px;height:64px;flex-shrink:0;
+    }
+    .shopify-feature-text{flex:1}
+    .shopify-feature-title{
+      font-size:18px;font-weight:700;color:#fff;
+      letter-spacing:-0.3px;line-height:1.2;
+    }
+    .shopify-feature-sub{
+      font-size:13px;color:rgba(255,255,255,0.55);
+      margin-top:4px;
+    }
+    .shopify-feature-id{
+      font-size:11px;color:rgba(149,191,71,0.7);
+      letter-spacing:0.5px;font-weight:500;margin-top:6px;
+    }
+    .shopify-feature-check{
+      width:32px;height:32px;border-radius:50%;
+      background:#95BF47;flex-shrink:0;
+      display:flex;align-items:center;justify-content:center;
+      color:#fff;font-size:14px;font-weight:700;
+      box-shadow:0 4px 14px rgba(149,191,71,0.4);
     }
 
     /* ── BANDE OUTILS ── */
@@ -957,6 +1026,20 @@
       text-decoration:none;transition:color .2s;
     }
     .footer-links a:hover{color:var(--sky)}
+    .footer-shopify{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:6px 12px;border-radius:50px;
+      background:rgba(149,191,71,0.1);
+      border:1px solid rgba(149,191,71,0.3);
+      font-size:11px;font-weight:600;color:rgba(149,191,71,0.9);
+      letter-spacing:0.3px;text-decoration:none;
+      transition:transform .2s,border-color .2s;
+    }
+    .footer-shopify:hover{
+      transform:translateY(-1px);
+      border-color:rgba(149,191,71,0.6);
+    }
+    .footer-shopify svg{flex-shrink:0}
 
     /* ── RESPONSIVE ── */
     @media(max-width:860px){
@@ -983,6 +1066,12 @@
       .scard{padding:32px 24px}
       .contact-card{padding:44px 28px}
       .dark-section{padding:90px 5% 80px}
+      .tunnel-stat{padding:60px 5%}
+      .tunnel-line{font-size:18px}
+      .marquee-track{gap:50px;animation-duration:25s}
+      .marquee-item{font-size:14px}
+      .shopify-feature{flex-direction:row;padding:18px}
+      .shopify-feature-logo{width:42px;height:48px}
     }
   </style>
 </head>
@@ -1015,7 +1104,7 @@
   <div class="hero-veil" aria-hidden="true"></div>
   <div class="hero-eyebrow">Agence IA &amp; Automatisation</div>
   <h1>Et si votre business<br/>tournait <em>tout seul ?</em></h1>
-  <p class="hero-sub">Neova conçoit des systèmes IA qui automatisent vos workflows, votre SEO et votre prospection — pendant que vous vous concentrez sur <strong style="color:#fff">ce qui compte vraiment.</strong></p>
+  <p class="hero-sub">Neova conçoit des systèmes IA qui automatisent vos workflows, votre SEO et votre prospection. Pendant ce temps, vous vous concentrez sur <strong style="color:#fff">ce qui compte vraiment.</strong></p>
   <div class="hero-btns">
     <a href="#contact" class="btn-fill">Consultation gratuite →</a>
     <a href="#services" class="btn-outline">Découvrir nos services</a>
@@ -1029,24 +1118,61 @@
   </div>
 </section>
 
-<!-- MANIFESTO — Stats qui choquent -->
-<section class="manifesto">
-  <div class="manifesto-wrap">
-    <span class="manifesto-eyebrow">— La réalité du terrain —</span>
-
-    <p class="manifesto-line"><em>90%</em> des entreprises <strong>sous-exploitent leur SEO</strong> — alors qu'il peut <em>x2 leur chiffre d'affaires</em> sans toucher au budget pub.</p>
-
-    <p class="manifesto-line"><em>40%</em> du temps de vos équipes part en <strong>tâches répétitives</strong> — qu'une IA traite <em>24h/24, sans pause, sans erreur.</em></p>
-
-    <p class="manifesto-line"><em>80%</em> des deals B2B se ferment <strong>après 5 relances.</strong> Seulement <em>8%</em> des commerciaux vont jusque-là.</p>
-
-    <p class="manifesto-line">Une PME paie en moyenne <em>9 600€/an</em> par employé en <strong>outils SaaS.</strong> Dont <em>30% ne sont jamais utilisés.</em></p>
-
-    <div class="manifesto-divider"></div>
-
-    <p class="manifesto-final">Reprenez le contrôle.<br/>On s'occupe <em>du reste.</em></p>
-    <div class="manifesto-sign"><strong>NEOVA</strong> · Pour ceux qui ont mieux à faire que de l'admin</div>
+<!-- MARQUEE LOGOS / outils maîtrisés -->
+<section class="marquee-section" aria-label="Outils et certifications">
+  <div class="marquee-label">Outils maîtrisés &amp; certifications</div>
+  <div class="marquee-track">
+    <!-- Set 1 -->
+    <a href="https://www.shopify.com/partners" target="_blank" rel="noopener" class="marquee-item">
+      <svg width="40" height="46" viewBox="0 0 109 124" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M74.7 14.8c0-.4-.4-.7-.7-.7-.4 0-6.6-.5-6.6-.5s-4.4-4.4-4.9-4.8c-.5-.5-1.4-.4-1.8-.2-.1 0-.9.3-2.4.7-.4-1.3-1-2.8-1.9-4.4-2.7-5.3-6.7-8.1-11.5-8.1-.4 0-.7 0-1 .1C43.9 1 41 .5 39.5.5 28 .5 22.5 14.9 20.7 22.2c-4.4 1.4-7.6 2.4-8 2.5-2.5.8-2.5.9-2.9 3.2C9.6 29.5 3 79.7 3 79.7L57 89l29.4-7.3-11.7-66.9z" fill="#95BF47"/>
+        <path d="M53.9 4.6c-.5.2-1.4.4-2.4.7C51 1.7 49.4-1 46.7-1 46.7-1 46.6-1 46.5-1c-.7.1-1.4.5-2.1 1 0 0 0 0 0 .1 1.4 0 2.5.5 3.5 1.4.7.7 1.3 1.6 1.9 2.7 1 1.7 1.7 3.6 2.1 5.3z" fill="#5E8E3E"/>
+        <path d="M42 5.4c0-1.6-.2-2.9-.5-3.9-.6-1.1-1.6-1.7-2.8-1.7-.3 0-.6.1-.8.3-.1 0-.1.1-.2.1.5 1.1.7 2.4.7 3.6v.4c1.1-.4 2.3-.7 3.6-.8z" fill="#95BF47"/>
+        <path d="M73.9 14.1l-6.5-.5s-4.4-4.3-4.8-4.7c-.2-.2-.4-.3-.6-.3l-3.9 71.3 27.7 9V20.6c0-.2-.2-.4-.4-.4l-11.5-6.1z" fill="#5E8E3E"/>
+        <path d="M53 31.4l-3.4 10.1s-3-1.6-6.7-1.6c-5.4 0-5.7 3.4-5.7 4.3 0 4.7 12.4 6.5 12.4 17.7 0 8.8-5.6 14.5-13.1 14.5-9.1 0-13.7-5.7-13.7-5.7l2.4-8s4.7 4.1 8.7 4.1c2.6 0 3.7-2.1 3.7-3.6 0-6.2-10.2-6.5-10.2-16.7 0-8.6 6.2-17 18.7-17 4.7-.1 7 1.3 7 1.3z" fill="#FFFFFF"/>
+      </svg>
+      <span>Shopify Partner</span>
+    </a>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item">Claude · Anthropic</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item">Python</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item">API custom &amp; Webhooks</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item">Scripts sur mesure</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item">SEO technique</span>
+    <span class="marquee-dot"></span>
+    <!-- Set 2 (duplicate pour boucle infinie) -->
+    <a href="https://www.shopify.com/partners" target="_blank" rel="noopener" class="marquee-item">
+      <svg width="40" height="46" viewBox="0 0 109 124" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M74.7 14.8c0-.4-.4-.7-.7-.7-.4 0-6.6-.5-6.6-.5s-4.4-4.4-4.9-4.8c-.5-.5-1.4-.4-1.8-.2-.1 0-.9.3-2.4.7-.4-1.3-1-2.8-1.9-4.4-2.7-5.3-6.7-8.1-11.5-8.1-.4 0-.7 0-1 .1C43.9 1 41 .5 39.5.5 28 .5 22.5 14.9 20.7 22.2c-4.4 1.4-7.6 2.4-8 2.5-2.5.8-2.5.9-2.9 3.2C9.6 29.5 3 79.7 3 79.7L57 89l29.4-7.3-11.7-66.9z" fill="#95BF47"/>
+        <path d="M53 31.4l-3.4 10.1s-3-1.6-6.7-1.6c-5.4 0-5.7 3.4-5.7 4.3 0 4.7 12.4 6.5 12.4 17.7 0 8.8-5.6 14.5-13.1 14.5-9.1 0-13.7-5.7-13.7-5.7l2.4-8s4.7 4.1 8.7 4.1c2.6 0 3.7-2.1 3.7-3.6 0-6.2-10.2-6.5-10.2-16.7 0-8.6 6.2-17 18.7-17 4.7-.1 7 1.3 7 1.3z" fill="#FFFFFF"/>
+      </svg>
+      <span>Shopify Partner</span>
+    </a>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item">Claude · Anthropic</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item">Python</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item">API custom &amp; Webhooks</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item">Scripts sur mesure</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item">SEO technique</span>
+    <span class="marquee-dot"></span>
   </div>
+</section>
+
+<!-- TUNNEL STAT 1 — SEO -->
+<section class="tunnel-stat">
+  <p class="tunnel-line"><em>90%</em> des entreprises <strong>sous-exploitent leur SEO.</strong> Pourtant, il peut multiplier leur chiffre d'affaires par <em>2</em>, sans dépenser un euro de plus en publicité.</p>
+  <a href="#contact" class="tunnel-cta">
+    <span>Parlons-en</span>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+  </a>
 </section>
 
 <!-- BANDE OUTILS / STACK -->
@@ -1088,14 +1214,14 @@
 <section class="dark-section" id="services">
   <span class="section-eyebrow">Nos services</span>
   <h2 class="section-title">Ce qu'on fait <em>pour vous</em></h2>
-  <p class="section-sub">Quatre piliers pour faire passer votre business à la vitesse supérieure — chacun pensé pour générer des résultats concrets.</p>
+  <p class="section-sub">Quatre piliers pour faire passer votre business à la vitesse supérieure. Chacun pensé pour générer des résultats concrets.</p>
   <div class="services-wrap">
 
     <div class="scard" data-tilt>
       <div class="scard-icon-wrap">🤖</div>
       <div class="scard-eyebrow">Automatisation IA</div>
       <h3>Workflows intelligents qui travaillent 24/7</h3>
-      <p>Automatisation de tâches, traitement de données, prospection automatique — des systèmes qui tournent sans vous.</p>
+      <p>Automatisation de tâches, traitement de données, prospection automatique. Des systèmes qui tournent sans vous.</p>
       <a href="#contact" class="scard-link">
         En savoir plus
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
@@ -1117,7 +1243,7 @@
       <div class="scard-icon-wrap">⚙️</div>
       <div class="scard-eyebrow">Outils sur mesure</div>
       <h3>Développé exactement pour votre business</h3>
-      <p>Scripts, pipelines, intégrations API. Rien de générique — du code qui résout votre vrai problème.</p>
+      <p>Scripts, pipelines, intégrations API. Rien de générique. Du code qui résout votre vrai problème.</p>
       <a href="#contact" class="scard-link">
         En savoir plus
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
@@ -1128,7 +1254,7 @@
       <div class="scard-icon-wrap">🎯</div>
       <div class="scard-eyebrow">Prospection automatisée</div>
       <h3>Vos prospects. Sans effort de votre côté.</h3>
-      <p>Système intelligent qui identifie, contacte et relance vos prospects — vous fermez, on alimente le pipeline.</p>
+      <p>Système intelligent qui identifie, contacte et relance vos prospects. Vous fermez, on alimente le pipeline.</p>
       <a href="#contact" class="scard-link">
         En savoir plus
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
@@ -1136,6 +1262,15 @@
     </div>
 
   </div>
+</section>
+
+<!-- TUNNEL STAT 2 — Automatisation IA -->
+<section class="tunnel-stat">
+  <p class="tunnel-line"><em>40%</em> du temps de vos équipes part en <strong>tâches répétitives.</strong> Pendant ce temps, une IA bien construite traite tout ça <em>24h/24, sans pause, sans erreur.</em></p>
+  <a href="#contact" class="tunnel-cta">
+    <span>Parlons-en</span>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+  </a>
 </section>
 
 <!-- PROCESSUS -->
@@ -1185,6 +1320,15 @@
   </div>
 </section>
 
+<!-- TUNNEL STAT 3 — Prospection -->
+<section class="tunnel-stat">
+  <p class="tunnel-line"><em>80%</em> des deals B2B se signent <strong>après 5 relances.</strong> Et pourtant, seulement <em>8%</em> des commerciaux vont jusque-là. Les autres laissent filer leurs prospects.</p>
+  <a href="#contact" class="tunnel-cta">
+    <span>Parlons-en</span>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+  </a>
+</section>
+
 <!-- POURQUOI NEOVA -->
 <section class="dark-section">
   <span class="section-eyebrow">Pourquoi nous</span>
@@ -1206,8 +1350,8 @@
     <div class="about-text">
       <span class="section-eyebrow">Notre histoire</span>
       <h2>L'IA pour tous, <em>pas seulement pour les géants.</em></h2>
-      <p>Neova est née d'un constat simple : les grandes entreprises se sont jetées sur l'IA. Les PME, les indépendants, les e-commerçants regardent le train passer — par manque de temps, de ressources ou d'interlocuteur de confiance.</p>
-      <p>On a créé Neova pour combler ce fossé. <strong style="color:#fff">Une agence à taille humaine</strong>, qui parle vrai, qui code propre, et qui livre des systèmes IA qui font une vraie différence sur votre quotidien — pas du blabla, pas du no-code générique.</p>
+      <p>Neova est née d'un constat simple : les grandes entreprises se sont jetées sur l'IA. Les PME, les indépendants, les e-commerçants regardent le train passer, par manque de temps, de ressources ou d'interlocuteur de confiance.</p>
+      <p>On a créé Neova pour combler ce fossé. <strong style="color:#fff">Une agence à taille humaine</strong>, qui parle vrai, qui code propre, et qui livre des systèmes IA qui font une vraie différence sur votre quotidien. Pas du blabla, pas du no-code générique.</p>
       <p>Notre conviction : <strong style="color:#fff">l'automatisation intelligente n'est pas un luxe</strong>, c'est le levier qui sépare aujourd'hui ceux qui scalent de ceux qui s'épuisent.</p>
       <div class="about-signature">
         <div class="about-avatar">YN</div>
@@ -1235,20 +1379,32 @@
           <div class="mini-stat-num">24h</div>
           <div class="mini-stat-label">Délai de réponse</div>
         </div>
-        <div class="partner-badges">
-          <a href="https://www.shopify.com/partners" target="_blank" rel="noopener" class="partner-badge verified" title="Shopify Partner ID 4903008">
-            <div class="partner-icon">S</div>
-            <span>Shopify Partner<br/><strong style="font-size:10px;opacity:0.7">Certifié officiel</strong></span>
-            <span class="partner-check">✓</span>
-          </a>
-          <div class="partner-badge">
-            <div class="partner-icon" style="background:linear-gradient(135deg,#0EA5E9,#8B5CF6)">N</div>
-            <span>Agence indépendante<br/><strong style="font-size:10px;opacity:0.7">100% française</strong></span>
+        <a href="https://www.shopify.com/partners" target="_blank" rel="noopener" class="shopify-feature">
+          <svg class="shopify-feature-logo" viewBox="0 0 109 124" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M74.7 14.8c0-.4-.4-.7-.7-.7-.4 0-6.6-.5-6.6-.5s-4.4-4.4-4.9-4.8c-.5-.5-1.4-.4-1.8-.2-.1 0-.9.3-2.4.7-.4-1.3-1-2.8-1.9-4.4-2.7-5.3-6.7-8.1-11.5-8.1-.4 0-.7 0-1 .1C43.9 1 41 .5 39.5.5 28 .5 22.5 14.9 20.7 22.2c-4.4 1.4-7.6 2.4-8 2.5-2.5.8-2.5.9-2.9 3.2C9.6 29.5 3 79.7 3 79.7L57 89l29.4-7.3-11.7-66.9z" fill="#95BF47"/>
+            <path d="M53.9 4.6c-.5.2-1.4.4-2.4.7C51 1.7 49.4-1 46.7-1c-.7.1-1.4.5-2.1 1 1.4 0 2.5.5 3.5 1.4.7.7 1.3 1.6 1.9 2.7 1 1.7 1.7 3.6 2.1 5.3z" fill="#5E8E3E"/>
+            <path d="M73.9 14.1l-6.5-.5s-4.4-4.3-4.8-4.7c-.2-.2-.4-.3-.6-.3l-3.9 71.3 27.7 9V20.6c0-.2-.2-.4-.4-.4l-11.5-6.1z" fill="#5E8E3E"/>
+            <path d="M53 31.4l-3.4 10.1s-3-1.6-6.7-1.6c-5.4 0-5.7 3.4-5.7 4.3 0 4.7 12.4 6.5 12.4 17.7 0 8.8-5.6 14.5-13.1 14.5-9.1 0-13.7-5.7-13.7-5.7l2.4-8s4.7 4.1 8.7 4.1c2.6 0 3.7-2.1 3.7-3.6 0-6.2-10.2-6.5-10.2-16.7 0-8.6 6.2-17 18.7-17 4.7-.1 7 1.3 7 1.3z" fill="#FFFFFF"/>
+          </svg>
+          <div class="shopify-feature-text">
+            <div class="shopify-feature-title">Shopify Partner</div>
+            <div class="shopify-feature-sub">Certifié officiel · Agence partenaire</div>
+            <div class="shopify-feature-id">Partner ID · 4903008</div>
           </div>
-        </div>
+          <div class="shopify-feature-check">✓</div>
+        </a>
       </div>
     </div>
   </div>
+</section>
+
+<!-- TUNNEL STAT 4 — SaaS -->
+<section class="tunnel-stat light-bg">
+  <p class="tunnel-line">Une PME paie en moyenne <em>9 600€/an</em> par employé en <strong>outils SaaS.</strong> Et <em>30%</em> de ces outils ne sont jamais ouverts. Du code propriétaire vous appartient à vie.</p>
+  <a href="#contact" class="tunnel-cta">
+    <span>Parlons-en</span>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+  </a>
 </section>
 
 <!-- TÉMOIGNAGES -->
@@ -1306,7 +1462,7 @@
 
   <div class="testimonials-source">
     <span style="color:#FBBF24;font-size:14px">★</span>
-    <span>Témoignages collectés auprès de nos premiers clients accompagnés — <strong>retours détaillés sur demande</strong></span>
+    <span>Témoignages collectés auprès de nos premiers clients accompagnés. <strong>Retours détaillés sur demande.</strong></span>
   </div>
 </section>
 
@@ -1347,12 +1503,19 @@
 <footer>
   <div class="footer-brand">
     <span class="footer-name">NEO<em>VA</em></span>
+    <a href="https://www.shopify.com/partners" target="_blank" rel="noopener" class="footer-shopify" title="Shopify Partner ID 4903008">
+      <svg width="18" height="20" viewBox="0 0 109 124" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M74.7 14.8c0-.4-.4-.7-.7-.7-.4 0-6.6-.5-6.6-.5s-4.4-4.4-4.9-4.8c-.5-.5-1.4-.4-1.8-.2-.1 0-.9.3-2.4.7-.4-1.3-1-2.8-1.9-4.4-2.7-5.3-6.7-8.1-11.5-8.1-.4 0-.7 0-1 .1C43.9 1 41 .5 39.5.5 28 .5 22.5 14.9 20.7 22.2c-4.4 1.4-7.6 2.4-8 2.5-2.5.8-2.5.9-2.9 3.2C9.6 29.5 3 79.7 3 79.7L57 89l29.4-7.3-11.7-66.9z" fill="#95BF47"/>
+        <path d="M53 31.4l-3.4 10.1s-3-1.6-6.7-1.6c-5.4 0-5.7 3.4-5.7 4.3 0 4.7 12.4 6.5 12.4 17.7 0 8.8-5.6 14.5-13.1 14.5-9.1 0-13.7-5.7-13.7-5.7l2.4-8s4.7 4.1 8.7 4.1c2.6 0 3.7-2.1 3.7-3.6 0-6.2-10.2-6.5-10.2-16.7 0-8.6 6.2-17 18.7-17 4.7-.1 7 1.3 7 1.3z" fill="#FFFFFF"/>
+      </svg>
+      Shopify Partner
+    </a>
   </div>
   <div class="footer-links">
     <a href="/mentions-legales.html">Mentions légales</a>
     <a href="/confidentialite.html">Confidentialité</a>
   </div>
-  <span class="footer-copy">© 2026 Neova — Agence IA &amp; Automatisation</span>
+  <span class="footer-copy">© 2026 Neova · Agence IA &amp; Automatisation</span>
 </footer>
 
 <script>
