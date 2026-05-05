@@ -223,178 +223,323 @@
 
     /* ── BANDE OUTILS ── */
     .tools-strip{
-      background:#111;
+      background:#0a0a0a;
       border-top:1px solid rgba(255,255,255,0.06);
       border-bottom:1px solid rgba(255,255,255,0.06);
-      padding:18px 24px;
+      padding:22px 24px;
       display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap;
+      overflow:hidden;position:relative;
     }
     .tools-strip span{
       font-size:12px;font-weight:500;
-      color:rgba(255,255,255,0.3);letter-spacing:0.3px;
+      color:rgba(255,255,255,0.35);letter-spacing:0.3px;
+      transition:color .25s;cursor:default;
     }
+    .tools-strip span:hover{color:var(--sky)}
 
-    /* ── SERVICES TILES — style Apple ── */
-    .services-grid{
-      display:grid;grid-template-columns:1fr 1fr;
-      gap:2px;background:#000;
-    }
-    .stile{
-      min-height:520px;
-      display:flex;flex-direction:column;
-      align-items:center;justify-content:flex-start;
-      padding:64px 48px;text-align:center;
+    /* ── SECTIONS DARK UNIFIÉES ── */
+    .dark-section{
+      background:#000;
+      padding:140px 6% 120px;text-align:center;
       position:relative;overflow:hidden;
     }
-    .stile.light{background:var(--apple-gray);color:var(--near-black)}
-    .stile.dark{background:var(--near-black);color:var(--white)}
-    .stile.black{background:#000;color:var(--white)}
-    .stile.blue{background:#0a1628;color:var(--white)}
-
-    .stile-eyebrow{
-      font-size:12px;font-weight:600;letter-spacing:1px;
-      text-transform:uppercase;margin-bottom:14px;
-      color:var(--sky);
+    .dark-section::before{
+      content:'';position:absolute;inset:0;
+      background-image:
+        radial-gradient(circle at 20% 30%,rgba(14,165,233,0.08),transparent 40%),
+        radial-gradient(circle at 80% 70%,rgba(139,92,246,0.08),transparent 40%);
+      pointer-events:none;
     }
-    .stile-title{
-      font-size:clamp(28px,3vw,46px);
-      font-weight:700;line-height:1.08;letter-spacing:-1px;
-      margin-bottom:14px;
+    .dark-section > *{position:relative;z-index:1}
+    .section-eyebrow{
+      display:inline-block;
+      font-size:11px;font-weight:600;letter-spacing:2px;
+      text-transform:uppercase;color:var(--sky);
+      padding:6px 14px;border-radius:50px;
+      background:rgba(14,165,233,0.08);
+      border:1px solid rgba(14,165,233,0.25);
+      margin-bottom:20px;
     }
-    .stile.light .stile-title{color:var(--near-black)}
-    .stile.dark .stile-title,.stile.black .stile-title,.stile.blue .stile-title{color:var(--white)}
-
-    .stile-desc{
-      font-size:15px;line-height:1.7;max-width:340px;
-      margin-bottom:24px;
+    .section-title{
+      font-size:clamp(34px,4.5vw,60px);
+      font-weight:700;letter-spacing:-1.8px;line-height:1.05;
+      color:var(--white);margin-bottom:18px;
     }
-    .stile.light .stile-desc{color:var(--muted)}
-    .stile.dark .stile-desc,.stile.black .stile-desc,.stile.blue .stile-desc{color:rgba(255,255,255,0.55)}
-
-    .stile-icon{
-      font-size:52px;margin-bottom:24px;
-      line-height:1;
+    .section-title em{font-style:normal;color:var(--sky)}
+    .section-sub{
+      font-size:17px;color:rgba(255,255,255,0.55);line-height:1.6;
+      max-width:600px;margin:0 auto 70px;
     }
 
-    .stile-link{
-      font-size:14px;font-weight:500;
-      color:var(--sky);text-decoration:none;
-      display:inline-flex;align-items:center;gap:4px;
-      transition:gap .2s;margin-top:auto;
+    /* ── SERVICES — cards premium interactives ── */
+    .services-wrap{
+      display:grid;grid-template-columns:repeat(2,1fr);
+      gap:20px;max-width:1100px;margin:0 auto;
     }
-    .stile-link:hover{gap:8px}
+    .scard{
+      position:relative;padding:44px 36px;
+      border-radius:22px;text-align:left;
+      background:linear-gradient(180deg,#0d0d0f 0%,#070708 100%);
+      border:1px solid rgba(255,255,255,0.06);
+      overflow:hidden;cursor:pointer;
+      transition:transform .35s cubic-bezier(.2,.8,.3,1),border-color .35s;
+    }
+    .scard::before{
+      content:'';position:absolute;inset:-1px;
+      border-radius:22px;padding:1px;
+      background:linear-gradient(135deg,var(--scard-c1,#0EA5E9),var(--scard-c2,#8B5CF6));
+      -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;mask-composite:exclude;
+      opacity:0;transition:opacity .4s;pointer-events:none;
+    }
+    .scard::after{
+      content:'';position:absolute;
+      top:var(--my,50%);left:var(--mx,50%);
+      width:400px;height:400px;border-radius:50%;
+      background:radial-gradient(circle,var(--scard-c1,#0EA5E9) 0%,transparent 70%);
+      transform:translate(-50%,-50%);
+      opacity:0;transition:opacity .4s;
+      pointer-events:none;filter:blur(40px);
+    }
+    .scard:hover{transform:translateY(-6px);border-color:transparent}
+    .scard:hover::before{opacity:1}
+    .scard:hover::after{opacity:0.18}
+    .scard:nth-child(1){--scard-c1:#0EA5E9;--scard-c2:#06B6D4}
+    .scard:nth-child(2){--scard-c1:#8B5CF6;--scard-c2:#3B82F6}
+    .scard:nth-child(3){--scard-c1:#06B6D4;--scard-c2:#0EA5E9}
+    .scard:nth-child(4){--scard-c1:#3B82F6;--scard-c2:#8B5CF6}
 
-    /* ── PROCESS — fond blanc ── */
-    .process-section{
-      background:var(--white);
-      padding:120px 6%;text-align:center;
+    .scard-icon-wrap{
+      width:60px;height:60px;border-radius:16px;
+      background:linear-gradient(135deg,rgba(14,165,233,0.15),rgba(139,92,246,0.15));
+      border:1px solid rgba(255,255,255,0.08);
+      display:flex;align-items:center;justify-content:center;
+      font-size:30px;margin-bottom:24px;
+      transition:transform .4s cubic-bezier(.2,.8,.3,1);
     }
-    .process-eyebrow{
-      font-size:12px;font-weight:600;letter-spacing:1px;
-      text-transform:uppercase;color:var(--muted);
+    .scard:hover .scard-icon-wrap{transform:scale(1.1) rotate(-6deg)}
+    .scard-eyebrow{
+      font-size:11px;font-weight:600;letter-spacing:1.5px;
+      text-transform:uppercase;color:var(--sky);
+      margin-bottom:10px;
+    }
+    .scard h3{
+      font-size:24px;font-weight:700;color:var(--white);
+      letter-spacing:-0.5px;line-height:1.2;
       margin-bottom:12px;
     }
-    .process-title{
-      font-size:clamp(32px,4vw,56px);
-      font-weight:700;letter-spacing:-1.5px;line-height:1.05;
-      color:var(--near-black);margin-bottom:64px;
+    .scard p{
+      font-size:15px;color:rgba(255,255,255,0.55);
+      line-height:1.65;margin-bottom:24px;
     }
-    .process-steps{
-      display:grid;grid-template-columns:repeat(2,1fr);
-      gap:48px;max-width:760px;margin:0 auto;
+    .scard-link{
+      font-size:14px;font-weight:500;color:var(--sky);
+      text-decoration:none;
+      display:inline-flex;align-items:center;gap:6px;
+      transition:gap .25s;
     }
-    .pstep{position:relative}
-    .pstep-num{
-      width:48px;height:48px;border-radius:50%;
-      border:1.5px solid rgba(14,165,233,0.4);
-      display:flex;align-items:center;justify-content:center;
-      font-size:18px;font-weight:700;color:var(--sky);
-      margin:0 auto 20px;
-      background:var(--white);
-    }
-    .pstep-title{
-      font-size:17px;font-weight:600;
-      color:var(--near-black);margin-bottom:8px;
-      letter-spacing:-0.3px;
-    }
-    .pstep-desc{font-size:14px;color:var(--muted);line-height:1.6}
+    .scard-link svg{transition:transform .25s}
+    .scard:hover .scard-link{gap:12px}
+    .scard:hover .scard-link svg{transform:translateX(4px)}
 
-    /* ── WHY — fond noir ── */
-    .why-section{
-      background:var(--black);
-      padding:120px 6%;text-align:center;
+    /* ── PROCESS — timeline lumineuse ── */
+    .process-wrap{
+      max-width:900px;margin:0 auto;
+      position:relative;
     }
-    .why-eyebrow{
-      font-size:12px;font-weight:600;letter-spacing:1px;
-      text-transform:uppercase;color:var(--sky);margin-bottom:12px;
+    .process-line{
+      position:absolute;left:50%;top:30px;bottom:30px;
+      width:2px;transform:translateX(-50%);
+      background:linear-gradient(180deg,
+        transparent 0%,
+        rgba(14,165,233,0.3) 10%,
+        rgba(139,92,246,0.3) 90%,
+        transparent 100%);
     }
-    .why-title{
-      font-size:clamp(32px,4vw,56px);
-      font-weight:700;letter-spacing:-1.5px;line-height:1.05;
-      color:var(--white);margin-bottom:64px;
+    .process-line::before{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(180deg,transparent,#0EA5E9,#8B5CF6,transparent);
+      filter:blur(8px);
     }
+    .process-row{
+      display:grid;grid-template-columns:1fr 80px 1fr;
+      align-items:center;gap:0;margin-bottom:60px;
+      position:relative;
+    }
+    .process-row:last-child{margin-bottom:0}
+    .process-row.right .process-content{grid-column:3;text-align:left;padding-left:30px}
+    .process-row.left .process-content{grid-column:1;text-align:right;padding-right:30px}
+    .process-row.right .process-empty{grid-column:1}
+    .process-row.left .process-empty{grid-column:3}
+    .process-num{
+      grid-column:2;
+      width:60px;height:60px;border-radius:50%;
+      background:radial-gradient(circle,#0EA5E9 0%,#0284C7 100%);
+      display:flex;align-items:center;justify-content:center;
+      font-size:22px;font-weight:700;color:#fff;
+      margin:0 auto;position:relative;z-index:2;
+      box-shadow:0 0 0 6px rgba(14,165,233,0.12),0 0 30px rgba(14,165,233,0.4);
+      transition:transform .35s,box-shadow .35s;
+    }
+    .process-row:hover .process-num{
+      transform:scale(1.15);
+      box-shadow:0 0 0 10px rgba(14,165,233,0.18),0 0 50px rgba(14,165,233,0.6);
+    }
+    .process-content h4{
+      font-size:22px;font-weight:700;color:var(--white);
+      letter-spacing:-0.4px;margin-bottom:8px;
+    }
+    .process-content p{
+      font-size:15px;color:rgba(255,255,255,0.55);
+      line-height:1.65;
+    }
+
+    /* ── WHY — cards interactives ── */
     .why-grid{
       display:grid;grid-template-columns:repeat(3,1fr);
-      gap:2px;max-width:1100px;margin:0 auto;
-      background:rgba(255,255,255,0.06);
+      gap:18px;max-width:1100px;margin:0 auto;
     }
     .witem{
-      background:var(--black);
-      padding:36px 32px;text-align:left;
-      transition:background .2s;
+      position:relative;
+      background:linear-gradient(180deg,#0d0d0f 0%,#070708 100%);
+      border:1px solid rgba(255,255,255,0.06);
+      border-radius:18px;
+      padding:32px 28px;text-align:left;
+      overflow:hidden;
+      transition:transform .35s cubic-bezier(.2,.8,.3,1),border-color .35s;
     }
-    .witem:hover{background:#0a0a0a}
+    .witem::after{
+      content:'';position:absolute;top:0;left:0;right:0;height:1px;
+      background:linear-gradient(90deg,transparent,rgba(14,165,233,0.6),transparent);
+      opacity:0;transition:opacity .35s;
+    }
+    .witem:hover{
+      transform:translateY(-4px);
+      border-color:rgba(14,165,233,0.3);
+    }
+    .witem:hover::after{opacity:1}
     .wcheck{
-      width:32px;height:32px;border-radius:50%;
-      background:var(--sky);
+      width:38px;height:38px;border-radius:12px;
+      background:linear-gradient(135deg,#0EA5E9,#8B5CF6);
       display:flex;align-items:center;justify-content:center;
-      color:var(--white);font-weight:700;font-size:13px;
+      color:var(--white);font-weight:700;font-size:14px;
       margin-bottom:16px;
+      box-shadow:0 4px 14px rgba(14,165,233,0.3);
     }
     .witem h4{
       font-size:17px;font-weight:600;color:var(--white);
       letter-spacing:-0.3px;margin-bottom:8px;
     }
-    .witem p{font-size:14px;color:rgba(255,255,255,0.45);line-height:1.6}
+    .witem p{font-size:14px;color:rgba(255,255,255,0.5);line-height:1.65}
 
-    /* ── CONTACT ── */
+    /* ── CONTACT — CTA spectaculaire ── */
     .contact-section{
-      background:var(--apple-gray);
-      padding:120px 6%;text-align:center;
+      background:#000;padding:140px 6%;text-align:center;
+      position:relative;overflow:hidden;
     }
+    .contact-section::before{
+      content:'';position:absolute;inset:0;
+      background:
+        radial-gradient(ellipse at 50% 50%,rgba(14,165,233,0.15) 0%,transparent 50%),
+        radial-gradient(ellipse at 30% 80%,rgba(139,92,246,0.12) 0%,transparent 50%);
+      pointer-events:none;
+    }
+    .contact-section > *{position:relative;z-index:1}
+    .contact-card{
+      max-width:780px;margin:0 auto;
+      padding:60px 48px;
+      background:linear-gradient(180deg,rgba(20,20,24,0.8) 0%,rgba(8,8,10,0.8) 100%);
+      backdrop-filter:blur(20px);
+      -webkit-backdrop-filter:blur(20px);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:28px;
+      position:relative;overflow:hidden;
+    }
+    .contact-card::before{
+      content:'';position:absolute;inset:-2px;
+      border-radius:28px;padding:2px;
+      background:conic-gradient(from var(--angle,0deg),#0EA5E9,#8B5CF6,#06B6D4,#0EA5E9);
+      -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;mask-composite:exclude;
+      animation:rotateBorder 6s linear infinite;
+      opacity:0.6;
+    }
+    @property --angle{syntax:'<angle>';initial-value:0deg;inherits:false;}
+    @keyframes rotateBorder{to{--angle:360deg}}
     .contact-eyebrow{
-      font-size:12px;font-weight:600;letter-spacing:1px;
-      text-transform:uppercase;color:var(--muted);margin-bottom:12px;
+      display:inline-block;
+      font-size:11px;font-weight:600;letter-spacing:2px;
+      text-transform:uppercase;color:var(--sky);
+      padding:6px 14px;border-radius:50px;
+      background:rgba(14,165,233,0.08);
+      border:1px solid rgba(14,165,233,0.25);
+      margin-bottom:20px;
     }
     .contact-title{
-      font-size:clamp(32px,4vw,56px);
-      font-weight:700;letter-spacing:-1.5px;line-height:1.05;
-      color:var(--near-black);margin-bottom:14px;
+      font-size:clamp(34px,4.5vw,56px);
+      font-weight:700;letter-spacing:-1.8px;line-height:1.05;
+      color:var(--white);margin-bottom:16px;
     }
+    .contact-title em{font-style:normal;color:var(--sky)}
     .contact-sub{
-      font-size:17px;color:var(--muted);
-      margin-bottom:52px;line-height:1.6;
+      font-size:17px;color:rgba(255,255,255,0.6);
+      margin-bottom:40px;line-height:1.6;
     }
-    .contact-cards{
-      display:flex;justify-content:center;gap:16px;flex-wrap:wrap;
+    .contact-buttons{
+      display:flex;justify-content:center;gap:14px;flex-wrap:wrap;
+      margin-bottom:36px;
     }
-    .ccard{
-      background:var(--white);border-radius:18px;
-      padding:36px 52px;text-decoration:none;
+    .cta-primary{
+      position:relative;display:inline-flex;align-items:center;gap:8px;
+      padding:14px 28px;border-radius:50px;
+      background:linear-gradient(135deg,#0EA5E9,#8B5CF6);
+      color:#fff;text-decoration:none;
+      font-size:15px;font-weight:600;letter-spacing:0.2px;
+      box-shadow:0 8px 28px rgba(14,165,233,0.4);
       transition:transform .25s,box-shadow .25s;
-      min-width:220px;
-      box-shadow:0 2px 8px rgba(0,0,0,0.06);
+      overflow:hidden;
     }
-    .ccard:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.1)}
-    .ccard-icon{font-size:28px;margin-bottom:12px}
-    .ccard-label{
-      font-size:11px;font-weight:600;letter-spacing:1px;
-      text-transform:uppercase;color:var(--sky);margin-bottom:6px;
+    .cta-primary::before{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(135deg,#8B5CF6,#0EA5E9);
+      opacity:0;transition:opacity .3s;
     }
-    .ccard-val{
-      font-size:17px;font-weight:600;color:var(--near-black);
-      letter-spacing:-0.3px;
+    .cta-primary span{position:relative;z-index:1}
+    .cta-primary:hover{
+      transform:translateY(-2px);
+      box-shadow:0 12px 38px rgba(139,92,246,0.5);
     }
+    .cta-primary:hover::before{opacity:1}
+    .cta-secondary{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:13px 26px;border-radius:50px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.15);
+      color:#fff;text-decoration:none;
+      font-size:15px;font-weight:500;
+      transition:background .25s,border-color .25s;
+    }
+    .cta-secondary:hover{
+      background:rgba(255,255,255,0.08);
+      border-color:rgba(14,165,233,0.5);
+    }
+    .contact-info{
+      display:flex;justify-content:center;gap:36px;flex-wrap:wrap;
+      padding-top:32px;border-top:1px solid rgba(255,255,255,0.06);
+    }
+    .contact-item{
+      display:flex;align-items:center;gap:10px;
+      color:rgba(255,255,255,0.7);
+      font-size:14px;text-decoration:none;
+      transition:color .2s;
+    }
+    .contact-item:hover{color:var(--sky)}
+    .contact-item-label{
+      font-size:10px;font-weight:600;letter-spacing:1.5px;
+      text-transform:uppercase;color:rgba(255,255,255,0.4);
+      display:block;margin-bottom:2px;
+    }
+    .contact-item-val{font-size:15px;font-weight:600;color:#fff}
 
     /* ── FOOTER ── */
     footer{
@@ -414,15 +559,23 @@
 
     /* ── RESPONSIVE ── */
     @media(max-width:860px){
-      .services-grid{grid-template-columns:1fr}
+      .services-wrap{grid-template-columns:1fr}
       .why-grid{grid-template-columns:repeat(2,1fr)}
+      .process-row{grid-template-columns:60px 1fr}
+      .process-row.right .process-content,.process-row.left .process-content{
+        grid-column:2;text-align:left;padding:0 0 0 16px;
+      }
+      .process-row.right .process-empty,.process-row.left .process-empty{display:none}
+      .process-num{grid-column:1}
+      .process-line{left:30px}
     }
     @media(max-width:640px){
       .nav-links li:not(.nav-cta-li){display:none}
       h1{letter-spacing:-1px}
-      .process-steps{grid-template-columns:1fr}
       .why-grid{grid-template-columns:1fr}
-      .stile{padding:48px 28px}
+      .scard{padding:32px 24px}
+      .contact-card{padding:44px 28px}
+      .dark-section{padding:90px 5% 80px}
     }
   </style>
 </head>
@@ -471,82 +624,117 @@
   <span>Python · Zapier</span>
 </div>
 
-<!-- SERVICES — 4 tiles Apple style -->
-<section id="services">
-  <div class="services-grid">
+<!-- SERVICES — cards premium interactives -->
+<section class="dark-section" id="services">
+  <span class="section-eyebrow">Nos services</span>
+  <h2 class="section-title">Ce qu'on fait <em>pour vous</em></h2>
+  <p class="section-sub">Quatre piliers pour faire passer votre business à la vitesse supérieure — chacun pensé pour générer des résultats concrets.</p>
+  <div class="services-wrap">
 
-    <div class="stile light">
-      <div class="stile-icon">🤖</div>
-      <div class="stile-eyebrow">Automatisation IA</div>
-      <h2 class="stile-title">Automatisation IA</h2>
-      <p class="stile-desc">Workflows intelligents, traitement de données, prospection automatique — des systèmes qui tournent 24h/24 sans vous.</p>
-      <a href="#contact" class="stile-link">Commencer →</a>
+    <div class="scard" data-tilt>
+      <div class="scard-icon-wrap">🤖</div>
+      <div class="scard-eyebrow">Automatisation IA</div>
+      <h3>Workflows intelligents qui travaillent 24/7</h3>
+      <p>Automatisation de tâches, traitement de données, prospection automatique — des systèmes qui tournent sans vous.</p>
+      <a href="#contact" class="scard-link">
+        En savoir plus
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
     </div>
 
-    <div class="stile black">
-      <div class="stile-icon">📈</div>
-      <div class="stile-eyebrow">SEO & Visibilité</div>
-      <h2 class="stile-title">SEO & Visibilité</h2>
-      <p class="stile-desc">Audit technique, optimisation on-page, stratégie de contenu. Résultats mesurables en 30 jours.</p>
-      <a href="#contact" class="stile-link">Commencer →</a>
+    <div class="scard" data-tilt>
+      <div class="scard-icon-wrap">📈</div>
+      <div class="scard-eyebrow">SEO &amp; Visibilité</div>
+      <h3>Soyez trouvé avant vos concurrents</h3>
+      <p>Audit technique, optimisation on-page, stratégie de contenu. Résultats mesurables en 30 jours.</p>
+      <a href="#contact" class="scard-link">
+        En savoir plus
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
     </div>
 
-    <div class="stile dark">
-      <div class="stile-icon">⚙️</div>
-      <div class="stile-eyebrow">Outils sur mesure</div>
-      <h2 class="stile-title">Outils sur mesure</h2>
-      <p class="stile-desc">Scripts, pipelines, intégrations API. Développés exactement pour votre business — rien de générique.</p>
-      <a href="#contact" class="stile-link">Commencer →</a>
+    <div class="scard" data-tilt>
+      <div class="scard-icon-wrap">⚙️</div>
+      <div class="scard-eyebrow">Outils sur mesure</div>
+      <h3>Développé exactement pour votre business</h3>
+      <p>Scripts, pipelines, intégrations API. Rien de générique — du code qui résout votre vrai problème.</p>
+      <a href="#contact" class="scard-link">
+        En savoir plus
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
     </div>
 
-    <div class="stile blue">
-      <div class="stile-icon">🎯</div>
-      <div class="stile-eyebrow">Prospection automatisée</div>
-      <h2 class="stile-title">Prospection automatisée</h2>
-      <p class="stile-desc">Système intelligent qui identifie, contacte et relance vos prospects — sans effort de votre côté.</p>
-      <a href="#contact" class="stile-link">Commencer →</a>
+    <div class="scard" data-tilt>
+      <div class="scard-icon-wrap">🎯</div>
+      <div class="scard-eyebrow">Prospection automatisée</div>
+      <h3>Vos prospects. Sans effort de votre côté.</h3>
+      <p>Système intelligent qui identifie, contacte et relance vos prospects — vous fermez, on alimente le pipeline.</p>
+      <a href="#contact" class="scard-link">
+        En savoir plus
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
     </div>
 
   </div>
 </section>
 
 <!-- PROCESSUS -->
-<section class="process-section" id="processus">
-  <div class="process-eyebrow">Notre méthode</div>
-  <h2 class="process-title">Comment ça marche</h2>
-  <div class="process-steps">
-    <div class="pstep">
-      <div class="pstep-num">1</div>
-      <h4 class="pstep-title">Audit gratuit</h4>
-      <p class="pstep-desc">On analyse votre situation et identifions les leviers de croissance.</p>
+<section class="dark-section" id="processus">
+  <span class="section-eyebrow">Notre méthode</span>
+  <h2 class="section-title">Comment <em>ça marche</em></h2>
+  <p class="section-sub">Un processus carré en 4 étapes, transparent du premier au dernier jour.</p>
+
+  <div class="process-wrap">
+    <div class="process-line" aria-hidden="true"></div>
+
+    <div class="process-row right">
+      <div class="process-empty"></div>
+      <div class="process-num">1</div>
+      <div class="process-content">
+        <h4>Audit gratuit</h4>
+        <p>On analyse votre situation et on identifie les leviers de croissance les plus impactants.</p>
+      </div>
     </div>
-    <div class="pstep">
-      <div class="pstep-num">2</div>
-      <h4 class="pstep-title">Proposition sur mesure</h4>
-      <p class="pstep-desc">Plan clair avec priorités, délais et tarifs. Aucune surprise.</p>
+
+    <div class="process-row left">
+      <div class="process-content">
+        <h4>Proposition sur mesure</h4>
+        <p>Plan clair avec priorités, délais et tarifs fixes. Aucune surprise, aucun coût caché.</p>
+      </div>
+      <div class="process-num">2</div>
+      <div class="process-empty"></div>
     </div>
-    <div class="pstep">
-      <div class="pstep-num">3</div>
-      <h4 class="pstep-title">Exécution</h4>
-      <p class="pstep-desc">On implémente, vous êtes formé, tout fonctionne.</p>
+
+    <div class="process-row right">
+      <div class="process-empty"></div>
+      <div class="process-num">3</div>
+      <div class="process-content">
+        <h4>Exécution &amp; mise en place</h4>
+        <p>On implémente, vous êtes formé. Tout fonctionne, et vous gardez la main sur le système.</p>
+      </div>
     </div>
-    <div class="pstep">
-      <div class="pstep-num">4</div>
-      <h4 class="pstep-title">Résultats mesurables</h4>
-      <p class="pstep-desc">KPIs clairs. Vous voyez ce que nos actions vous rapportent.</p>
+
+    <div class="process-row left">
+      <div class="process-content">
+        <h4>Résultats mesurables</h4>
+        <p>KPIs clairs et reporting régulier. Vous voyez exactement ce que nos actions vous rapportent.</p>
+      </div>
+      <div class="process-num">4</div>
+      <div class="process-empty"></div>
     </div>
   </div>
 </section>
 
 <!-- POURQUOI NEOVA -->
-<section class="why-section">
-  <div class="why-eyebrow">Pourquoi nous</div>
-  <h2 class="why-title">Pourquoi choisir Neova</h2>
+<section class="dark-section">
+  <span class="section-eyebrow">Pourquoi nous</span>
+  <h2 class="section-title">Pourquoi choisir <em>Neova</em></h2>
+  <p class="section-sub">Six raisons concrètes pour lesquelles nos clients nous font confiance.</p>
   <div class="why-grid">
     <div class="witem"><div class="wcheck">✓</div><h4>100% sur mesure</h4><p>Chaque système est conçu pour votre activité spécifique.</p></div>
     <div class="witem"><div class="wcheck">✓</div><h4>Résultats rapides</h4><p>Premières améliorations visibles sous 2 semaines.</p></div>
-    <div class="witem"><div class="wcheck">✓</div><h4>Transparent & direct</h4><p>On dit ce qui marche et ce qui ne marche pas. Pas de jargon.</p></div>
-    <div class="witem"><div class="wcheck">✓</div><h4>Interlocuteur unique</h4><p>Un seul contact du début à la fin.</p></div>
+    <div class="witem"><div class="wcheck">✓</div><h4>Transparent &amp; direct</h4><p>On dit ce qui marche et ce qui ne marche pas. Pas de jargon.</p></div>
+    <div class="witem"><div class="wcheck">✓</div><h4>Interlocuteur unique</h4><p>Un seul contact du début à la fin du projet.</p></div>
     <div class="witem"><div class="wcheck">✓</div><h4>IA-first</h4><p>On exploite les meilleurs outils IA pour livrer plus vite.</p></div>
     <div class="witem"><div class="wcheck">✓</div><h4>Consultation gratuite</h4><p>Premier échange sans engagement, avec de la valeur dès le départ.</p></div>
   </div>
@@ -554,20 +742,34 @@
 
 <!-- CONTACT -->
 <section class="contact-section" id="contact">
-  <div class="contact-eyebrow">Contact</div>
-  <h2 class="contact-title">Parlons de votre projet</h2>
-  <p class="contact-sub">20 minutes suffisent pour voir si on peut vous aider.<br/>Gratuit, sans engagement.</p>
-  <div class="contact-cards">
-    <a href="tel:0783802565" class="ccard">
-      <div class="ccard-icon">📞</div>
-      <div class="ccard-label">Téléphone</div>
-      <div class="ccard-val">07 83 80 25 65</div>
-    </a>
-    <a href="mailto:contact@neova-agency.fr" class="ccard">
-      <div class="ccard-icon">✉️</div>
-      <div class="ccard-label">Email</div>
-      <div class="ccard-val">contact@neova-agency.fr</div>
-    </a>
+  <div class="contact-card">
+    <span class="contact-eyebrow">Contact</span>
+    <h2 class="contact-title">Parlons de <em>votre projet</em></h2>
+    <p class="contact-sub">20 minutes suffisent pour voir si on peut vous aider.<br/>Gratuit, sans engagement, valeur immédiate.</p>
+    <div class="contact-buttons">
+      <a href="mailto:contact@neova-agency.fr" class="cta-primary">
+        <span>Réserver un appel</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="position:relative;z-index:1"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="tel:0783802565" class="cta-secondary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        Appeler maintenant
+      </a>
+    </div>
+    <div class="contact-info">
+      <a href="tel:0783802565" class="contact-item">
+        <div>
+          <span class="contact-item-label">Téléphone</span>
+          <span class="contact-item-val">07 83 80 25 65</span>
+        </div>
+      </a>
+      <a href="mailto:contact@neova-agency.fr" class="contact-item">
+        <div>
+          <span class="contact-item-label">Email</span>
+          <span class="contact-item-val">contact@neova-agency.fr</span>
+        </div>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -679,6 +881,19 @@
   canvas.parentElement.addEventListener('mouseleave',()=>{mouse.x=null;mouse.y=null;});
 
   resize();init();draw();
+})();
+
+// Glow qui suit la souris sur les cards services
+(function(){
+  document.querySelectorAll('.scard').forEach(card=>{
+    card.addEventListener('mousemove',(e)=>{
+      const r=card.getBoundingClientRect();
+      const x=e.clientX-r.left;
+      const y=e.clientY-r.top;
+      card.style.setProperty('--mx',x+'px');
+      card.style.setProperty('--my',y+'px');
+    });
+  });
 })();
 </script>
 </body>
