@@ -26,9 +26,8 @@
     <path d="M 95 0 L 125 0 L 125 30 L 115 20 L 100 35 L 90 25 L 105 10 Z" fill="url(#navy-grad)"/>
   </g>
 
-  <!-- Texte NEOVA -->
-  <g transform="translate(180, 0)">
-    <text x="0" y="125" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="84" font-weight="800" letter-spacing="-2" fill="#1E3A5F">NEOV</text>
-    <text x="240" y="125" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="84" font-weight="800" letter-spacing="-2" fill="url(#a-grad)">A</text>
-  </g>
+  <!-- Texte NEOVA (un seul text + tspan pour bon espacement) -->
+  <text x="180" y="125" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="84" font-weight="800" letter-spacing="-2">
+    <tspan fill="#1E3A5F">NEOV</tspan><tspan fill="url(#a-grad)">A</tspan>
+  </text>
 </svg>
