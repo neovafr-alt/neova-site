@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="a-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
+    </linearGradient>
+    <radialGradient id="bg-glow" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#1E3A5F" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Fond bleu navy très foncé -->
+  <rect width="400" height="400" fill="#0A1F3D"/>
+
+  <!-- Glow central -->
+  <rect width="400" height="400" fill="url(#bg-glow)"/>
+
+  <!-- Texte NEOVA centré -->
+  <text x="200" y="225" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="78" font-weight="800" letter-spacing="-3" text-anchor="middle">
+    <tspan fill="#FFFFFF">NEOV</tspan><tspan fill="url(#a-grad)">A</tspan>
+  </text>
+</svg>
