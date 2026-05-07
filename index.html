@@ -1041,7 +1041,7 @@
     }
     .footer-shopify svg{flex-shrink:0}
 
-    /* ── RESPONSIVE ── */
+    /* ── RESPONSIVE — Tablet ── */
     @media(max-width:860px){
       .services-wrap{grid-template-columns:1fr}
       .why-grid{grid-template-columns:repeat(2,1fr)}
@@ -1059,19 +1059,125 @@
       .process-num{grid-column:1}
       .process-line{left:30px}
     }
+
+    /* ── RESPONSIVE — Mobile (≤640px) ── */
     @media(max-width:640px){
+      /* NAV */
       .nav-links li:not(.nav-cta-li){display:none}
-      h1{letter-spacing:-1px}
-      .why-grid{grid-template-columns:1fr}
-      .scard{padding:32px 24px}
-      .contact-card{padding:44px 28px}
-      .dark-section{padding:90px 5% 80px}
+      .nav-cta{padding:6px 12px;font-size:11px}
+
+      /* HERO — garde l'animation mais ajuste les tailles */
+      .hero{padding:60px 18px 60px;min-height:90vh}
+      .hero-eyebrow{font-size:11px;margin-bottom:14px}
+      h1{font-size:clamp(36px,9vw,48px)!important;letter-spacing:-1.5px;line-height:1.1}
+      .hero-sub{font-size:15px;line-height:1.55;margin-bottom:28px;padding:0 4px}
+      .hero-btns{flex-direction:column;gap:10px;width:100%}
+      .btn-fill,.btn-outline{width:100%;text-align:center;padding:14px 22px;font-size:15px}
+      .hero-trust{flex-direction:column;gap:10px;font-size:12px;margin-top:24px}
+      .trust-sep{display:none}
+
+      /* MARQUEE */
+      .marquee-section{padding:32px 0}
+      .marquee-track{gap:40px;animation-duration:22s}
+      .marquee-item{font-size:13px}
+      .marquee-item svg{width:30px;height:34px}
+      .marquee-label{font-size:10px;letter-spacing:2px;margin-bottom:18px}
+
+      /* STATS */
+      .stats-section{padding:60px 5%}
+      .stats-grid{grid-template-columns:repeat(2,1fr);gap:28px}
+      .stat-num{font-size:36px}
+      .stat-label{font-size:13px}
+      .stat-sub{font-size:11px}
+
+      /* SECTIONS GENERIC */
+      .dark-section{padding:80px 5% 70px}
+      .light-section{padding:80px 5% 70px}
+      .section-title{font-size:32px;letter-spacing:-1px}
+      .section-sub{font-size:15px;margin-bottom:48px;padding:0 4px}
+      .section-eyebrow{font-size:10px;letter-spacing:1.5px;padding:5px 12px}
+
+      /* TUNNEL STATS */
       .tunnel-stat{padding:60px 5%}
-      .tunnel-line{font-size:18px}
-      .marquee-track{gap:50px;animation-duration:25s}
-      .marquee-item{font-size:14px}
-      .shopify-feature{flex-direction:row;padding:18px}
+      .tunnel-line{font-size:17px;line-height:1.5;letter-spacing:-0.4px;margin-bottom:24px}
+      .tunnel-cta{padding:12px 22px;font-size:13px}
+
+      /* SERVICES */
+      .scard{padding:30px 22px;border-radius:18px}
+      .scard-icon-wrap{width:50px;height:50px;font-size:24px;margin-bottom:18px;border-radius:13px}
+      .scard h3{font-size:20px;line-height:1.25}
+      .scard p{font-size:14px;margin-bottom:18px}
+      .scard-eyebrow{font-size:10px}
+
+      /* PROCESS */
+      .process-wrap{padding:0 8px}
+      .process-row{margin-bottom:42px;grid-template-columns:50px 1fr}
+      .process-num{width:48px;height:48px;font-size:18px}
+      .process-content h4{font-size:18px}
+      .process-content p{font-size:14px}
+      .process-line{left:24px}
+
+      /* WHY */
+      .why-grid{grid-template-columns:1fr;gap:14px;max-width:420px}
+      .witem{padding:24px 22px}
+      .witem h4{font-size:16px}
+      .witem p{font-size:13px}
+
+      /* ABOUT (Notre histoire) */
+      .about-section{padding:80px 5% 70px}
+      .about-text h2{font-size:30px;letter-spacing:-1px;margin-bottom:18px}
+      .about-text p{font-size:15px;line-height:1.65}
+      .about-stat-cards{padding:18px;gap:10px}
+      .mini-stat{padding:14px}
+      .mini-stat-num{font-size:22px}
+      .mini-stat-label{font-size:11px}
+      .shopify-feature{flex-direction:row;padding:16px;gap:14px}
       .shopify-feature-logo{width:42px;height:48px}
+      .shopify-feature-title{font-size:15px}
+      .shopify-feature-sub{font-size:11px}
+      .shopify-feature-id{font-size:10px}
+      .shopify-feature-check{width:26px;height:26px;font-size:12px}
+      .about-avatar{width:46px;height:46px;font-size:17px}
+      .about-name{font-size:14px}
+      .about-role{font-size:12px}
+
+      /* TÉMOIGNAGES */
+      .testimonials-section{padding:80px 5% 70px}
+      .testimonials-header{margin-bottom:48px}
+      .testimonials-header h2{font-size:30px}
+      .global-rating{padding:12px 18px;gap:10px}
+      .rating-num{font-size:18px}
+      .rating-text{font-size:11px}
+      .rating-stars{font-size:15px}
+      .tcard{padding:26px 22px;border-radius:16px}
+      .tcard-quote{font-size:14px;line-height:1.6}
+      .tcard-name{font-size:13px}
+      .tcard-role{font-size:11px}
+      .testimonials-source{font-size:11px;padding:8px 14px;margin-top:32px}
+
+      /* CONTACT */
+      .contact-section{padding:80px 5% 70px}
+      .contact-card{padding:38px 22px;border-radius:22px}
+      .contact-title{font-size:32px;letter-spacing:-1px}
+      .contact-sub{font-size:15px;margin-bottom:32px}
+      .contact-buttons{flex-direction:column;gap:10px}
+      .cta-primary,.cta-secondary{width:100%;justify-content:center;padding:14px 22px;font-size:14px}
+      .contact-info{flex-direction:column;gap:18px;padding-top:24px}
+      .contact-item-val{font-size:14px}
+
+      /* FOOTER */
+      footer{padding:18px;flex-direction:column;gap:14px;text-align:center}
+      .footer-brand{flex-direction:column;gap:10px;align-items:center}
+      .footer-links{flex-wrap:wrap;justify-content:center;gap:14px}
+      .footer-copy{font-size:11px}
+    }
+
+    /* ── RESPONSIVE — Petit mobile (≤380px) ── */
+    @media(max-width:380px){
+      h1{font-size:34px!important}
+      .section-title{font-size:28px}
+      .stats-grid{grid-template-columns:1fr}
+      .tunnel-line{font-size:16px}
     }
   </style>
 </head>
