@@ -1,13 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 180" width="600" height="180">
-  <defs>
-    <linearGradient id="a-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#1E3A5F"/>
-      <stop offset="100%" stop-color="#22D3EE"/>
-    </linearGradient>
-  </defs>
-
-  <!-- Texte NEOVA centré -->
   <text x="300" y="125" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="100" font-weight="800" letter-spacing="-3" text-anchor="middle">
-    <tspan fill="#1E3A5F">NEOV</tspan><tspan fill="url(#a-grad)">A</tspan>
+    <tspan fill="#1E3A5F">NEOV</tspan><tspan fill="#22D3EE">A</tspan>
   </text>
 </svg>
