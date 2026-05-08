@@ -195,6 +195,32 @@
       0%,100%{opacity:0.5}
       50%{opacity:1}
     }
+
+    /* Scroll progress bar */
+    #scroll-progress{
+      position:fixed;top:0;left:0;height:3px;width:0;
+      background:linear-gradient(90deg,#22D3EE 0%,#8B5CF6 50%,#0EA5E9 100%);
+      z-index:9999;transition:width 0.08s linear;
+      box-shadow:0 0 12px rgba(34,211,238,0.6);
+    }
+
+    /* Reveal on scroll */
+    .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1),transform 0.8s cubic-bezier(0.22,1,0.36,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .scard.reveal{transition-delay:0s}
+    .scard.reveal:nth-child(2){transition-delay:0.08s}
+    .scard.reveal:nth-child(3){transition-delay:0.16s}
+    .scard.reveal:nth-child(4){transition-delay:0.24s}
+    .pcard.reveal{transition-delay:0s}
+    .pcard.reveal:nth-child(2){transition-delay:0.08s}
+    .pcard.reveal:nth-child(3){transition-delay:0.16s}
+    .pcard.reveal:nth-child(4){transition-delay:0.24s}
+    .tcard.reveal:nth-child(2){transition-delay:0.1s}
+    .tcard.reveal:nth-child(3){transition-delay:0.2s}
+    @media(prefers-reduced-motion:reduce){
+      .reveal{opacity:1;transform:none;transition:none}
+    }
+
     /* Voile sombre pour garantir la lisibilité du texte */
     .hero-veil{
       position:absolute;inset:0;
@@ -1068,8 +1094,8 @@
 
       /* HERO — version mobile allégée pour éviter saccades / taches blanches */
       .hero{padding:60px 18px 60px;min-height:90vh}
-      /* On coupe les effets coûteux qui causent les taches blanches sur mobile */
-      .stars{display:none!important}
+      /* Étoiles : visibles mais FIXES (pas d'animation = pas de bug) */
+      .stars{animation:none!important;opacity:0.7!important}
       .hero-sweep{display:none!important}
       .hero-network{display:none!important}
       /* Orbes adoucis, animation plus lente, GPU-friendly */
@@ -1761,6 +1787,55 @@
       card.style.setProperty('--my',y+'px');
     });
   });
+})();
+
+// Reveal animations on scroll (IntersectionObserver — perf-friendly)
+(function(){
+  const reveal=document.querySelectorAll('section, .scard, .pcard, .tcard, .manifesto-block, h2, .hero-trust');
+  reveal.forEach(el=>{el.classList.add('reveal');});
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}
+    });
+  },{threshold:0.12,rootMargin:'0px 0px -60px 0px'});
+  reveal.forEach(el=>io.observe(el));
+})();
+
+// Parallaxe léger sur les orbes du hero au scroll (desktop only)
+(function(){
+  if(window.matchMedia('(max-width:860px)').matches)return;
+  const orbs=document.querySelectorAll('.orb');
+  if(!orbs.length)return;
+  let ticking=false;
+  window.addEventListener('scroll',()=>{
+    if(ticking)return;
+    ticking=true;
+    requestAnimationFrame(()=>{
+      const y=window.scrollY;
+      orbs.forEach((orb,i)=>{
+        const speed=(i+1)*0.08;
+        orb.style.translate=`0 ${y*speed}px`;
+      });
+      ticking=false;
+    });
+  },{passive:true});
+})();
+
+// Progress bar de scroll en haut de page
+(function(){
+  const bar=document.createElement('div');
+  bar.id='scroll-progress';
+  document.body.appendChild(bar);
+  let ticking=false;
+  function update(){
+    const h=document.documentElement;
+    const pct=(h.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
+    bar.style.width=pct+'%';
+    ticking=false;
+  }
+  window.addEventListener('scroll',()=>{
+    if(!ticking){requestAnimationFrame(update);ticking=true;}
+  },{passive:true});
 })();
 </script>
 </body>
