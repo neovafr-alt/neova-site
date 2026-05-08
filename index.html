@@ -1066,20 +1066,20 @@
       .nav-links li:not(.nav-cta-li){display:none}
       .nav-cta{padding:6px 12px;font-size:11px}
 
-      /* HERO — effets optimises pour mobile (pas de saccades) */
+      /* HERO — version mobile allégée pour éviter saccades / taches blanches */
       .hero{padding:60px 18px 60px;min-height:90vh}
-      /* Desactiver les etoiles (radial-gradient cause taches blanches saccadees sur mobile) */
-      .stars{display:none}
-      /* Sweep desactive sur mobile (cause saccades quand combine au canvas) */
-      .hero-sweep{display:none}
-      /* Orbes plus visibles avec animation fluide */
-      .orb{opacity:0.85;filter:blur(50px);will-change:transform}
-      .orb-1{width:380px;height:380px;animation-duration:14s}
-      .orb-2{width:340px;height:340px;animation-duration:16s}
-      .orb-3{width:300px;height:300px;animation-duration:15s}
-      .orb-4{width:260px;height:260px;animation-duration:18s}
-      /* Voile moins sombre pour mieux voir les effets */
-      .hero-veil{background:radial-gradient(ellipse at center,rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.3) 100%)}
+      /* On coupe les effets coûteux qui causent les taches blanches sur mobile */
+      .stars{display:none!important}
+      .hero-sweep{display:none!important}
+      .hero-network{display:none!important}
+      /* Orbes adoucis, animation plus lente, GPU-friendly */
+      .orb{opacity:0.7;filter:blur(60px);will-change:transform;transform:translateZ(0)}
+      .orb-1{width:340px;height:340px;animation-duration:18s}
+      .orb-2{width:300px;height:300px;animation-duration:20s}
+      .orb-3{width:260px;height:260px;animation-duration:22s}
+      .orb-4{width:240px;height:240px;animation-duration:24s}
+      /* Voile un peu plus marqué pour compenser l'absence d'étoiles */
+      .hero-veil{background:radial-gradient(ellipse at center,rgba(0,0,0,0.15) 0%,rgba(0,0,0,0.45) 100%)}
       .hero-eyebrow{font-size:11px;margin-bottom:14px}
       h1{font-size:clamp(36px,9vw,48px)!important;letter-spacing:-1.5px;line-height:1.1}
       .hero-sub{font-size:15px;line-height:1.55;margin-bottom:28px;padding:0 4px}
@@ -1640,6 +1640,9 @@
 (function(){
   const canvas=document.getElementById('heroNet');
   if(!canvas)return;
+  // Mobile: on coupe entièrement le canvas (cause de saccades + taches blanches au touch)
+  const IS_MOBILE=window.matchMedia('(max-width:640px)').matches||('ontouchstart' in window && window.innerWidth<768);
+  if(IS_MOBILE){canvas.style.display='none';return;}
   const ctx=canvas.getContext('2d');
   let W,H,particles=[],mouse={x:null,y:null};
   const COUNT=window.innerWidth<768?80:120;
