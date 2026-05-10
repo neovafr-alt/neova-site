@@ -221,6 +221,33 @@
       .reveal{opacity:1;transform:none;transition:none}
     }
 
+    /* Feedback tactile sur cards / boutons (touchscreens) */
+    @media(hover:none){
+      .scard, .pcard, .tcard, .pcard-cta, .btn-fill, .btn-outline{
+        transition:transform 0.18s cubic-bezier(0.22,1,0.36,1), box-shadow 0.18s, border-color 0.18s, filter 0.18s !important;
+        -webkit-tap-highlight-color:transparent;
+      }
+      .scard:active, .pcard:active, .tcard:active{
+        transform:scale(0.985) !important;
+        border-color:rgba(34,211,238,0.55) !important;
+      }
+      .pcard.popular:active{border-color:rgba(139,92,246,0.85) !important}
+      .pcard-cta:active, .btn-fill:active{
+        transform:scale(0.96) translateY(0) !important;
+        filter:brightness(0.92) !important;
+      }
+      .btn-outline:active{
+        transform:scale(0.96) !important;
+        background:rgba(34,211,238,0.08) !important;
+      }
+      .scard-link:active, .nav-cta:active, .pcard-cta:active{
+        opacity:0.85 !important;
+      }
+      /* Glow figé au centre pour effet premium au repos */
+      .scard{--mx:50%;--my:50%}
+      .scard::after{opacity:0.06 !important}
+    }
+
     /* Voile sombre pour garantir la lisibilité du texte */
     .hero-veil{
       position:absolute;inset:0;
@@ -1264,20 +1291,31 @@
       .nav-links li:not(.nav-cta-li){display:none}
       .nav-cta{padding:6px 12px;font-size:11px}
 
-      /* HERO — version mobile allégée pour éviter saccades / taches blanches */
+      /* HERO — version mobile FULL EXPÉRIENCE (étoiles + sweep + canvas optimisés) */
       .hero{padding:60px 18px 60px;min-height:90vh}
-      /* Étoiles : visibles mais FIXES (pas d'animation = pas de bug) */
-      .stars{animation:none!important;opacity:0.7!important}
-      .hero-sweep{display:none!important}
-      .hero-network{display:none!important}
-      /* Orbes adoucis, animation plus lente, GPU-friendly */
-      .orb{opacity:0.7;filter:blur(60px);will-change:transform;transform:translateZ(0)}
-      .orb-1{width:340px;height:340px;animation-duration:18s}
-      .orb-2{width:300px;height:300px;animation-duration:20s}
-      .orb-3{width:260px;height:260px;animation-duration:22s}
-      .orb-4{width:240px;height:240px;animation-duration:24s}
-      /* Voile un peu plus marqué pour compenser l'absence d'étoiles */
-      .hero-veil{background:radial-gradient(ellipse at center,rgba(0,0,0,0.15) 0%,rgba(0,0,0,0.45) 100%)}
+      /* Étoiles : visibles + scintillement subtil (animation lente, GPU-friendly) */
+      .stars{
+        opacity:0.85!important;
+        animation:starsFade 12s ease-in-out infinite!important;
+        will-change:opacity;transform:translateZ(0);
+      }
+      /* Sweep : version douce mobile (slower, smoother) */
+      .hero-sweep{
+        display:block!important;
+        animation-duration:8s!important;
+        opacity:0.7!important;
+        will-change:transform;transform:translateZ(0);
+      }
+      /* Canvas particules : visible mais optimisé via JS (40 particules, no touch follow) */
+      .hero-network{display:block!important;opacity:0.85}
+      /* Orbes : intensité gardée, GPU-friendly */
+      .orb{opacity:0.8;filter:blur(55px);will-change:transform;transform:translateZ(0)}
+      .orb-1{width:360px;height:360px;animation-duration:14s}
+      .orb-2{width:320px;height:320px;animation-duration:16s}
+      .orb-3{width:280px;height:280px;animation-duration:15s}
+      .orb-4{width:240px;height:240px;animation-duration:18s}
+      /* Voile : équilibré pour laisser respirer les effets sans tuer la lisibilité */
+      .hero-veil{background:radial-gradient(ellipse at center,rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.35) 100%)}
       .hero-eyebrow{font-size:11px;margin-bottom:14px}
       h1{font-size:clamp(36px,9vw,48px)!important;letter-spacing:-1.5px;line-height:1.1}
       .hero-sub{font-size:15px;line-height:1.55;margin-bottom:28px;padding:0 4px}
@@ -1958,22 +1996,25 @@
 (function(){
   const canvas=document.getElementById('heroNet');
   if(!canvas)return;
-  // Mobile: on coupe entièrement le canvas (cause de saccades + taches blanches au touch)
   const IS_MOBILE=window.matchMedia('(max-width:640px)').matches||('ontouchstart' in window && window.innerWidth<768);
-  if(IS_MOBILE){canvas.style.display='none';return;}
   const ctx=canvas.getContext('2d');
   let W,H,particles=[],mouse={x:null,y:null};
-  const COUNT=window.innerWidth<768?80:120;
-  const LINK_DIST=140;
+  // Mobile : moins de particules (40), liens + courts, pas d'ombre = GPU-friendly
+  const COUNT=IS_MOBILE?40:(window.innerWidth<768?80:120);
+  const LINK_DIST=IS_MOBILE?100:140;
   const COLORS=['#0EA5E9','#06B6D4','#8B5CF6','#3B82F6'];
+  // FPS cap mobile à 30fps (cap : ~33ms entre frames)
+  const FRAME_MIN_MS=IS_MOBILE?33:0;
+  let lastFrame=0;
 
   function resize(){
     const hero=canvas.parentElement;
     const w=hero.clientWidth,h=hero.clientHeight;
-    canvas.width=w*devicePixelRatio;
-    canvas.height=h*devicePixelRatio;
+    const dpr=IS_MOBILE?Math.min(devicePixelRatio,2):devicePixelRatio;
+    canvas.width=w*dpr;
+    canvas.height=h*dpr;
     ctx.setTransform(1,0,0,1,0,0);
-    ctx.scale(devicePixelRatio,devicePixelRatio);
+    ctx.scale(dpr,dpr);
   }
 
   function init(){
@@ -1984,15 +2025,19 @@
       particles.push({
         x:Math.random()*w,
         y:Math.random()*h,
-        vx:(Math.random()-0.5)*0.6,
-        vy:(Math.random()-0.5)*0.6,
+        vx:(Math.random()-0.5)*(IS_MOBILE?0.4:0.6),
+        vy:(Math.random()-0.5)*(IS_MOBILE?0.4:0.6),
         radius:Math.random()*1.8+0.8,
         color:COLORS[Math.floor(Math.random()*COLORS.length)]
       });
     }
   }
 
-  function draw(){
+  function draw(now){
+    requestAnimationFrame(draw);
+    if(FRAME_MIN_MS && (now-lastFrame)<FRAME_MIN_MS)return;
+    lastFrame=now;
+
     const hero=canvas.parentElement;
     const w=hero.clientWidth,h=hero.clientHeight;
     ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -2003,23 +2048,28 @@
       if(p.x<0||p.x>w)p.vx*=-1;
       if(p.y<0||p.y>h)p.vy*=-1;
 
-      // Légère attraction vers la souris
+      // Attraction très DOUCE vers le pointeur (souris OU touch)
       if(mouse.x!==null){
         const dx=mouse.x-p.x,dy=mouse.y-p.y;
         const d=Math.sqrt(dx*dx+dy*dy);
-        if(d<180){
-          p.x+=dx/d*0.4;
-          p.y+=dy/d*0.4;
+        const range=IS_MOBILE?120:180;
+        const force=IS_MOBILE?0.15:0.4;
+        if(d<range){
+          p.x+=dx/d*force;
+          p.y+=dy/d*force;
         }
       }
 
       ctx.beginPath();
       ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);
       ctx.fillStyle=p.color;
-      ctx.shadowBlur=10;
-      ctx.shadowColor=p.color;
+      // Pas de shadowBlur sur mobile (très coûteux)
+      if(!IS_MOBILE){
+        ctx.shadowBlur=10;
+        ctx.shadowColor=p.color;
+      }
       ctx.fill();
-      ctx.shadowBlur=0;
+      if(!IS_MOBILE)ctx.shadowBlur=0;
     }
 
     // Lignes entre particules proches
@@ -2044,8 +2094,6 @@
         }
       }
     }
-
-    requestAnimationFrame(draw);
   }
 
   window.addEventListener('resize',()=>{resize();init();});
@@ -2055,7 +2103,7 @@
     mouse.y=e.clientY-r.top;
   });
   canvas.parentElement.addEventListener('mouseleave',()=>{mouse.x=null;mouse.y=null;});
-  // Touch support (mobile)
+  // Touch support (mobile) : suit le doigt mais avec attraction très douce
   canvas.parentElement.addEventListener('touchmove',(e)=>{
     if(!e.touches.length)return;
     const t=e.touches[0];
@@ -2065,7 +2113,7 @@
   },{passive:true});
   canvas.parentElement.addEventListener('touchend',()=>{mouse.x=null;mouse.y=null;});
 
-  resize();init();draw();
+  resize();init();requestAnimationFrame(draw);
 })();
 
 // Glow qui suit la souris sur les cards services
