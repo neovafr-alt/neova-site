@@ -795,11 +795,64 @@
     }
 
     @media(max-width:640px){
-      .pricing-wrap{gap:22px;padding:0 14px}
+      .pricing-wrap{gap:32px;padding:0 14px}
       .pcard{padding:32px 24px}
       .pcard-title{font-size:21px;min-height:0}
       .pcard-pitch{min-height:0}
       .pcard-price-main{font-size:28px}
+
+      /* ─── Bandes de couleur animées (aurora border) sur mobile ─── */
+      .pcard{position:relative;isolation:isolate}
+      /* Wrap aurora derrière la card */
+      .pcard::before{
+        content:'';position:absolute;inset:-2px;
+        border-radius:24px;
+        padding:0;background:none;
+        -webkit-mask:none;mask:none;
+        opacity:1!important;z-index:-1;
+        background:conic-gradient(
+          from var(--aurora-angle,0deg),
+          transparent 0deg,
+          var(--pc1) 60deg,
+          var(--pc2) 120deg,
+          transparent 200deg,
+          transparent 360deg
+        );
+        animation:aurora-spin 6s linear infinite;
+        filter:blur(8px);
+      }
+      .pcard.popular::before{
+        animation-duration:3.8s;
+        background:conic-gradient(
+          from var(--aurora-angle,0deg),
+          transparent 0deg,
+          #22D3EE 40deg,
+          #8B5CF6 100deg,
+          #22D3EE 160deg,
+          transparent 220deg,
+          transparent 360deg
+        );
+        filter:blur(12px);
+        inset:-3px;
+      }
+      /* Card opaque par-dessus pour que la bande ne soit visible qu'aux bords */
+      .pcard::after{
+        content:'';position:absolute;inset:0;
+        border-radius:24px;
+        background:linear-gradient(180deg,#0d0d0f 0%,#070708 100%);
+        z-index:-1;
+        opacity:1;
+        top:auto;left:auto;width:auto;height:auto;
+      }
+    }
+
+    @property --aurora-angle{
+      syntax:'<angle>';
+      initial-value:0deg;
+      inherits:false;
+    }
+    @keyframes aurora-spin{
+      to{--aurora-angle:360deg}
     }
 
     /* ── PROCESS — timeline lumineuse (sur fond clair) ── */
@@ -1623,9 +1676,8 @@
       <div class="pcard-meta">Délai : 10 jours ouvrés</div>
     </div>
 
-    <!-- CROISSANCE — POPULAIRE -->
+    <!-- CROISSANCE -->
     <div class="pcard popular">
-      <div class="pcard-badge">Le plus choisi</div>
       <div class="pcard-eyebrow">Croissance</div>
       <h3 class="pcard-title">Industrialisez vos process clés et libérez votre équipe</h3>
       <p class="pcard-pitch">Pour les PME et cabinets de 5 à 20 collaborateurs qui veulent automatiser plusieurs maillons de leur chaîne.</p>
