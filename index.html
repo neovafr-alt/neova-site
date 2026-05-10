@@ -632,6 +632,65 @@
     .scard:hover .scard-link{gap:12px}
     .scard:hover .scard-link svg{transform:translateX(4px)}
 
+    /* ── EXAMPLES CARDS — cas d'usage par secteur ── */
+    .examples-grid{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+      max-width:1200px;margin:0 auto;padding:0 24px;
+    }
+    @media(max-width:980px){.examples-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:640px){.examples-grid{grid-template-columns:1fr;max-width:480px;gap:14px;padding:0 14px}}
+    .ecard{
+      position:relative;padding:26px 24px 22px;
+      border-radius:18px;
+      background:#fff;
+      border:1px solid rgba(15,23,42,0.07);
+      box-shadow:0 10px 30px -20px rgba(15,23,42,0.18);
+      transition:transform .3s cubic-bezier(.2,.8,.3,1),box-shadow .3s,border-color .3s;
+      display:flex;flex-direction:column;gap:8px;
+    }
+    .ecard:hover{
+      transform:translateY(-4px);
+      border-color:rgba(14,165,233,0.4);
+      box-shadow:0 18px 50px -20px rgba(14,165,233,0.35);
+    }
+    .ecard-icon{
+      font-size:32px;line-height:1;margin-bottom:4px;
+    }
+    .ecard-sector{
+      font-size:11px;font-weight:700;letter-spacing:1.4px;
+      text-transform:uppercase;color:#0EA5E9;
+    }
+    .ecard-task{
+      font-size:15px;font-weight:600;line-height:1.4;
+      color:#0F172A;letter-spacing:-0.2px;
+      margin:2px 0 8px;
+    }
+    .ecard-result{
+      margin-top:auto;padding-top:14px;
+      border-top:1px solid rgba(15,23,42,0.06);
+      display:flex;align-items:baseline;gap:8px;
+    }
+    .result-num{
+      font-size:24px;font-weight:800;color:#0F172A;
+      letter-spacing:-0.8px;
+      background:linear-gradient(135deg,#0EA5E9,#8B5CF6);
+      -webkit-background-clip:text;background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    .result-label{
+      font-size:13px;color:#64748B;font-weight:500;
+    }
+    .examples-note{
+      max-width:680px;margin:32px auto 0;text-align:center;
+      font-size:14px;color:#64748B;padding:0 24px;
+    }
+    .examples-note a{
+      color:#0EA5E9;text-decoration:none;font-weight:600;
+      border-bottom:1px solid currentColor;
+      transition:color .2s;
+    }
+    .examples-note a:hover{color:#0284C7}
+
     /* ── PRICING CARDS — offres avec prix ── */
     .pricing-wrap{
       display:grid;grid-template-columns:repeat(3,1fr);gap:28px;
@@ -1770,6 +1829,61 @@
     </div>
 
   </div>
+</section>
+
+<!-- EXEMPLES CONCRETS — cas d'usage réels par secteur -->
+<section class="light-section" id="exemples">
+  <span class="section-eyebrow">Exemples concrets</span>
+  <h2 class="section-title">Ce qu'on automatise <em>chez nos clients</em></h2>
+  <p class="section-sub">Des cas réels, par métier, avec le temps économisé chaque semaine.</p>
+
+  <div class="examples-grid">
+
+    <div class="ecard">
+      <div class="ecard-icon">🏛️</div>
+      <div class="ecard-sector">Cabinet d'expertise comptable</div>
+      <h4 class="ecard-task">Tri et classement automatique des pièces clients</h4>
+      <div class="ecard-result"><span class="result-num">~6h</span><span class="result-label">économisées / semaine</span></div>
+    </div>
+
+    <div class="ecard">
+      <div class="ecard-icon">⚖️</div>
+      <div class="ecard-sector">Cabinet d'avocat</div>
+      <h4 class="ecard-task">Génération d'actes répétitifs et préparation de dossiers</h4>
+      <div class="ecard-result"><span class="result-num">~10h</span><span class="result-label">économisées / semaine</span></div>
+    </div>
+
+    <div class="ecard">
+      <div class="ecard-icon">🔨</div>
+      <div class="ecard-sector">Artisan BTP / Couvreur</div>
+      <h4 class="ecard-task">Devis automatique sur demande entrante (formulaire / mail)</h4>
+      <div class="ecard-result"><span class="result-num">~4h</span><span class="result-label">économisées / semaine</span></div>
+    </div>
+
+    <div class="ecard">
+      <div class="ecard-icon">🩺</div>
+      <div class="ecard-sector">Cabinet médical / Vétérinaire</div>
+      <h4 class="ecard-task">Standard IA + prise de RDV + rappels patients</h4>
+      <div class="ecard-result"><span class="result-num">~8h</span><span class="result-label">économisées / semaine</span></div>
+    </div>
+
+    <div class="ecard">
+      <div class="ecard-icon">🏗️</div>
+      <div class="ecard-sector">Bureau d'études / Expert bâtiment</div>
+      <h4 class="ecard-task">Rédaction automatique de rapports + tri de photos chantier</h4>
+      <div class="ecard-result"><span class="result-num">~7h</span><span class="result-label">économisées / semaine</span></div>
+    </div>
+
+    <div class="ecard">
+      <div class="ecard-icon">🚛</div>
+      <div class="ecard-sector">Transporteur / Logistique</div>
+      <h4 class="ecard-task">Saisie de bons + planning chauffeurs + relances factures</h4>
+      <div class="ecard-result"><span class="result-num">~9h</span><span class="result-label">économisées / semaine</span></div>
+    </div>
+
+  </div>
+
+  <p class="examples-note">Votre métier n'est pas dans la liste ? <a href="#contact">Parlons-en</a> — on a presque toujours un cas d'usage adapté.</p>
 </section>
 
 <!-- Section pricing désactivée temporairement (tarifs retirés à la demande) -->
