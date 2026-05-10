@@ -818,15 +818,16 @@
         animation:pcard-breath 4s ease-in-out infinite;
       }
 
-      /* Couleurs : ESSENTIEL = bleu sobre (fiable) */
+      /* Couleurs : ESSENTIEL = bleu profond / indigo (sobre, fiable) */
       .pricing-wrap > .pcard:nth-child(1){
-        --edge-c1:#3B82F6;--edge-c2:#06B6D4;
+        --edge-c1:#1E40AF;--edge-c2:#3B82F6;
       }
       .pricing-wrap > .pcard:nth-child(1)::before{
-        filter:drop-shadow(0 0 4px rgba(14,165,233,0.6));
+        background:linear-gradient(135deg,#1E40AF 0%,#3B82F6 100%);
+        filter:drop-shadow(0 0 5px rgba(59,130,246,0.55));
       }
 
-      /* Couleurs : CROISSANCE = cyan + violet (le sweet spot, dynamique) */
+      /* Couleurs : CROISSANCE = cyan + violet (sweet spot, dynamique) */
       .pricing-wrap > .pcard:nth-child(2){
         --edge-c1:#22D3EE;--edge-c2:#8B5CF6;
       }
@@ -848,27 +849,8 @@
         animation:pcard-breath 4.5s ease-in-out infinite;
       }
 
-      /* Petites lueurs ponctuelles aux 4 coins (effet scintillement) */
-      .pcard::after{
-        content:'';position:absolute;inset:0;
-        border-radius:24px;
-        background:
-          radial-gradient(circle at 0% 0%, var(--edge-c1) 0%, transparent 8%),
-          radial-gradient(circle at 100% 0%, var(--edge-c2) 0%, transparent 8%),
-          radial-gradient(circle at 100% 100%, var(--edge-c1) 0%, transparent 8%),
-          radial-gradient(circle at 0% 100%, var(--edge-c2) 0%, transparent 8%);
-        opacity:0.45;
-        animation:pcard-twinkle 5s ease-in-out infinite;
-        pointer-events:none;mix-blend-mode:screen;
-      }
-      .pricing-wrap > .pcard:nth-child(2)::after{
-        animation-duration:3.8s;
-        opacity:0.6;
-      }
-      .pricing-wrap > .pcard:nth-child(3)::after{
-        animation-duration:6s;
-        opacity:0.55;
-      }
+      /* Pas de lueurs aux coins (retirées) */
+      .pcard::after{display:none}
     }
 
     @keyframes pcard-breath{
@@ -1620,9 +1602,9 @@
 <section class="stats-section">
   <div class="stats-grid">
     <div class="stat">
-      <div class="stat-num">+10h</div>
-      <div class="stat-label">gagnées par semaine</div>
-      <div class="stat-sub">objectif typique d'un projet</div>
+      <div class="stat-num">x2 à x9</div>
+      <div class="stat-label">de ROI dès l'année 1</div>
+      <div class="stat-sub">selon la formule choisie</div>
     </div>
     <div class="stat">
       <div class="stat-num">1 à 4 sem</div>
@@ -1805,7 +1787,7 @@
       </div>
 
       <a href="#contact" class="pcard-cta">Réserver un audit stratégique</a>
-      <div class="pcard-meta">Délai : 3 à 4 semaines</div>
+      <div class="pcard-meta">Délai : 5 semaines</div>
     </div>
 
   </div>
