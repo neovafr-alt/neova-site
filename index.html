@@ -62,6 +62,8 @@
     .brand-name em{
       font-style:normal;color:var(--sky);
     }
+    .nav-burger{display:none}
+    .mobile-menu{display:none}
     .nav-links{display:flex;align-items:center;gap:28px;list-style:none}
     .nav-links a{
       font-size:12px;font-weight:400;letter-spacing:0.2px;
@@ -805,10 +807,34 @@
       transition:transform .2s,box-shadow .25s,filter .25s;
       box-shadow:0 8px 22px -8px rgba(14,165,233,0.5);
     }
-    .pcard-cta:hover{transform:translateY(-2px);box-shadow:0 14px 30px -10px rgba(14,165,233,0.7);filter:brightness(1.1)}
-    .pcard.popular .pcard-cta{
+    .pcard-cta:hover{transform:translateY(-2px);filter:brightness(1.1)}
+
+    /* CTA ESSENTIEL — bleu indigo (cohérent avec sa bordure) */
+    .pricing-wrap > .pcard:nth-child(1) .pcard-cta{
+      background:linear-gradient(135deg,#1E40AF,#3B82F6);
+      box-shadow:0 8px 22px -8px rgba(59,130,246,0.55);
+    }
+    .pricing-wrap > .pcard:nth-child(1) .pcard-cta:hover{
+      box-shadow:0 14px 30px -10px rgba(59,130,246,0.75);
+    }
+
+    /* CTA CROISSANCE — cyan + violet (déjà cohérent) */
+    .pricing-wrap > .pcard:nth-child(2) .pcard-cta{
       background:linear-gradient(135deg,#22D3EE,#8B5CF6);
       box-shadow:0 8px 22px -8px rgba(139,92,246,0.6);
+    }
+    .pricing-wrap > .pcard:nth-child(2) .pcard-cta:hover{
+      box-shadow:0 14px 30px -10px rgba(139,92,246,0.8);
+    }
+
+    /* CTA PERFORMANCE — doré + violet (premium, cohérent avec sa bordure) */
+    .pricing-wrap > .pcard:nth-child(3) .pcard-cta{
+      background:linear-gradient(135deg,#FBBF24 0%,#F472B6 50%,#A78BFA 100%);
+      color:#0a0a0a;font-weight:700;
+      box-shadow:0 8px 22px -8px rgba(251,191,36,0.55);
+    }
+    .pricing-wrap > .pcard:nth-child(3) .pcard-cta:hover{
+      box-shadow:0 14px 30px -10px rgba(251,191,36,0.75);
     }
 
     .pcard-meta{
@@ -1328,9 +1354,80 @@
 
     /* ── RESPONSIVE — Mobile (≤640px) ── */
     @media(max-width:640px){
-      /* NAV */
-      .nav-links li:not(.nav-cta-li){display:none}
-      .nav-cta{padding:6px 12px;font-size:11px}
+      /* NAV mobile : on cache les liens classiques + bouton CTA, on affiche le burger */
+      .nav-links{display:none}
+      .nav-burger{
+        display:flex;flex-direction:column;justify-content:center;gap:5px;
+        width:42px;height:42px;border-radius:11px;
+        background:rgba(255,255,255,0.06);
+        border:1px solid rgba(255,255,255,0.1);
+        cursor:pointer;padding:0;
+        transition:background 0.25s,border-color 0.25s;
+        align-items:center;
+        -webkit-tap-highlight-color:transparent;
+      }
+      .nav-burger span{
+        display:block;width:18px;height:2px;border-radius:2px;
+        background:#fff;
+        transition:transform 0.3s cubic-bezier(0.5,0,0.2,1),opacity 0.2s;
+      }
+      .nav-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+      .nav-burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+      .nav-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+      .nav-burger[aria-expanded="true"]{
+        background:rgba(34,211,238,0.12);
+        border-color:rgba(34,211,238,0.4);
+      }
+
+      /* Menu mobile en overlay */
+      .mobile-menu{
+        display:block;position:fixed;top:0;left:0;right:0;bottom:0;
+        background:rgba(7,7,8,0.97);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+        z-index:99;
+        opacity:0;visibility:hidden;
+        transition:opacity 0.3s ease,visibility 0.3s ease;
+        padding:90px 24px 40px;
+      }
+      .mobile-menu.open{opacity:1;visibility:visible}
+      .mobile-menu ul{
+        list-style:none;padding:0;margin:0;
+        display:flex;flex-direction:column;gap:6px;
+      }
+      .mobile-menu li{
+        opacity:0;transform:translateY(20px);
+        transition:opacity 0.4s ease,transform 0.4s cubic-bezier(0.22,1,0.36,1);
+      }
+      .mobile-menu.open li{opacity:1;transform:translateY(0)}
+      .mobile-menu.open li:nth-child(1){transition-delay:0.05s}
+      .mobile-menu.open li:nth-child(2){transition-delay:0.1s}
+      .mobile-menu.open li:nth-child(3){transition-delay:0.15s}
+      .mobile-menu.open li:nth-child(4){transition-delay:0.2s}
+      .mobile-menu.open li:nth-child(5){transition-delay:0.27s}
+      .mobile-menu a{
+        display:block;padding:18px 4px;
+        font-size:24px;font-weight:600;letter-spacing:-0.3px;
+        color:#fff;text-decoration:none;
+        border-bottom:1px solid rgba(255,255,255,0.08);
+        transition:color 0.2s,padding 0.25s;
+      }
+      .mobile-menu a:active{color:#22D3EE;padding-left:10px}
+      .mobile-menu .mobile-menu-cta{
+        margin-top:18px;border:none;
+        text-align:center;border-radius:14px;
+        padding:18px 22px;font-size:16px;
+        background:linear-gradient(135deg,#0EA5E9,#22D3EE,#8B5CF6);
+        background-size:200% 200%;
+        animation:menu-cta-shift 4s ease infinite;
+        box-shadow:0 14px 40px -10px rgba(34,211,238,0.55);
+      }
+      .mobile-menu .mobile-menu-cta:active{padding-left:22px}
+      @keyframes menu-cta-shift{
+        0%,100%{background-position:0% 50%}
+        50%{background-position:100% 50%}
+      }
+
+      /* Empêcher le scroll du body quand menu ouvert */
+      body.menu-open{overflow:hidden}
 
       /* HERO — version mobile FULL EXPÉRIENCE (étoiles + sweep + canvas optimisés) */
       .hero{padding:60px 18px 60px;min-height:90vh}
@@ -1483,7 +1580,19 @@
     <li><a href="#temoignages">Avis</a></li>
     <li class="nav-cta-li"><a href="#contact" class="nav-cta">Nous contacter</a></li>
   </ul>
+  <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <ul>
+    <li><a href="#offres" data-close>Offres</a></li>
+    <li><a href="#processus" data-close>Méthode</a></li>
+    <li><a href="#temoignages" data-close>Avis</a></li>
+    <li><a href="#histoire" data-close>Notre histoire</a></li>
+    <li><a href="#contact" class="mobile-menu-cta" data-close>Nous contacter →</a></li>
+  </ul>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -2154,6 +2263,34 @@
   canvas.parentElement.addEventListener('touchend',()=>{mouse.x=null;mouse.y=null;});
 
   resize();init();requestAnimationFrame(draw);
+})();
+
+// Mobile menu (burger) — ouvrir/fermer + accessibilité
+(function(){
+  const burger=document.getElementById('navBurger');
+  const menu=document.getElementById('mobileMenu');
+  if(!burger||!menu)return;
+  function close(){
+    burger.setAttribute('aria-expanded','false');
+    menu.classList.remove('open');
+    menu.setAttribute('aria-hidden','true');
+    document.body.classList.remove('menu-open');
+  }
+  function open(){
+    burger.setAttribute('aria-expanded','true');
+    menu.classList.add('open');
+    menu.setAttribute('aria-hidden','false');
+    document.body.classList.add('menu-open');
+  }
+  burger.addEventListener('click',()=>{
+    if(burger.getAttribute('aria-expanded')==='true')close();else open();
+  });
+  // Fermer au clic sur un lien
+  menu.querySelectorAll('[data-close]').forEach(a=>{
+    a.addEventListener('click',()=>setTimeout(close,80));
+  });
+  // Fermer à l'échap
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
 })();
 
 // Glow qui suit la souris sur les cards services
