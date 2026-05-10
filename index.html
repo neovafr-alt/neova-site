@@ -603,6 +603,178 @@
     .scard:hover .scard-link{gap:12px}
     .scard:hover .scard-link svg{transform:translateX(4px)}
 
+    /* ── PRICING CARDS — offres avec prix ── */
+    .pricing-wrap{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:28px;
+      max-width:1280px;margin:0 auto;padding:0 24px;
+      align-items:stretch;
+    }
+    @media(max-width:1100px){.pricing-wrap{grid-template-columns:1fr;max-width:560px}}
+    .pcard{
+      position:relative;display:flex;flex-direction:column;
+      padding:40px 32px;border-radius:24px;
+      background:linear-gradient(180deg,#0d0d0f 0%,#070708 100%);
+      border:1px solid rgba(255,255,255,0.08);
+      transition:transform .35s cubic-bezier(.2,.8,.3,1),border-color .35s,box-shadow .35s;
+      overflow:hidden;
+    }
+    .pcard::before{
+      content:'';position:absolute;inset:-1px;
+      border-radius:24px;padding:1px;
+      background:linear-gradient(135deg,var(--pc1,#0EA5E9),var(--pc2,#8B5CF6));
+      -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;mask-composite:exclude;
+      opacity:0;transition:opacity .4s;pointer-events:none;
+    }
+    .pcard:hover{transform:translateY(-6px);border-color:transparent;box-shadow:0 30px 70px -20px rgba(14,165,233,0.35)}
+    .pcard:hover::before{opacity:1}
+    .pcard.popular{
+      border-color:rgba(139,92,246,0.55);
+      box-shadow:0 25px 60px -25px rgba(139,92,246,0.5);
+    }
+    .pcard.popular::before{opacity:0.85}
+    .pcard:nth-child(1){--pc1:#06B6D4;--pc2:#3B82F6}
+    .pcard:nth-child(2){--pc1:#22D3EE;--pc2:#8B5CF6}
+    .pcard:nth-child(3){--pc1:#8B5CF6;--pc2:#3B82F6}
+
+    .pcard-badge{
+      position:absolute;top:18px;right:18px;
+      font-size:10px;font-weight:700;letter-spacing:1.2px;
+      text-transform:uppercase;color:#fff;
+      padding:6px 12px;border-radius:999px;
+      background:linear-gradient(135deg,#22D3EE,#8B5CF6);
+      box-shadow:0 4px 14px rgba(139,92,246,0.45);
+    }
+    .pcard-eyebrow{
+      font-size:11px;font-weight:700;letter-spacing:1.6px;
+      text-transform:uppercase;color:var(--sky);
+      margin-bottom:14px;
+    }
+    .pcard-title{
+      font-size:24px;font-weight:700;color:var(--white);
+      letter-spacing:-0.5px;line-height:1.25;
+      margin-bottom:14px;min-height:60px;
+    }
+    .pcard-pitch{
+      font-size:14px;color:rgba(255,255,255,0.55);
+      line-height:1.55;margin-bottom:24px;min-height:65px;
+    }
+    .pcard-benefits{
+      display:flex;flex-direction:column;gap:10px;
+      margin-bottom:22px;
+    }
+    .pcard-benefit{
+      display:flex;align-items:flex-start;gap:10px;
+      font-size:14px;color:rgba(255,255,255,0.85);line-height:1.5;
+    }
+    .pcard-benefit svg{flex-shrink:0;margin-top:3px;color:#22D3EE}
+
+    .pcard-roi{
+      margin:6px 0 24px;padding:18px 18px;border-radius:14px;
+      background:linear-gradient(135deg,rgba(34,211,238,0.08),rgba(139,92,246,0.10));
+      border:1px solid rgba(34,211,238,0.18);
+    }
+    .pcard-roi-label{
+      font-size:10px;font-weight:700;letter-spacing:1.4px;
+      text-transform:uppercase;color:#22D3EE;
+      margin-bottom:6px;
+    }
+    .pcard-roi-value{
+      font-size:22px;font-weight:800;color:var(--white);
+      letter-spacing:-0.5px;line-height:1.15;
+    }
+    .pcard-roi-detail{
+      font-size:12px;color:rgba(255,255,255,0.6);
+      margin-top:4px;line-height:1.4;
+    }
+
+    .pcard-includes{
+      margin-bottom:22px;
+    }
+    .pcard-includes-title{
+      font-size:11px;font-weight:700;letter-spacing:1.4px;
+      text-transform:uppercase;color:rgba(255,255,255,0.45);
+      margin-bottom:12px;
+    }
+    .pcard-includes ul{
+      list-style:none;padding:0;margin:0;
+      display:flex;flex-direction:column;gap:8px;
+    }
+    .pcard-includes li{
+      font-size:13.5px;color:rgba(255,255,255,0.72);
+      line-height:1.5;padding-left:16px;position:relative;
+    }
+    .pcard-includes li::before{
+      content:'';position:absolute;left:0;top:8px;
+      width:6px;height:6px;border-radius:50%;
+      background:linear-gradient(135deg,#22D3EE,#8B5CF6);
+    }
+
+    .pcard-guarantee{
+      margin-bottom:22px;padding:14px 16px;border-radius:12px;
+      background:rgba(255,255,255,0.03);
+      border:1px dashed rgba(34,211,238,0.25);
+      font-size:13px;color:rgba(255,255,255,0.78);
+      line-height:1.5;display:flex;gap:10px;align-items:flex-start;
+    }
+    .pcard-guarantee strong{color:var(--white);font-weight:600}
+
+    .pcard-pricing{
+      margin-top:auto;padding-top:20px;
+      border-top:1px solid rgba(255,255,255,0.08);
+      margin-bottom:18px;
+    }
+    .pcard-price-main{
+      font-size:32px;font-weight:800;color:var(--white);
+      letter-spacing:-1px;line-height:1.1;
+    }
+    .pcard-price-main .currency{font-size:22px;font-weight:600;opacity:0.7}
+    .pcard-price-main .ht{font-size:13px;font-weight:500;opacity:0.55;margin-left:4px}
+    .pcard-price-monthly{
+      font-size:14px;color:rgba(255,255,255,0.65);
+      margin-top:6px;
+    }
+    .pcard-price-monthly strong{color:#22D3EE;font-weight:700}
+    .pcard-price-engagement{
+      font-size:12px;color:rgba(255,255,255,0.45);
+      margin-top:8px;
+    }
+
+    .pcard-cta{
+      display:block;text-align:center;
+      padding:14px 22px;border-radius:12px;
+      font-size:14px;font-weight:600;letter-spacing:0.2px;
+      text-decoration:none;
+      background:linear-gradient(135deg,#0EA5E9,#22D3EE);
+      color:#fff;
+      transition:transform .2s,box-shadow .25s,filter .25s;
+      box-shadow:0 8px 22px -8px rgba(14,165,233,0.5);
+    }
+    .pcard-cta:hover{transform:translateY(-2px);box-shadow:0 14px 30px -10px rgba(14,165,233,0.7);filter:brightness(1.1)}
+    .pcard.popular .pcard-cta{
+      background:linear-gradient(135deg,#22D3EE,#8B5CF6);
+      box-shadow:0 8px 22px -8px rgba(139,92,246,0.6);
+    }
+
+    .pcard-meta{
+      margin-top:14px;text-align:center;
+      font-size:12px;color:rgba(255,255,255,0.5);
+    }
+
+    .pricing-disclaimer{
+      max-width:780px;margin:36px auto 0;text-align:center;
+      font-size:12.5px;color:rgba(255,255,255,0.4);
+      font-style:italic;line-height:1.6;padding:0 24px;
+    }
+
+    @media(max-width:640px){
+      .pricing-wrap{gap:22px;padding:0 14px}
+      .pcard{padding:32px 24px}
+      .pcard-title{font-size:21px;min-height:0}
+      .pcard-pitch{min-height:0}
+      .pcard-price-main{font-size:28px}
+    }
+
     /* ── PROCESS — timeline lumineuse (sur fond clair) ── */
     .process-wrap{
       max-width:900px;margin:0 auto;
@@ -1227,7 +1399,7 @@
     <span class="brand-name">NEO<em>VA</em></span>
   </a>
   <ul class="nav-links">
-    <li><a href="#services">Services</a></li>
+    <li><a href="#offres">Offres</a></li>
     <li><a href="#processus">Méthode</a></li>
     <li><a href="#temoignages">Avis</a></li>
     <li class="nav-cta-li"><a href="#contact" class="nav-cta">Nous contacter</a></li>
@@ -1251,7 +1423,7 @@
   <p class="hero-sub">Neova conçoit des systèmes IA qui automatisent vos workflows, votre SEO et votre prospection. Pendant ce temps, vous vous concentrez sur <strong style="color:#fff">ce qui compte vraiment.</strong></p>
   <div class="hero-btns">
     <a href="#contact" class="btn-fill">Consultation gratuite →</a>
-    <a href="#services" class="btn-outline">Découvrir nos services</a>
+    <a href="#offres" class="btn-outline">Voir nos offres</a>
   </div>
   <div class="hero-trust">
     <div class="trust-item"><span class="trust-dot live"></span>Réponse sous 24h</div>
@@ -1355,57 +1527,177 @@
 </section>
 
 <!-- SERVICES — cards premium interactives -->
-<section class="dark-section" id="services">
-  <span class="section-eyebrow">Nos services</span>
-  <h2 class="section-title">Ce qu'on fait <em>pour vous</em></h2>
-  <p class="section-sub">Quatre piliers pour faire passer votre business à la vitesse supérieure. Chacun pensé pour générer des résultats concrets.</p>
-  <div class="services-wrap">
+<section class="dark-section" id="offres">
+  <span class="section-eyebrow">Nos offres</span>
+  <h2 class="section-title">Choisissez la formule <em>qui vous correspond</em></h2>
+  <p class="section-sub">Trois formules pensées pour les PME qui veulent automatiser intelligemment, sans recruter, sans complexité. Tarifs forfaitaires fermes, garantie résultat sur chaque offre.</p>
 
-    <div class="scard" data-tilt>
-      <div class="scard-icon-wrap">🤖</div>
-      <div class="scard-eyebrow">Automatisation IA</div>
-      <h3>Workflows intelligents qui travaillent 24/7</h3>
-      <p>Automatisation de tâches, traitement de données, prospection automatique. Des systèmes qui tournent sans vous.</p>
-      <a href="#contact" class="scard-link">
-        En savoir plus
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </a>
+  <div class="pricing-wrap">
+
+    <!-- ESSENTIEL -->
+    <div class="pcard">
+      <div class="pcard-eyebrow">Essentiel</div>
+      <h3 class="pcard-title">Lancez votre première automatisation en 10 jours</h3>
+      <p class="pcard-pitch">Pour les dirigeants qui veulent éprouver concrètement la valeur de l'IA sur un irritant identifié, sans risque.</p>
+
+      <div class="pcard-benefits">
+        <div class="pcard-benefit">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+          Du temps libéré chaque semaine sur une tâche chronophage
+        </div>
+        <div class="pcard-benefit">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+          Une exécution sans erreur, 24h/24, 7j/7
+        </div>
+        <div class="pcard-benefit">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+          Un cas d'usage prouvé pour décider de la suite
+        </div>
+      </div>
+
+      <div class="pcard-roi">
+        <div class="pcard-roi-label">ROI typique année 1</div>
+        <div class="pcard-roi-value">x4 à x9</div>
+        <div class="pcard-roi-detail">Investissement amorti en 2 à 3 mois, puis gain net.</div>
+      </div>
+
+      <div class="pcard-includes">
+        <div class="pcard-includes-title">Ce qui est inclus</div>
+        <ul>
+          <li>1 automatisation sur mesure intégrée à vos outils</li>
+          <li>Hébergement sécurisé en Europe (RGPD)</li>
+          <li>30 minutes de prise en main avec votre équipe</li>
+          <li>Documentation claire pour autonomie totale</li>
+        </ul>
+      </div>
+
+      <div class="pcard-guarantee">
+        <span>🛡</span>
+        <div><strong>Garantie 30 jours :</strong> ajustements illimités. Pas satisfait ? Remboursement intégral.</div>
+      </div>
+
+      <div class="pcard-pricing">
+        <div class="pcard-price-main">990<span class="currency"> €</span><span class="ht"> HT</span></div>
+        <div class="pcard-price-monthly">Sans engagement, sans mensuel</div>
+      </div>
+
+      <a href="#contact" class="pcard-cta">Réserver un échange</a>
+      <div class="pcard-meta">Délai : 10 jours ouvrés</div>
     </div>
 
-    <div class="scard" data-tilt>
-      <div class="scard-icon-wrap">📈</div>
-      <div class="scard-eyebrow">SEO &amp; Visibilité</div>
-      <h3>Soyez trouvé avant vos concurrents</h3>
-      <p>Audit technique, optimisation on-page, stratégie de contenu. Résultats mesurables en 30 jours.</p>
-      <a href="#contact" class="scard-link">
-        En savoir plus
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </a>
+    <!-- CROISSANCE — POPULAIRE -->
+    <div class="pcard popular">
+      <div class="pcard-badge">Le plus choisi</div>
+      <div class="pcard-eyebrow">Croissance</div>
+      <h3 class="pcard-title">Industrialisez vos process clés et libérez votre équipe</h3>
+      <p class="pcard-pitch">Pour les PME et cabinets de 5 à 20 collaborateurs qui veulent automatiser plusieurs maillons de leur chaîne.</p>
+
+      <div class="pcard-benefits">
+        <div class="pcard-benefit">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+          L'équivalent d'un mi-temps libéré, sans embaucher
+        </div>
+        <div class="pcard-benefit">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+          Une expérience client améliorée (réactivité 24/7)
+        </div>
+        <div class="pcard-benefit">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+          Un partenaire qui reste pour faire évoluer la solution
+        </div>
+      </div>
+
+      <div class="pcard-roi">
+        <div class="pcard-roi-label">ROI typique année 1</div>
+        <div class="pcard-roi-value">x2 à x4</div>
+        <div class="pcard-roi-detail">12 000 € à 24 000 € d'économies estimées vs 6 380 € investis.</div>
+      </div>
+
+      <div class="pcard-includes">
+        <div class="pcard-includes-title">Ce qui est inclus</div>
+        <ul>
+          <li>3 automatisations sur mesure intégrées à votre écosystème</li>
+          <li>1 agent IA "couteau suisse" sur vos tâches récurrentes</li>
+          <li>Tableau de bord d'activité de l'IA en temps réel</li>
+          <li>Maintenance, monitoring et hébergement RGPD inclus</li>
+          <li>1 mini-automatisation offerte tous les 2 mois</li>
+        </ul>
+      </div>
+
+      <div class="pcard-guarantee">
+        <span>🛡</span>
+        <div><strong>Garantie 60 jours :</strong> ajustements illimités. Pas satisfait après itération ? Remboursement intégral.</div>
+      </div>
+
+      <div class="pcard-pricing">
+        <div class="pcard-price-main">2 900<span class="currency"> €</span><span class="ht"> HT</span></div>
+        <div class="pcard-price-monthly">+ <strong>290 € HT / mois</strong> de maintenance</div>
+        <div class="pcard-price-engagement">Engagement 6 mois sur le mensuel</div>
+      </div>
+
+      <a href="#contact" class="pcard-cta">Réserver un échange</a>
+      <div class="pcard-meta">Délai : 3 semaines</div>
     </div>
 
-    <div class="scard" data-tilt>
-      <div class="scard-icon-wrap">⚙️</div>
-      <div class="scard-eyebrow">Outils sur mesure</div>
-      <h3>Développé exactement pour votre business</h3>
-      <p>Scripts, pipelines, intégrations API. Rien de générique. Du code qui résout votre vrai problème.</p>
-      <a href="#contact" class="scard-link">
-        En savoir plus
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </a>
-    </div>
+    <!-- PERFORMANCE -->
+    <div class="pcard">
+      <div class="pcard-eyebrow">Performance</div>
+      <h3 class="pcard-title">Transformez en profondeur une fonction de votre entreprise</h3>
+      <p class="pcard-pitch">Pour les PME de 10 à 30 collaborateurs qui veulent automatiser une fonction complète avec un accompagnement long terme.</p>
 
-    <div class="scard" data-tilt>
-      <div class="scard-icon-wrap">🎯</div>
-      <div class="scard-eyebrow">Prospection automatisée</div>
-      <h3>Vos prospects. Sans effort de votre côté.</h3>
-      <p>Système intelligent qui identifie, contacte et relance vos prospects. Vous fermez, on alimente le pipeline.</p>
-      <a href="#contact" class="scard-link">
-        En savoir plus
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </a>
+      <div class="pcard-benefits">
+        <div class="pcard-benefit">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+          L'équivalent d'un collaborateur à temps plein
+        </div>
+        <div class="pcard-benefit">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+          Une fonction entière fluidifiée et industrialisée
+        </div>
+        <div class="pcard-benefit">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+          Un référent dédié qui connaît votre business
+        </div>
+      </div>
+
+      <div class="pcard-roi">
+        <div class="pcard-roi-label">ROI typique année 1</div>
+        <div class="pcard-roi-value">x2 à x3</div>
+        <div class="pcard-roi-detail">35 000 € à 50 000 € de coût annuel d'1 ETP économisés. ROI x5+ années suivantes.</div>
+      </div>
+
+      <div class="pcard-includes">
+        <div class="pcard-includes-title">Ce qui est inclus</div>
+        <ul>
+          <li>2 à 3 agents IA interconnectés couvrant un workflow complet</li>
+          <li>Intégrations avancées (ERP, CRM, outils sectoriels)</li>
+          <li>Agent principal entraîné sur vos données</li>
+          <li>Référent dédié + 4 h d'ajustements par mois</li>
+          <li>1 nouvelle automatisation incluse tous les 2 mois</li>
+          <li>Roadmap 12 mois co-construite avec votre direction</li>
+        </ul>
+      </div>
+
+      <div class="pcard-guarantee">
+        <span>🛡</span>
+        <div><strong>Garantie 90 jours :</strong> ajustements illimités après chaque livraison. Remboursement intégral si non tenue.</div>
+      </div>
+
+      <div class="pcard-pricing">
+        <div class="pcard-price-main">À partir de 6 900<span class="currency"> €</span><span class="ht"> HT</span></div>
+        <div class="pcard-price-monthly">+ <strong>690 € HT / mois</strong> de maintenance</div>
+        <div class="pcard-price-engagement">Engagement 12 mois sur le mensuel</div>
+      </div>
+
+      <a href="#contact" class="pcard-cta">Réserver un audit stratégique</a>
+      <div class="pcard-meta">Délai : 6 semaines</div>
     </div>
 
   </div>
+
+  <p class="pricing-disclaimer">
+    Tarifs en HT. Devis ferme et définitif sous 48 heures après l'échange découverte. Estimations de ROI basées sur un taux horaire moyen chargé de 30 €/h en PME ; le résultat réel dépend du process automatisé et du volume traité.
+  </p>
 </section>
 
 <!-- TUNNEL STAT 2 — Automatisation IA -->
