@@ -645,24 +645,52 @@
       transition:transform .35s cubic-bezier(.2,.8,.3,1),border-color .35s,box-shadow .35s;
       overflow:hidden;
     }
+    .pcard{border-color:transparent}
     .pcard::before{
-      content:'';position:absolute;inset:-1px;
-      border-radius:24px;padding:1px;
-      background:linear-gradient(135deg,var(--pc1,#0EA5E9),var(--pc2,#8B5CF6));
+      content:'';position:absolute;inset:0;
+      border-radius:24px;padding:1.5px;
+      background:linear-gradient(135deg,var(--edge-c1,#3B82F6),var(--edge-c2,#22D3EE));
       -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
       -webkit-mask-composite:xor;mask-composite:exclude;
-      opacity:0;transition:opacity .4s;pointer-events:none;
+      opacity:0.85;pointer-events:none;
+      animation:pcard-breath 4s ease-in-out infinite;
     }
-    .pcard:hover{transform:translateY(-6px);border-color:transparent;box-shadow:0 30px 70px -20px rgba(14,165,233,0.35)}
+    .pcard:hover{transform:translateY(-6px);box-shadow:0 30px 70px -20px var(--edge-glow,rgba(14,165,233,0.45))}
     .pcard:hover::before{opacity:1}
-    .pcard.popular{
-      border-color:rgba(139,92,246,0.55);
-      box-shadow:0 25px 60px -25px rgba(139,92,246,0.5);
+
+    /* ESSENTIEL — bleu profond / indigo (sobre, fiable) */
+    .pricing-wrap > .pcard:nth-child(1){
+      --edge-c1:#1E40AF;--edge-c2:#3B82F6;
+      --edge-glow:rgba(59,130,246,0.4);
     }
-    .pcard.popular::before{opacity:0.85}
-    .pcard:nth-child(1){--pc1:#06B6D4;--pc2:#3B82F6}
-    .pcard:nth-child(2){--pc1:#22D3EE;--pc2:#8B5CF6}
-    .pcard:nth-child(3){--pc1:#8B5CF6;--pc2:#3B82F6}
+    .pricing-wrap > .pcard:nth-child(1)::before{
+      filter:drop-shadow(0 0 5px rgba(59,130,246,0.55));
+    }
+
+    /* CROISSANCE — cyan + violet (sweet spot, dynamique) */
+    .pricing-wrap > .pcard:nth-child(2){
+      --edge-c1:#22D3EE;--edge-c2:#8B5CF6;
+      --edge-glow:rgba(139,92,246,0.5);
+    }
+    .pricing-wrap > .pcard:nth-child(2)::before{
+      padding:2px;
+      background:linear-gradient(135deg,#22D3EE 0%,#8B5CF6 50%,#22D3EE 100%);
+      filter:drop-shadow(0 0 8px rgba(139,92,246,0.7));
+      animation:pcard-breath 3.5s ease-in-out infinite;
+    }
+    .pcard.popular{box-shadow:0 25px 60px -25px rgba(139,92,246,0.5)}
+
+    /* PERFORMANCE — doré + rose + violet (premium, exclusif) */
+    .pricing-wrap > .pcard:nth-child(3){
+      --edge-c1:#FBBF24;--edge-c2:#A78BFA;
+      --edge-glow:rgba(251,191,36,0.4);
+    }
+    .pricing-wrap > .pcard:nth-child(3)::before{
+      padding:2px;
+      background:linear-gradient(135deg,#FBBF24 0%,#F472B6 45%,#A78BFA 100%);
+      filter:drop-shadow(0 0 10px rgba(251,191,36,0.55)) drop-shadow(0 0 4px rgba(167,139,250,0.55));
+      animation:pcard-breath 4.5s ease-in-out infinite;
+    }
 
     .pcard-badge{
       position:absolute;top:18px;right:18px;
@@ -801,56 +829,9 @@
       .pcard-pitch{min-height:0}
       .pcard-price-main{font-size:28px}
 
-      /* ─── Bordure scintillante statique par pack — mobile ─── */
-      .pcard{position:relative;isolation:isolate;border-color:transparent}
-
-      /* Bordure stable colorée par pack (gradient figé) */
-      .pcard::before{
-        content:'';position:absolute;inset:0;
-        border-radius:24px;
-        padding:1.5px;
-        background:linear-gradient(135deg,var(--edge-c1),var(--edge-c2));
-        -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-        -webkit-mask-composite:xor;
-        mask-composite:exclude;
-        opacity:0.85!important;
-        pointer-events:none;
-        animation:pcard-breath 4s ease-in-out infinite;
-      }
-
-      /* Couleurs : ESSENTIEL = bleu profond / indigo (sobre, fiable) */
-      .pricing-wrap > .pcard:nth-child(1){
-        --edge-c1:#1E40AF;--edge-c2:#3B82F6;
-      }
-      .pricing-wrap > .pcard:nth-child(1)::before{
-        background:linear-gradient(135deg,#1E40AF 0%,#3B82F6 100%);
-        filter:drop-shadow(0 0 5px rgba(59,130,246,0.55));
-      }
-
-      /* Couleurs : CROISSANCE = cyan + violet (sweet spot, dynamique) */
-      .pricing-wrap > .pcard:nth-child(2){
-        --edge-c1:#22D3EE;--edge-c2:#8B5CF6;
-      }
-      .pricing-wrap > .pcard:nth-child(2)::before{
-        padding:2px;
-        background:linear-gradient(135deg,#22D3EE 0%,#8B5CF6 50%,#22D3EE 100%);
-        filter:drop-shadow(0 0 8px rgba(139,92,246,0.7));
-        animation:pcard-breath 3.5s ease-in-out infinite;
-      }
-
-      /* Couleurs : PERFORMANCE = doré + violet (premium, exclusif) */
-      .pricing-wrap > .pcard:nth-child(3){
-        --edge-c1:#FBBF24;--edge-c2:#A78BFA;
-      }
-      .pricing-wrap > .pcard:nth-child(3)::before{
-        padding:2px;
-        background:linear-gradient(135deg,#FBBF24 0%,#F472B6 45%,#A78BFA 100%);
-        filter:drop-shadow(0 0 10px rgba(251,191,36,0.55)) drop-shadow(0 0 4px rgba(167,139,250,0.55));
-        animation:pcard-breath 4.5s ease-in-out infinite;
-      }
-
-      /* Pas de lueurs aux coins (retirées) */
-      .pcard::after{display:none}
+      /* Mobile : on hérite des couleurs scintillantes définies en global,
+         juste pas d'effet hover translate (pas pertinent au touch) */
+      .pcard:hover{transform:none}
     }
 
     @keyframes pcard-breath{
