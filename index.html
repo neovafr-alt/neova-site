@@ -801,51 +801,83 @@
       .pcard-pitch{min-height:0}
       .pcard-price-main{font-size:28px}
 
-      /* ─── Trait néon animé qui fait le tour de la card sur mobile ─── */
+      /* ─── Bordure scintillante statique par pack — mobile ─── */
       .pcard{position:relative;isolation:isolate;border-color:transparent}
+
+      /* Bordure stable colorée par pack (gradient figé) */
       .pcard::before{
         content:'';position:absolute;inset:0;
         border-radius:24px;
         padding:1.5px;
-        background:conic-gradient(
-          from var(--aurora-angle,0deg),
-          transparent 0deg,
-          transparent 240deg,
-          var(--pc1) 300deg,
-          var(--pc2) 340deg,
-          transparent 360deg
-        );
+        background:linear-gradient(135deg,var(--edge-c1),var(--edge-c2));
         -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
         -webkit-mask-composite:xor;
         mask-composite:exclude;
-        opacity:1!important;
-        animation:aurora-spin 4s linear infinite;
+        opacity:0.85!important;
         pointer-events:none;
-        filter:drop-shadow(0 0 6px var(--pc1));
+        animation:pcard-breath 4s ease-in-out infinite;
       }
-      .pcard.popular::before{
+
+      /* Couleurs : ESSENTIEL = bleu sobre (fiable) */
+      .pricing-wrap > .pcard:nth-child(1){
+        --edge-c1:#3B82F6;--edge-c2:#06B6D4;
+      }
+      .pricing-wrap > .pcard:nth-child(1)::before{
+        filter:drop-shadow(0 0 4px rgba(14,165,233,0.6));
+      }
+
+      /* Couleurs : CROISSANCE = cyan + violet (le sweet spot, dynamique) */
+      .pricing-wrap > .pcard:nth-child(2){
+        --edge-c1:#22D3EE;--edge-c2:#8B5CF6;
+      }
+      .pricing-wrap > .pcard:nth-child(2)::before{
         padding:2px;
-        animation-duration:2.8s;
-        background:conic-gradient(
-          from var(--aurora-angle,0deg),
-          transparent 0deg,
-          transparent 200deg,
-          #22D3EE 260deg,
-          #8B5CF6 320deg,
-          #22D3EE 350deg,
-          transparent 360deg
-        );
-        filter:drop-shadow(0 0 10px #8B5CF6) drop-shadow(0 0 4px #22D3EE);
+        background:linear-gradient(135deg,#22D3EE 0%,#8B5CF6 50%,#22D3EE 100%);
+        filter:drop-shadow(0 0 8px rgba(139,92,246,0.7));
+        animation:pcard-breath 3.5s ease-in-out infinite;
+      }
+
+      /* Couleurs : PERFORMANCE = doré + violet (premium, exclusif) */
+      .pricing-wrap > .pcard:nth-child(3){
+        --edge-c1:#FBBF24;--edge-c2:#A78BFA;
+      }
+      .pricing-wrap > .pcard:nth-child(3)::before{
+        padding:2px;
+        background:linear-gradient(135deg,#FBBF24 0%,#F472B6 45%,#A78BFA 100%);
+        filter:drop-shadow(0 0 10px rgba(251,191,36,0.55)) drop-shadow(0 0 4px rgba(167,139,250,0.55));
+        animation:pcard-breath 4.5s ease-in-out infinite;
+      }
+
+      /* Petites lueurs ponctuelles aux 4 coins (effet scintillement) */
+      .pcard::after{
+        content:'';position:absolute;inset:0;
+        border-radius:24px;
+        background:
+          radial-gradient(circle at 0% 0%, var(--edge-c1) 0%, transparent 8%),
+          radial-gradient(circle at 100% 0%, var(--edge-c2) 0%, transparent 8%),
+          radial-gradient(circle at 100% 100%, var(--edge-c1) 0%, transparent 8%),
+          radial-gradient(circle at 0% 100%, var(--edge-c2) 0%, transparent 8%);
+        opacity:0.45;
+        animation:pcard-twinkle 5s ease-in-out infinite;
+        pointer-events:none;mix-blend-mode:screen;
+      }
+      .pricing-wrap > .pcard:nth-child(2)::after{
+        animation-duration:3.8s;
+        opacity:0.6;
+      }
+      .pricing-wrap > .pcard:nth-child(3)::after{
+        animation-duration:6s;
+        opacity:0.55;
       }
     }
 
-    @property --aurora-angle{
-      syntax:'<angle>';
-      initial-value:0deg;
-      inherits:false;
+    @keyframes pcard-breath{
+      0%,100%{opacity:0.7}
+      50%{opacity:1}
     }
-    @keyframes aurora-spin{
-      to{--aurora-angle:360deg}
+    @keyframes pcard-twinkle{
+      0%,100%{opacity:0.35;transform:scale(1)}
+      50%{opacity:0.7;transform:scale(1.02)}
     }
 
     /* ── PROCESS — timeline lumineuse (sur fond clair) ── */
