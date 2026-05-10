@@ -801,48 +801,41 @@
       .pcard-pitch{min-height:0}
       .pcard-price-main{font-size:28px}
 
-      /* ─── Bandes de couleur animées (aurora border) sur mobile ─── */
-      .pcard{position:relative;isolation:isolate}
-      /* Wrap aurora derrière la card */
+      /* ─── Trait néon animé qui fait le tour de la card sur mobile ─── */
+      .pcard{position:relative;isolation:isolate;border-color:transparent}
       .pcard::before{
-        content:'';position:absolute;inset:-2px;
-        border-radius:24px;
-        padding:0;background:none;
-        -webkit-mask:none;mask:none;
-        opacity:1!important;z-index:-1;
-        background:conic-gradient(
-          from var(--aurora-angle,0deg),
-          transparent 0deg,
-          var(--pc1) 60deg,
-          var(--pc2) 120deg,
-          transparent 200deg,
-          transparent 360deg
-        );
-        animation:aurora-spin 6s linear infinite;
-        filter:blur(8px);
-      }
-      .pcard.popular::before{
-        animation-duration:3.8s;
-        background:conic-gradient(
-          from var(--aurora-angle,0deg),
-          transparent 0deg,
-          #22D3EE 40deg,
-          #8B5CF6 100deg,
-          #22D3EE 160deg,
-          transparent 220deg,
-          transparent 360deg
-        );
-        filter:blur(12px);
-        inset:-3px;
-      }
-      /* Card opaque par-dessus pour que la bande ne soit visible qu'aux bords */
-      .pcard::after{
         content:'';position:absolute;inset:0;
         border-radius:24px;
-        background:linear-gradient(180deg,#0d0d0f 0%,#070708 100%);
-        z-index:-1;
-        opacity:1;
-        top:auto;left:auto;width:auto;height:auto;
+        padding:1.5px;
+        background:conic-gradient(
+          from var(--aurora-angle,0deg),
+          transparent 0deg,
+          transparent 240deg,
+          var(--pc1) 300deg,
+          var(--pc2) 340deg,
+          transparent 360deg
+        );
+        -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+        -webkit-mask-composite:xor;
+        mask-composite:exclude;
+        opacity:1!important;
+        animation:aurora-spin 4s linear infinite;
+        pointer-events:none;
+        filter:drop-shadow(0 0 6px var(--pc1));
+      }
+      .pcard.popular::before{
+        padding:2px;
+        animation-duration:2.8s;
+        background:conic-gradient(
+          from var(--aurora-angle,0deg),
+          transparent 0deg,
+          transparent 200deg,
+          #22D3EE 260deg,
+          #8B5CF6 320deg,
+          #22D3EE 350deg,
+          transparent 360deg
+        );
+        filter:drop-shadow(0 0 10px #8B5CF6) drop-shadow(0 0 4px #22D3EE);
       }
     }
 
@@ -1600,9 +1593,9 @@
       <div class="stat-sub">objectif typique d'un projet</div>
     </div>
     <div class="stat">
-      <div class="stat-num">7-14j</div>
+      <div class="stat-num">10j à 6sem</div>
       <div class="stat-label">de mise en place</div>
-      <div class="stat-sub">du brief à la prod</div>
+      <div class="stat-sub">selon la formule choisie</div>
     </div>
     <div class="stat">
       <div class="stat-num">100%</div>
