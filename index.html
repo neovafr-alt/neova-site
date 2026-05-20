@@ -691,6 +691,379 @@
     }
     .examples-note a:hover{color:#0284C7}
 
+    /* ── DEMOS CARDS — 4 réalisations types avec mockups visuels ── */
+    .demos-grid{
+      display:grid;grid-template-columns:repeat(2,1fr);gap:32px;
+      max-width:1200px;margin:0 auto;padding:0 24px;
+    }
+    @media(max-width:900px){.demos-grid{grid-template-columns:1fr;max-width:560px;gap:24px}}
+    .demo-card{
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:20px;
+      padding:32px;
+      transition:transform .25s, border-color .25s, box-shadow .25s;
+      display:flex;flex-direction:column;
+    }
+    .demo-card:hover{
+      transform:translateY(-4px);
+      border-color:rgba(14,165,233,0.3);
+      box-shadow:0 20px 60px -30px rgba(14,165,233,0.4);
+    }
+    .demo-mockup{
+      background:rgba(14,165,233,0.04);
+      border:1px solid rgba(14,165,233,0.12);
+      border-radius:14px;
+      padding:18px;
+      margin-bottom:24px;
+      min-height:200px;
+      display:flex;
+      flex-direction:column;
+      align-items:stretch;
+      justify-content:center;
+      gap:8px;
+    }
+    .demo-icon{font-size:28px;line-height:1;margin-bottom:10px}
+    .demo-title{
+      font-size:20px;font-weight:600;
+      color:#fff;margin-bottom:10px;letter-spacing:-0.3px;
+    }
+    .demo-desc{
+      color:rgba(255,255,255,0.65);
+      font-size:14px;line-height:1.55;
+      margin-bottom:18px;
+    }
+    .demo-bullets{
+      list-style:none;display:flex;flex-direction:column;gap:8px;
+      margin-top:auto;
+    }
+    .demo-bullets li{
+      color:rgba(255,255,255,0.78);
+      font-size:13px;line-height:1.4;
+      padding-left:20px;position:relative;
+    }
+    .demo-bullets li::before{
+      content:'✓';position:absolute;left:0;top:0;
+      color:#0EA5E9;font-weight:700;
+    }
+
+    /* Mockup window — devis */
+    .mockup-window{
+      width:100%;background:#1d1d1f;
+      border-radius:8px;overflow:hidden;
+      border:1px solid rgba(255,255,255,0.1);
+    }
+    .mockup-bar{
+      display:flex;align-items:center;gap:6px;
+      padding:8px 12px;background:rgba(255,255,255,0.04);
+      border-bottom:1px solid rgba(255,255,255,0.08);
+    }
+    .mockup-dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+    .mockup-dot.red{background:#ff5f57}
+    .mockup-dot.yellow{background:#ffbd2e}
+    .mockup-dot.green{background:#28ca42}
+    .mockup-title{
+      margin-left:auto;margin-right:auto;
+      font-size:11px;color:rgba(255,255,255,0.5);
+    }
+    .mockup-body{padding:14px;display:flex;flex-direction:column;gap:8px}
+    .mockup-field{display:flex;align-items:center;gap:10px;font-size:12px}
+    .mockup-field label{
+      color:rgba(255,255,255,0.45);min-width:70px;
+      font-size:10px;text-transform:uppercase;letter-spacing:0.5px;
+    }
+    .mockup-input{
+      flex:1;background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:5px;padding:6px 10px;
+      color:rgba(255,255,255,0.85);font-size:12px;
+    }
+    .mockup-input-ai{color:#0EA5E9;font-weight:500;border-color:rgba(14,165,233,0.3)}
+    .mockup-btn{
+      background:#0EA5E9;color:#fff;text-align:center;
+      padding:9px;border-radius:6px;
+      font-size:12px;font-weight:500;margin-top:4px;
+    }
+
+    /* Timeline — relances */
+    .mockup-timeline{display:flex;flex-direction:column;gap:14px;width:100%}
+    .timeline-item{display:flex;gap:12px;align-items:center;opacity:0.4}
+    .timeline-item.done{opacity:0.65}
+    .timeline-item.active{opacity:1}
+    .timeline-dot{
+      width:10px;height:10px;border-radius:50%;
+      background:rgba(255,255,255,0.2);flex-shrink:0;
+    }
+    .timeline-item.done .timeline-dot{background:rgba(14,165,233,0.4)}
+    .timeline-item.active .timeline-dot{
+      background:#0EA5E9;
+      box-shadow:0 0 0 4px rgba(14,165,233,0.2);
+    }
+    .timeline-content{display:flex;flex-direction:column;gap:2px}
+    .timeline-label{font-size:13px;color:rgba(255,255,255,0.9);font-weight:500}
+    .timeline-date{font-size:11px;color:rgba(255,255,255,0.45)}
+
+    /* Leads multi-canaux */
+    .mockup-sources{display:flex;gap:6px;margin-bottom:6px;width:100%}
+    .source-item{
+      flex:1;background:rgba(255,255,255,0.05);
+      padding:8px 6px;border-radius:6px;
+      font-size:11px;text-align:center;
+      color:rgba(255,255,255,0.8);
+    }
+    .mockup-arrows{
+      text-align:center;color:rgba(14,165,233,0.6);
+      font-size:14px;margin:4px 0;
+    }
+    .mockup-inbox{
+      background:#1d1d1f;border-radius:6px;
+      padding:8px;display:flex;flex-direction:column;gap:6px;
+      width:100%;
+      border:1px solid rgba(255,255,255,0.06);
+    }
+    .inbox-row{
+      display:flex;gap:8px;align-items:center;
+      padding:6px 8px;background:rgba(255,255,255,0.03);
+      border-radius:4px;font-size:11px;
+    }
+    .inbox-source{
+      background:rgba(14,165,233,0.15);color:#0EA5E9;
+      padding:2px 7px;border-radius:3px;
+      font-size:10px;font-weight:600;
+    }
+    .inbox-name{flex:1;color:rgba(255,255,255,0.85);font-weight:500}
+    .inbox-tag{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500}
+    .inbox-tag.hot{background:rgba(255,99,99,0.15);color:#ff8585}
+    .inbox-tag.warm{background:rgba(255,189,46,0.15);color:#ffd97a}
+    .inbox-tag.cold{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.5)}
+
+    /* Audio → doc (rapports) */
+    .mockup-audio{
+      background:rgba(255,255,255,0.04);border-radius:6px;
+      padding:10px 12px;width:100%;
+      border:1px solid rgba(255,255,255,0.06);
+    }
+    .audio-waveform{
+      display:flex;gap:2px;align-items:center;
+      height:26px;margin-bottom:6px;
+    }
+    .audio-waveform span{
+      display:inline-block;width:3px;
+      background:#0EA5E9;border-radius:2px;
+    }
+    .audio-waveform span:nth-child(1){height:8px}
+    .audio-waveform span:nth-child(2){height:16px}
+    .audio-waveform span:nth-child(3){height:12px}
+    .audio-waveform span:nth-child(4){height:22px}
+    .audio-waveform span:nth-child(5){height:10px}
+    .audio-waveform span:nth-child(6){height:18px}
+    .audio-waveform span:nth-child(7){height:14px}
+    .audio-waveform span:nth-child(8){height:24px}
+    .audio-waveform span:nth-child(9){height:9px}
+    .audio-waveform span:nth-child(10){height:17px}
+    .audio-waveform span:nth-child(11){height:13px}
+    .audio-waveform span:nth-child(12){height:21px}
+    .audio-waveform span:nth-child(13){height:7px}
+    .audio-waveform span:nth-child(14){height:15px}
+    .audio-waveform span:nth-child(15){height:11px}
+    .audio-label{font-size:10px;color:rgba(255,255,255,0.5)}
+    .mockup-arrow{
+      text-align:center;color:#0EA5E9;
+      font-size:12px;font-weight:600;margin:8px 0;
+    }
+    .mockup-doc{
+      background:rgba(255,255,255,0.05);border-radius:5px;
+      padding:12px;width:100%;
+      border:1px solid rgba(255,255,255,0.06);
+    }
+    .doc-header{
+      font-size:11px;font-weight:600;color:rgba(255,255,255,0.9);
+      margin-bottom:8px;padding-bottom:6px;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+    }
+    .doc-line{
+      height:5px;background:rgba(255,255,255,0.12);
+      border-radius:2px;margin-bottom:5px;
+    }
+    .doc-line.short{width:60%}
+
+    .demos-note{
+      max-width:680px;margin:48px auto 0;text-align:center;
+      font-size:14px;color:rgba(255,255,255,0.55);padding:0 24px;
+    }
+    .demos-note a{
+      color:#0EA5E9;text-decoration:none;font-weight:500;
+      border-bottom:1px solid rgba(14,165,233,0.3);
+      transition:color .2s,border-color .2s;
+    }
+    .demos-note a:hover{color:#38bdf8;border-color:#38bdf8}
+
+    @media(max-width:600px){
+      .demo-card{padding:24px}
+      .demo-mockup{min-height:160px;padding:14px}
+    }
+
+    /* ── DASHBOARD MOCKUP — démo unifiée (option B) ── */
+    .hero-demo{
+      max-width:1080px;margin:0 auto;padding:0 24px;
+    }
+    .dashmock-window{
+      background:#0c0c0e;
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:0 40px 80px -20px rgba(14,165,233,0.25),
+                 0 0 0 1px rgba(14,165,233,0.06);
+    }
+    .dashmock-bar{
+      display:flex;align-items:center;gap:8px;
+      padding:14px 18px;
+      background:rgba(255,255,255,0.03);
+      border-bottom:1px solid rgba(255,255,255,0.07);
+    }
+    .dashmock-title{
+      margin-left:14px;
+      font-size:12px;color:rgba(255,255,255,0.6);font-weight:500;
+    }
+    .dashmock-live{
+      margin-left:auto;
+      font-size:11px;color:#28ca42;
+      display:flex;align-items:center;gap:5px;
+    }
+    .dashmock-live::before{
+      content:'';width:7px;height:7px;border-radius:50%;
+      background:#28ca42;
+      box-shadow:0 0 6px #28ca42;
+      animation:dashmock-pulse 2s ease-in-out infinite;
+    }
+    @keyframes dashmock-pulse{50%{opacity:0.5}}
+    .dashmock-body{
+      padding:32px;
+      background:linear-gradient(180deg,#0c0c0e 0%,#0a0a0c 100%);
+    }
+    .dashmock-row{
+      display:flex;align-items:center;justify-content:space-between;
+      margin-bottom:28px;gap:16px;flex-wrap:wrap;
+    }
+    .dashmock-hello{
+      font-size:24px;font-weight:600;color:#fff;
+      letter-spacing:-0.4px;
+    }
+    .dashmock-sub{
+      font-size:13px;color:rgba(255,255,255,0.5);margin-top:2px;
+    }
+    .dashmock-period{
+      display:flex;gap:4px;
+      background:rgba(255,255,255,0.04);
+      border-radius:8px;padding:4px;
+      border:1px solid rgba(255,255,255,0.06);
+    }
+    .period-tab{
+      padding:6px 14px;font-size:12px;
+      color:rgba(255,255,255,0.5);
+      border-radius:5px;
+      transition:background .2s,color .2s;
+    }
+    .period-tab.active{
+      background:rgba(14,165,233,0.15);
+      color:#0EA5E9;font-weight:600;
+    }
+    .dashmock-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+    }
+    @media(max-width:900px){.dashmock-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:520px){.dashmock-grid{grid-template-columns:1fr}}
+    .dashmock-widget{
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.06);
+      border-radius:12px;
+      padding:18px;
+      transition:transform .25s,border-color .25s;
+      display:flex;flex-direction:column;gap:8px;
+    }
+    .dashmock-widget:hover{
+      transform:translateY(-3px);
+      border-color:rgba(14,165,233,0.3);
+    }
+    .widget-head{
+      display:flex;align-items:center;gap:8px;
+    }
+    .widget-icon{font-size:18px;line-height:1}
+    .widget-label{
+      font-size:11px;color:rgba(255,255,255,0.55);
+      text-transform:uppercase;letter-spacing:0.6px;font-weight:500;
+    }
+    .widget-num{
+      font-size:36px;font-weight:700;color:#fff;
+      line-height:1;letter-spacing:-1px;margin:4px 0 2px;
+    }
+    .widget-unit{
+      font-size:18px;font-weight:500;color:rgba(255,255,255,0.5);
+      margin-left:2px;
+    }
+    .widget-meta{
+      font-size:11px;color:rgba(255,255,255,0.5);
+    }
+    .widget-up{
+      color:#28ca42;font-weight:600;
+    }
+    .widget-hot{
+      color:#ff8585;font-weight:600;
+    }
+    .widget-spark{
+      display:flex;align-items:flex-end;gap:3px;height:24px;margin-top:6px;
+    }
+    .widget-spark span{
+      flex:1;background:linear-gradient(180deg,rgba(14,165,233,0.6),rgba(14,165,233,0.15));
+      border-radius:2px;
+    }
+    .widget-spark span:nth-child(1){height:30%}
+    .widget-spark span:nth-child(2){height:55%}
+    .widget-spark span:nth-child(3){height:42%}
+    .widget-spark span:nth-child(4){height:70%}
+    .widget-spark span:nth-child(5){height:60%}
+    .widget-spark span:nth-child(6){height:85%}
+    .widget-spark span:nth-child(7){height:100%}
+    .widget-mini-list{
+      display:flex;flex-direction:column;gap:4px;margin-top:4px;
+    }
+    .mini-lead{
+      font-size:11px;color:rgba(255,255,255,0.65);
+      padding:4px 8px;
+      background:rgba(255,99,99,0.08);
+      border-radius:4px;
+      border-left:2px solid #ff8585;
+    }
+    .widget-bar{
+      height:5px;background:rgba(255,255,255,0.06);
+      border-radius:3px;overflow:hidden;margin-top:6px;
+    }
+    .widget-bar-fill{
+      height:100%;width:72%;
+      background:linear-gradient(90deg,#0EA5E9,#28ca42);
+      border-radius:3px;
+    }
+
+    .hero-demo-foot{
+      display:flex;justify-content:center;gap:12px;
+      margin-top:24px;flex-wrap:wrap;
+    }
+    .hero-demo-pill{
+      padding:7px 14px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:99px;
+      font-size:12px;color:rgba(255,255,255,0.7);
+    }
+
+    @media(max-width:680px){
+      .dashmock-body{padding:20px}
+      .dashmock-hello{font-size:20px}
+      .widget-num{font-size:30px}
+    }
+
     /* ── PRICING CARDS — offres avec prix ── */
     .pricing-wrap{
       display:grid;grid-template-columns:repeat(3,1fr);gap:28px;
@@ -1640,9 +2013,9 @@
   </a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
+    <li><a href="#demos">Réalisations</a></li>
     <li><a href="#offres">Offres</a></li>
     <li><a href="#processus">Méthode</a></li>
-    <li><a href="#temoignages">Avis</a></li>
     <li class="nav-cta-li"><a href="#contact" class="nav-cta">Nous contacter</a></li>
   </ul>
   <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false">
@@ -1652,9 +2025,9 @@
 <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
   <ul>
     <li><a href="#services" data-close>Services</a></li>
+    <li><a href="#demos" data-close>Réalisations</a></li>
     <li><a href="#offres" data-close>Offres</a></li>
     <li><a href="#processus" data-close>Méthode</a></li>
-    <li><a href="#temoignages" data-close>Avis</a></li>
     <li><a href="#histoire" data-close>Notre histoire</a></li>
     <li><a href="#contact" class="mobile-menu-cta" data-close>Nous contacter →</a></li>
   </ul>
@@ -1834,59 +2207,101 @@
   </div>
 </section>
 
-<!-- EXEMPLES CONCRETS — section masquée à la demande (gardée en code au cas où) -->
-<section class="light-section" id="exemples" style="display:none">
-  <span class="section-eyebrow">Exemples concrets</span>
-  <h2 class="section-title">Ce qu'on automatise <em>chez nos clients</em></h2>
-  <p class="section-sub">Des cas réels, par métier, avec le temps économisé chaque semaine.</p>
+<!-- DÉMO — mockup dashboard unifié (un seul visuel qui parle à toutes les PME) -->
+<section class="dark-section" id="demos">
+  <span class="section-eyebrow">Démo</span>
+  <h2 class="section-title">Voici à quoi peut ressembler <em>votre futur outil</em></h2>
+  <p class="section-sub">Un tableau de bord unique pour piloter tout ce qu'on automatise pour vous. Adapté à votre métier, sur mesure.</p>
 
-  <div class="examples-grid">
+  <div class="hero-demo">
 
-    <div class="ecard">
-      <div class="ecard-icon">🏛️</div>
-      <div class="ecard-sector">Cabinet d'expertise comptable</div>
-      <h4 class="ecard-task">Tri et classement automatique des pièces clients</h4>
-      <div class="ecard-result"><span class="result-num">~6h</span><span class="result-label">économisées / semaine</span></div>
+    <div class="dashmock-window">
+      <div class="dashmock-bar">
+        <span class="mockup-dot red"></span>
+        <span class="mockup-dot yellow"></span>
+        <span class="mockup-dot green"></span>
+        <span class="dashmock-title">Tableau de bord · Neova</span>
+        <span class="dashmock-live">● en direct</span>
+      </div>
+
+      <div class="dashmock-body">
+
+        <div class="dashmock-row">
+          <div class="dashmock-greeting">
+            <div class="dashmock-hello">Bonjour Yanis 👋</div>
+            <div class="dashmock-sub">Voici votre semaine en un coup d'œil</div>
+          </div>
+          <div class="dashmock-period">
+            <span class="period-tab active">Semaine</span>
+            <span class="period-tab">Mois</span>
+            <span class="period-tab">Année</span>
+          </div>
+        </div>
+
+        <div class="dashmock-grid">
+
+          <div class="dashmock-widget">
+            <div class="widget-head">
+              <span class="widget-icon">📋</span>
+              <span class="widget-label">Devis générés</span>
+            </div>
+            <div class="widget-num">12</div>
+            <div class="widget-meta"><span class="widget-up">↑ +4</span> vs semaine dernière</div>
+            <div class="widget-spark">
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+
+          <div class="dashmock-widget">
+            <div class="widget-head">
+              <span class="widget-icon">📞</span>
+              <span class="widget-label">Leads captés</span>
+            </div>
+            <div class="widget-num">8</div>
+            <div class="widget-meta"><span class="widget-hot">🔥 3 chauds</span> à rappeler</div>
+            <div class="widget-mini-list">
+              <div class="mini-lead">Martin S. · Form</div>
+              <div class="mini-lead">Restaurant L. · Tel</div>
+            </div>
+          </div>
+
+          <div class="dashmock-widget">
+            <div class="widget-head">
+              <span class="widget-icon">💸</span>
+              <span class="widget-label">Factures relancées</span>
+            </div>
+            <div class="widget-num">4</div>
+            <div class="widget-meta"><span class="widget-up">+2 850 €</span> récupérés cette semaine</div>
+            <div class="widget-bar">
+              <div class="widget-bar-fill"></div>
+            </div>
+          </div>
+
+          <div class="dashmock-widget">
+            <div class="widget-head">
+              <span class="widget-icon">⏱️</span>
+              <span class="widget-label">Temps économisé</span>
+            </div>
+            <div class="widget-num">14<span class="widget-unit">h</span></div>
+            <div class="widget-meta"><span class="widget-up">↑ 56h</span> sur le mois</div>
+            <div class="widget-spark">
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
     </div>
 
-    <div class="ecard">
-      <div class="ecard-icon">⚖️</div>
-      <div class="ecard-sector">Cabinet d'avocat</div>
-      <h4 class="ecard-task">Génération d'actes répétitifs et préparation de dossiers</h4>
-      <div class="ecard-result"><span class="result-num">~10h</span><span class="result-label">économisées / semaine</span></div>
+    <div class="hero-demo-foot">
+      <span class="hero-demo-pill">✨ Sur mesure</span>
+      <span class="hero-demo-pill">🔒 Vos données vous appartiennent</span>
+      <span class="hero-demo-pill">⚡ Adapté à votre métier</span>
     </div>
-
-    <div class="ecard">
-      <div class="ecard-icon">🔨</div>
-      <div class="ecard-sector">Artisan BTP / Couvreur</div>
-      <h4 class="ecard-task">Devis automatique sur demande entrante (formulaire / mail)</h4>
-      <div class="ecard-result"><span class="result-num">~4h</span><span class="result-label">économisées / semaine</span></div>
-    </div>
-
-    <div class="ecard">
-      <div class="ecard-icon">🩺</div>
-      <div class="ecard-sector">Cabinet médical / Vétérinaire</div>
-      <h4 class="ecard-task">Standard IA + prise de RDV + rappels patients</h4>
-      <div class="ecard-result"><span class="result-num">~8h</span><span class="result-label">économisées / semaine</span></div>
-    </div>
-
-    <div class="ecard">
-      <div class="ecard-icon">🏗️</div>
-      <div class="ecard-sector">Bureau d'études / Expert bâtiment</div>
-      <h4 class="ecard-task">Rédaction automatique de rapports + tri de photos chantier</h4>
-      <div class="ecard-result"><span class="result-num">~7h</span><span class="result-label">économisées / semaine</span></div>
-    </div>
-
-    <div class="ecard">
-      <div class="ecard-icon">🚛</div>
-      <div class="ecard-sector">Transporteur / Logistique</div>
-      <h4 class="ecard-task">Saisie de bons + planning chauffeurs + relances factures</h4>
-      <div class="ecard-result"><span class="result-num">~9h</span><span class="result-label">économisées / semaine</span></div>
-    </div>
-
   </div>
 
-  <p class="examples-note">Votre métier n'est pas dans la liste ? <a href="#contact">Parlons-en</a> — on a presque toujours un cas d'usage adapté.</p>
+  <p class="demos-note">Ce mockup n'est qu'un exemple. <a href="#contact">Décrivez-moi votre activité</a> et je vous monte l'outil exact qui résout vos vrais problèmes.</p>
 </section>
 
 <!-- OFFRES — 3 packs (sans tarifs visibles, "sur devis") -->
