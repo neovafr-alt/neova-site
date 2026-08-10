@@ -1994,7 +1994,7 @@
     }
   </style>
 </head>
-<body>
+<body data-simu-profil="restaurant">
 
 <!-- NAV -->
 <nav>
@@ -2007,7 +2007,7 @@
     
     <li><a href="#processus">Méthode</a></li>
     <li><a href="/" style="opacity:.7">← neova.agency</a></li>
-    <li class="nav-cta-li"><a href="#contact" class="nav-cta">Nous contacter</a></li>
+    <li class="nav-cta-li"><a href="https://calendar.app.google/R4ugqFzZaBMKv9Q47" class="nav-cta" target="_blank" rel="noopener">Réserver 15 minutes &#8594;</a></li>
   </ul>
   <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false">
     <span></span><span></span><span></span>
@@ -2020,7 +2020,7 @@
     
     <li><a href="#processus" data-close>Méthode</a></li>
     <li><a href="/" data-close>← neova.agency</a></li>
-    <li><a href="#contact" class="mobile-menu-cta" data-close>Nous contacter →</a></li>
+    <li><a href="https://calendar.app.google/R4ugqFzZaBMKv9Q47" class="mobile-menu-cta" data-close target="_blank" rel="noopener">Réserver 15 minutes &#8594;</a></li>
   </ul>
 </div>
 
@@ -2049,7 +2049,7 @@
 
 <section class="tunnel-stat">
   <p class="tunnel-line">En plein service, le téléphone sonne <em>dans le vide</em>. Et un client qui veut réserver et tombe sur le répondeur, c'est <strong>une table qui part au resto d'à côté.</strong></p>
-  <a href="#contact" class="tunnel-cta"><span>Parlons-en</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+  <a href="https://calendar.app.google/R4ugqFzZaBMKv9Q47" class="tunnel-cta" target="_blank" rel="noopener">Réserver 15 minutes &#8594;</a>
 </section>
 
 <section class="dark-section" id="defis">
@@ -2096,7 +2096,7 @@
 
 <section class="tunnel-stat">
   <p class="tunnel-line">Quelques <em>tables récupérées par semaine</em> qui seraient parties ailleurs, et l'assistant est <strong>largement rentabilisé.</strong> Et il travaille pour vous chaque soir.</p>
-  <a href="#contact" class="tunnel-cta"><span>Je veux ça</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+  <a href="https://calendar.app.google/R4ugqFzZaBMKv9Q47" class="tunnel-cta" target="_blank" rel="noopener">Réserver 15 minutes &#8594;</a>
 </section>
 
 <section class="light-section" id="processus">
@@ -2145,6 +2145,332 @@
 
   </div>
 </section>
+
+<section class="dark-section" id="offres">
+  <span class="section-eyebrow">Votre standardiste IA</span>
+  <h2 class="section-title">Ce que vous coûtent <em>les appels que vous ratez</em></h2>
+  <p class="section-sub">Deux chiffres suffisent pour le savoir. Les vôtres.</p>
+
+  <div class="simu-tabs" role="tablist" aria-label="Choisissez votre métier">
+    <button class="simu-tab is-on" role="tab" aria-selected="true" data-profil="plombier">Plombier</button>
+    <button class="simu-tab" role="tab" aria-selected="false" data-profil="electricien">Électricien</button>
+    <button class="simu-tab" role="tab" aria-selected="false" data-profil="couvreur">Couvreur</button>
+    <button class="simu-tab" role="tab" aria-selected="false" data-profil="garage">Garage</button>
+    <button class="simu-tab" role="tab" aria-selected="false" data-profil="coiffeur">Coiffeur</button>
+    <button class="simu-tab" role="tab" aria-selected="false" data-profil="medecin">Médecin</button>
+    <button class="simu-tab" role="tab" aria-selected="false" data-profil="kine">Kiné</button>
+    <button class="simu-tab" role="tab" aria-selected="false" data-profil="restaurant">Restaurant</button>
+    <button class="simu-tab" role="tab" aria-selected="false" data-profil="immobilier">Immobilier</button>
+    <button class="simu-tab" role="tab" aria-selected="false" data-profil="comptable">Comptable</button>
+  </div>
+
+  <div class="simu-wrap" id="simu" data-profil="depannage">
+    <div class="simu-inputs">
+      <label class="simu-field">
+        <span class="simu-lab" id="labA">Appels que vous ne pouvez pas prendre, par semaine</span>
+        <div class="simu-row">
+          <input type="range" id="inA" min="1" max="40" value="8" step="1" aria-labelledby="labA">
+          <output id="outA" class="simu-out">8</output>
+        </div>
+      </label>
+      <label class="simu-field">
+        <span class="simu-lab" id="labB">Montant moyen d'une intervention</span>
+        <div class="simu-row">
+          <input type="range" id="inB" min="80" max="3000" value="350" step="10" aria-labelledby="labB">
+          <output id="outB" class="simu-out">350 €</output>
+        </div>
+      </label>
+      <p class="simu-note" id="simuNote"></p>
+    </div>
+
+    <div class="simu-result">
+      <span class="simu-result-lab" id="resLab">Ce qui part chez le voisin</span>
+      <div class="simu-big"><span id="resVal">36 400</span> <span id="resUnit">€</span></div>
+      <span class="simu-result-sub" id="resSub">par an, estimation basse</span>
+
+      <div class="simu-compare">
+        <div class="simu-cmp-row">
+          <span>Votre standardiste IA <small style="color:var(--light)">(abonnement, hors installation)</small></span>
+          <b>7 080 € / an</b>
+        </div>
+        <div class="simu-cmp-row simu-cmp-win">
+          <span id="gainLab">Ce que vous récupérez</span>
+          <b id="gainVal">+ 29 320 €</b>
+        </div>
+      </div>
+      <p class="simu-foot" id="simuPhrase"></p>
+    </div>
+  </div>
+
+  <p class="simu-lp"><a id="simuLp" href="/plombiers/">Voir la page dédiée aux plombiers &#8594;</a></p>
+
+  <div class="prix-block">
+    <div class="prix-card">
+      <span class="prix-eyebrow">Le prix, sans détour</span>
+      <div class="prix-main">
+        <div class="prix-item"><span class="prix-num">1 500 €</span><span class="prix-lab">installation, une fois</span></div>
+        <span class="prix-plus">+</span>
+        <div class="prix-item"><span class="prix-num">590 €<small>/mois</small></span><span class="prix-lab">tout compris, sans engagement</span></div>
+      </div>
+      <p class="prix-vs">Un standard humain à mi-temps vous coûterait entre 1 200 et 1 800 € par mois, charges comprises. Et il ne décroche ni le dimanche, ni à 22 h.</p>
+      <ul class="prix-list">
+        <li>Il décroche à chaque appel, même en plein coup de feu, jour et nuit</li>
+        <li>Il note le nom, le nombre de couverts et l'horaire souhaité</li>
+        <li>Il vous transmet chaque réservation par SMS, en temps réel</li>
+        <li>Il ne promet jamais une table sans votre accord</li>
+        <li>Installation, numéro, mises à jour et suivi inclus</li>
+      </ul>
+      <div class="prix-guarantee">
+        <strong>Deux semaines d'essai, gratuites.</strong>
+        Vous ne payez rien et vous ne signez rien tant que vous n'avez pas vu ce qu'il récupère chez vous.
+      </div>
+      <a href="https://calendar.app.google/R4ugqFzZaBMKv9Q47" target="_blank" rel="noopener" class="btn-fill">Réserver 15 minutes &#8594;</a>
+      <p class="prix-micro">15 minutes au téléphone avec moi. Pas un commercial, pas un centre d'appel.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .simu-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:820px;margin:34px auto 0}
+  .simu-tab{font:inherit;font-size:14px;font-weight:500;color:#d2d2d7;background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:9px 18px;cursor:pointer;transition:.18s}
+  .simu-tab:hover{background:rgba(255,255,255,.11)}
+  .simu-tab.is-on{background:var(--sky);border-color:var(--sky);color:#fff}
+  .simu-tab:focus-visible{outline:2px solid var(--sky);outline-offset:3px}
+  @media(max-width:600px){.simu-tabs{gap:6px}.simu-tab{font-size:13px;padding:8px 14px}}
+  .simu-lp{text-align:center;margin:18px 0 0}
+  .simu-lp a{font-size:15px;color:#7dd3fc;text-decoration:none;border-bottom:1px solid rgba(125,211,252,.35);padding-bottom:2px}
+  .simu-lp a:hover{color:#fff;border-bottom-color:#fff}
+  .simu-wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;max-width:1000px;margin:26px auto 0;align-items:stretch}
+  @media(max-width:820px){.simu-wrap{grid-template-columns:1fr;gap:20px}}
+  .simu-inputs{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:30px 28px}
+  .simu-field{display:block;margin-bottom:28px}
+  .simu-field:last-of-type{margin-bottom:16px}
+  .simu-lab{display:block;font-size:15px;color:#d2d2d7;margin-bottom:14px;line-height:1.4}
+  .simu-row{display:flex;align-items:center;gap:16px}
+  .simu-row input[type=range]{flex:1;-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;background:rgba(255,255,255,.18);outline:none}
+  .simu-row input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--sky);cursor:pointer;border:3px solid #fff;box-shadow:0 2px 10px rgba(14,165,233,.5)}
+  .simu-row input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--sky);cursor:pointer;border:3px solid #fff}
+  .simu-row input[type=range]:focus-visible{outline:2px solid var(--sky);outline-offset:6px}
+  .simu-out{min-width:104px;text-align:right;font-size:26px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+  .simu-note{font-size:13px;color:var(--light);line-height:1.55;margin:0}
+  .simu-result{background:linear-gradient(160deg,rgba(14,165,233,.16),rgba(14,165,233,.04));border:1px solid rgba(14,165,233,.32);border-radius:20px;padding:30px 28px;display:flex;flex-direction:column}
+  .simu-result-lab{font-size:13px;text-transform:uppercase;letter-spacing:.09em;color:#7dd3fc}
+  .simu-big{font-size:clamp(40px,6.4vw,60px);font-weight:700;letter-spacing:-.03em;line-height:1.05;color:#fff;margin:8px 0 2px;font-variant-numeric:tabular-nums}
+  .simu-result-sub{font-size:14px;color:var(--light);margin-bottom:22px}
+  .simu-compare{border-top:1px solid rgba(255,255,255,.14);padding-top:18px;margin-top:auto}
+  .simu-cmp-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:7px 0;font-size:15px;color:#d2d2d7}
+  .simu-cmp-row b{color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .simu-cmp-win b{color:#4ade80;font-size:19px}
+  .simu-cmp-win.is-neg b{color:#f87171}
+  .simu-foot{font-size:13.5px;color:var(--light);line-height:1.55;margin:16px 0 0;border-top:1px solid rgba(255,255,255,.1);padding-top:14px}
+  .prix-block{max-width:1000px;margin:34px auto 0}
+  .prix-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:38px 34px;text-align:center}
+  .prix-eyebrow{display:block;font-size:13px;text-transform:uppercase;letter-spacing:.09em;color:#7dd3fc;margin-bottom:22px}
+  .prix-main{display:flex;align-items:center;justify-content:center;gap:26px;flex-wrap:wrap;margin-bottom:18px}
+  .prix-item{display:flex;flex-direction:column;gap:5px}
+  .prix-num{font-size:clamp(34px,5vw,46px);font-weight:700;letter-spacing:-.03em;color:#fff;line-height:1}
+  .prix-num small{font-size:20px;font-weight:600;color:var(--light)}
+  .prix-lab{font-size:13.5px;color:var(--light)}
+  .prix-plus{font-size:28px;color:var(--light);font-weight:300}
+  .prix-vs{max-width:60ch;margin:0 auto 26px;font-size:15.5px;color:#d2d2d7;line-height:1.6}
+  .prix-list{list-style:none;padding:0;margin:0 auto 26px;max-width:520px;text-align:left}
+  .prix-list li{position:relative;padding:9px 0 9px 30px;font-size:15px;color:#d2d2d7;border-bottom:1px solid rgba(255,255,255,.07);line-height:1.45}
+  .prix-list li:last-child{border-bottom:0}
+  .prix-list li::before{content:"";position:absolute;left:4px;top:16px;width:9px;height:9px;border-radius:50%;background:var(--sky)}
+  .prix-guarantee{max-width:60ch;margin:0 auto 28px;padding:18px 22px;background:rgba(74,222,128,.09);border:1px solid rgba(74,222,128,.28);border-radius:14px;font-size:15px;color:#d2d2d7;line-height:1.55}
+  .prix-guarantee strong{display:block;color:#4ade80;margin-bottom:4px}
+  .prix-micro{font-size:13px;color:var(--light);margin:14px 0 0}
+</style>
+
+<script>
+(function(){
+  var box=document.getElementById('simu'); if(!box) return;
+  var inA=document.getElementById('inA'), inB=document.getElementById('inB'),
+      outA=document.getElementById('outA'), outB=document.getElementById('outB'),
+      labA=document.getElementById('labA'), labB=document.getElementById('labB'),
+      resLab=document.getElementById('resLab'), resVal=document.getElementById('resVal'),
+      resUnit=document.getElementById('resUnit'), resSub=document.getElementById('resSub'),
+      gainLab=document.getElementById('gainLab'), gainVal=document.getElementById('gainVal'),
+      note=document.getElementById('simuNote'), phrase=document.getElementById('simuPhrase'),
+      lpLink=document.getElementById('simuLp'), lpWrap=lpLink?lpLink.parentNode:null;
+  var AN=7080; // 590 x 12
+  var f=function(n){return Math.round(n).toLocaleString('fr-FR');};
+
+  var P={
+    depannage:{
+      a:{lab:"Appels que vous ne pouvez pas prendre, par semaine",min:1,max:40,val:8,step:1,fmt:function(v){return v;}},
+      b:{lab:"Montant moyen d'une intervention",min:80,max:3000,val:350,step:10,fmt:function(v){return f(v)+' €';}},
+      note:"On part du principe qu'un appel manqué sur quatre serait devenu une intervention. Le reste, ce sont des démarchages, des erreurs et des gens qui rappellent.",
+      resLab:"Ce qui part chez le voisin", unit:"€", sub:"par an, estimation basse", mot:"interventions", genre:"f",
+      calc:function(a,b){return a*52*0.25*b;}, mode:"euros"
+    },
+    rdv:{
+      a:{lab:"Appels reçus pendant que vous travaillez, par jour",min:2,max:40,val:12,step:1,fmt:function(v){return v;}},
+      b:{lab:"Temps perdu par appel : coupure, puis rappel le soir",min:1,max:12,val:4,step:1,fmt:function(v){return v+' min';}},
+      note:"Un appel pendant un soin ne coûte pas que sa durée : il casse la concentration, et il finit en rappel le soir. C'est ce temps-là qu'on vous rend.",
+      resLab:"Temps repris sur votre métier", unit:"h / mois", sub:"soit l'équivalent de plusieurs journées par an",
+      calc:function(a,b){return a*22*b/60;}, mode:"temps"
+    },
+    reservation:{
+      a:{lab:"Appels manqués pendant le service, par jour",min:1,max:30,val:6,step:1,fmt:function(v){return v;}},
+      b:{lab:"Addition moyenne par personne",min:15,max:200,val:38,step:1,fmt:function(v){return f(v)+' €';}},
+      note:"On compte qu'un appel manqué sur trois en plein service était une réservation, pour deux personnes en moyenne, sur 6 jours d'ouverture par semaine.",
+      resLab:"Ce qui ne s'assoit jamais chez vous", unit:"€", sub:"par an, estimation basse", mot:"réservations", genre:"f",
+      calc:function(a,b){return a*6*52*0.33*b*2;}, mode:"euros"
+    },
+    valeur:{
+      a:{lab:"Appels manqués par semaine",min:1,max:20,val:3,step:1,fmt:function(v){return v;}},
+      b:{lab:"Valeur moyenne d'un mandat ou d'un dossier",min:500,max:15000,val:4000,step:100,fmt:function(v){return f(v)+' €';}},
+      note:"Le taux retenu est volontairement bas : 1 appel manqué sur 12 seulement se transforme en affaire. Sur ces montants, un seul suffit à tout changer.",
+      resLab:"Ce qui signe ailleurs", unit:"€", sub:"par an, estimation basse", mot:"mandats", genre:"m",
+      calc:function(a,b){return a*52*(1/12)*b;}, mode:"euros"
+    }
+  };
+
+  // 10 secteurs : chacun hérite d'un des 4 modèles ci-dessus et ajuste ses chiffres,
+  // son vocabulaire et le lien vers sa page dédiée.
+  // Un ratio par ordre de grandeur : plus le ticket est gros, plus la conversion est basse.
+  var R4=function(a,b){return a*52*0.25*b;},        // 1 appel manqué sur 4
+      R6=function(a,b){return a*52*(1/6)*b;},       // 1 sur 6
+      R8=function(a,b){return a*52*0.125*b;};       // 1 sur 8
+  var N4="On part du principe qu'un appel manqué sur quatre serait devenu une intervention. Le reste, ce sont des démarchages, des erreurs et des gens qui rappellent.",
+      N6C="On retient qu'un appel manqué sur six seulement serait devenu un chantier. Le reste, ce sont des démarchages, des erreurs et des gens qui rappellent.",
+      N8C="On retient qu'un appel manqué sur huit seulement serait devenu un chantier. Sur ces montants, il n'en faut pas beaucoup pour que ça compte.";
+
+  var SECTEURS={
+    plombier:   {base:"depannage",   lp:"/plombiers/",            lien:"Voir la page dédiée aux plombiers",
+                 a:{val:8},  b:{val:350}},
+    electricien:{base:"depannage",   lp:"/electriciens/",         lien:"Voir la page dédiée aux électriciens",
+                 a:{val:7},  b:{val:280}},
+    couvreur:   {base:"depannage",   lp:"/couvreurs/",            lien:"Voir la page dédiée aux couvreurs",
+                 a:{val:5},  b:{lab:"Montant moyen d'un chantier",val:1200,min:100,max:8000,step:50},
+                 mot:"chantiers", genre:"m", calc:R8, note:N8C},
+    macon:      {base:"depannage",   lp:"/macons/",               lien:"Voir la page dédiée aux maçons",
+                 a:{val:5},  b:{lab:"Montant moyen d'un chantier",val:1500,min:100,max:12000,step:50},
+                 mot:"chantiers", genre:"m", calc:R8, note:N8C},
+    menuisier:  {base:"depannage",   lp:"/menuisiers/",           lien:"Voir la page dédiée aux menuisiers",
+                 a:{val:6},  b:{lab:"Montant moyen d'une pose ou d'un ouvrage",val:900,min:100,max:6000,step:50},
+                 mot:"chantiers", genre:"m", calc:R6, note:N6C},
+    paysagiste: {base:"depannage",   lp:"/paysagistes/",          lien:"Voir la page dédiée aux paysagistes",
+                 a:{val:7},  b:{lab:"Montant moyen d'un chantier d'entretien",val:400},
+                 mot:"chantiers", genre:"m", calc:R4,
+                 note:"On part du principe qu'un appel manqué sur quatre serait devenu un chantier. Le reste, ce sont des démarchages, des erreurs et des gens qui rappellent."},
+    garage:     {base:"depannage",   lp:"/garages/",              lien:"Voir la page dédiée aux garages",
+                 a:{val:10}, b:{lab:"Montant moyen d'une réparation",val:420},
+                 mot:"réparations", genre:"f", calc:R4,
+                 note:"On part du principe qu'un appel manqué sur quatre serait passé à l'atelier. Le reste, ce sont des démarchages, des erreurs et des gens qui rappellent."},
+    carrossier: {base:"depannage",   lp:"/carrossiers/",          lien:"Voir la page dédiée aux carrossiers",
+                 a:{val:8},  b:{lab:"Montant moyen d'une réparation",val:950,min:100,max:6000,step:50},
+                 mot:"réparations", genre:"f", calc:R6,
+                 note:"On retient qu'un appel manqué sur six seulement serait passé à l'atelier. Le reste, ce sont des démarchages, des erreurs et des gens qui rappellent."},
+    coiffeur:   {base:"rdv",         lp:"/coiffeurs/",            lien:"Voir la page dédiée aux salons de coiffure",
+                 a:{val:12}, b:{val:4}},
+    medecin:    {base:"rdv",         lp:"/medecins/",             lien:"Voir la page dédiée aux médecins",
+                 a:{lab:"Appels reçus pendant vos consultations, par jour",val:25}, b:{val:3},
+                 note:"Un appel pendant une consultation ne coûte pas que sa durée : il casse le fil, et il finit en rappel le soir. C'est ce temps-là qu'on vous rend."},
+    dentiste:   {base:"rdv",         lp:"/dentistes/",            lien:"Voir la page dédiée aux dentistes",
+                 a:{lab:"Appels reçus pendant vos soins, par jour",val:22}, b:{val:3},
+                 note:"Un appel pendant un soin ne coûte pas que sa durée : il casse le fil, et il finit en rappel le soir. C'est ce temps-là qu'on vous rend."},
+    kine:       {base:"rdv",         lp:"/kines/",                lien:"Voir la page dédiée aux kinés",
+                 a:{lab:"Appels reçus pendant vos séances, par jour",val:14}, b:{val:4},
+                 note:"Un appel pendant une séance ne coûte pas que sa durée : il casse le fil, et il finit en rappel le soir. C'est ce temps-là qu'on vous rend."},
+    restaurant: {base:"reservation", lp:"/restaurants/",          lien:"Voir la page dédiée aux restaurants",
+                 a:{val:6},  b:{val:38}},
+    bar:        {base:"reservation", lp:"/bars/",                 lien:"Voir la page dédiée aux bars",
+                 a:{val:4},  b:{lab:"Addition moyenne par personne",val:22}},
+    immobilier: {base:"valeur",      lp:"/agences-immobilieres/", lien:"Voir la page dédiée aux agences immobilières",
+                 a:{val:3},  b:{lab:"Valeur moyenne d'une commission de mandat",val:4000}},
+    comptable:  {base:"valeur",      lp:"/experts-comptables/",   lien:"Voir la page dédiée aux experts-comptables",
+                 a:{val:2},  b:{lab:"Ce que vous rapporte un client sur une année",val:2500},
+                 mot:"dossiers", genre:"m"}
+  };
+
+  (function(){
+    for(var k in SECTEURS){
+      var s=SECTEURS[k], base=P[s.base], p={};
+      for(var f1 in base) p[f1]=base[f1];
+      p.a={}; for(var f2 in base.a) p.a[f2]=base.a[f2];
+      p.b={}; for(var f3 in base.b) p.b[f3]=base.b[f3];
+      if(s.a) for(var f4 in s.a) p.a[f4]=s.a[f4];
+      if(s.b) for(var f5 in s.b) p.b[f5]=s.b[f5];
+      if(s.note) p.note=s.note;
+      if(s.mot) p.mot=s.mot;
+      if(s.genre) p.genre=s.genre;
+      if(s.calc) p.calc=s.calc;
+      p.lp=s.lp; p.lien=s.lien;
+      P[k]=p;
+    }
+  })();
+
+  var cur='plombier';
+
+  function applyProfil(k){
+    cur=k; var p=P[k];
+    labA.textContent=p.a.lab; labB.textContent=p.b.lab;
+    inA.min=p.a.min; inA.max=p.a.max; inA.step=p.a.step; inA.value=p.a.val;
+    inB.min=p.b.min; inB.max=p.b.max; inB.step=p.b.step; inB.value=p.b.val;
+    note.textContent=p.note; resLab.textContent=p.resLab;
+    resUnit.textContent=p.unit; resSub.textContent=p.sub;
+    box.setAttribute('data-profil',k);
+    if(lpWrap){
+      if(p.lp){ lpWrap.style.display=''; lpLink.setAttribute('href',p.lp); lpLink.innerHTML=p.lien+' &#8594;'; }
+      else { lpWrap.style.display='none'; }
+    }
+    maj();
+  }
+
+  function maj(){
+    var p=P[cur], a=+inA.value, b=+inB.value, r=p.calc(a,b);
+    outA.textContent=p.a.fmt(a); outB.textContent=p.b.fmt(b);
+    var row=gainVal.closest('.simu-cmp-row');
+
+    if(p.mode==='temps'){
+      resVal.textContent=f(r);
+      resSub.textContent='soit environ '+f(r*12/7)+' journées de travail par an';
+      gainLab.textContent="Ce que vous coûte l'heure récupérée";
+      var parHeure = r>0 ? (AN/12)/r : 0;
+      gainVal.textContent=f(parHeure)+' €';
+      row.classList.remove('is-neg');
+      phrase.textContent = "Chaque heure rendue à votre métier vous revient à "+f(parHeure)+" €. À vous de dire si votre heure vaut plus que ça.";
+    } else {
+      resVal.textContent=f(r);
+      resSub.textContent=p.sub;
+      var net=r-AN;
+      row.classList.toggle('is-neg', net<0);
+      gainLab.textContent = net>=0 ? 'Ce que vous récupérez' : 'Ce que ça vous coûterait';
+      gainVal.textContent=(net>=0?'+ ':'− ')+f(Math.abs(net))+' €';
+      var parMois = b>0 ? (AN/12)/b : 0;
+      if(net<=0){
+        phrase.textContent="À ce niveau d'activité, le service ne se rentabilise pas encore. Dites-le-moi franchement au téléphone, je vous le dirai aussi.";
+      } else if(parMois<=1){
+        phrase.textContent=(p.genre==="f"?"Une seule ":"Un seul ")+p.mot.slice(0,-1)+(p.genre==="f"?" récupérée":" récupéré")+" par mois rembourse déjà le service.";
+      } else {
+        phrase.textContent="Il suffit de "+Math.ceil(parMois)+" "+p.mot+(p.genre==="f"?" récupérées":" récupérés")+" par mois pour que le service soit remboursé.";
+      }
+    }
+  }
+
+  [].forEach.call(document.querySelectorAll('.simu-tab'), function(t){
+    t.addEventListener('click', function(){
+      [].forEach.call(document.querySelectorAll('.simu-tab'), function(x){
+        x.classList.remove('is-on'); x.setAttribute('aria-selected','false');
+      });
+      t.classList.add('is-on'); t.setAttribute('aria-selected','true');
+      applyProfil(t.getAttribute('data-profil'));
+    });
+  });
+  inA.addEventListener('input',maj); inB.addEventListener('input',maj);
+
+  // une LP peut verrouiller le profil : <body data-simu-profil="rdv">
+  var forced=document.body.getAttribute('data-simu-profil');
+  if(forced && P[forced]){
+    var tb=document.querySelector('.simu-tabs'); if(tb) tb.style.display='none';
+    applyProfil(forced);
+    if(lpWrap) lpWrap.style.display='none'; // sur une LP, le lien pointerait sur elle-même
+  } else { applyProfil('plombier'); }
+})();
+</script>
 
 <section class="contact-section" id="contact">
   <div class="contact-card">
