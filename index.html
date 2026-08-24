@@ -2068,6 +2068,7 @@
   <div class="hero-eyebrow">Agence IA &amp; Automatisation &middot; on commence par votre téléphone</div>
   <h1>Ne perdez plus un <em>client.</em><br/>Ni une <em>heure.</em></h1>
   <p class="hero-sub">Quand vous ne pouvez pas décrocher, votre standard répond sur votre numéro habituel. Il comprend la demande, cale le rendez-vous dans votre agenda et vous envoie tout par SMS. <strong style="color:#fff">Vos clients ne tombent jamais sur un répondeur.</strong></p>
+  <p class="hero-essai"><strong>Vos 20 premiers appels, gratuits.</strong> Sans carte bancaire.</p>
   <div class="hero-btns">
     <a href="https://calendar.app.google/R4ugqFzZaBMKv9Q47" target="_blank" rel="noopener" class="btn-fill">Réserver 15 minutes &#8594;</a>
     <a href="#offres" class="btn-outline">Calculer ce que ça vous coûte</a>
@@ -2146,7 +2147,7 @@
 
       <div class="simu-compare">
         <div class="simu-cmp-row">
-          <span>Votre standardiste IA <small style="color:var(--light)">(abonnement, hors installation)</small></span>
+          <span>Votre standardiste IA <small style="color:var(--light)">(590 € HT/mois)</small></span>
           <b>7 080 € HT/an</b>
         </div>
         <div class="simu-cmp-row simu-cmp-win">
@@ -2167,25 +2168,18 @@
       <span class="prix-eyebrow">Le prix, sans détour</span>
 
       <p class="prix-essai"><strong>Vos 20 premiers appels, gratuits.</strong> On branche votre standard sur votre numéro habituel. Vous ne payez rien, vous ne signez rien. Chaque vendredi, vous recevez la liste des appels qu'il a récupérés&nbsp;: qui a appelé, pour quoi, et ce qu'il a répondu.</p>
-      <p class="prix-essai-fin">L'essai s'arrête au 20<sup>e</sup> appel pris, ou au bout d'un mois — le premier des deux. Vous décidez avec les chiffres sous les yeux.</p>
+      <p class="prix-essai-fin">L'essai s'arrête au 20<sup>e</sup> appel pris. Pas de carte bancaire, pas de date limite. Vous décidez avec les chiffres sous les yeux.</p>
 
-      <div class="prix-formules">
+      <div class="prix-formules prix-formules-solo">
         <div class="prix-formule is-reco">
-          <span class="prix-badge">Recommandé</span>
           <div class="prix-num">590 €<small> HT/mois</small></div>
-          <div class="prix-lab">engagement 12 mois</div>
-          <div class="prix-install">Installation <s>1 500 €</s> <b>offerte</b></div>
+          <div class="prix-lab">sans engagement, résiliable chaque mois</div>
           <div class="prix-tout">Tout compris</div>
-        </div>
-        <div class="prix-formule">
-          <div class="prix-num">850 €<small> HT/mois</small></div>
-          <div class="prix-lab">sans engagement</div>
-          <div class="prix-install">Installation <s>1 500 €</s> <b>offerte</b></div>
-          <div class="prix-tout">Tout compris, résiliable chaque mois</div>
         </div>
       </div>
 
-      <p class="prix-arbitrage">La formule libre coûte 260 € de plus par mois. C'est le prix de pouvoir arrêter quand vous voulez, sans avoir à vous justifier. Si vous comptez rester, l'engagement vous fait économiser 3 120 € sur l'année.</p>
+      <p class="prix-humain">Je paramètre votre standard avec vous, comptez deux heures, c'est compris.</p>
+
 
       <p class="prix-vs">Une personne à mi-temps pour tenir le standard, c'est entre 1 000 et 1 400 € par mois, charges comprises. Et elle ne décroche ni le dimanche, ni à 22 h, ni pendant ses congés.</p>
 
@@ -2196,7 +2190,7 @@
         <li>Il note le nom, le motif et les coordonnées, puis vous envoie tout par SMS</li>
         <li>Il cale le rendez-vous directement dans votre agenda</li>
         <li>Il ne donne jamais de prix à votre place</li>
-        <li>Installation, numéro, mises à jour et suivi inclus</li>
+        <li>Le numéro, les mises à jour et le suivi, inclus</li>
       </ul>
 
       <p class="prix-ht">Prix hors taxes. TVA non applicable, article 293 B du CGI.</p>
@@ -2302,6 +2296,12 @@
   .prix-install s{opacity:.6}
   .prix-install b{color:#4ade80;font-weight:600}
   .prix-tout{font-size:13.5px;color:var(--light);margin-top:2px}
+  .prix-formules-solo{grid-template-columns:minmax(0,340px);justify-content:center}
+  .prix-humain{max-width:60ch;margin:0 auto 26px;font-size:15.5px;line-height:1.6;color:#d2d2d7}
+  .hero-essai{max-width:44ch;margin:18px auto 0;font-size:16px;line-height:1.5;
+    color:rgba(255,255,255,.82);text-align:center}
+  .hero-essai strong{color:#fff;font-weight:600}
+  @media(max-width:600px){.hero-essai{font-size:15px;margin-top:14px}}
   .prix-arbitrage{max-width:60ch;margin:0 auto 26px;font-size:14.5px;line-height:1.6;color:#d2d2d7}
   .prix-inclus-titre{max-width:62ch;margin:0 auto 22px;font-size:15px;line-height:1.6;color:#d2d2d7}
   .prix-inclus-titre strong{color:#fff}
@@ -3051,12 +3051,15 @@
   function entete(){ var n=document.querySelector('nav'); return n?n.getBoundingClientRect().height:0; }
   function plafond(){ return Math.max(0, racine.scrollHeight - window.innerHeight); }
 
+  var jeton=0;   // un seul defilement a la fois : le dernier clic gagne
   function anime(vers){
+    var moi=++jeton;
     var depart=window.pageYOffset, delta=vers-depart;
     if(Math.abs(delta)<2){ window.scrollTo(0,vers); return; }
     var duree=Math.min(700, Math.max(280, Math.abs(delta)*0.22));
     var t0=null, fini=false;
     function pas(t){
+      if(moi!==jeton) return;                      // un clic plus recent a pris la main
       if(t0===null) t0=t;
       var p=Math.min(1,(t-t0)/duree);
       var e=p<0.5 ? 4*p*p*p : 1-Math.pow(-2*p+2,3)/2;
@@ -3065,8 +3068,10 @@
     }
     requestAnimationFrame(pas);
     /* Filet : dans un onglet en arriere-plan, ou sur une machine qui rame,
-       requestAnimationFrame peut ne jamais tourner. On garantit l'arrivee. */
-    setTimeout(function(){ if(!fini) window.scrollTo(0,vers); }, duree+260);
+       requestAnimationFrame peut ne jamais tourner. On garantit l'arrivee.
+       Le jeton empeche ce filet de ramener la page en arriere si l'utilisateur
+       a clique une autre ancre entre-temps. */
+    setTimeout(function(){ if(moi===jeton && !fini) window.scrollTo(0,vers); }, duree+260);
   }
 
   function allerA(el, sansAnimation){

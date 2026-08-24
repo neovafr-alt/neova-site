@@ -29,7 +29,7 @@
       --light:#86868b;
       --text:#1d1d1f;
     }
-    html{scroll-behavior:smooth}
+    html{scroll-behavior:auto;scroll-padding-top:62px}
     body{
       font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Helvetica Neue',Arial,sans-serif;
       color:var(--text);background:var(--black);overflow-x:hidden;
@@ -197,20 +197,23 @@
     }
 
     /* Reveal on scroll */
-    .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1),transform 0.8s cubic-bezier(0.22,1,0.36,1)}
-    .reveal.visible{opacity:1;transform:translateY(0)}
-    .scard.reveal{transition-delay:0s}
-    .scard.reveal:nth-child(2){transition-delay:0.08s}
-    .scard.reveal:nth-child(3){transition-delay:0.16s}
-    .scard.reveal:nth-child(4){transition-delay:0.24s}
-    .pcard.reveal{transition-delay:0s}
-    .pcard.reveal:nth-child(2){transition-delay:0.08s}
-    .pcard.reveal:nth-child(3){transition-delay:0.16s}
-    .pcard.reveal:nth-child(4){transition-delay:0.24s}
-    .tcard.reveal:nth-child(2){transition-delay:0.1s}
-    .tcard.reveal:nth-child(3){transition-delay:0.2s}
+    /* L'etat masque n'existe QUE si le JS a pose html.js-anim.
+       Sans JS, ou si le JS casse, la page reste entierement lisible. */
+    html.js-anim .reveal{opacity:0;transform:translateY(18px);
+      transition:opacity 0.26s ease-out,transform 0.26s ease-out}
+    html.js-anim .reveal.visible{opacity:1;transform:none}
+    html.js-anim .scard.reveal:nth-child(2){transition-delay:0.05s}
+    html.js-anim .scard.reveal:nth-child(3){transition-delay:0.1s}
+    html.js-anim .scard.reveal:nth-child(4){transition-delay:0.15s}
+    html.js-anim .pcard.reveal:nth-child(2){transition-delay:0.05s}
+    html.js-anim .pcard.reveal:nth-child(3){transition-delay:0.1s}
+    html.js-anim .pcard.reveal:nth-child(4){transition-delay:0.15s}
+    html.js-anim .tcard.reveal:nth-child(2){transition-delay:0.05s}
+    html.js-anim .tcard.reveal:nth-child(3){transition-delay:0.1s}
     @media(prefers-reduced-motion:reduce){
-      .reveal{opacity:1;transform:none;transition:none}
+      html.js-anim .reveal{opacity:1;transform:none;transition:none}
+      .orb,.hero-sweep{animation:none}
+      html{scroll-behavior:auto}
     }
 
     /* Feedback tactile sur cards / boutons (touchscreens) */
@@ -1993,6 +1996,19 @@
       .tunnel-line{font-size:16px}
     }
   </style>
+<script>
+/* Le masquage des sections est pose ici, par JS, et jamais par le CSS seul :
+   sans JS la page s'affiche telle quelle. Et si le script principal ne tourne
+   pas (erreur, reseau), le filet ci-dessous redonne tout a voir en 1,5 s. */
+(function(){
+  var h=document.documentElement;
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  h.className += (h.className?' ':'') + 'js-anim';
+  setTimeout(function(){
+    if(!h.hasAttribute('data-reveal-pret')) h.className=h.className.replace(/\bjs-anim\b/,'');
+  },1500);
+})();
+</script>
 </head>
 <body data-simu-profil="immobilier">
 
@@ -2034,6 +2050,7 @@
   <div class="hero-eyebrow">Neova · Standard téléphonique pour agences immobilières</div>
   <h1>Un appel manqué,<br/><em>un mandat chez le concurrent.</em></h1>
   <p class="hero-sub">Votre standard intelligent décroche à chaque appel, qualifie vendeurs et acquéreurs et cale les rendez-vous. Même quand vous êtes en visite.</p>
+  <p class="hero-essai"><strong>Vos 20 premiers appels, gratuits.</strong> Sans carte bancaire.</p>
   <div class="hero-btns">
     <a href="https://calendar.app.google/R4ugqFzZaBMKv9Q47" target="_blank" rel="noopener" class="btn-fill">Réserver une démo →</a>
     <a href="tel:0783802565" class="btn-outline">07 83 80 25 65</a>
@@ -2043,7 +2060,7 @@
     <div class="trust-sep"></div>
     <div class="trust-item">🛡️ 100% en français</div>
     <div class="trust-sep"></div>
-    <div class="trust-item">✅ Sans installation</div>
+    <div class="trust-item">✅ Vos 20 premiers appels, gratuits</div>
   </div>
 </section>
 
@@ -2140,7 +2157,7 @@
     <div style="background:linear-gradient(180deg,#0d0d0f 0%,#070708 100%);border:1px solid rgba(34,211,238,0.18);border-radius:18px;padding:28px 24px">
       <div style="font-size:26px;line-height:1;margin-bottom:14px">&#128196;</div>
       <h3 style="font-size:18px;color:#fff;margin:0 0 8px;font-weight:600">Devis transparent</h3>
-      <p style="color:rgba(255,255,255,0.62);line-height:1.6;font-size:15px;margin:0">Un prix ferme et définitif sous 48h après la démo. Sans engagement, sans surprise.</p>
+      <p style="color:rgba(255,255,255,0.62);line-height:1.6;font-size:15px;margin:0">590 € HT par mois, tout compris, affiché sur cette page. Sans engagement, sans surprise.</p>
     </div>
 
   </div>
@@ -2190,7 +2207,7 @@
 
       <div class="simu-compare">
         <div class="simu-cmp-row">
-          <span>Votre standardiste IA <small style="color:var(--light)">(abonnement, hors installation)</small></span>
+          <span>Votre standardiste IA <small style="color:var(--light)">(590 € HT/mois)</small></span>
           <b>7 080 € / an</b>
         </div>
         <div class="simu-cmp-row simu-cmp-win">
@@ -2211,25 +2228,18 @@
       <span class="prix-eyebrow">Le prix, sans détour</span>
 
       <p class="prix-essai"><strong>Vos 20 premiers appels, gratuits.</strong> On branche votre standard sur votre numéro habituel. Vous ne payez rien, vous ne signez rien. Chaque vendredi, vous recevez la liste des appels qu'il a récupérés&nbsp;: qui a appelé, pour quoi, et ce qu'il a répondu.</p>
-      <p class="prix-essai-fin">L'essai s'arrête au 20<sup>e</sup> appel pris, ou au bout d'un mois — le premier des deux. Vous décidez avec les chiffres sous les yeux.</p>
+      <p class="prix-essai-fin">L'essai s'arrête au 20<sup>e</sup> appel pris. Pas de carte bancaire, pas de date limite. Vous décidez avec les chiffres sous les yeux.</p>
 
-      <div class="prix-formules">
+      <div class="prix-formules prix-formules-solo">
         <div class="prix-formule is-reco">
-          <span class="prix-badge">Recommandé</span>
           <div class="prix-num">590 €<small> HT/mois</small></div>
-          <div class="prix-lab">engagement 12 mois</div>
-          <div class="prix-install">Installation <s>1 500 €</s> <b>offerte</b></div>
+          <div class="prix-lab">sans engagement, résiliable chaque mois</div>
           <div class="prix-tout">Tout compris</div>
-        </div>
-        <div class="prix-formule">
-          <div class="prix-num">850 €<small> HT/mois</small></div>
-          <div class="prix-lab">sans engagement</div>
-          <div class="prix-install">Installation <s>1 500 €</s> <b>offerte</b></div>
-          <div class="prix-tout">Tout compris, résiliable chaque mois</div>
         </div>
       </div>
 
-      <p class="prix-arbitrage">La formule libre coûte 260 € de plus par mois. C'est le prix de pouvoir arrêter quand vous voulez, sans avoir à vous justifier. Si vous comptez rester, l'engagement vous fait économiser 3 120 € sur l'année.</p>
+      <p class="prix-humain">Je paramètre votre standard avec vous, comptez deux heures, c'est compris.</p>
+
 
       <p class="prix-vs">Une personne à mi-temps pour tenir le standard, c'est entre 1 000 et 1 400 € par mois, charges comprises. Et elle ne décroche ni le dimanche, ni à 22 h, ni pendant ses congés.</p>
 
@@ -2240,7 +2250,7 @@
         <li>Il note le nom, les coordonnées et l'objet de la demande, puis vous envoie tout par SMS</li>
         <li>Il cale le rendez-vous directement dans votre agenda</li>
         <li>Il ne donne jamais de prix ni d'estimation à votre place</li>
-        <li>Installation, numéro, mises à jour et suivi inclus</li>
+        <li>Le numéro, les mises à jour et le suivi, inclus</li>
       </ul>
 
       <p class="prix-ht">Prix hors taxes. TVA non applicable, article 293 B du CGI.</p>
@@ -2306,6 +2316,12 @@
   .prix-install s{opacity:.6}
   .prix-install b{color:#4ade80;font-weight:600}
   .prix-tout{font-size:13.5px;color:var(--light);margin-top:2px}
+  .prix-formules-solo{grid-template-columns:minmax(0,340px);justify-content:center}
+  .prix-humain{max-width:60ch;margin:0 auto 26px;font-size:15.5px;line-height:1.6;color:#d2d2d7}
+  .hero-essai{max-width:44ch;margin:18px auto 0;font-size:16px;line-height:1.5;
+    color:rgba(255,255,255,.82);text-align:center}
+  .hero-essai strong{color:#fff;font-weight:600}
+  @media(max-width:600px){.hero-essai{font-size:15px;margin-top:14px}}
   .prix-arbitrage{max-width:60ch;margin:0 auto 26px;font-size:14.5px;line-height:1.6;color:#d2d2d7}
   .prix-inclus-titre{max-width:62ch;margin:0 auto 22px;font-size:15px;line-height:1.6;color:#d2d2d7}
   .prix-inclus-titre strong{color:#fff}
@@ -2727,16 +2743,124 @@
   });
 })();
 
-// Reveal animations on scroll (IntersectionObserver — perf-friendly)
+/* ──────────────────────────────────────────────────────────────────
+   Apparition au scroll + navigation par ancres.
+
+   Le scroll fluide natif ne demarre pas sur certains navigateurs :
+   window.scrollTo({behavior:'smooth'}) ne bougeait pas d'un pixel et
+   la page restait figee au clic sur le menu. On anime donc a la main.
+   Et on revele toujours la section visee, sinon on atterrit sur du
+   contenu transparent. Constate et corrige le 24/08/2026.
+   ────────────────────────────────────────────────────────────────── */
 (function(){
-  const reveal=document.querySelectorAll('section, .scard, .pcard, .tcard, .manifesto-block, h2, .hero-trust');
-  reveal.forEach(el=>{el.classList.add('reveal');});
-  const io=new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}
-    });
-  },{threshold:0.12,rootMargin:'0px 0px -60px 0px'});
-  reveal.forEach(el=>io.observe(el));
+  var racine=document.documentElement;
+  var reduit=!!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var tous=document.querySelectorAll('section:not(.hero), .scard, .pcard, .tcard, .manifesto-block, h2');
+  var cibles=[];
+  for(var a=0;a<tous.length;a++){
+    var el=tous[a];
+    if(el.closest && el.closest('.hero')) continue;   // le hero est net des le premier rendu
+    cibles.push(el);
+  }
+  racine.setAttribute('data-reveal-pret','1');
+
+  function revele(el){
+    if(!el) return;
+    el.classList.add('visible');
+    var dedans=el.querySelectorAll ? el.querySelectorAll('.reveal') : [];
+    for(var i=0;i<dedans.length;i++) dedans[i].classList.add('visible');
+  }
+  function toutMontrer(){
+    racine.className=racine.className.replace(/\bjs-anim\b/,'');
+    for(var i=0;i<cibles.length;i++) revele(cibles[i]);
+  }
+
+  if(reduit || !('IntersectionObserver' in window)){
+    toutMontrer();
+  } else {
+    for(var b=0;b<cibles.length;b++) cibles[b].classList.add('reveal');
+    var vus=0;
+    var io=new IntersectionObserver(function(entrees){
+      for(var j=0;j<entrees.length;j++){
+        if(entrees[j].isIntersecting){ vus++; revele(entrees[j].target); io.unobserve(entrees[j].target); }
+      }
+    },{threshold:0,rootMargin:'400px 0px 400px 0px'});
+    for(var c=0;c<cibles.length;c++) io.observe(cibles[c]);
+    // deja dans la fenetre au chargement : visible tout de suite, sans attendre
+    for(var d=0;d<cibles.length;d++){
+      if(cibles[d].getBoundingClientRect().top < window.innerHeight+400) revele(cibles[d]);
+    }
+    // filet : si l'observateur n'a jamais tourne, on montre tout
+    setTimeout(function(){ if(vus===0) toutMontrer(); },1200);
+  }
+
+  /* ── ancres : on scrolle nous-memes, avec le decalage de l'entete ── */
+  function entete(){ var n=document.querySelector('nav'); return n?n.getBoundingClientRect().height:0; }
+  function plafond(){ return Math.max(0, racine.scrollHeight - window.innerHeight); }
+
+  var jeton=0;   // un seul defilement a la fois : le dernier clic gagne
+  function anime(vers){
+    var moi=++jeton;
+    var depart=window.pageYOffset, delta=vers-depart;
+    if(Math.abs(delta)<2){ window.scrollTo(0,vers); return; }
+    var duree=Math.min(700, Math.max(280, Math.abs(delta)*0.22));
+    var t0=null, fini=false;
+    function pas(t){
+      if(moi!==jeton) return;                      // un clic plus recent a pris la main
+      if(t0===null) t0=t;
+      var p=Math.min(1,(t-t0)/duree);
+      var e=p<0.5 ? 4*p*p*p : 1-Math.pow(-2*p+2,3)/2;
+      window.scrollTo(0, depart+delta*e);
+      if(p<1) requestAnimationFrame(pas); else fini=true;
+    }
+    requestAnimationFrame(pas);
+    /* Filet : dans un onglet en arriere-plan, ou sur une machine qui rame,
+       requestAnimationFrame peut ne jamais tourner. On garantit l'arrivee.
+       Le jeton empeche ce filet de ramener la page en arriere si l'utilisateur
+       a clique une autre ancre entre-temps. */
+    setTimeout(function(){ if(moi===jeton && !fini) window.scrollTo(0,vers); }, duree+260);
+  }
+
+  function allerA(el, sansAnimation){
+    revele(el);
+    var y=el.getBoundingClientRect().top + window.pageYOffset - entete() - 14;
+    y=Math.max(0, Math.min(y, plafond()));
+    if(sansAnimation || reduit) window.scrollTo(0,y); else anime(y);
+  }
+
+  document.addEventListener('click', function(ev){
+    if(ev.defaultPrevented || ev.button!==0 || ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
+    var a=ev.target;
+    while(a && a.nodeName!=='A') a=a.parentNode;
+    if(!a || !a.getAttribute) return;
+    var href=a.getAttribute('href');
+    if(!href || href.charAt(0)!=='#') return;
+    var cible = href.length>1 ? document.getElementById(href.slice(1)) : null;
+    if(href.length>1 && !cible) return;          // ancre inconnue : on laisse faire le navigateur
+    ev.preventDefault();
+    var faire=function(){
+      if(href==='#'){
+        anime(0);
+        if(history.replaceState) history.replaceState(null,'',location.pathname);
+      } else {
+        allerA(cible);
+        if(history.pushState) history.pushState(null,'',href);
+      }
+    };
+    // le menu mobile bloque le defilement du corps : on le laisse se fermer
+    if(document.body.classList.contains('menu-open')) setTimeout(faire,140); else faire();
+  }, false);
+
+  // arrivee directe sur une adresse du type /#demos
+  if(location.hash && location.hash.length>1){
+    var arrivee=document.getElementById(location.hash.slice(1));
+    if(arrivee) setTimeout(function(){ allerA(arrivee,true); },60);
+  }
+  window.addEventListener('hashchange', function(){
+    if(!location.hash || location.hash.length<2) return;
+    var h=document.getElementById(location.hash.slice(1));
+    if(h) allerA(h,true);
+  });
 })();
 
 // Parallaxe léger sur les orbes du hero au scroll (desktop only)
