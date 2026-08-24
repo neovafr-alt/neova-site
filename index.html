@@ -39,7 +39,7 @@
       --light:#86868b;
       --text:#1d1d1f;
     }
-    html{scroll-behavior:smooth}
+    html{scroll-behavior:auto;scroll-padding-top:62px}
     body{
       font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Helvetica Neue',Arial,sans-serif;
       color:var(--text);background:var(--black);overflow-x:hidden;
@@ -207,20 +207,23 @@
     }
 
     /* Reveal on scroll */
-    .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1),transform 0.8s cubic-bezier(0.22,1,0.36,1)}
-    .reveal.visible{opacity:1;transform:translateY(0)}
-    .scard.reveal{transition-delay:0s}
-    .scard.reveal:nth-child(2){transition-delay:0.08s}
-    .scard.reveal:nth-child(3){transition-delay:0.16s}
-    .scard.reveal:nth-child(4){transition-delay:0.24s}
-    .pcard.reveal{transition-delay:0s}
-    .pcard.reveal:nth-child(2){transition-delay:0.08s}
-    .pcard.reveal:nth-child(3){transition-delay:0.16s}
-    .pcard.reveal:nth-child(4){transition-delay:0.24s}
-    .tcard.reveal:nth-child(2){transition-delay:0.1s}
-    .tcard.reveal:nth-child(3){transition-delay:0.2s}
+    /* L'etat masque n'existe QUE si le JS a pose html.js-anim.
+       Sans JS, ou si le JS casse, la page reste entierement lisible. */
+    html.js-anim .reveal{opacity:0;transform:translateY(18px);
+      transition:opacity 0.26s ease-out,transform 0.26s ease-out}
+    html.js-anim .reveal.visible{opacity:1;transform:none}
+    html.js-anim .scard.reveal:nth-child(2){transition-delay:0.05s}
+    html.js-anim .scard.reveal:nth-child(3){transition-delay:0.1s}
+    html.js-anim .scard.reveal:nth-child(4){transition-delay:0.15s}
+    html.js-anim .pcard.reveal:nth-child(2){transition-delay:0.05s}
+    html.js-anim .pcard.reveal:nth-child(3){transition-delay:0.1s}
+    html.js-anim .pcard.reveal:nth-child(4){transition-delay:0.15s}
+    html.js-anim .tcard.reveal:nth-child(2){transition-delay:0.05s}
+    html.js-anim .tcard.reveal:nth-child(3){transition-delay:0.1s}
     @media(prefers-reduced-motion:reduce){
-      .reveal{opacity:1;transform:none;transition:none}
+      html.js-anim .reveal{opacity:1;transform:none;transition:none}
+      .orb,.hero-sweep{animation:none}
+      html{scroll-behavior:auto}
     }
 
     /* Feedback tactile sur cards / boutons (touchscreens) */
@@ -2003,6 +2006,19 @@
       .tunnel-line{font-size:16px}
     }
   </style>
+<script>
+/* Le masquage des sections est pose ici, par JS, et jamais par le CSS seul :
+   sans JS la page s'affiche telle quelle. Et si le script principal ne tourne
+   pas (erreur, reseau), le filet ci-dessous redonne tout a voir en 1,5 s. */
+(function(){
+  var h=document.documentElement;
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  h.className += (h.className?' ':'') + 'js-anim';
+  setTimeout(function(){
+    if(!h.hasAttribute('data-reveal-pret')) h.className=h.className.replace(/\bjs-anim\b/,'');
+  },1500);
+})();
+</script>
 </head>
 <body>
 
@@ -2013,7 +2029,7 @@
   </a>
   <ul class="nav-links">
     <li><a href="#offres">Le calcul</a></li>
-    <li><a href="#services">Ce qu'on fait</a></li>
+    <li><a href="#prix">Le prix</a></li>
     <li><a href="#demos">La démo</a></li>
     <li><a href="#processus">Méthode</a></li>
     <li><a href="/autres-prestations/">Autres prestations</a></li>
@@ -2026,14 +2042,16 @@
 <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
   <ul>
     <li><a href="#offres" data-close>Le calcul</a></li>
-    <li><a href="#services" data-close>Ce qu'on fait</a></li>
+    <li><a href="#prix" data-close>Le prix</a></li>
     <li><a href="#demos" data-close>La démo</a></li>
     <li><a href="#processus" data-close>Méthode</a></li>
+    <li><a href="#engagements" data-close>Nos engagements</a></li>
     <li><a href="/autres-prestations/" data-close>Autres prestations</a></li>
     <li><a href="#histoire" data-close>Notre histoire</a></li>
     <li><a href="https://calendar.app.google/R4ugqFzZaBMKv9Q47" class="mobile-menu-cta" data-close target="_blank" rel="noopener">Réserver 15 minutes &#8594;</a></li>
   </ul>
 </div>
+
 
 <!-- HERO -->
 <section class="hero">
@@ -2053,10 +2071,7 @@
   <div class="hero-btns">
     <a href="https://calendar.app.google/R4ugqFzZaBMKv9Q47" target="_blank" rel="noopener" class="btn-fill">Réserver 15 minutes &#8594;</a>
     <a href="#offres" class="btn-outline">Calculer ce que ça vous coûte</a>
-  
-    <a href="tel:+33189313658" class="btn-appel">Appelez-le maintenant &#8594; 01 89 31 36 58</a>
   </div>
-  <p class="hero-demo-note">C'est le standard d'une entreprise de démonstration. Posez-lui vos questions comme le ferait un de vos clients.</p>
   <div class="hero-trust">
     <div class="trust-item"><span class="trust-dot live"></span>24h/24, week-end compris</div>
     <div class="trust-sep"></div>
@@ -2064,6 +2079,24 @@
     <div class="trust-sep"></div>
     <div class="trust-item">✅ Vos 20 premiers appels, gratuits</div>
   </div>
+</section>
+
+<!-- ECHANTILLON AUDIO -->
+<section class="audio-section">
+  <div class="audio-card">
+    <span class="audio-eyebrow">Écoutez-le répondre</span>
+    <p class="audio-sub">Un appel réel, de bout en bout : le client décrit sa fuite, le standard pose les questions, consulte le planning, cale le créneau et confirme. Deux minutes, sans coupure.</p>
+    <audio controls preload="none" class="audio-player" src="/demo-standard.mp3">
+      Votre navigateur ne lit pas les fichiers audio.
+    </audio>
+    <p class="audio-note">Enregistrement d'un appel réel passé sur notre propre standard.</p>
+  </div>
+</section>
+
+<!-- TUNNEL STAT 1 — Standard IA / appels -->
+<section class="tunnel-stat">
+  <p class="tunnel-line">Chez un pro débordé, le téléphone sonne <em>quand il ne peut pas répondre</em> : le soir, le week-end, en clientèle. Et <strong>un client qui tombe sur le répondeur</strong> appelle le suivant sur la liste.</p>
+  <a href="https://calendar.app.google/R4ugqFzZaBMKv9Q47" class="tunnel-cta" target="_blank" rel="noopener">Réserver 15 minutes &#8594;</a>
 </section>
 
 <!-- OFFRES — 3 packs (sans tarifs visibles, "sur devis") -->
@@ -2129,7 +2162,7 @@
 
   <p class="simu-lp"><a id="simuLp" href="/plombiers/">Voir la page dédiée aux plombiers &#8594;</a></p>
 
-  <div class="prix-block">
+  <div class="prix-block" id="prix">
     <div class="prix-card">
       <span class="prix-eyebrow">Le prix, sans détour</span>
 
@@ -2502,72 +2535,6 @@
 })();
 </script>
 
-<!-- MARQUEE LOGOS / outils maîtrisés -->
-
-
-<!-- ECHANTILLON AUDIO -->
-<section class="audio-section">
-  <div class="audio-card">
-    <span class="audio-eyebrow">Écoutez-le répondre</span>
-    <p class="audio-sub">Un appel réel, de bout en bout : le client décrit sa fuite, le standard pose les questions, consulte le planning, cale le créneau et confirme.</p>
-    <audio controls preload="none" class="audio-player" src="/demo-standard.mp3">
-      Votre navigateur ne lit pas les fichiers audio.
-    </audio>
-    <p class="audio-note">Enregistrement d'un appel réel passé sur notre propre standard.</p>
-  </div>
-</section>
-
-<!-- TUNNEL STAT 1 — Standard IA / appels -->
-<section class="tunnel-stat">
-  <p class="tunnel-line">Chez un pro débordé, le téléphone sonne <em>quand il ne peut pas répondre</em> : le soir, le week-end, en clientèle. Et <strong>un client qui tombe sur le répondeur</strong> appelle le suivant sur la liste.</p>
-  <a href="https://calendar.app.google/R4ugqFzZaBMKv9Q47" class="tunnel-cta" target="_blank" rel="noopener">Réserver 15 minutes &#8594;</a>
-</section>
-
-<!-- STATS — chiffres clés -->
-<section class="stats-section">
-  <div class="stats-grid">
-    <div class="stat">
-      <div class="stat-num">0€</div>
-      <div class="stat-label">échange découverte</div>
-      <div class="stat-sub">selon la formule choisie</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">48 h</div>
-      <div class="stat-label">de mise en place</div>
-      <div class="stat-sub">selon la formule choisie</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">100%</div>
-      <div class="stat-label">sur mesure</div>
-      <div class="stat-sub">code propriétaire</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">1</div>
-      <div class="stat-label">interlocuteur unique</div>
-      <div class="stat-sub">du début à la fin</div>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES — cards premium interactives -->
-<section class="dark-section" id="services">
-  <span class="section-eyebrow">Nos services</span>
-  <h2 class="section-title">Ce qu'on fait <em>pour vous</em></h2>
-  <p class="section-sub">Un standard téléphonique qui décroche quand vous ne pouvez pas, comprend la demande et cale le rendez-vous. C'est tout ce que fait cette page.</p>
-  <p class="section-sub" style="margin-top:-8px"><a class="lien-autres" href="/autres-prestations/">Voir nos autres prestations &#8594;</a></p>
-  <div class="services-wrap">
-
-    <div class="scard" data-tilt>
-      <div class="scard-icon-wrap">📞</div>
-      <div class="scard-eyebrow">Votre standardiste IA</div>
-      <h3>Ne ratez plus un seul appel</h3>
-      <p>Un assistant qui décroche 24h/24, qualifie l'appel, prend les rendez-vous et vous transmet l'essentiel. Chaque client vous joint, même quand vous êtes occupé.</p>
-      <a href="https://calendar.app.google/R4ugqFzZaBMKv9Q47" class="scard-link" target="_blank" rel="noopener">Réserver 15 minutes &#8594;</a>
-    </div>
-
-  </div>
-</section>
-
 <!-- DÉMO — mockup dashboard unifié (un seul visuel qui parle à toutes les PME) -->
 <section class="dark-section" id="demos">
   <span class="section-eyebrow">Démo</span>
@@ -2674,17 +2641,17 @@
   <p class="demos-note">Ce tableau de bord est un exemple, les chiffres sont illustratifs. <a href="https://calendar.app.google/R4ugqFzZaBMKv9Q47" target="_blank" rel="noopener">Réserver 15 minutes &#8594;</a> et je vous fais entendre le standard sur votre propre activité.</p>
 </section>
 
-<!-- TUNNEL STAT 2 — Automatisation IA -->
+<!-- TUNNEL STAT 3 — Réactivité / qualification -->
 <section class="tunnel-stat">
-  <p class="tunnel-line">Recopier, relancer, ressaisir : <em>une bonne part de vos journées</em> part en <strong>tâches répétitives.</strong> Une IA bien construite traite tout ça <em>24h/24, sans pause, sans erreur.</em></p>
+  <p class="tunnel-line"><strong>Le premier qui répond</strong> décroche souvent l'affaire. Un prospect qui tombe sur un répondeur ne rappelle pas : il compose le numéro suivant. Répondre vite, <em>c'est déjà à moitié signé.</em></p>
   <a href="https://calendar.app.google/R4ugqFzZaBMKv9Q47" class="tunnel-cta" target="_blank" rel="noopener">Réserver 15 minutes &#8594;</a>
 </section>
 
 <!-- PROCESSUS -->
 <section class="light-section" id="processus">
-  <span class="section-eyebrow">Notre méthode</span>
+  <span class="section-eyebrow">Comment ça se passe</span>
   <h2 class="section-title">Comment <em>ça marche</em></h2>
-  <p class="section-sub">Un processus carré en 4 étapes, transparent du premier au dernier jour.</p>
+  <p class="section-sub">Quatre étapes, et vous êtes en ligne sous 48&nbsp;h.</p>
 
   <div class="process-wrap">
     <div class="process-line" aria-hidden="true"></div>
@@ -2693,15 +2660,15 @@
       <div class="process-empty"></div>
       <div class="process-num">1</div>
       <div class="process-content">
-        <h4>Audit gratuit</h4>
-        <p>On analyse votre situation et on identifie les leviers de croissance les plus impactants.</p>
+        <h4>15 minutes au téléphone</h4>
+        <p>On regarde vos horaires, votre zone d'intervention, et ce qui se passe aujourd'hui quand vous ne décrochez pas. Gratuit, sans engagement.</p>
       </div>
     </div>
 
     <div class="process-row left">
       <div class="process-content">
-        <h4>Proposition sur mesure</h4>
-        <p>Plan clair avec priorités, délais et tarifs fixes. Aucune surprise, aucun coût caché.</p>
+        <h4>En ligne sous 48&nbsp;h</h4>
+        <p>On branche le standard sur votre numéro habituel. Vous ne changez rien&nbsp;: ni de numéro, ni d'opérateur, ni d'habitude.</p>
       </div>
       <div class="process-num">2</div>
       <div class="process-empty"></div>
@@ -2711,15 +2678,15 @@
       <div class="process-empty"></div>
       <div class="process-num">3</div>
       <div class="process-content">
-        <h4>Exécution &amp; mise en place</h4>
-        <p>On implémente, vous êtes formé. Tout fonctionne, et vous gardez la main sur le système.</p>
+        <h4>Vos 20 premiers appels, gratuits</h4>
+        <p>Il décroche, il qualifie, il cale les rendez-vous. Chaque vendredi, vous recevez la liste de ce qu'il a récupéré&nbsp;: qui a appelé, pour quoi, et ce qu'il a répondu.</p>
       </div>
     </div>
 
     <div class="process-row left">
       <div class="process-content">
-        <h4>Résultats mesurables</h4>
-        <p>KPIs clairs et reporting régulier. Vous voyez exactement ce que nos actions vous rapportent.</p>
+        <h4>Vous tranchez avec les chiffres</h4>
+        <p>Au 20<sup>e</sup> appel, vous savez ce qu'il vous a rapporté. Vous continuez, ou on débranche. Rien à résilier, rien à justifier.</p>
       </div>
       <div class="process-num">4</div>
       <div class="process-empty"></div>
@@ -2727,52 +2694,12 @@
   </div>
 </section>
 
-<!-- TUNNEL STAT 3 — Réactivité / qualification -->
-<section class="tunnel-stat">
-  <p class="tunnel-line"><strong>Le premier qui répond</strong> décroche souvent l'affaire. Un prospect qui tombe sur un répondeur ne rappelle pas : il compose le numéro suivant. Répondre vite, <em>c'est déjà à moitié signé.</em></p>
-  <a href="https://calendar.app.google/R4ugqFzZaBMKv9Q47" class="tunnel-cta" target="_blank" rel="noopener">Réserver 15 minutes &#8594;</a>
-</section>
-
-<!-- POURQUOI NEOVA -->
-<section class="dark-section">
-  <span class="section-eyebrow">Pourquoi nous</span>
-  <h2 class="section-title">Pourquoi choisir <em>Neova</em></h2>
-  <p class="section-sub">Six raisons concrètes de nous confier votre projet.</p>
-  <div class="why-grid">
-    <div class="witem"><div class="wcheck">✓</div><h4>100% sur mesure</h4><p>Chaque système est conçu pour votre activité spécifique.</p></div>
-    <div class="witem"><div class="wcheck">✓</div><h4>Mise en route rapide</h4><p>En ligne sous 48 h.</p></div>
-    <div class="witem"><div class="wcheck">✓</div><h4>Transparent &amp; direct</h4><p>On dit ce qui marche et ce qui ne marche pas. Pas de jargon.</p></div>
-    <div class="witem"><div class="wcheck">✓</div><h4>Interlocuteur unique</h4><p>Un seul contact du début à la fin du projet.</p></div>
-    <div class="witem"><div class="wcheck">✓</div><h4>IA-first</h4><p>On exploite les meilleurs outils IA pour livrer plus vite.</p></div>
-    <div class="witem"><div class="wcheck">✓</div><h4>Consultation gratuite</h4><p>Premier échange sans engagement, avec de la valeur dès le départ.</p></div>
-  </div>
-</section>
-
-<!-- NOTRE HISTOIRE -->
-<section class="about-section" id="histoire">
-  <div class="about-wrap">
-    <div class="about-text">
-      <span class="section-eyebrow">Notre histoire</span>
-      <h2 class="section-title">L'IA pour tous, <em>pas seulement pour les géants</em></h2>
-      <p>Les grands groupes ont des équipes entières pour répondre au téléphone. Vous, vous êtes sous une chaudière, et le téléphone sonne dans la poche de votre bleu de travail.</p>
-      <p>Neova est née de ce déséquilibre. Une structure à taille humaine, qui parle clair, qui code propre, et qui livre un outil qui change vos journées. Pas de blabla, pas de no-code générique.</p>
-      <p>Ma conviction : bien répondre au téléphone n'est pas un luxe d'entreprise du CAC 40. C'est ce qui décide qui décroche le chantier.</p>
-    </div>
-  </div>
-</section>
-
-<!-- TUNNEL STAT 4 — SaaS -->
-<section class="tunnel-stat light-bg">
-  <p class="tunnel-line">Un abonnement SaaS, vous le payez <em>tous les mois, à vie</em>, et vous ne possédez rien. <strong>Du code propriétaire vous appartient</strong>, et il ne s'arrête pas le jour où vous arrêtez de payer.</p>
-  <a href="https://calendar.app.google/R4ugqFzZaBMKv9Q47" class="tunnel-cta" target="_blank" rel="noopener">Réserver 15 minutes &#8594;</a>
-</section>
-
-<!-- NOS ENGAGEMENTS -->
-<section class="testimonials-section" id="temoignages">
+<!-- ENGAGEMENTS — fusion des trois blocs de reassurance -->
+<section class="testimonials-section" id="engagements">
   <div class="testimonials-header">
     <span class="section-eyebrow">Nos engagements</span>
     <h2>Ce sur quoi on <em>s'engage</em></h2>
-    <p style="color:#5a6572;font-size:17px;line-height:1.6;max-width:620px;margin:0 auto">Ce qu'on garantit à chaque client, dès le premier jour.</p>
+    <p style="color:#5a6572;font-size:17px;line-height:1.6;max-width:620px;margin:0 auto">Cinq choses qu'on tient dès le premier jour.</p>
   </div>
 
   <div style="max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px;text-align:left">
@@ -2784,9 +2711,9 @@
     </div>
 
     <div style="background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:18px;padding:28px 24px;box-shadow:0 10px 30px -18px rgba(0,0,0,0.22)">
-      <div style="font-size:26px;line-height:1;margin-bottom:14px">&#128274;</div>
-      <h3 style="font-size:18px;color:#111;margin:0 0 8px;font-weight:600">Hébergement en Europe (RGPD)</h3>
-      <p style="color:#5a6572;line-height:1.6;font-size:15px;margin:0">Le site vitrine est hébergé par GitHub Pages (États-Unis). Les données de vos appels sont traitées et stockées en Europe.</p>
+      <div style="font-size:26px;line-height:1;margin-bottom:14px">&#9201;&#65039;</div>
+      <h3 style="font-size:18px;color:#111;margin:0 0 8px;font-weight:600">En ligne sous 48&nbsp;h</h3>
+      <p style="color:#5a6572;line-height:1.6;font-size:15px;margin:0">On branche le standard sur votre numéro habituel en deux jours ouvrés. Vous ne changez ni de numéro, ni d'opérateur.</p>
     </div>
 
     <div style="background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:18px;padding:28px 24px;box-shadow:0 10px 30px -18px rgba(0,0,0,0.22)">
@@ -2796,9 +2723,15 @@
     </div>
 
     <div style="background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:18px;padding:28px 24px;box-shadow:0 10px 30px -18px rgba(0,0,0,0.22)">
-      <div style="font-size:26px;line-height:1;margin-bottom:14px">&#128196;</div>
-      <h3 style="font-size:18px;color:#111;margin:0 0 8px;font-weight:600">Devis transparent</h3>
-      <p style="color:#5a6572;line-height:1.6;font-size:15px;margin:0">Un prix ferme et définitif sous 48h après notre échange. Zéro coût caché, zéro surprise.</p>
+      <div style="font-size:26px;line-height:1;margin-bottom:14px">&#128273;</div>
+      <h3 style="font-size:18px;color:#111;margin:0 0 8px;font-weight:600">Du code qui vous appartient</h3>
+      <p style="color:#5a6572;line-height:1.6;font-size:15px;margin:0">Un abonnement SaaS, vous le payez tous les mois, à vie, et vous ne possédez rien. Du code propriétaire vous appartient, et il ne s'arrête pas le jour où vous arrêtez de payer.</p>
+    </div>
+
+    <div style="background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:18px;padding:28px 24px;box-shadow:0 10px 30px -18px rgba(0,0,0,0.22)">
+      <div style="font-size:26px;line-height:1;margin-bottom:14px">&#128274;</div>
+      <h3 style="font-size:18px;color:#111;margin:0 0 8px;font-weight:600">Hébergement en Europe (RGPD)</h3>
+      <p style="color:#5a6572;line-height:1.6;font-size:15px;margin:0">Le site vitrine est hébergé par GitHub Pages (États-Unis). Les données de vos appels sont traitées et stockées en Europe.</p>
     </div>
 
   </div>
@@ -2838,6 +2771,19 @@
   </div>
 </section>
 
+<!-- NOTRE HISTOIRE -->
+<section class="about-section" id="histoire">
+  <div class="about-wrap">
+    <div class="about-text">
+      <span class="section-eyebrow">Notre histoire</span>
+      <h2 class="section-title">L'IA pour tous, <em>pas seulement pour les géants</em></h2>
+      <p>Les grands groupes ont des équipes entières pour répondre au téléphone. Vous, vous êtes sous une chaudière, et le téléphone sonne dans la poche de votre bleu de travail.</p>
+      <p>Neova est née de ce déséquilibre. Une structure à taille humaine, qui parle clair, qui code propre, et qui livre un outil qui change vos journées. Pas de blabla, pas de no-code générique.</p>
+      <p>Ma conviction : bien répondre au téléphone n'est pas un luxe d'entreprise du CAC 40. C'est ce qui décide qui décroche le chantier.</p>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section class="contact-section" id="contact">
   <div class="contact-card">
@@ -2870,6 +2816,7 @@
     </div>
   </div>
 </section>
+
 
 <!-- FOOTER -->
 <footer>
@@ -3049,16 +2996,119 @@
   });
 })();
 
-// Reveal animations on scroll (IntersectionObserver — perf-friendly)
+/* ──────────────────────────────────────────────────────────────────
+   Apparition au scroll + navigation par ancres.
+
+   Le scroll fluide natif ne demarre pas sur certains navigateurs :
+   window.scrollTo({behavior:'smooth'}) ne bougeait pas d'un pixel et
+   la page restait figee au clic sur le menu. On anime donc a la main.
+   Et on revele toujours la section visee, sinon on atterrit sur du
+   contenu transparent. Constate et corrige le 24/08/2026.
+   ────────────────────────────────────────────────────────────────── */
 (function(){
-  const reveal=document.querySelectorAll('section, .scard, .pcard, .tcard, .manifesto-block, h2, .hero-trust');
-  reveal.forEach(el=>{el.classList.add('reveal');});
-  const io=new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}
-    });
-  },{threshold:0.12,rootMargin:'0px 0px -60px 0px'});
-  reveal.forEach(el=>io.observe(el));
+  var racine=document.documentElement;
+  var reduit=!!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var tous=document.querySelectorAll('section:not(.hero), .scard, .pcard, .tcard, .manifesto-block, h2');
+  var cibles=[];
+  for(var a=0;a<tous.length;a++){
+    var el=tous[a];
+    if(el.closest && el.closest('.hero')) continue;   // le hero est net des le premier rendu
+    cibles.push(el);
+  }
+  racine.setAttribute('data-reveal-pret','1');
+
+  function revele(el){
+    if(!el) return;
+    el.classList.add('visible');
+    var dedans=el.querySelectorAll ? el.querySelectorAll('.reveal') : [];
+    for(var i=0;i<dedans.length;i++) dedans[i].classList.add('visible');
+  }
+  function toutMontrer(){
+    racine.className=racine.className.replace(/\bjs-anim\b/,'');
+    for(var i=0;i<cibles.length;i++) revele(cibles[i]);
+  }
+
+  if(reduit || !('IntersectionObserver' in window)){
+    toutMontrer();
+  } else {
+    for(var b=0;b<cibles.length;b++) cibles[b].classList.add('reveal');
+    var vus=0;
+    var io=new IntersectionObserver(function(entrees){
+      for(var j=0;j<entrees.length;j++){
+        if(entrees[j].isIntersecting){ vus++; revele(entrees[j].target); io.unobserve(entrees[j].target); }
+      }
+    },{threshold:0,rootMargin:'400px 0px 400px 0px'});
+    for(var c=0;c<cibles.length;c++) io.observe(cibles[c]);
+    // deja dans la fenetre au chargement : visible tout de suite, sans attendre
+    for(var d=0;d<cibles.length;d++){
+      if(cibles[d].getBoundingClientRect().top < window.innerHeight+400) revele(cibles[d]);
+    }
+    // filet : si l'observateur n'a jamais tourne, on montre tout
+    setTimeout(function(){ if(vus===0) toutMontrer(); },1200);
+  }
+
+  /* ── ancres : on scrolle nous-memes, avec le decalage de l'entete ── */
+  function entete(){ var n=document.querySelector('nav'); return n?n.getBoundingClientRect().height:0; }
+  function plafond(){ return Math.max(0, racine.scrollHeight - window.innerHeight); }
+
+  function anime(vers){
+    var depart=window.pageYOffset, delta=vers-depart;
+    if(Math.abs(delta)<2){ window.scrollTo(0,vers); return; }
+    var duree=Math.min(700, Math.max(280, Math.abs(delta)*0.22));
+    var t0=null, fini=false;
+    function pas(t){
+      if(t0===null) t0=t;
+      var p=Math.min(1,(t-t0)/duree);
+      var e=p<0.5 ? 4*p*p*p : 1-Math.pow(-2*p+2,3)/2;
+      window.scrollTo(0, depart+delta*e);
+      if(p<1) requestAnimationFrame(pas); else fini=true;
+    }
+    requestAnimationFrame(pas);
+    /* Filet : dans un onglet en arriere-plan, ou sur une machine qui rame,
+       requestAnimationFrame peut ne jamais tourner. On garantit l'arrivee. */
+    setTimeout(function(){ if(!fini) window.scrollTo(0,vers); }, duree+260);
+  }
+
+  function allerA(el, sansAnimation){
+    revele(el);
+    var y=el.getBoundingClientRect().top + window.pageYOffset - entete() - 14;
+    y=Math.max(0, Math.min(y, plafond()));
+    if(sansAnimation || reduit) window.scrollTo(0,y); else anime(y);
+  }
+
+  document.addEventListener('click', function(ev){
+    if(ev.defaultPrevented || ev.button!==0 || ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
+    var a=ev.target;
+    while(a && a.nodeName!=='A') a=a.parentNode;
+    if(!a || !a.getAttribute) return;
+    var href=a.getAttribute('href');
+    if(!href || href.charAt(0)!=='#') return;
+    var cible = href.length>1 ? document.getElementById(href.slice(1)) : null;
+    if(href.length>1 && !cible) return;          // ancre inconnue : on laisse faire le navigateur
+    ev.preventDefault();
+    var faire=function(){
+      if(href==='#'){
+        anime(0);
+        if(history.replaceState) history.replaceState(null,'',location.pathname);
+      } else {
+        allerA(cible);
+        if(history.pushState) history.pushState(null,'',href);
+      }
+    };
+    // le menu mobile bloque le defilement du corps : on le laisse se fermer
+    if(document.body.classList.contains('menu-open')) setTimeout(faire,140); else faire();
+  }, false);
+
+  // arrivee directe sur une adresse du type /#demos
+  if(location.hash && location.hash.length>1){
+    var arrivee=document.getElementById(location.hash.slice(1));
+    if(arrivee) setTimeout(function(){ allerA(arrivee,true); },60);
+  }
+  window.addEventListener('hashchange', function(){
+    if(!location.hash || location.hash.length<2) return;
+    var h=document.getElementById(location.hash.slice(1));
+    if(h) allerA(h,true);
+  });
 })();
 
 // Parallaxe léger sur les orbes du hero au scroll (desktop only)
