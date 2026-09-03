@@ -3177,13 +3177,15 @@
   var lance = false;
   var el = null;
 
-  /* Rustine pour un defaut du widget Telnyx, mesure le 03/09/2026.
-     Le widget n'installe son ecouteur de messages qu'APRES l'ouverture de la
-     socket. La trame "widget_settings", qui arrive avant meme la reponse du
-     login, est donc perdue, et le widget reste vide -- reproduit jusque sur les
-     propres pages de demonstration de Telnyx. On capte la trame et on la lui
-     rejoue une fois qu'il ecoute. Le jour ou Telnyx corrige, le rejeu devient
-     sans effet. Detail : Standard-IA-livraison/widget-demo-2026-09-03/. */
+  /* Filet pour le visiteur qui clique puis change d'onglet, mesure le 03/09/2026.
+     Le widget n'affiche son bouton qu'a reception de la trame "widget_settings",
+     et il ne pose son ecouteur qu'apres l'ouverture de la socket. Dans un onglet
+     visible l'ecart est inferieur a 1 ms, donc tout va bien. Mais un onglet passe
+     en arriere-plan voit ses minuteurs plafonnes a 1 s par le navigateur : l'ecart
+     monte a ~990 ms, la trame (qui arrive vers 700 ms) passe avant l'ecouteur, et
+     elle n'est jamais renvoyee -- le widget reste vide pour toujours.
+     On garde donc la trame de cote et on la lui rejoue jusqu'a ce qu'il s'affiche.
+     Sans effet dans le cas normal. Detail : Standard-IA-livraison/widget-demo-2026-09-03/. */
   function affiche(){
     return !!(el && el.shadowRoot && el.getBoundingClientRect().height > 0);
   }
