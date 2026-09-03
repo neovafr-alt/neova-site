@@ -2082,18 +2082,7 @@
   </div>
 </section>
 
-<!-- DEMO VOCALE EN DIRECT
-     L'enregistrement d'appel a ete retire le 03/09/2026 : Yanis le trouvait mauvais.
-     Un nouvel enregistrement propre viendra reprendre sa place au-dessus. -->
-<section class="audio-section">
-    <div class="audio-card demo-live">
-      <span class="audio-eyebrow">Parlez-lui, tout de suite</span>
-      <p class="audio-sub">Dites-lui que votre chaudi&egrave;re fuit, demandez un rendez-vous, coupez-lui la parole. C'est exactement le standard que vous auriez, avec un vrai agenda derri&egrave;re.</p>
-      <button type="button" class="btn-fill demo-live-btn" id="demoLiveBtn">Parler &agrave; la d&eacute;mo &#8594;</button>
-      <div class="demo-live-slot" id="demoLiveSlot"></div>
-      <p class="audio-note">Votre navigateur va demander l'acc&egrave;s au micro. Le rendez-vous est pris dans un agenda de d&eacute;monstration : personne n'est pr&eacute;venu, rien n'est conserv&eacute;.</p>
-    </div>
-</section>
+
 
 <!-- TUNNEL STAT 1 — Standard IA / appels -->
 <section class="tunnel-stat">
@@ -2276,13 +2265,6 @@
   .audio-eyebrow{display:block;font-size:16px;font-weight:600;color:#fff;margin-bottom:10px}
   .audio-sub{font-size:14.5px;line-height:1.6;color:rgba(255,255,255,.68);margin-bottom:20px}
 
-/* DEMO VOCALE EN DIRECT — le widget Telnyx n'est charge qu'au clic */
-.demo-live-btn{border:0;cursor:pointer;font-family:inherit}
-.demo-live-btn:hover{background:var(--sky-dark)}
-.demo-live-btn[disabled]{opacity:.6;cursor:default}
-.demo-live-slot{margin-top:18px;min-height:0}
-.demo-live-slot telnyx-ai-agent{display:block}
-.demo-live-err{font-size:13px;color:#ff9a9a;margin-top:12px}
 
   .audio-note{font-size:12.5px;color:rgba(255,255,255,.45);margin-top:14px}
   @media(max-width:600px){.btn-appel{font-size:15px;padding:13px 20px}}
@@ -3163,107 +3145,7 @@
 })();
 </script>
 
-<script>
-/* DEMO VOCALE — chargement paresseux.
-   Le script Telnyx ouvre un WebSocket des qu'il est charge. On ne le charge donc
-   qu'au clic : aucun visiteur ne se connecte a un tiers sans l'avoir demande,
-   et la page reste legere pour ceux qui ne testent pas. */
-(function(){
-  var btn = document.getElementById('demoLiveBtn');
-  var slot = document.getElementById('demoLiveSlot');
-  if(!btn || !slot) return;
-  var AGENT = 'assistant-b7a1f48c-d477-42e3-8d76-284f0a9f8991';
-  var SRC = 'https://cdn.jsdelivr.net/npm/@telnyx/ai-agent-widget@0.35.1/dist/bundle.min.js';
-  var lance = false;
-  var el = null;
 
-  /* Filet pour le visiteur qui clique puis change d'onglet, mesure le 03/09/2026.
-     Le widget n'affiche son bouton qu'a reception de la trame "widget_settings",
-     et il ne pose son ecouteur qu'apres l'ouverture de la socket. Dans un onglet
-     visible l'ecart est inferieur a 1 ms, donc tout va bien. Mais un onglet passe
-     en arriere-plan voit ses minuteurs plafonnes a 1 s par le navigateur : l'ecart
-     monte a ~990 ms, la trame (qui arrive vers 700 ms) passe avant l'ecouteur, et
-     elle n'est jamais renvoyee -- le widget reste vide pour toujours.
-     On garde donc la trame de cote et on la lui rejoue jusqu'a ce qu'il s'affiche.
-     Sans effet dans le cas normal. Detail : Standard-IA-livraison/widget-demo-2026-09-03/. */
-  function affiche(){
-    return !!(el && el.shadowRoot && el.getBoundingClientRect().height > 0);
-  }
-  function rustine(){
-    var Natif = window.WebSocket;
-    if(!Natif || Natif.__neova) return;
-    function Enveloppe(url, protocoles){
-      var s = arguments.length > 1 ? new Natif(url, protocoles) : new Natif(url);
-      try{
-        if(String(url).indexOf('rtc.telnyx.com') === -1) return s;
-        var reglages = null, arme = false;
-        s.addEventListener('message', function(e){
-          var brut = String(e.data), o;
-          try{ o = JSON.parse(brut); }catch(_){ return; }
-          if(o && o.method === 'ai_conversation' && o.params
-             && o.params.type === 'widget_settings'){ reglages = brut; return; }
-          if(!arme && reglages && o && o.result && o.result.message === 'logged in'){
-            arme = true;
-            var essais = 0;
-            var t = setInterval(function(){
-              if(affiche() || ++essais > 16){ clearInterval(t); return; }
-              try{ s.dispatchEvent(new MessageEvent('message', { data: reglages })); }
-              catch(_){ clearInterval(t); }
-            }, 400);
-          }
-        });
-      }catch(_){}
-      return s;
-    }
-    Enveloppe.prototype = Natif.prototype;
-    Enveloppe.__neova = true;
-    Enveloppe.CONNECTING = Natif.CONNECTING; Enveloppe.OPEN = Natif.OPEN;
-    Enveloppe.CLOSING = Natif.CLOSING; Enveloppe.CLOSED = Natif.CLOSED;
-    window.WebSocket = Enveloppe;
-  }
-
-  function echoue(msg){
-    var p = document.createElement('p');
-    p.className = 'demo-live-err';
-    p.textContent = msg;
-    slot.appendChild(p);
-    btn.disabled = false;
-    btn.textContent = 'Reessayer \u2192';
-  }
-
-  function poser(){
-    el = document.createElement('telnyx-ai-agent');
-    el.setAttribute('agent-id', AGENT);
-    el.setAttribute('environment', 'production');
-    el.setAttribute('position', 'inline');
-    slot.innerHTML = '';
-    slot.appendChild(el);
-    btn.style.display = 'none';
-  }
-
-  btn.addEventListener('click', function(){
-    if(lance) return;
-    lance = true;
-    rustine();
-    btn.disabled = true;
-    btn.textContent = 'Connexion\u2026';
-    if(window.customElements && customElements.get('telnyx-ai-agent')){ poser(); return; }
-    var sc = document.createElement('script');
-    sc.src = SRC; sc.async = true;
-    sc.onload = function(){
-      if(window.customElements && customElements.whenDefined){
-        customElements.whenDefined('telnyx-ai-agent').then(poser);
-        setTimeout(function(){ if(btn.style.display !== 'none') poser(); }, 2500);
-      } else { poser(); }
-    };
-    sc.onerror = function(){
-      lance = false;
-      echoue("La d\u00e9mo n'a pas pu se charger. Appelez-nous, \u00e7a marchera mieux.");
-    };
-    document.head.appendChild(sc);
-  });
-})();
-</script>
 
 </body>
 </html>
