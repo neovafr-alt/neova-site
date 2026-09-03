@@ -3185,6 +3185,50 @@
   var AGENT = 'assistant-b7a1f48c-d477-42e3-8d76-284f0a9f8991';
   var SRC = 'https://cdn.jsdelivr.net/npm/@telnyx/ai-agent-widget@0.35.1/dist/bundle.min.js';
   var lance = false;
+  var el = null;
+
+  /* Rustine pour un defaut du widget Telnyx, mesure le 03/09/2026.
+     Le widget n'installe son ecouteur de messages qu'APRES l'ouverture de la
+     socket. La trame "widget_settings", qui arrive avant meme la reponse du
+     login, est donc perdue, et le widget reste vide -- reproduit jusque sur les
+     propres pages de demonstration de Telnyx. On capte la trame et on la lui
+     rejoue une fois qu'il ecoute. Le jour ou Telnyx corrige, le rejeu devient
+     sans effet. Detail : Standard-IA-livraison/widget-demo-2026-09-03/. */
+  function affiche(){
+    return !!(el && el.shadowRoot && el.getBoundingClientRect().height > 0);
+  }
+  function rustine(){
+    var Natif = window.WebSocket;
+    if(!Natif || Natif.__neova) return;
+    function Enveloppe(url, protocoles){
+      var s = arguments.length > 1 ? new Natif(url, protocoles) : new Natif(url);
+      try{
+        if(String(url).indexOf('rtc.telnyx.com') === -1) return s;
+        var reglages = null, arme = false;
+        s.addEventListener('message', function(e){
+          var brut = String(e.data), o;
+          try{ o = JSON.parse(brut); }catch(_){ return; }
+          if(o && o.method === 'ai_conversation' && o.params
+             && o.params.type === 'widget_settings'){ reglages = brut; return; }
+          if(!arme && reglages && o && o.result && o.result.message === 'logged in'){
+            arme = true;
+            var essais = 0;
+            var t = setInterval(function(){
+              if(affiche() || ++essais > 16){ clearInterval(t); return; }
+              try{ s.dispatchEvent(new MessageEvent('message', { data: reglages })); }
+              catch(_){ clearInterval(t); }
+            }, 400);
+          }
+        });
+      }catch(_){}
+      return s;
+    }
+    Enveloppe.prototype = Natif.prototype;
+    Enveloppe.__neova = true;
+    Enveloppe.CONNECTING = Natif.CONNECTING; Enveloppe.OPEN = Natif.OPEN;
+    Enveloppe.CLOSING = Natif.CLOSING; Enveloppe.CLOSED = Natif.CLOSED;
+    window.WebSocket = Enveloppe;
+  }
 
   function echoue(msg){
     var p = document.createElement('p');
@@ -3196,8 +3240,9 @@
   }
 
   function poser(){
-    var el = document.createElement('telnyx-ai-agent');
+    el = document.createElement('telnyx-ai-agent');
     el.setAttribute('agent-id', AGENT);
+    el.setAttribute('environment', 'production');
     el.setAttribute('position', 'inline');
     slot.innerHTML = '';
     slot.appendChild(el);
@@ -3207,6 +3252,7 @@
   btn.addEventListener('click', function(){
     if(lance) return;
     lance = true;
+    rustine();
     btn.disabled = true;
     btn.textContent = 'Connexion\u2026';
     if(window.customElements && customElements.get('telnyx-ai-agent')){ poser(); return; }
