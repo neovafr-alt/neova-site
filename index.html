@@ -2082,20 +2082,12 @@
   </div>
 </section>
 
-<!-- ECHANTILLON AUDIO -->
+<!-- DEMO VOCALE EN DIRECT
+     L'enregistrement d'appel a ete retire le 03/09/2026 : Yanis le trouvait mauvais.
+     Un nouvel enregistrement propre viendra reprendre sa place au-dessus. -->
 <section class="audio-section">
-  <div class="audio-card">
-    <span class="audio-eyebrow">Écoutez-le répondre</span>
-    <p class="audio-sub">Un appel réel, de bout en bout : le client décrit sa fuite, le standard pose les questions, consulte le planning, cale le créneau et confirme. Deux minutes, sans coupure.</p>
-    <audio controls preload="none" class="audio-player" src="/demo-standard.mp3">
-      Votre navigateur ne lit pas les fichiers audio.
-    </audio>
-    <p class="audio-note">Enregistrement d'un appel réel passé sur notre propre standard.</p>
-  </div>
-
-    <!-- DEMO VOCALE EN DIRECT -->
     <div class="audio-card demo-live">
-      <span class="audio-eyebrow">Ou parlez-lui, tout de suite</span>
+      <span class="audio-eyebrow">Parlez-lui, tout de suite</span>
       <p class="audio-sub">Dites-lui que votre chaudi&egrave;re fuit, demandez un rendez-vous, coupez-lui la parole. C'est exactement le standard que vous auriez, avec un vrai agenda derri&egrave;re.</p>
       <button type="button" class="btn-fill demo-live-btn" id="demoLiveBtn">Parler &agrave; la d&eacute;mo &#8594;</button>
       <div class="demo-live-slot" id="demoLiveSlot"></div>
@@ -2283,10 +2275,8 @@
     border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:30px 28px;text-align:center}
   .audio-eyebrow{display:block;font-size:16px;font-weight:600;color:#fff;margin-bottom:10px}
   .audio-sub{font-size:14.5px;line-height:1.6;color:rgba(255,255,255,.68);margin-bottom:20px}
-  .audio-player{width:100%;max-width:420px}
 
 /* DEMO VOCALE EN DIRECT — le widget Telnyx n'est charge qu'au clic */
-.demo-live{margin-top:18px}
 .demo-live-btn{border:0;cursor:pointer;font-family:inherit}
 .demo-live-btn:hover{background:var(--sky-dark)}
 .demo-live-btn[disabled]{opacity:.6;cursor:default}
