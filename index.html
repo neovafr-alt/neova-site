@@ -2092,15 +2092,6 @@
     </audio>
     <p class="audio-note">Enregistrement d'un appel réel passé sur notre propre standard.</p>
   </div>
-
-    <!-- DEMO VOCALE EN DIRECT -->
-    <div class="audio-card demo-live">
-      <span class="audio-eyebrow">Ou parlez-lui, tout de suite</span>
-      <p class="audio-sub">Dites-lui que votre chaudi&egrave;re fuit, demandez un rendez-vous, coupez-lui la parole. C'est exactement le standard que vous auriez, avec un vrai agenda derri&egrave;re.</p>
-      <button type="button" class="btn-fill demo-live-btn" id="demoLiveBtn">Parler &agrave; la d&eacute;mo &#8594;</button>
-      <div class="demo-live-slot" id="demoLiveSlot"></div>
-      <p class="audio-note">Votre navigateur va demander l'acc&egrave;s au micro. Le rendez-vous est pris dans un agenda de d&eacute;monstration : personne n'est pr&eacute;venu, rien n'est conserv&eacute;.</p>
-    </div>
 </section>
 
 <!-- TUNNEL STAT 1 — Standard IA / appels -->
@@ -2284,16 +2275,6 @@
   .audio-eyebrow{display:block;font-size:16px;font-weight:600;color:#fff;margin-bottom:10px}
   .audio-sub{font-size:14.5px;line-height:1.6;color:rgba(255,255,255,.68);margin-bottom:20px}
   .audio-player{width:100%;max-width:420px}
-
-/* DEMO VOCALE EN DIRECT — le widget Telnyx n'est charge qu'au clic */
-.demo-live{margin-top:18px}
-.demo-live-btn{border:0;cursor:pointer;font-family:inherit}
-.demo-live-btn:hover{background:var(--sky-dark)}
-.demo-live-btn[disabled]{opacity:.6;cursor:default}
-.demo-live-slot{margin-top:18px;min-height:0}
-.demo-live-slot telnyx-ai-agent{display:block}
-.demo-live-err{font-size:13px;color:#ff9a9a;margin-top:12px}
-
   .audio-note{font-size:12.5px;color:rgba(255,255,255,.45);margin-top:14px}
   @media(max-width:600px){.btn-appel{font-size:15px;padding:13px 20px}}
   .prix-essai{max-width:64ch;margin:0 auto 10px;font-size:16px;line-height:1.6;color:#e8e8ed}
@@ -3172,60 +3153,5 @@
   },{passive:true});
 })();
 </script>
-
-<script>
-/* DEMO VOCALE — chargement paresseux.
-   Le script Telnyx ouvre un WebSocket des qu'il est charge. On ne le charge donc
-   qu'au clic : aucun visiteur ne se connecte a un tiers sans l'avoir demande,
-   et la page reste legere pour ceux qui ne testent pas. */
-(function(){
-  var btn = document.getElementById('demoLiveBtn');
-  var slot = document.getElementById('demoLiveSlot');
-  if(!btn || !slot) return;
-  var AGENT = 'assistant-b7a1f48c-d477-42e3-8d76-284f0a9f8991';
-  var SRC = 'https://cdn.jsdelivr.net/npm/@telnyx/ai-agent-widget@0.35.1/dist/bundle.min.js';
-  var lance = false;
-
-  function echoue(msg){
-    var p = document.createElement('p');
-    p.className = 'demo-live-err';
-    p.textContent = msg;
-    slot.appendChild(p);
-    btn.disabled = false;
-    btn.textContent = 'Reessayer \u2192';
-  }
-
-  function poser(){
-    var el = document.createElement('telnyx-ai-agent');
-    el.setAttribute('agent-id', AGENT);
-    el.setAttribute('position', 'inline');
-    slot.innerHTML = '';
-    slot.appendChild(el);
-    btn.style.display = 'none';
-  }
-
-  btn.addEventListener('click', function(){
-    if(lance) return;
-    lance = true;
-    btn.disabled = true;
-    btn.textContent = 'Connexion\u2026';
-    if(window.customElements && customElements.get('telnyx-ai-agent')){ poser(); return; }
-    var sc = document.createElement('script');
-    sc.src = SRC; sc.async = true;
-    sc.onload = function(){
-      if(window.customElements && customElements.whenDefined){
-        customElements.whenDefined('telnyx-ai-agent').then(poser);
-        setTimeout(function(){ if(btn.style.display !== 'none') poser(); }, 2500);
-      } else { poser(); }
-    };
-    sc.onerror = function(){
-      lance = false;
-      echoue("La d\u00e9mo n'a pas pu se charger. Appelez-nous, \u00e7a marchera mieux.");
-    };
-    document.head.appendChild(sc);
-  });
-})();
-</script>
-
 </body>
 </html>
