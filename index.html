@@ -2259,7 +2259,60 @@
     color:#d2d2d7;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.08);border-radius:12px;
     padding:18px 18px;margin:0;white-space:pre-wrap;overflow-x:auto}
   .rapport-note{font-size:12.5px;color:rgba(255,255,255,.45);margin:12px 0 0}
-  .audio-section{padding:56px 22px;background:#000}
+  .audio-section{padding:96px 22px;background:#000}
+
+  /* Carte d'ecoute — pas de bordure franche : un degrade tres sombre et un
+     filet lumineux en haut, comme les autres panneaux du site. */
+  .ecoute{max-width:660px;margin:0 auto;padding:38px 34px 30px;position:relative;
+    background:linear-gradient(180deg,#0d0d0f 0%,#070708 100%);border-radius:22px;
+    box-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 24px 60px -30px rgba(0,0,0,.9)}
+  .ecoute::before{content:"";position:absolute;top:0;left:34px;right:34px;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(14,165,233,.5),rgba(139,92,246,.5),transparent)}
+  .ecoute-tete{margin:0 0 26px}
+  .ecoute-kicker{display:block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#6b7280;margin-bottom:12px}
+  .ecoute-titre{font-size:23px;line-height:1.25;font-weight:600;color:#fff;margin:0 0 10px;letter-spacing:-.01em}
+  .ecoute-sous{font-size:14.5px;line-height:1.65;color:rgba(255,255,255,.6);margin:0;max-width:52ch}
+
+  .lecteur{display:flex;align-items:center;gap:18px}
+  .lecteur-btn{flex:0 0 auto;width:52px;height:52px;border:0;border-radius:50%;cursor:pointer;
+    background:linear-gradient(135deg,#0EA5E9,#8B5CF6);display:grid;place-items:center;padding:0;
+    transition:transform .18s ease,box-shadow .18s ease;box-shadow:0 6px 20px -8px rgba(14,165,233,.9)}
+  .lecteur-btn:hover{transform:scale(1.05);box-shadow:0 8px 26px -8px rgba(139,92,246,.9)}
+  .lecteur-btn:active{transform:scale(.97)}
+  .lecteur-btn svg{width:22px;height:22px;fill:#fff;display:block}
+  .lecteur-btn .ic-pause,.lecteur[data-joue] .ic-play{display:none}
+  .lecteur[data-joue] .ic-pause{display:block}
+
+  .lecteur-piste{flex:1 1 auto;height:3px;border-radius:2px;cursor:pointer;position:relative;
+    background:rgba(255,255,255,.13)}
+  .lecteur-piste::after{content:"";position:absolute;inset:-11px 0}
+  .lecteur-remplissage{position:absolute;inset:0 auto 0 0;width:0;border-radius:2px;
+    background:linear-gradient(90deg,#0EA5E9,#8B5CF6)}
+  .lecteur-remplissage::after{content:"";position:absolute;right:-4px;top:50%;width:9px;height:9px;
+    margin-top:-4.5px;border-radius:50%;background:#fff;opacity:0;transition:opacity .18s ease}
+  .lecteur-piste:hover .lecteur-remplissage::after,
+  .lecteur-piste:focus-visible .lecteur-remplissage::after{opacity:1}
+  .lecteur-piste:focus-visible{outline:2px solid rgba(14,165,233,.7);outline-offset:6px}
+
+  .lecteur-temps{flex:0 0 auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:12px;color:rgba(255,255,255,.45);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .lecteur-temps em{font-style:normal;color:rgba(255,255,255,.85)}
+  .lecteur-temps i{font-style:normal}
+  .lecteur-temps i::before{content:" / "}
+
+  .ecoute-note{font-size:12.5px;line-height:1.6;color:rgba(255,255,255,.4);margin:26px 0 0;
+    padding-top:20px;border-top:1px solid rgba(255,255,255,.07)}
+  .ecoute-note strong{color:rgba(255,255,255,.72);font-weight:600}
+
+  @media(max-width:600px){
+    .audio-section{padding:64px 18px}
+    .ecoute{padding:30px 22px 24px;border-radius:18px}
+    .ecoute::before{left:22px;right:22px}
+    .ecoute-titre{font-size:20px}
+    .lecteur{gap:14px}
+    .lecteur-btn{width:46px;height:46px}
+  }
   .audio-card{max-width:640px;margin:0 auto;background:rgba(255,255,255,.05);
     border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:30px 28px;text-align:center}
   .audio-eyebrow{display:block;font-size:16px;font-weight:600;color:#fff;margin-bottom:10px}
@@ -2529,17 +2582,31 @@
 
 <!-- DÉMO — mockup dashboard unifié (un seul visuel qui parle à toutes les PME) -->
 <!-- ECHANTILLON AUDIO — appel de demonstration enregistre le 05/09/2026.
-     Place juste avant les captures SMS : on l'entend repondre, puis on voit
-     ce qu'on recoit. L'ancre #demos de la navigation pointe ici. -->
+     Place juste avant les captures SMS : on l'entend repondre, puis on voit ce
+     qu'on recoit. Porte l'ancre #demos. Lecteur maison : le controle natif du
+     navigateur (pastille blanche) cassait la page. -->
 <section class="audio-section" id="demos">
-  <div class="audio-card">
-    <span class="audio-eyebrow">&Eacute;coutez-le r&eacute;pondre</span>
-    <p class="audio-sub">Le client explique mal, se trompe sur le nom de sa commune, coupe la parole. Le standard rattrape, consulte le planning, cale le cr&eacute;neau et confirme. Une minute vingt-cinq, sans coupure.</p>
-    <audio controls preload="none" class="audio-player" src="/demo-standard.mp3">
-      Votre navigateur ne lit pas les fichiers audio.
-    </audio>
-    <p class="audio-note">Appel de d&eacute;monstration pass&eacute; sur notre propre standard. Ici c'est une ligne de plomberie-chauffage&nbsp;: <strong>le m&ecirc;me standard se r&egrave;gle pour votre m&eacute;tier</strong> — coiffure, garage, serrurerie, &eacute;lectricit&eacute;, r&eacute;novation, jardin.</p>
-  </div>
+  <figure class="ecoute">
+    <figcaption class="ecoute-tete">
+      <span class="ecoute-kicker">Appel enregistr&eacute;</span>
+      <h3 class="ecoute-titre">&Eacute;coutez-le r&eacute;pondre</h3>
+      <p class="ecoute-sous">Le client explique mal, se trompe sur le nom de sa commune, coupe la parole. Le standard rattrape, consulte le planning, cale le cr&eacute;neau et confirme.</p>
+    </figcaption>
+
+    <div class="lecteur" data-lecteur>
+      <button type="button" class="lecteur-btn" aria-label="Lire l'enregistrement">
+        <svg class="ic-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+        <svg class="ic-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.2v14H7zm6.8 0H17v14h-3.2z"/></svg>
+      </button>
+      <div class="lecteur-piste" role="slider" tabindex="0" aria-label="Position dans l'enregistrement" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <span class="lecteur-remplissage"></span>
+      </div>
+      <span class="lecteur-temps"><em>0:00</em><i>1:25</i></span>
+      <audio preload="metadata" src="/demo-standard.mp3"></audio>
+    </div>
+
+    <p class="ecoute-note">Appel de d&eacute;monstration pass&eacute; sur notre propre standard. Ici, une ligne de plomberie-chauffage&nbsp;— <strong>le m&ecirc;me standard se r&egrave;gle pour votre m&eacute;tier</strong>&nbsp;: coiffure, garage, serrurerie, &eacute;lectricit&eacute;, r&eacute;novation, jardin.</p>
+  </figure>
 </section>
 
 <section class="dark-section">
@@ -3161,6 +3228,60 @@
 </script>
 
 
+
+<script>
+/* Lecteur d'ecoute. Le controle natif <audio controls> rend une pastille
+   blanche opaque, incoherente avec le reste de la page et differente sur
+   chaque navigateur. On garde l'element <audio> pour le decodage et on
+   dessine nos propres commandes. Sans JS, l'element reste lisible par les
+   lecteurs d'ecran via son src. */
+(function(){
+  var boite = document.querySelector('[data-lecteur]');
+  if(!boite) return;
+  var son  = boite.querySelector('audio');
+  var btn  = boite.querySelector('.lecteur-btn');
+  var pist = boite.querySelector('.lecteur-piste');
+  var rem  = boite.querySelector('.lecteur-remplissage');
+  var ecou = boite.querySelector('.lecteur-temps em');
+  var tot  = boite.querySelector('.lecteur-temps i');
+
+  function mmss(s){
+    if(!isFinite(s)) return '0:00';
+    var m = Math.floor(s/60), r = Math.floor(s%60);
+    return m + ':' + (r<10 ? '0' : '') + r;
+  }
+  function peindre(){
+    var d = son.duration;
+    if(!isFinite(d) || !d) return;
+    var p = Math.min(1, son.currentTime/d);
+    rem.style.width = (p*100).toFixed(2) + '%';
+    pist.setAttribute('aria-valuenow', Math.round(p*100));
+    ecou.textContent = mmss(son.currentTime);
+  }
+  function viser(ev){
+    var d = son.duration; if(!isFinite(d) || !d) return;
+    var r = pist.getBoundingClientRect();
+    var x = (ev.touches ? ev.touches[0].clientX : ev.clientX) - r.left;
+    son.currentTime = Math.max(0, Math.min(1, x/r.width)) * d;
+    peindre();
+  }
+
+  son.addEventListener('loadedmetadata', function(){ tot.textContent = mmss(son.duration); peindre(); });
+  son.addEventListener('timeupdate', peindre);
+  son.addEventListener('play',  function(){ boite.setAttribute('data-joue',''); btn.setAttribute('aria-label',"Mettre en pause"); });
+  son.addEventListener('pause', function(){ boite.removeAttribute('data-joue'); btn.setAttribute('aria-label',"Lire l'enregistrement"); });
+  son.addEventListener('ended', function(){ son.currentTime = 0; peindre(); });
+
+  btn.addEventListener('click', function(){ son.paused ? son.play() : son.pause(); });
+  pist.addEventListener('click', viser);
+  pist.addEventListener('keydown', function(e){
+    var d = son.duration; if(!isFinite(d)) return;
+    if(e.key === 'ArrowRight'){ son.currentTime = Math.min(d, son.currentTime+5); e.preventDefault(); }
+    if(e.key === 'ArrowLeft'){  son.currentTime = Math.max(0, son.currentTime-5); e.preventDefault(); }
+    if(e.key === ' ' || e.key === 'Enter'){ son.paused ? son.play() : son.pause(); e.preventDefault(); }
+  });
+})();
+</script>
 
 </body>
 </html>
