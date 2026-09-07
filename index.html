@@ -394,10 +394,7 @@
     .tunnel-stat.light-bg .tunnel-line strong{color:var(--near-black)}
     .tunnel-line strong{color:#fff;font-weight:700}
     .tunnel-line em{
-      font-style:normal;font-weight:800;
-      background:linear-gradient(135deg,#0EA5E9,#06B6D4);
-      -webkit-background-clip:text;background-clip:text;
-      -webkit-text-fill-color:transparent;
+      font-style:normal;font-weight:800;color:var(--sky);
     }
     .tunnel-cta{
       display:inline-flex;align-items:center;gap:8px;
@@ -1541,6 +1538,9 @@
       padding:140px 6% 120px;
       text-align:center;position:relative;overflow:hidden;
     }
+    .eng-ic-wrap{margin-bottom:16px;line-height:0}
+    .eng-ic{width:26px;height:26px;color:var(--sky-dark);opacity:.85;
+      display:block;flex:0 0 auto}
     .testimonials-header{
       max-width:780px;margin:0 auto 64px;
     }
@@ -1550,7 +1550,10 @@
       font-weight:700;letter-spacing:-1.5px;line-height:1.1;
       color:var(--near-black);margin-bottom:18px;
     }
-    .testimonials-header h2 em{font-style:normal;color:var(--sky-dark)}
+    .testimonials-header h2 em{font-style:normal;color:inherit;
+      text-decoration:underline;text-decoration-color:rgba(2,132,199,.45);
+      text-decoration-thickness:2px;text-underline-offset:.16em;
+      text-decoration-skip-ink:auto}
 
     .global-rating{
       display:inline-flex;align-items:center;gap:14px;
@@ -1679,7 +1682,10 @@
       font-weight:700;letter-spacing:-1.8px;line-height:1.05;
       color:var(--near-black);margin-bottom:16px;
     }
-    .contact-title em{font-style:normal;color:var(--sky-dark)}
+    .contact-title em{font-style:normal;color:inherit;
+      text-decoration:underline;text-decoration-color:rgba(14,165,233,.5);
+      text-decoration-thickness:2px;text-underline-offset:.16em;
+      text-decoration-skip-ink:auto}
     .contact-sub{
       font-size:17px;color:var(--muted);
       margin-bottom:40px;line-height:1.6;
@@ -1976,8 +1982,6 @@
 
       /* TÉMOIGNAGES */
       .testimonials-section{padding:80px 5% 70px}
-  .eng-ic-wrap{margin-bottom:16px;line-height:0}
-  .eng-ic{width:24px;height:24px;color:var(--sky-dark);opacity:.9}
       .testimonials-header{margin-bottom:48px}
       .testimonials-header h2{font-size:30px}
       .global-rating{padding:12px 18px;gap:10px}
