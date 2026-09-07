@@ -383,12 +383,7 @@
     .tunnel-stat.light-bg .tunnel-line{color:var(--near-black)}
     .tunnel-stat.light-bg .tunnel-line strong{color:var(--near-black)}
     .tunnel-line strong{color:#fff;font-weight:700}
-    .tunnel-line em{
-      font-style:normal;font-weight:800;
-      background:linear-gradient(135deg,#0EA5E9,#06B6D4);
-      -webkit-background-clip:text;background-clip:text;
-      -webkit-text-fill-color:transparent;
-    }
+    .tunnel-line em{font-style:normal;font-weight:800;color:var(--sky)}
     .tunnel-cta{
       display:inline-flex;align-items:center;gap:8px;
       padding:12px 24px;border-radius:50px;
@@ -491,11 +486,10 @@
     .stat-num{
       font-size:clamp(36px,4.5vw,52px);
       font-weight:700;letter-spacing:-1.5px;line-height:1;
-      background:linear-gradient(135deg,#0EA5E9,#8B5CF6);
-      -webkit-background-clip:text;background-clip:text;
-      -webkit-text-fill-color:transparent;
-      margin-bottom:8px;
-    }
+      
+      
+      
+      margin-bottom:8px;color:var(--sky);font-variant-numeric:tabular-nums}
     .stat-label{
       font-size:14px;font-weight:500;
       color:var(--near-black);letter-spacing:-0.2px;
@@ -511,13 +505,9 @@
       padding:140px 6% 120px;text-align:center;
       position:relative;overflow:hidden;
     }
-    .light-section .section-eyebrow{
-      color:var(--sky-dark);
-      background:rgba(14,165,233,0.06);
-      border-color:rgba(14,165,233,0.18);
-    }
+    
     .light-section .section-title{color:var(--near-black)}
-    .light-section .section-title em{color:var(--sky-dark)}
+    .light-section .section-title em{text-decoration-color:rgba(2,132,199,.45)}
     .light-section .section-sub{color:var(--muted)}
 
     /* ── SECTIONS DARK UNIFIÉES ── */
@@ -534,21 +524,16 @@
       pointer-events:none;
     }
     .dark-section > *{position:relative;z-index:1}
-    .section-eyebrow{
-      display:inline-block;
-      font-size:11px;font-weight:600;letter-spacing:2px;
-      text-transform:uppercase;color:var(--sky);
-      padding:6px 14px;border-radius:50px;
-      background:rgba(14,165,233,0.08);
-      border:1px solid rgba(14,165,233,0.25);
-      margin-bottom:20px;
-    }
+    .section-eyebrow{display:inline-flex;align-items:center;gap:11px;font-size:11px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:rgba(255,255,255,.42);padding:0;border:0;background:none;border-radius:0;margin-bottom:20px}
+    .section-eyebrow::before{content:"";width:26px;height:1px;flex:0 0 auto;background:linear-gradient(90deg,var(--sky),rgba(14,165,233,0))}
+    .light-section .section-eyebrow,.testimonials-header .section-eyebrow{color:rgba(29,29,31,.5)}
+    .light-section .section-eyebrow::before,.testimonials-header .section-eyebrow::before{background:linear-gradient(90deg,var(--sky-dark),rgba(2,132,199,0))}
     .section-title{
       font-size:clamp(34px,4.5vw,60px);
       font-weight:700;letter-spacing:-1.8px;line-height:1.05;
       color:var(--white);margin-bottom:18px;
     }
-    .section-title em{font-style:normal;color:var(--sky)}
+    .section-title em{font-style:normal;color:inherit;text-decoration:underline;text-decoration-color:rgba(14,165,233,.5);text-decoration-thickness:2px;text-underline-offset:.16em;text-decoration-skip-ink:auto}
     .section-sub{
       font-size:17px;color:rgba(255,255,255,0.55);line-height:1.6;
       max-width:600px;margin:0 auto 70px;
@@ -1523,17 +1508,15 @@
     .testimonials-header{
       max-width:780px;margin:0 auto 64px;
     }
-    .testimonials-header .section-eyebrow{
-      color:var(--sky-dark);
-      background:rgba(14,165,233,0.06);
-      border-color:rgba(14,165,233,0.18);
-    }
+    .eng-ic-wrap{margin-bottom:16px;line-height:0}
+    .eng-ic{width:26px;height:26px;color:var(--sky-dark);opacity:.85;display:block}
+    
     .testimonials-header h2{
       font-size:clamp(32px,4vw,52px);
       font-weight:700;letter-spacing:-1.5px;line-height:1.1;
       color:var(--near-black);margin-bottom:18px;
     }
-    .testimonials-header h2 em{font-style:normal;color:var(--sky-dark)}
+    .testimonials-header h2 em{font-style:normal;color:inherit;text-decoration:underline;text-decoration-color:rgba(2,132,199,.45);text-decoration-thickness:2px;text-underline-offset:.16em;text-decoration-skip-ink:auto}
 
     .global-rating{
       display:inline-flex;align-items:center;gap:14px;
@@ -1662,7 +1645,7 @@
       font-weight:700;letter-spacing:-1.8px;line-height:1.05;
       color:var(--near-black);margin-bottom:16px;
     }
-    .contact-title em{font-style:normal;color:var(--sky-dark)}
+    .contact-title em{font-style:normal;color:inherit;text-decoration:underline;text-decoration-color:rgba(2,132,199,.45);text-decoration-thickness:2px;text-underline-offset:.16em;text-decoration-skip-ink:auto}
     .contact-sub{
       font-size:17px;color:var(--muted);
       margin-bottom:40px;line-height:1.6;
@@ -1911,7 +1894,7 @@
       .light-section{padding:80px 5% 70px}
       .section-title{font-size:32px;letter-spacing:-1px}
       .section-sub{font-size:15px;margin-bottom:48px;padding:0 4px}
-      .section-eyebrow{font-size:10px;letter-spacing:1.5px;padding:5px 12px}
+      .section-eyebrow{font-size:10px;letter-spacing:1.4px}
 
       /* TUNNEL STATS */
       .tunnel-stat{padding:60px 5%}
@@ -2058,9 +2041,9 @@
   <div class="hero-trust">
     <div class="trust-item"><span class="trust-dot live"></span>Disponible 24h/24</div>
     <div class="trust-sep"></div>
-    <div class="trust-item">🛡️ 100% en français</div>
+    <div class="trust-item">100&nbsp;% en français</div>
     <div class="trust-sep"></div>
-    <div class="trust-item">✅ Sans engagement, résiliable chaque mois</div>
+    <div class="trust-item">Sans engagement, résiliable chaque mois</div>
   </div>
 </section>
 
@@ -2137,19 +2120,19 @@
   <div style="max-width:1000px;margin:44px auto 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px;text-align:left">
 
     <div style="background:linear-gradient(180deg,#0d0d0f 0%,#070708 100%);border:1px solid rgba(34,211,238,0.18);border-radius:18px;padding:28px 24px">
-      <div style="font-size:26px;line-height:1;margin-bottom:14px">&#128737;&#65039;</div>
+      <div class="eng-ic-wrap"><svg class="eng-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.6 3.6h3l1.5 4-2 1.2a10 10 0 0 0 5.3 5.3l1.2-2 4 1.5v3a2 2 0 0 1-2 2A14.6 14.6 0 0 1 4.4 5.6a2 2 0 0 1 2-2Z"/></svg></div>
       <h3 style="font-size:18px;color:#fff;margin:0 0 8px;font-weight:600">Garantie résultat</h3>
       <p style="color:rgba(255,255,255,0.62);line-height:1.6;font-size:15px;margin:0">On ajuste jusqu'à ce que l'assistant réponde exactement comme vous le voulez. Et vous jugez sur vos 20 premiers appels, avant de payer quoi que ce soit.</p>
     </div>
 
     <div style="background:linear-gradient(180deg,#0d0d0f 0%,#070708 100%);border:1px solid rgba(34,211,238,0.18);border-radius:18px;padding:28px 24px">
-      <div style="font-size:26px;line-height:1;margin-bottom:14px">&#128274;</div>
+      <div class="eng-ic-wrap"><svg class="eng-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.6l7 2.9v5c0 4.2-2.9 7.4-7 8.9-4.1-1.5-7-4.7-7-8.9v-5Z"/></svg></div>
       <h3 style="font-size:18px;color:#fff;margin:0 0 8px;font-weight:600">Données en Europe (RGPD)</h3>
       <p style="color:rgba(255,255,255,0.62);line-height:1.6;font-size:15px;margin:0">Vos appels et vos données restent hébergés en Europe, dans le respect du RGPD.</p>
     </div>
 
     <div style="background:linear-gradient(180deg,#0d0d0f 0%,#070708 100%);border:1px solid rgba(34,211,238,0.18);border-radius:18px;padding:28px 24px">
-      <div style="font-size:26px;line-height:1;margin-bottom:14px">&#128100;</div>
+      <div class="eng-ic-wrap"><svg class="eng-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M5.6 19.6a6.5 6.5 0 0 1 12.8 0"/></svg></div>
       <h3 style="font-size:18px;color:#fff;margin:0 0 8px;font-weight:600">Un interlocuteur unique</h3>
       <p style="color:rgba(255,255,255,0.62);line-height:1.6;font-size:15px;margin:0">Vous parlez directement à la personne qui configure votre assistant. Pas de call center.</p>
     </div>
