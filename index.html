@@ -997,6 +997,7 @@
       display:flex;align-items:center;gap:8px;
     }
     .widget-icon{font-size:18px;line-height:1}
+    .wg-ic{width:17px;height:17px;display:block;color:currentColor}
     .widget-label{
       font-size:11px;color:rgba(255,255,255,0.55);
       text-transform:uppercase;letter-spacing:0.6px;font-weight:500;
@@ -2572,14 +2573,20 @@
     var row=gainVal.closest('.simu-cmp-row');
 
     if(p.mode==='temps'){
+      /* On ne divise plus le prix par les heures. Ce ratio sortait un
+         "34 € l'heure recuperee" qui invitait la seule comparaison qui
+         dessert : le taux horaire du professionnel. On met les deux
+         grandeurs cote a cote — un prix annuel, un temps annuel — et on
+         laisse l'artisan valoriser sa journee lui-meme. */
       resVal.textContent=f(r);
-      resSub.textContent='soit environ '+f(r*12/7)+' journées de travail par an';
-      gainLab.textContent = p.gainLab || "Ce que vous coûte l'heure récupérée";
-      var parHeure = r>0 ? (AN/12)/r : 0;
-      gainVal.textContent=f(parHeure)+' €';
+      resSub.textContent='repris sur votre métier, chaque mois';
+      var jours = r*12/7;
+      gainLab.textContent = p.gainLab || 'Sur un an, vous reprenez';
+      gainVal.textContent = f(jours)+' journées de travail';
       row.classList.remove('is-neg');
-      phrase.textContent = p.phrase ? p.phrase(f(parHeure))
-        : "Chaque heure rendue à votre métier vous revient à "+f(parHeure)+" €. À vous de dire si votre heure vaut plus que ça.";
+      phrase.textContent = p.phrase ? p.phrase(f(jours))
+        : "Le standard coûte "+f(AN)+" € HT par an. En face, vous reprenez environ "
+          +f(jours)+" journées de travail. C'est à vous de dire ce que vaut une de vos journées.";
     } else {
       resVal.textContent=f(r);
       resSub.textContent=p.sub;
@@ -2668,7 +2675,7 @@
 
         <div class="dashmock-row">
           <div class="dashmock-greeting">
-            <div class="dashmock-hello">Bonjour 👋</div>
+            <div class="dashmock-hello">Bonjour</div>
             <div class="dashmock-sub">Voici ce que votre standard a pris cette semaine</div>
           </div>
           <div class="dashmock-period">
@@ -2682,7 +2689,7 @@
 
           <div class="dashmock-widget">
             <div class="widget-head">
-              <span class="widget-icon">📞</span>
+              <span class="widget-icon"><svg class="wg-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.6 3.6h3l1.5 4-2 1.2a10 10 0 0 0 5.3 5.3l1.2-2 4 1.5v3a2 2 0 0 1-2 2A14.6 14.6 0 0 1 4.4 5.6a2 2 0 0 1 2-2Z"/></svg></span>
               <span class="widget-label">Appels décrochés</span>
             </div>
             <div class="widget-num">47</div>
@@ -2694,11 +2701,11 @@
 
           <div class="dashmock-widget">
             <div class="widget-head">
-              <span class="widget-icon">📅</span>
+              <span class="widget-icon"><svg class="wg-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.8" y="5" width="16.4" height="15" rx="2.4"/><path d="M3.8 9.6h16.4M8.4 3.4v3.2m7.2-3.2v3.2"/></svg></span>
               <span class="widget-label">Rendez-vous calés</span>
             </div>
             <div class="widget-num">9</div>
-            <div class="widget-meta"><span class="widget-hot">🔥 2 urgences</span> remontées</div>
+            <div class="widget-meta"><span class="widget-hot">2 urgences</span> remontées</div>
             <div class="widget-mini-list">
               <div class="mini-lead">Mardi 8h30 · fuite chaudière</div>
               <div class="mini-lead">Jeudi 14h · devis salle de bain</div>
@@ -2707,7 +2714,7 @@
 
           <div class="dashmock-widget">
             <div class="widget-head">
-              <span class="widget-icon">💬</span>
+              <span class="widget-icon"><svg class="wg-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 12.2a7.4 7.4 0 0 1-8 7.4L4.6 20.4l1-3.6a7.4 7.4 0 1 1 14.6-4.6Z"/></svg></span>
               <span class="widget-label">Messages transmis</span>
             </div>
             <div class="widget-num">23</div>

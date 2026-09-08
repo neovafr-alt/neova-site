@@ -2498,14 +2498,20 @@
     var row=gainVal.closest('.simu-cmp-row');
 
     if(p.mode==='temps'){
+      /* On ne divise plus le prix par les heures. Ce ratio sortait un
+         "34 € l'heure recuperee" qui invitait la seule comparaison qui
+         dessert : le taux horaire du professionnel. On met les deux
+         grandeurs cote a cote — un prix annuel, un temps annuel — et on
+         laisse l'artisan valoriser sa journee lui-meme. */
       resVal.textContent=f(r);
-      resSub.textContent='soit environ '+f(r*12/7)+' journées de travail par an';
-      gainLab.textContent = p.gainLab || "Ce que vous coûte l'heure récupérée";
-      var parHeure = r>0 ? (AN/12)/r : 0;
-      gainVal.textContent=f(parHeure)+' €';
+      resSub.textContent='repris sur votre métier, chaque mois';
+      var jours = r*12/7;
+      gainLab.textContent = p.gainLab || 'Sur un an, vous reprenez';
+      gainVal.textContent = f(jours)+' journées de travail';
       row.classList.remove('is-neg');
-      phrase.textContent = p.phrase ? p.phrase(f(parHeure))
-        : "Chaque heure rendue à votre métier vous revient à "+f(parHeure)+" €. À vous de dire si votre heure vaut plus que ça.";
+      phrase.textContent = p.phrase ? p.phrase(f(jours))
+        : "Le standard coûte "+f(AN)+" € HT par an. En face, vous reprenez environ "
+          +f(jours)+" journées de travail. C'est à vous de dire ce que vaut une de vos journées.";
     } else {
       resVal.textContent=f(r);
       resSub.textContent=p.sub;
