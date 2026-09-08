@@ -2457,6 +2457,7 @@
                  note:"On retient qu'un appel sur deux reçu par un cabinet est une demande de rendez-vous, de statut ou d'information que l'assistant traite de bout en bout. L'autre moitié vous est transmise, résumée, quand ça vous arrange.",
                  resLab:"Temps rendu à votre équipe",
                  titre:"Ce que le téléphone <em>coûte à votre cabinet</em>",
+                 gainMode:"heure", sub2:"rendues à votre équipe, chaque mois",
                  gainLab:"Ce que vous coûte l'heure rendue",
                  phrase:function(x){return "Chaque heure rendue à votre équipe vous revient à "+x+" €. À comparer au coût horaire chargé d'un collaborateur.";}}
   };
@@ -2504,14 +2505,25 @@
          grandeurs cote a cote — un prix annuel, un temps annuel — et on
          laisse l'artisan valoriser sa journee lui-meme. */
       resVal.textContent=f(r);
-      resSub.textContent='repris sur votre métier, chaque mois';
+      resSub.textContent = p.sub2 || 'repris sur votre métier, chaque mois';
       var jours = r*12/7;
-      gainLab.textContent = p.gainLab || 'Sur un an, vous reprenez';
-      gainVal.textContent = f(jours)+' journées de travail';
       row.classList.remove('is-neg');
-      phrase.textContent = p.phrase ? p.phrase(f(jours))
-        : "Le standard coûte "+f(AN)+" € HT par an. En face, vous reprenez environ "
+      if(p.gainMode==='heure'){
+        /* Le ratio en euros ne se defend que si la comparaison se fait avec le
+           cout d'un SALARIE, pas avec l'heure du dirigeant. Un cabinet compare
+           a un collaborateur charge : l'argument joue pour nous. Un coiffeur
+           compare a sa propre heure : il joue contre nous. */
+        var parHeure = r>0 ? (AN/12)/r : 0;
+        gainLab.textContent = p.gainLab || "Ce que vous coûte l'heure rendue";
+        gainVal.textContent = f(parHeure)+' €';
+        phrase.textContent = p.phrase ? p.phrase(f(parHeure))
+          : "Chaque heure rendue vous revient à "+f(parHeure)+" €.";
+      } else {
+        gainLab.textContent = 'Sur un an, vous reprenez';
+        gainVal.textContent = f(jours)+' journées de travail';
+        phrase.textContent = "Le standard coûte "+f(AN)+" € HT par an. En face, vous reprenez environ "
           +f(jours)+" journées de travail. C'est à vous de dire ce que vaut une de vos journées.";
+      }
     } else {
       resVal.textContent=f(r);
       resSub.textContent=p.sub;
