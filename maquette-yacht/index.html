@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Maquette de réservation en ligne</title>
+<link href="https://fonts.googleapis.com/css2?family=Actor&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root { --navy:#003666; --gold:#bfa879; --gold-l:#d9c384; --cream:#f8f5f0; --ink:#12232f; }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body { margin:0; background:#e6e0d6; font-family:'Open Sans',Helvetica,Arial,sans-serif; font-weight:300; color:var(--navy); }
+  .app { max-width:460px; margin:0 auto; background:var(--cream); min-height:100vh; box-shadow:0 0 60px rgba(0,54,102,.18); }
+  .strip { background:var(--navy); color:var(--gold-l); text-align:center; font-size:10px; letter-spacing:.14em; padding:7px 14px; }
+  .hero { position:relative; height:240px; overflow:hidden; }
+  .hero img { width:100%; height:100%; object-fit:cover; display:block; }
+  .hero .veil { position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,54,102,.18),rgba(0,54,102,.78)); }
+  .hero .t { position:absolute; left:0; right:0; bottom:0; padding:20px 22px; color:#fff; }
+  .hero .eyebrow { font-size:10px; letter-spacing:.26em; color:var(--gold-l); }
+  .hero h1 { font-family:'Actor',sans-serif; font-weight:400; font-size:30px; margin:6px 0 4px; text-transform:uppercase; letter-spacing:.04em; }
+  .hero .route { font-size:12px; color:#e7dfd2; }
+  .tabs { background:#fff; border-bottom:1px solid rgba(0,54,102,.1); display:flex; flex-wrap:wrap; justify-content:center; padding:4px 6px; }
+  .tabs button { background:none; border:none; border-bottom:2px solid transparent; padding:13px 10px; min-height:44px; font:inherit; font-size:11px; letter-spacing:.12em; color:#7f8c95; cursor:pointer; }
+  .tabs button.on { color:var(--navy); border-color:var(--gold); }
+  .intro { padding:20px 22px 0; }
+  .intro .d { font-size:13px; color:#4a5c68; line-height:1.6; }
+  .intro .f { font-size:12px; color:#8a6f3c; margin-top:4px; }
+  section { padding:24px 22px 0; }
+  h2 { font-family:'Actor',sans-serif; font-weight:400; font-size:15px; letter-spacing:.18em; text-transform:uppercase; margin:0 0 10px; }
+  hr.rule { border:none; border-top:1px solid var(--gold); margin:0 0 14px; width:46px; }
+  .panel { background:#fff; border:1px solid rgba(0,54,102,.1); padding:16px 14px; }
+  .month { text-align:center; font-size:12px; letter-spacing:.16em; margin-bottom:10px; }
+  .cal { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; }
+  .cal .wd { text-align:center; font-size:10px; color:#8b97a0; padding-bottom:2px; }
+  .cal button { min-height:44px; border:1px solid rgba(0,54,102,.12); background:#fff; font:inherit; font-size:13px; color:var(--navy); cursor:pointer; }
+  .cal button.off { background:#efeae1; color:#a8b2b9; cursor:not-allowed; }
+  .cal button.on { background:var(--navy); color:#fff; border-color:var(--navy); }
+  .legend { display:flex; gap:16px; font-size:11px; color:#4a5c68; margin-top:10px; }
+  .boats { display:flex; flex-direction:column; gap:16px; }
+  .boat { background:#fff; border:1px solid rgba(0,54,102,.1); padding:0; text-align:left; cursor:pointer; font:inherit; display:block; width:100%; }
+  .boat.on { border:2px solid var(--gold); }
+  .boat .ph { position:relative; height:168px; overflow:hidden; }
+  .boat .ph img { width:100%; height:100%; object-fit:cover; display:block; }
+  .boat .ph .veil { position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,54,102,0) 45%,rgba(0,54,102,.78) 100%); }
+  .boat .ph .lab { position:absolute; left:0; right:0; bottom:0; padding:14px 16px; }
+  .boat .ph .lab .n { font-family:'Actor',sans-serif; font-size:21px; color:#fff; }
+  .boat .ph .lab .p { font-size:14px; color:var(--gold-l); margin-top:3px; }
+  .boat .ph .badge { position:absolute; top:12px; right:12px; background:var(--gold); color:var(--navy); font-size:10px; letter-spacing:.14em; padding:6px 10px; }
+  .boat .meta { padding:11px 16px; display:flex; align-items:center; gap:13px; font-size:12px; color:#4a5c68; }
+  .boat .meta span { display:flex; align-items:center; gap:5px; }
+  .boat .meta .cta { margin-left:auto; font-size:11px; letter-spacing:.12em; color:#8b97a0; }
+  .boat.on .meta .cta { color:#8a6f3c; }
+  .more { display:block; margin:14px auto 0; background:none; border:1px solid var(--gold); padding:13px 20px; font:inherit; font-size:11px; letter-spacing:.14em; color:var(--navy); min-height:44px; cursor:pointer; }
+  .xs { display:flex; flex-direction:column; gap:7px; }
+  .xs button { text-align:left; background:#fff; border:1px solid rgba(0,54,102,.1); padding:13px 15px; display:flex; align-items:center; gap:12px; min-height:44px; font:inherit; font-size:13px; color:var(--navy); cursor:pointer; }
+  .xs button.on { background:#fdfbf7; border-color:var(--gold); }
+  .xs .box { width:18px; height:18px; border:1px solid rgba(0,54,102,.28); flex:0 0 auto; }
+  .xs button.on .box { background:var(--gold); border-color:var(--gold); }
+  .xs .pr { margin-left:auto; color:#4a5c68; }
+  .recap { background:var(--navy); color:var(--cream); padding:20px; display:flex; flex-direction:column; gap:12px; }
+  .recap .row { display:flex; gap:12px; align-items:baseline; }
+  .recap .row .l { flex:1; font-size:12px; letter-spacing:.06em; color:#b9c6d1; }
+  .recap .row .v { font-size:14px; text-align:right; }
+  .recap .sep { border-top:1px solid rgba(248,245,240,.2); }
+  .recap .tot { display:flex; align-items:baseline; gap:12px; }
+  .recap .tot .l { flex:1; font-family:'Actor',sans-serif; font-size:18px; letter-spacing:.14em; text-transform:uppercase; }
+  .recap .tot .v { font-family:'Actor',sans-serif; font-size:27px; color:var(--gold-l); }
+  .recap .split { display:flex; gap:9px; }
+  .recap .split div { flex:1; background:rgba(248,245,240,.08); padding:11px 13px; }
+  .recap .split .k { font-size:10px; letter-spacing:.08em; color:#b9c6d1; }
+  .recap .split .w { font-size:16px; padding-top:4px; }
+  .recap .go { border:none; background:var(--gold); color:var(--navy); padding:16px; font:inherit; font-size:12px; letter-spacing:.16em; text-transform:uppercase; min-height:44px; opacity:.9; }
+  .recap .note { font-size:10px; color:#9fb0bd; text-align:center; letter-spacing:.06em; }
+  .after { background:#fff; border:1px solid rgba(0,54,102,.1); padding:16px; margin-top:14px; }
+  .after .k { font-size:11px; letter-spacing:.14em; color:#8a6f3c; margin-bottom:8px; }
+  .after .d { font-size:13px; color:#4a5c68; line-height:1.6; }
+  footer { padding:18px 22px 34px; font-size:10px; color:#7d8a93; line-height:1.7; }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="strip">MAQUETTE · AUCUNE RÉSERVATION NI PAIEMENT RÉEL</div>
+
+  <div class="hero">
+    <img src="img/b25.jpg" alt="">
+    <div class="veil"></div>
+    <div class="t">
+      <div class="eyebrow">YACHT SELECTION</div>
+      <h1 id="pkgName">Local Cruise</h1>
+      <div class="route" id="pkgRoute"></div>
+    </div>
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+
+  <div class="intro">
+    <div class="d" id="pkgDetail"></div>
+    <div class="f" id="pkgFleet"></div>
+  </div>
+
+  <section>
+    <h2>Votre date</h2><hr class="rule">
+    <div class="panel">
+      <div class="month">JUILLET 2027</div>
+      <div class="cal" id="cal"></div>
+      <div class="legend"><span>Disponible</span><span style="color:#9aa6ad">Déjà réservé</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Votre bateau</h2><hr class="rule">
+    <div class="boats" id="boats"></div>
+    <button class="more" id="more"></button>
+  </section>
+
+  <section>
+    <h2>À bord</h2><hr class="rule">
+    <div class="xs" id="extras"></div>
+  </section>
+
+  <section style="padding-bottom:0">
+    <h2>Votre réservation</h2><hr class="rule">
+    <div class="recap">
+      <div id="recap"></div>
+      <div class="sep"></div>
+      <div class="tot"><div class="l">Total</div><div class="v" id="total">—</div></div>
+      <div class="split">
+        <div><div class="k">ACOMPTE 30 %, CARTE</div><div class="w" id="acompte">—</div></div>
+        <div><div class="k">SOLDE, VIREMENT</div><div class="w" id="solde">—</div></div>
+      </div>
+      <button class="go" id="go" disabled>Choisissez un bateau</button>
+      <div class="note">BOUTON INACTIF, CECI EST UNE MAQUETTE</div>
+    </div>
+    <div class="after">
+      <div class="k">ET CÔTÉ MANAGER, AU MÊME MOMENT</div>
+      <div class="d">La date se bloque sur le bateau, le contrat part à la signature avec le lien de paiement, le propriétaire reçoit sa notification, le capitaine voit la sortie dans son planning, et la réservation entre au planning manager avec son numéro de contrat.</div>
+    </div>
+  </section>
+
+  <footer>
+    Maquette réalisée par Neova pour Yacht Selection, le 23 septembre 2026. Bateaux, photos, formules et tarifs repris du catalogue existant. Les prix suivis d'un point sont estimés et restent à confirmer. Les disponibilités affichées sont fictives.
+  </footer>
+</div>
+
+<script>
+const PACKAGES = [
+ {id:'local',  label:'LOCAL CRUISE', name:'Local Cruise',    route:'Monaco vers Saint-Jean-Cap-Ferrat', detail:"8 heures, de 10 h à 18 h. Mise à disposition, skipper, carburant, taxes, serviettes, boissons, rosé et matériel de snorkeling compris.", fleet:26, ratio:1},
+ {id:'lerins', label:'LÉRINS',       name:'Lérins Cruise',   route:'Cannes vers les îles de Lérins',    detail:"8 heures, de 10 h à 18 h. Mise à disposition, skipper, carburant, taxes, serviettes, boissons, rosé et matériel de snorkeling compris.", fleet:27, ratio:1.08},
+ {id:'sttrop', label:'ST TROPEZ',    name:'St Tropez Cruise',route:'Saint-Tropez vers Pampelonne',      detail:"8 heures, de 10 h à 18 h. Mise à disposition, skipper, carburant, taxes, serviettes, boissons, rosé et matériel de snorkeling compris.", fleet:24, ratio:1.19},
+ {id:'halfday',label:'HALF DAY',     name:'Half Day',        route:"Demi-journée, selon le port d'attache", detail:"4 heures. Mise à disposition, skipper, carburant, taxes, serviettes, boissons et rosé compris.", fleet:14, ratio:0.74},
+ {id:'sunset', label:'SUNSET',       name:'Sunset Cruise',   route:"Coucher de soleil, selon le port d'attache", detail:"2 h 30 en fin de journée. Mise à disposition, skipper, carburant, taxes, serviettes, boissons et rosé compris.", fleet:11, ratio:0.58}
+];
+const BOATS = [
+ {id:'axopar25',n:'Axopar 25 Cross Top',g:8,c:2,l:'8 m',base:1900,ph:'b00'},
+ {id:'prestige38',n:'Prestige 38 S',g:9,c:1,l:'10,85 m',base:2900,ph:'b01'},
+ {id:'leader36',n:'Leader 36',g:6,c:1,l:'11,62 m',base:3200,ph:'b02'},
+ {id:'fjord36',n:'Fjord 36 Open',g:10,c:2,l:'11,15 m',base:3300,ph:'b03'},
+ {id:'itama40',n:'Itama 40',g:9,c:2,l:'12,25 m',base:3800,ph:'b04'},
+ {id:'vandutch40',n:'VanDutch 40',g:10,c:0,l:'12 m',base:3900,ph:'b05'},
+ {id:'solaris40',n:'Solaris 40 Open',g:7,c:1,l:'12 m',base:4400,ph:'b06'},
+ {id:'fjord41',n:'Fjord 41 XL',g:10,c:4,l:'12,15 m',base:4500,ph:'b07'},
+ {id:'cranchi44',n:'Cranchi 44',g:10,c:1,l:'13,8 m',base:4700,ph:'b08'},
+ {id:'pardo43',n:'Pardo 43',g:10,c:1,l:'13 m',base:4750,ph:'b09'},
+ {id:'solaris48',n:'Solaris 48 Lobster',g:10,c:2,l:'14,03 m',base:5000,ph:'b10'},
+ {id:'portofino',n:'Portofino 53',g:8,c:2,l:'15,19 m',base:5000,ph:'b11'},
+ {id:'azimut45',n:'Azimut 45',g:10,c:2,l:'14,62 m',base:5100,ph:'b12'},
+ {id:'solaris44',n:'Solaris 44 Open',g:10,c:1,l:'13,47 m',base:5200,ph:'b13'},
+ {id:'riva52',n:'Riva 52',g:10,c:2,l:'15,74 m',base:5400,ph:'b14'},
+ {id:'sacs47',n:'SACS 47',g:12,c:1,l:'13,07 m',base:5400,ph:'b15'},
+ {id:'prestige520',n:'Prestige 520',g:11,c:3,l:'15 m',base:5800,ph:'b16'},
+ {id:'sichter54',n:'Sichterman 54',g:8,c:1,l:'16,42 m',base:6200,ph:'b17'},
+ {id:'princessv64',n:'Princess V64',g:10,c:4,l:'20 m',base:6200,ph:'b18'},
+ {id:'princessv58',n:'Princess V58',g:8,c:3,l:'17,67 m',base:6200,ph:'b19'},
+ {id:'sichter68',n:'Sichterman 68',g:10,c:3,l:'19,7 m',base:7400,ph:'b20'},
+ {id:'wajer55',n:'Wajer 55',g:8,c:1,l:'16,80 m',base:7900,ph:'b21'},
+ {id:'prestige590',n:'Prestige 590',g:12,c:3,l:'16,46 m',base:7900,ph:'b22'},
+ {id:'prestige680',n:'Prestige 680',g:12,c:4,l:'19,1 m',base:10400,ph:'b23'},
+ {id:'leopard24',n:'Leopard 24',g:11,c:3,l:'24 m',base:10900,ph:'b24'},
+ {id:'pearl80',n:'Pearl 80',g:12,c:3,l:'24 m',base:13900,ph:'b25'}
+];
+const EXACT = {
+ pearl80:{local:13900,lerins:15200,sttrop:16900},
+ pardo43:{local:4750,lerins:5100,sttrop:5600,halfday:3550,sunset:2650},
+ axopar25:{local:1900,lerins:2100,halfday:1400,sunset:1150}
+};
+const EXTRAS = [
+ {id:'seabob',n:'Seabob F5 S',p:350},{id:'efoil',n:'E-Foil Fliteboard',p:450},
+ {id:'jetsurf',n:'Jet Surf',p:450},{id:'vapor',n:'Scooter sous-marin Vapor',p:250},
+ {id:'platform',n:'Plateforme de bain 2 x 2 m',p:290},{id:'apero',n:'Sélection apéritif complète',p:255},
+ {id:'planche',n:'Planche charcuterie et fromages',p:170},{id:'paddle',n:'Paddle',p:90}
+];
+const BLOCKED = {3:1,4:1,10:1,11:1,14:1,17:1,18:1,24:1,25:1,31:1};
+const ICON = {
+ g:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#bfa879" stroke-width="1.6"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg>',
+ c:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#bfa879" stroke-width="1.6"><path d="M3 18v-8h13a4 4 0 0 1 4 4v4"/><path d="M3 14h17"/><circle cx="7.5" cy="12" r="1.6"/></svg>',
+ l:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#bfa879" stroke-width="1.6"><path d="M4 20l16-16"/><path d="M14 4h6v6"/></svg>'
+};
+let S = {pkg:'local', day:null, boat:null, extras:[], all:false};
+const eur = n => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,' ') + ' €';
+const pkg = () => PACKAGES.find(p=>p.id===S.pkg);
+function price(b){ const e=EXACT[b.id]; if(e&&e[S.pkg]) return {v:e[S.pkg],est:false};
+  if(S.pkg==='local') return {v:b.base,est:false};
+  return {v:Math.round(b.base*pkg().ratio/50)*50, est:true}; }
+
+function render(){
+  const P = pkg();
+  document.getElementById('pkgName').textContent = P.name;
+  document.getElementById('pkgRoute').textContent = P.route;
+  document.getElementById('pkgDetail').textContent = P.detail;
+  document.getElementById('pkgFleet').textContent = 'Dans votre base : ' + P.fleet + ' bateaux sur cette formule.';
+
+  document.getElementById('tabs').innerHTML = PACKAGES.map(p =>
+    `<button class="${p.id===S.pkg?'on':''}" data-p="${p.id}">${p.label}</button>`).join('');
+
+  let cal = ['L','M','M','J','V','S','D'].map(w=>`<div class="wd">${w}</div>`).join('');
+  cal += '<div></div><div></div><div></div>';
+  for(let n=1;n<=31;n++){
+    const off = !!BLOCKED[n], on = S.day===n;
+    cal += `<button class="${off?'off':''}${on?' on':''}" data-d="${n}" ${off?'disabled':''} aria-label="${n} juillet ${off?'déjà réservé':'disponible'}">${n}</button>`;
+  }
+  document.getElementById('cal').innerHTML = cal;
+
+  const list = S.all ? BOATS : BOATS.slice(0,5);
+  document.getElementById('boats').innerHTML = list.map(b=>{
+    const p = price(b), on = S.boat===b.id;
+    const cab = b.c>0 ? b.c+(b.c>1?' cabines':' cabine') : 'pont ouvert';
+    return `<button class="boat ${on?'on':''}" data-b="${b.id}">
+      <div class="ph"><img src="img/${b.ph}.jpg" alt="${b.n}" loading="lazy"><div class="veil"></div>
+        <div class="lab"><div class="n">${b.n}</div><div class="p">${eur(p.v)}${p.est?' ·':''} tout compris</div></div>
+        ${on?'<div class="badge">CHOISI</div>':''}</div>
+      <div class="meta"><span>${ICON.g} ${b.g} pers.</span><span>${ICON.c} ${cab}</span><span>${ICON.l} ${b.l}</span>
+        <span class="cta">${on?'SÉLECTIONNÉ':'CHOISIR'}</span></div></button>`;
+  }).join('');
+  document.getElementById('more').textContent = S.all ? 'RÉDUIRE LA LISTE' : 'VOIR LES 26 BATEAUX';
+
+  document.getElementById('extras').innerHTML = EXTRAS.map(x=>{
+    const on = S.extras.includes(x.id);
+    return `<button class="${on?'on':''}" data-x="${x.id}" aria-pressed="${on}"><span class="box"></span>${x.n}<span class="pr">${eur(x.p)}</span></button>`;
+  }).join('');
+
+  const boat = BOATS.find(b=>b.id===S.boat);
+  const xt = EXTRAS.filter(x=>S.extras.includes(x.id)).reduce((s,x)=>s+x.p,0);
+  const tot = (boat?price(boat).v:0) + xt;
+  document.getElementById('recap').innerHTML = [
+    ['CROISIÈRE', P.name],
+    ['DATE', S.day ? S.day+' juillet 2027' : 'à choisir'],
+    ['BATEAU', boat ? boat.n : 'à choisir'],
+    ['À BORD', S.extras.length ? S.extras.length+(S.extras.length>1?' options, ':' option, ')+eur(xt) : 'aucune option']
+  ].map(r=>`<div class="row"><div class="l">${r[0]}</div><div class="v">${r[1]}</div></div>`).join('');
+  document.getElementById('total').textContent = tot?eur(tot):'—';
+  document.getElementById('acompte').textContent = tot?eur(tot*0.3):'—';
+  document.getElementById('solde').textContent = tot?eur(tot*0.7):'—';
+  document.getElementById('go').textContent = tot ? 'Réserver, acompte '+eur(tot*0.3) : 'Choisissez un bateau';
+}
+document.addEventListener('click', e=>{
+  const t = e.target.closest('[data-p],[data-d],[data-b],[data-x],#more');
+  if(!t) return;
+  if(t.dataset.p){ S.pkg=t.dataset.p; S.boat=null; }
+  else if(t.dataset.d){ S.day=+t.dataset.d; }
+  else if(t.dataset.b){ S.boat=t.dataset.b; }
+  else if(t.dataset.x){ const i=S.extras.indexOf(t.dataset.x); i>=0?S.extras.splice(i,1):S.extras.push(t.dataset.x); }
+  else if(t.id==='more'){ S.all=!S.all; }
+  render();
+});
+render();
+</script>
+</body>
+</html>
