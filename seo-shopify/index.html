@@ -2012,6 +2012,16 @@
     <span></span><span></span><span></span>
   </button>
 </nav>
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <ul>
+    <li><a href="#constat" data-close>Le constat</a></li>
+    <li><a href="#methode" data-close>Ce que je corrige</a></li>
+    <li><a href="#exemple" data-close>Ce que j'ai mesuré</a></li>
+    <li><a href="#offre" data-close>Le prix</a></li>
+    <li><a href="/" data-close>&#8592; neova.agency</a></li>
+    <li><a href="#audit" class="mobile-menu-cta" data-close>Recevoir mon relevé &#8594;</a></li>
+  </ul>
+</div>
 
 <section class="hero">
   <div class="hero-bg" aria-hidden="true"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div><div class="orb orb-4"></div></div>
@@ -2047,18 +2057,18 @@
 </section>
 
 <section class="tunnel-stat">
-  <p class="tunnel-line">Une boutique peut être soignée et rester <em>invisible</em>. Google ne lit pas vos photos, il lit vos textes. Et quand deux fiches racontent exactement la même chose, <strong>il n'en garde qu'une.</strong></p>
+  <p class="tunnel-line">Une boutique peut être soignée et rester <em>invisible</em>. Google ne voit pas vos photos comme vous, il lit vos textes. Et quand deux fiches racontent exactement la même chose, <strong>il n'en garde qu'une.</strong></p>
   <a href="#audit" class="tunnel-cta">Recevoir mon relevé &#8594;</a>
 </section>
 
 <section class="light-section" id="constat">
   <span class="section-eyebrow">Le constat</span>
   <h2 class="section-title">Ce qui vous rend <em>invisible</em></h2>
-  <p class="section-sub">Quatre défauts reviennent boutique après boutique. Aucun ne se voit à l'œil nu, et tous coûtent des visiteurs tous les jours.</p>
+  <p class="section-sub">Quatre défauts reviennent boutique après boutique. Aucun ne se voit à l'œil nu, et chacun peut vous coûter des visiteurs.</p>
   <div class="why-grid">
     <div class="witem"><div class="wcheck" style="color:#fff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><h4>Des fiches jumelles</h4><p>Le même texte sur plusieurs produits. Google en garde une et ignore les autres : vos pages se font concurrence entre elles.</p></div>
     <div class="witem"><div class="wcheck" style="color:#fff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><h4>La même phrase dans Google</h4><p>La ligne qui s'affiche sous votre lien, identique d'un produit à l'autre. Elle ne donne aucune raison de cliquer plutôt que d'aller voir ailleurs.</p></div>
-    <div class="witem"><div class="wcheck" style="color:#fff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><h4>Des photos muettes</h4><p>Le champ qui décrit l'image est vide, et le thème affiche le nom du produit à la place. Ni Google Images ni les assistants IA ne savent ce qu'elles montrent.</p></div>
+    <div class="witem"><div class="wcheck" style="color:#fff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><h4>Des photos muettes</h4><p>Le champ qui décrit l'image est vide, et le thème affiche le nom du produit à la place. Google Images et les assistants IA doivent deviner ce qu'elles montrent.</p></div>
     <div class="witem"><div class="wcheck" style="color:#fff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><h4>Un blog à l'arrêt</h4><p>Quelques articles oubliés il y a des mois, parfois sans aucun lien depuis la page d'accueil. Et une boutique sur deux n'en a jamais publié un seul.</p></div>
   </div>
 </section>
@@ -2070,7 +2080,7 @@
   <div class="why-grid">
     <div class="witem"><div class="wcheck" style="color:#fff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><h4>Le relevé, boutique entière</h4><p>Chaque fiche est lue, pas trois au hasard. Vous recevez les chiffres exacts, y compris ce qui est déjà bien fait chez vous.</p></div>
     <div class="witem"><div class="wcheck" style="color:#fff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><h4>Les textes réécrits</h4><p>Fiches jumelles séparées, descriptions Google refaites une par une, variantes regroupées quand elles n'ont pas besoin d'une page à elles.</p></div>
-    <div class="witem"><div class="wcheck" style="color:#fff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><h4>Les photos décrites</h4><p>Produit, matière, couleur, origine. Vos images entrent dans Google Images, et les assistants IA savent enfin ce qu'elles montrent.</p></div>
+    <div class="witem"><div class="wcheck" style="color:#fff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><h4>Les photos décrites</h4><p>Produit, matière, couleur, origine. Google Images et les assistants IA n'ont plus à deviner ce qu'elles montrent.</p></div>
     <div class="witem"><div class="wcheck" style="color:#fff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><h4>Le blog remis en marche</h4><p>Des articles écrits sur ce que vos acheteurs cherchent vraiment, publiés automatiquement, reliés à vos collections.</p></div>
     <div class="witem"><div class="wcheck" style="color:#fff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><h4>Et le reste</h4><p>Données structurées, pages de collection, liens internes, produits d'une saison passée qui traînent encore. Si la mesure le montre, c'est traité.</p></div>
     <div class="witem"><div class="wcheck" style="color:#fff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><h4>Mesuré après, aussi</h4><p>Le même relevé est refait une fois le travail livré. Vous voyez ce qui a bougé, chiffre contre chiffre.</p></div>
@@ -2122,14 +2132,14 @@
   <div class="stats-grid" style="max-width:780px;margin:40px auto 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;text-align:center">
     <div class="stat" style="background:linear-gradient(180deg,#0d0d0f 0%,#070708 100%);border:1px solid rgba(34,211,238,0.28);border-radius:18px;padding:28px 18px">
       <div class="stat-num" style="background:linear-gradient(135deg,#22D3EE,#8B5CF6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">dès 300&nbsp;€</div>
-      <div class="stat-label" style="color:#fff">HT, une seule fois : fiches réécrites et photos décrites, livré sous 48&nbsp;heures après le règlement</div>
+      <div class="stat-label" style="color:#fff">une seule fois : fiches réécrites et photos décrites, livré sous 48&nbsp;heures après le règlement</div>
     </div>
     <div class="stat" style="background:linear-gradient(180deg,#0d0d0f 0%,#070708 100%);border:1px solid rgba(139,92,246,0.28);border-radius:18px;padding:28px 18px">
       <div class="stat-num" style="background:linear-gradient(135deg,#8B5CF6,#22D3EE);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">300&nbsp;€</div>
-      <div class="stat-label" style="color:#fff">par mois, HT, sans engagement : deux articles publiés sur votre blog, et chaque nouvelle fiche corrigée</div>
+      <div class="stat-label" style="color:#fff">par mois, sans engagement : deux articles publiés sur votre blog, et chaque nouvelle fiche corrigée</div>
     </div>
   </div>
-  <p class="section-sub" style="margin-top:30px">Le prix exact de la remise en état dépend de la taille de votre catalogue. Il figure dans le devis, avant tout travail, et se règle à la commande.</p>
+  <p class="section-sub" style="margin-top:30px">Le prix exact de la remise en état dépend de la taille de votre catalogue. Il figure dans le devis, avant tout travail, et se règle à la commande. Pas de TVA en plus (article 293 B du CGI) : le prix annoncé est celui que vous payez.</p>
 </section>
 
 <section class="contact-section" id="audit">
@@ -2164,7 +2174,7 @@
     </a>
   </div>
   <div class="footer-links">
-    <a href="/">Retour homepage</a>
+    <a href="/">Retour à l'accueil</a>
     <a href="/mentions-legales.html">Mentions légales</a>
     <a href="/confidentialite.html">Confidentialité</a>
   </div>
