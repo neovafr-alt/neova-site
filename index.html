@@ -2444,15 +2444,35 @@
 .rq-grille-4{max-width:980px;grid-template-columns:repeat(2,1fr)}
 .rq-apres a{color:#0369a1;font-weight:600;text-decoration:none;white-space:nowrap}
 .rq-note{max-width:640px;margin:30px auto 0;font-size:16px;color:#3a3a3c}
-.methode{background:var(--apple-gray);padding:100px 6%;text-align:center}
-.methode .section-eyebrow{color:#0369a1}
-.methode-titre{font-size:clamp(30px,4vw,50px);font-weight:700;letter-spacing:-1.4px;line-height:1.1;color:var(--near-black);margin:8px auto 10px;max-width:860px;text-wrap:balance}
-.methode-titre em{font-style:normal;color:#0369a1}
+.methode{background:#050507;padding:100px 6%;text-align:center}
+.methode .section-eyebrow{color:rgba(255,255,255,.62)}
+.methode-titre{font-size:clamp(30px,4vw,50px);font-weight:700;letter-spacing:-1.4px;line-height:1.1;color:#fff;margin:8px auto 10px;max-width:860px;text-wrap:balance}
+.methode-titre em{font-style:normal;color:#38BDF8}
 .methode .frise{margin:36px auto 34px}
 .frise-4{max-width:1080px;grid-template-columns:repeat(4,1fr)}
-.methode .etape{background:#fff;border:1px solid #e5e5ea}
-.methode .etape .quand{color:#0369a1}
-.methode .etape p{color:#3a3a3c}
+.methode .etape{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1)}
+.methode .etape .quand{color:#38BDF8}
+.methode .etape p{color:rgba(255,255,255,.75)}
+/* Alternance sombre / clair : le contact final passe en sombre */
+.contact-section{background:#050507}
+.contact-card{background:linear-gradient(180deg,#0d1220 0%,#0a0d16 100%);border:1px solid rgba(255,255,255,.08);box-shadow:0 20px 60px rgba(14,165,233,.12)}
+.contact-eyebrow{color:#38BDF8;background:rgba(14,165,233,.12);border-color:rgba(56,189,248,.3)}
+.contact-title{color:#fff}
+.contact-sub{color:rgba(255,255,255,.7)}
+.cta-secondary{color:#fff;border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.04)}
+.cta-secondary:hover{color:#38BDF8}
+.contact-info{border-top-color:rgba(255,255,255,.1)}
+.contact-item,.contact-item-label{color:rgba(255,255,255,.6)}
+.contact-item-val{color:#fff}
+/* Page de démo : « Après l'appel » passe en clair pour alterner avec l'écoute et le contact */
+.recu{background:var(--apple-gray)}
+.recu .section-eyebrow{color:#0369a1}
+.recu .recu-titre{color:var(--near-black)}
+.recu .recu-titre em{color:#0369a1}
+.recu-intro{color:#3a3a3c}
+.recu-etiquette{color:#0369a1}
+.recu-vrai,.sms-de-qui{color:#6e6e73}
+.recu .mail,.recu .agenda,.recu .sms-seul{box-shadow:0 14px 36px -16px rgba(0,0,0,.22);border:1px solid #e5e5ea}
 .std-actions{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:14px 26px;margin:30px auto 0}
 .std-lien{color:#38BDF8;font-weight:600;text-decoration:none;font-size:15.5px}
 .std-lien:hover{text-decoration:underline}
@@ -2464,6 +2484,14 @@
 .pq-item{padding:22px 22px 20px;border-radius:18px;background:var(--apple-gray);border:1px solid #e5e5ea}
 .pq-item b{display:block;font-size:18px;color:var(--near-black);margin:0 0 6px;letter-spacing:-.2px}
 .pq-item p{margin:0;font-size:15.5px;line-height:1.55;color:#3a3a3c}
+.histoire{background:var(--apple-gray);padding:90px 6%;text-align:center}
+.histoire .section-eyebrow{color:#0369a1}
+.histoire-titre{font-size:clamp(30px,4vw,50px);font-weight:700;letter-spacing:-1.4px;line-height:1.1;color:var(--near-black);margin:8px auto 30px;text-wrap:balance}
+.histoire-titre em{font-style:normal;color:#0369a1}
+.histoire-texte{max-width:680px;margin:0 auto;text-align:left}
+.histoire-texte p{font-size:17px;line-height:1.65;color:#3a3a3c;margin:0 0 16px}
+.histoire-texte p.histoire-fort{font-size:19px;line-height:1.5;color:var(--near-black);font-weight:600}
+.histoire-signe{margin:22px 0 0;font-size:15px;color:#6e6e73}
 @media(max-width:900px){.frise-4{grid-template-columns:1fr 1fr}}
 @media(max-width:640px){.rq-grille-4,.pq-grille,.frise-4{grid-template-columns:1fr}.methode,.pq{padding:64px 18px}}
 /* corrections relecture 30/09 */
@@ -2632,6 +2660,17 @@ footer .footer-copy{color:rgba(255,255,255,.5)}
     <details class="faq-item"><summary>Et si je veux arrêter&nbsp;?</summary><p>Ce qui a été construit et vos données restent à vous. Le suivi mensuel et le standard sont sans engagement.</p></details>
     <details class="faq-item"><summary>Le standard prend-il tous mes appels&nbsp;?</summary><p>Non. Il ne décroche que si personne ne répond au bout de quelques sonneries, ou si la ligne est occupée. Il se présente comme un assistant vocal automatique, puis il s'occupe tout de suite de la demande.</p></details>
     <details class="faq-item"><summary>Où vont mes données&nbsp;?</summary><p>Elles sont stockées sur un serveur que nous louons en Allemagne. Pour le standard, la conversation passe aussi par trois prestataires américains&nbsp;: Telnyx pour la ligne et la voix, Deepgram pour la reconnaissance vocale, Anthropic pour la compréhension. Les appels ne sont pas enregistrés, et vos données restent les vôtres.</p></details>
+  </div>
+</section>
+
+<section class="histoire" id="qui">
+  <span class="section-eyebrow">Qui est derrière Neova</span>
+  <h2 class="histoire-titre">J'ai vu le problème <em>de l'intérieur.</em></h2>
+  <div class="histoire-texte">
+    <p>Je m'appelle Yanis Zitouni Zind, j'habite à Lagny-sur-Marne. Avant Neova, j'étais commercial en concession automobile.</p>
+    <p>Tous les jours, je voyais des devis jamais relancés, des informations recopiées trois fois, et des clients perdus parce que personne n'avait pu décrocher. Pas par manque de travail&nbsp;: par manque de temps.</p>
+    <p class="histoire-fort">Aujourd'hui, je cherche les heures que vous perdez chaque semaine, et je vous les rends.</p>
+    <p class="histoire-signe">Yanis, fondateur de Neova</p>
   </div>
 </section>
 
