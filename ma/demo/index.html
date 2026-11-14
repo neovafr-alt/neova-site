@@ -41,19 +41,5 @@
   </div>
   <p class="sign">Démonstration préparée par Neova · Yanis Zitouni · 07 83 80 25 65<br>Voix de l'assistante générée par IA. La voix de la cliente est l'enregistrement de son téléphone. Aucun paiement réel.<br><a href="https://neova.agency">neova.agency</a></p>
 </main>
-<script>
-(function(){
-  var ici = 'https://n8n.neova.agency/webhook/demo/multiauto/vu';
-  try { if (location.hash === '#moi') localStorage.setItem('neova-moi', '1'); if (localStorage.getItem('neova-moi')) return; } catch (x) {}
-  var a = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) ? 'telephone' : 'ordinateur';
-  function signal(e) { try { new Image().src = ici + '?e=' + e + '&a=' + a + '&t=' + Date.now(); } catch (x) {} }
-  signal('ouverte');
-  var v = document.querySelector('video'), lancee = false;
-  if (v) {
-    v.addEventListener('play', function () { if (!lancee) { lancee = true; signal('lecture'); } });
-    v.addEventListener('ended', function () { signal('fin'); });
-  }
-})();
-</script>
 </body>
 </html>
